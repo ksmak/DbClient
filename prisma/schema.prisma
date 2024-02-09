@@ -1,0 +1,110 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int            @id @default(autoincrement())
+  login        String         @unique
+  password     String
+  firstName    String?
+  lastName     String?
+  middleName   String?
+  role         Role           @default(READER)
+  department   Department?    @relation(fields: [departmentId], references: [id])
+  departmentId Int?
+  expiredPwd   DateTime?
+  createdAt    DateTime?      @default(now())
+  updatedAt    DateTime?      @updatedAt
+}
+
+enum Role {
+  READER
+  OPERATOR
+  EDITOR
+  ADMIN
+}
+
+model Department {
+  id           Int            @id @default(autoincrement())
+  title        String         @unique
+  users        User[]
+}
+
+model Dictionary {
+  id           Int            @id @default(autoincrement())
+  title        String
+  tableName    String         @unique
+  createdAt    DateTime?      @default(now())
+  updatedAt    DateTime?      @updatedAt
+}
+
+model InputForm {
+  id           Int            @id @default(autoincrement())
+  pos          Int            @default(0)
+  title        String
+  groups       Group[]
+  createdAt    DateTime?      @default(now())
+  updatedAt    DateTime?      @updatedAt
+}
+
+model SearchForm {
+  id           Int            @id @default(autoincrement())
+  pos          Int            @default(0)
+  title        String
+  fields       SearchField[]
+  createdAt    DateTime?      @default(now())
+  updatedAt    DateTime?      @updatedAt
+}
+
+model Group {
+  id           Int            @id @default(autoincrement())
+  pos          Int            @default(0)
+  title        String
+  inputForm    InputForm      @relation(fields: [inputFormId], references: [id])
+  inputFormId  Int
+  isMulty      Boolean        @default(false)
+  tableName    String
+  fields       InputField[]
+  createdAt    DateTime?      @default(now())
+  updatedAt    DateTime?      @updatedAt
+}
+
+model InputField {
+  id           Int            @id @default(autoincrement())
+  pos          Int            @default(0)
+  title        String
+  group        Group          @relation(fields: [groupId], references: [id])
+  groupId      Int
+  fieldName    String
+  fieldType    String
+  len          Int
+  isKey        Boolean        @default(false)
+  isVisible    Boolean        @default(true)
+  isEnable     Boolean        @default(true)
+  isRequire    Boolean        @default(false)
+  presision    Int
+  isDuplicate  Boolean        @default(false)
+  searchField  SearchField[]
+  createdAt    DateTime?      @default(now())
+  updatedAt    DateTime?      @updatedAt
+}
+
+model SearchField {
+  id           Int            @id @default(autoincrement())
+  pos          Int            @default(0)
+  title        String
+  searchForm   SearchForm     @relation(fields: [searchFormId], references: [id])
+  searchFormId Int
+  field        InputField     @relation(fields: [fieldId], references: [id])
+  fieldId      Int
+  createdAt    DateTime?      @default(now())
+  updatedAt    DateTime?      @updatedAt
+}
