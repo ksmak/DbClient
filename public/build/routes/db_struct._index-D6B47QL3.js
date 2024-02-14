@@ -702,7 +702,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/ui/panels/db_struct.tsx"
   );
-  import.meta.hot.lastModified = "1707496182781.9768";
+  import.meta.hot.lastModified = "1707921490517.8137";
 }
 function DbStrucPanel({
   state,
@@ -904,7 +904,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/db_struct._index.tsx"
   );
-  import.meta.hot.lastModified = "1707496452468.594";
+  import.meta.hot.lastModified = "1707921721438.4937";
 }
 var {
   Button: Button5
@@ -1069,4 +1069,4 @@ window.$RefreshSig$ = prevRefreshSig;
 export {
   DbStruct as default
 };
-//# sourceMappingURL=/build/routes/db_struct._index-LB5IADEB.js.map
+//# sourceMappingURL=/build/routes/db_struct._index-D6B47QL3.js.map

@@ -10,6 +10,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Department {
+  id           Int            @id @default(autoincrement())
+  title        String         @unique
+  users        User[]
+}
+
+model Role {
+  id           Int            @id @default(autoincrement())
+  title        String         @unique
+  access       Access[]
+  userRoles    UserRole[]
+}
+
+enum AccessType {
+  READ
+  WRITE
+  DELETE
+}
+
+model Access {
+  id           Int            @id @default(autoincrement())
+  role         Role           @relation(fields: [roleId], references: [id])
+  roleId       Int
+  obj          Int
+  accessType   AccessType     @default(READ)
+}
+
+model UserRole {
+  id           Int            @id @default(autoincrement())
+  user         User           @relation(fields: [userId], references: [id])
+  userId       Int
+  role         Role           @relation(fields: [roleId], references: [id])
+  roleId       Int
+}
+
 model User {
   id           Int            @id @default(autoincrement())
   login        String         @unique
@@ -17,25 +52,12 @@ model User {
   firstName    String?
   lastName     String?
   middleName   String?
-  role         Role           @default(READER)
   department   Department?    @relation(fields: [departmentId], references: [id])
   departmentId Int?
   expiredPwd   DateTime?
   createdAt    DateTime?      @default(now())
   updatedAt    DateTime?      @updatedAt
-}
-
-enum Role {
-  READER
-  OPERATOR
-  EDITOR
-  ADMIN
-}
-
-model Department {
-  id           Int            @id @default(autoincrement())
-  title        String         @unique
-  users        User[]
+  role         UserRole[]
 }
 
 model Dictionary {
@@ -59,9 +81,9 @@ model SearchForm {
   id           Int            @id @default(autoincrement())
   pos          Int            @default(0)
   title        String
-  fields       SearchField[]
   createdAt    DateTime?      @default(now())
   updatedAt    DateTime?      @updatedAt
+  fields       SearchField[]
 }
 
 model Group {
@@ -72,9 +94,9 @@ model Group {
   inputFormId  Int
   isMulty      Boolean        @default(false)
   tableName    String
-  fields       InputField[]
   createdAt    DateTime?      @default(now())
   updatedAt    DateTime?      @updatedAt
+  fields       InputField[]
 }
 
 model InputField {
@@ -85,16 +107,16 @@ model InputField {
   groupId      Int
   fieldName    String
   fieldType    String
-  len          Int
+  len          Int            @default(0)
   isKey        Boolean        @default(false)
   isVisible    Boolean        @default(true)
   isEnable     Boolean        @default(true)
   isRequire    Boolean        @default(false)
-  presision    Int
+  precision    Int            @default(0)
   isDuplicate  Boolean        @default(false)
-  searchField  SearchField[]
   createdAt    DateTime?      @default(now())
   updatedAt    DateTime?      @updatedAt
+  searchField  SearchField[]
 }
 
 model SearchField {

@@ -1,4 +1,5 @@
 import { Dictionary, Group, InputForm, SearchForm } from "@prisma/client"
+import { JsonObject } from "@prisma/client/runtime/library"
 import { Link } from "@remix-run/react"
 
 type DbStructPanelProps = {

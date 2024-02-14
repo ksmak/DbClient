@@ -1667,17 +1667,17 @@ function DbStrucPanel({
     /* @__PURE__ */ jsxDEV9("li", { className: "flex items-center gap-1 font-bold", children: [
       /* @__PURE__ */ jsxDEV9("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV9("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, !1, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 30,
+        lineNumber: 31,
         columnNumber: 21
       }, this) }, void 0, !1, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 29,
+        lineNumber: 30,
         columnNumber: 17
       }, this),
       "Input Forms"
     ] }, void 0, !0, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 28,
+      lineNumber: 29,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ jsxDEV9("ul", { children: inputForms.map((form) => /* @__PURE__ */ jsxDEV9("div", { children: [
@@ -1695,11 +1695,11 @@ function DbStrucPanel({
               children: [
                 /* @__PURE__ */ jsxDEV9("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV9("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
                   fileName: "app/ui/panels/db_struct.tsx",
-                  lineNumber: 45,
+                  lineNumber: 46,
                   columnNumber: 37
                 }, this) }, void 0, !1, {
                   fileName: "app/ui/panels/db_struct.tsx",
-                  lineNumber: 44,
+                  lineNumber: 45,
                   columnNumber: 33
                 }, this),
                 form.pos,
@@ -1711,7 +1711,7 @@ function DbStrucPanel({
             !0,
             {
               fileName: "app/ui/panels/db_struct.tsx",
-              lineNumber: 40,
+              lineNumber: 41,
               columnNumber: 29
             },
             this
@@ -1721,7 +1721,7 @@ function DbStrucPanel({
         !1,
         {
           fileName: "app/ui/panels/db_struct.tsx",
-          lineNumber: 37,
+          lineNumber: 38,
           columnNumber: 25
         },
         this
@@ -1740,11 +1740,11 @@ function DbStrucPanel({
               children: [
                 /* @__PURE__ */ jsxDEV9("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV9("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
                   fileName: "app/ui/panels/db_struct.tsx",
-                  lineNumber: 61,
+                  lineNumber: 62,
                   columnNumber: 45
                 }, this) }, void 0, !1, {
                   fileName: "app/ui/panels/db_struct.tsx",
-                  lineNumber: 60,
+                  lineNumber: 61,
                   columnNumber: 41
                 }, this),
                 gr.pos,
@@ -1756,7 +1756,7 @@ function DbStrucPanel({
             !0,
             {
               fileName: "app/ui/panels/db_struct.tsx",
-              lineNumber: 56,
+              lineNumber: 57,
               columnNumber: 37
             },
             this
@@ -1766,38 +1766,38 @@ function DbStrucPanel({
         !1,
         {
           fileName: "app/ui/panels/db_struct.tsx",
-          lineNumber: 52,
+          lineNumber: 53,
           columnNumber: 33
         },
         this
       )) }, void 0, !1, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 50,
+        lineNumber: 51,
         columnNumber: 25
       }, this)
     ] }, form.id, !0, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 36,
+      lineNumber: 37,
       columnNumber: 21
     }, this)) }, void 0, !1, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 34,
+      lineNumber: 35,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ jsxDEV9("li", { className: "flex items-center gap-1 font-bold", children: [
       /* @__PURE__ */ jsxDEV9("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV9("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, !1, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 73,
+        lineNumber: 74,
         columnNumber: 21
       }, this) }, void 0, !1, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 72,
+        lineNumber: 73,
         columnNumber: 17
       }, this),
       "Search Forms"
     ] }, void 0, !0, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 71,
+      lineNumber: 72,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ jsxDEV9("ul", { children: searchForms.map((form) => /* @__PURE__ */ jsxDEV9(
@@ -1814,11 +1814,11 @@ function DbStrucPanel({
             children: [
               /* @__PURE__ */ jsxDEV9("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV9("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
                 fileName: "app/ui/panels/db_struct.tsx",
-                lineNumber: 88,
+                lineNumber: 89,
                 columnNumber: 33
               }, this) }, void 0, !1, {
                 fileName: "app/ui/panels/db_struct.tsx",
-                lineNumber: 87,
+                lineNumber: 88,
                 columnNumber: 29
               }, this),
               form.pos,
@@ -1830,7 +1830,7 @@ function DbStrucPanel({
           !0,
           {
             fileName: "app/ui/panels/db_struct.tsx",
-            lineNumber: 83,
+            lineNumber: 84,
             columnNumber: 25
           },
           this
@@ -1840,29 +1840,29 @@ function DbStrucPanel({
       !1,
       {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 79,
+        lineNumber: 80,
         columnNumber: 21
       },
       this
     )) }, void 0, !1, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 77,
+      lineNumber: 78,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ jsxDEV9("li", { className: "flex items-center gap-1 font-bold", children: [
       /* @__PURE__ */ jsxDEV9("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV9("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, !1, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 97,
+        lineNumber: 98,
         columnNumber: 21
       }, this) }, void 0, !1, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 96,
+        lineNumber: 97,
         columnNumber: 17
       }, this),
       "Dictionaries"
     ] }, void 0, !0, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 95,
+      lineNumber: 96,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ jsxDEV9("ul", { children: dictionaries.map((dict) => /* @__PURE__ */ jsxDEV9(
@@ -1879,11 +1879,11 @@ function DbStrucPanel({
             children: [
               /* @__PURE__ */ jsxDEV9("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV9("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
                 fileName: "app/ui/panels/db_struct.tsx",
-                lineNumber: 112,
+                lineNumber: 113,
                 columnNumber: 33
               }, this) }, void 0, !1, {
                 fileName: "app/ui/panels/db_struct.tsx",
-                lineNumber: 111,
+                lineNumber: 112,
                 columnNumber: 29
               }, this),
               dict.title
@@ -1893,7 +1893,7 @@ function DbStrucPanel({
           !0,
           {
             fileName: "app/ui/panels/db_struct.tsx",
-            lineNumber: 107,
+            lineNumber: 108,
             columnNumber: 25
           },
           this
@@ -1903,18 +1903,18 @@ function DbStrucPanel({
       !1,
       {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 103,
+        lineNumber: 104,
         columnNumber: 21
       },
       this
     )) }, void 0, !1, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 101,
+      lineNumber: 102,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/ui/panels/db_struct.tsx",
-    lineNumber: 27,
+    lineNumber: 28,
     columnNumber: 9
   }, this);
 }
@@ -2950,7 +2950,7 @@ function Index() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-NOOPHWRD.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-DGLILCEK.js", "/build/_shared/chunk-HZQAXSMT.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-Q6LMBPEP.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-5TV3PF3M.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-Z4ZKV2R7.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/db_struct._index": { id: "routes/db_struct._index", parentId: "root", path: "db_struct", index: !0, caseSensitive: void 0, module: "/build/routes/db_struct._index-LB5IADEB.js", imports: ["/build/_shared/chunk-E6EKDHBM.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/users._index": { id: "routes/users._index", parentId: "root", path: "users", index: !0, caseSensitive: void 0, module: "/build/routes/users._index-QPNCHJES.js", imports: ["/build/_shared/chunk-E6EKDHBM.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "020a0266", hmr: { runtime: "/build/_shared/chunk-Q6LMBPEP.js", timestamp: 1707496789464 }, url: "/build/manifest-020A0266.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-NOOPHWRD.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-DGLILCEK.js", "/build/_shared/chunk-HZQAXSMT.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-Q6LMBPEP.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-5TV3PF3M.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-Z4ZKV2R7.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/db_struct._index": { id: "routes/db_struct._index", parentId: "root", path: "db_struct", index: !0, caseSensitive: void 0, module: "/build/routes/db_struct._index-D6B47QL3.js", imports: ["/build/_shared/chunk-E6EKDHBM.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/users._index": { id: "routes/users._index", parentId: "root", path: "users", index: !0, caseSensitive: void 0, module: "/build/routes/users._index-QPNCHJES.js", imports: ["/build/_shared/chunk-E6EKDHBM.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "0123b256", hmr: { runtime: "/build/_shared/chunk-Q6LMBPEP.js", timestamp: 1707923927921 }, url: "/build/manifest-0123B256.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public/build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1, v3_throwAbortReason: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
