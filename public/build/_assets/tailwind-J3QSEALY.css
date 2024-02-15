@@ -1241,6 +1241,9 @@ select {
 .\!overflow-visible {
   overflow: visible !important;
 }
+.overflow-x-auto {
+  overflow-x: auto;
+}
 .overflow-x-hidden {
   overflow-x: hidden;
 }
@@ -4921,4 +4924,4 @@ select {
 .\[\&\:\:-webkit-slider-thumb\]\:\[-webkit-appearance\:none\]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-/*# sourceMappingURL=/build/_assets/tailwind-WGMOBJHC.css.map */
+/*# sourceMappingURL=/build/_assets/tailwind-7UTOKOBW.css.map */

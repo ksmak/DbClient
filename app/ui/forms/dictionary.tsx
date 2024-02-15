@@ -1,10 +1,9 @@
 import MaterialTailwind from "@material-tailwind/react"
 const { Button } = MaterialTailwind;
 import { Form } from "@remix-run/react"
-import { IDictionary } from "~/types/types"
 
 type DictionaryFormProps = {
-    dictionary: IDictionary
+    dictionary: any
 }
 
 export default function DictionaryForm({ dictionary }: DictionaryFormProps) {

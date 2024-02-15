@@ -1,13 +1,12 @@
-import { Dictionary, Group, InputForm, SearchForm } from "@prisma/client"
-import { JsonObject } from "@prisma/client/runtime/library"
+import { Dictionary, Group, InputField, InputForm, SearchForm } from "@prisma/client"
 import { Link } from "@remix-run/react"
 
 type DbStructPanelProps = {
     state: string | null,
-    inputForms: InputForm[],
-    searchForms: SearchForm[],
-    dictionaries: Dictionary[],
-    groups: Group[],
+    inputForms: any,
+    searchForms: any,
+    dictionaries: any,
+    groups: any,
     inputFormId: number | undefined,
     searchFormId: number | undefined,
     dictionaryId: number | undefined,
@@ -33,7 +32,7 @@ export default function DbStrucPanel({
                 Input Forms
             </li>
             <ul>
-                {inputForms.map((form) => (
+                {inputForms.map((form: InputForm & { groups: Group[] }) => (
                     <div key={form.id}>
                         <Link
                             to={`/db_struct?state=inputForm&inputFormId=${form.id}`}
@@ -49,7 +48,7 @@ export default function DbStrucPanel({
                             </li>
                         </Link>
                         <ul>
-                            {groups.map((gr) => (
+                            {form.groups.map((gr: Group) => (
                                 <Link
                                     key={gr.id}
                                     to={`/db_struct?state=group&inputFormId=${gr.inputFormId}&groupId=${gr.id}`}
@@ -76,7 +75,7 @@ export default function DbStrucPanel({
                 Search Forms
             </li>
             <ul>
-                {searchForms.map((form) => (
+                {searchForms.map((form: SearchForm) => (
                     <Link
                         key={form.id}
                         to={`/db_struct?state=searchForm&searchFormId=${form.id}`}
@@ -100,7 +99,7 @@ export default function DbStrucPanel({
                 Dictionaries
             </li>
             <ul>
-                {dictionaries.map((dict) => (
+                {dictionaries.map((dict: Dictionary) => (
                     <Link
                         key={dict.id}
                         to={`/db_struct?state=dictionary&dictionaryId=${dict.id}`}

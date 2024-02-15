@@ -1,10 +1,9 @@
 import MaterialTailwind from "@material-tailwind/react"
-import { SearchForm } from "@prisma/client";
 const { Button } = MaterialTailwind;
 import { Form } from "@remix-run/react"
 
 type SearchFormProps = {
-    searchForm: SearchForm
+    searchForm: any
 }
 export default function SearchFormForm({ searchForm }: SearchFormProps) {
     return (

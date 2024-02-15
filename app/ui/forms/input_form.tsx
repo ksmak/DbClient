@@ -1,11 +1,10 @@
 import MaterialTailwind from "@material-tailwind/react";
-import { Group, InputForm } from "@prisma/client";
 const { Button } = MaterialTailwind;
 import { Form } from "@remix-run/react"
 
 type InputFormProps = {
-    inputForm: InputForm,
-    groups: Group[],
+    inputForm: any,
+    groups: any,
 }
 
 export default function InputFormForm({ inputForm, groups }: InputFormProps) {

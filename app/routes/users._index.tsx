@@ -1,33 +1,16 @@
 import MaterialTailwind from "@material-tailwind/react";
-import { Role, User } from "@prisma/client";
+import { User } from "@prisma/client";
 const { Button } = MaterialTailwind;
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { Form, useLoaderData, useNavigate } from "@remix-run/react"
 import moment from "moment";
-import { createEmptyUser, deleteUser, getDepartments, getUser, getUsers, updateUser } from "~/api/api"
+import { createEmptyUser, deleteUser, getDepartments, getRoles, getUser, getUsers, updateUser } from "~/api/api"
 import UserDialog from "~/ui/dialogs/user_dialog";
 
 export async function loader({
     request,
 }: LoaderFunctionArgs) {
-    const roles = [
-        {
-            id: Role.READER,
-            title: Role.READER
-        },
-        {
-            id: Role.OPERATOR,
-            title: Role.OPERATOR
-        },
-        {
-            id: Role.EDITOR,
-            title: Role.EDITOR
-        },
-        {
-            id: Role.ADMIN,
-            title: Role.ADMIN
-        }
-    ]
+    const roles = await getRoles()
     const departments = await getDepartments()
     const users = await getUsers()
     const url = new URL(request.url)
@@ -50,17 +33,15 @@ export async function action({
         return redirect(`/users?userId=${user.id}`);
     }
     if (_action === 'updateUser') {
-        await updateUser({
+        await updateUser(Number(values.id), {
             id: Number(values.id),
             login: String(values.login),
             password: String(values.password),
             firstName: String(values.firstName),
             lastName: String(values.lastName),
             middleName: String(values.middleName),
-            role: String(values.role) as Role,
             departmentId: Number(values.departmentId),
             expiredPwd: new Date(String(values.expiredPwd)),
-            isChangePwd: Boolean(values.changePwd),
             createdAt: null,
             updatedAt: null,
         });
@@ -120,7 +101,6 @@ export default function Users() {
                         <th className="p-1 text-sm border border-blue-gray-700">First Name</th>
                         <th className="p-1 text-sm border border-blue-gray-700">Last Name</th>
                         <th className="p-1 text-sm border border-blue-gray-700">Middle Name</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">Role</th>
                         <th className="p-1 text-sm border border-blue-gray-700">Department</th>
                         <th className="p-1 text-sm border border-blue-gray-700">Expired Password</th>
                         <th className="p-1 text-sm border border-blue-gray-700">created</th>
@@ -139,7 +119,6 @@ export default function Users() {
                             <td className="p-1 text-sm border border-blue-gray-700">{user.firstName}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{user.lastName}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{user.middleName}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{user.role}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{departments.find(item => item.id === user.departmentId)?.title}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{moment(user.expiredPwd).format('DD.MM.YYYY')}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{moment(user.createdAt).format('DD.MM.YYYY H:m:s')}</td>

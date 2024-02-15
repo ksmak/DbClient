@@ -57,7 +57,7 @@ model User {
   expiredPwd   DateTime?
   createdAt    DateTime?      @default(now())
   updatedAt    DateTime?      @updatedAt
-  role         UserRole[]
+  roles        UserRole[]
 }
 
 model Dictionary {

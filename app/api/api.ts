@@ -1,6 +1,5 @@
 import bcrypt from 'bcryptjs'
-import { PrismaClient } from '@prisma/client'
-import { IDictionary, IGroup, IInputField, IInputForm, ISearchField, ISearchForm, IUser } from '~/types/types'
+import { Dictionary, Group, InputField, InputForm, PrismaClient, SearchField, SearchForm, User } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -8,15 +7,25 @@ export async function getDepartments() {
     return await prisma.department.findMany()
 }
 
+export async function getRoles() {
+    return await prisma.role.findMany()
+}
+
 export async function getUsers(q: string | null = null) {
     if (!q) {
         return await prisma.user.findMany({
+            include: {
+                roles: true
+            },
             orderBy: {
                 login: 'asc',
             }
         })
     } else {
         return await prisma.user.findMany({
+            include: {
+                roles: true
+            },
             where: {
                 login: {
                     startsWith: q
@@ -55,7 +64,7 @@ export async function createEmptyUser(cnt: number) {
     })
 }
 
-export async function updateUser(userId: number, user: IUser) {
+export async function updateUser(userId: number, user: User) {
     if (!user.password) {
         return await prisma.user.update({
             where: {
@@ -66,7 +75,7 @@ export async function updateUser(userId: number, user: IUser) {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 middleName: user.middleName,
-                departmentId: user.department.id,
+                departmentId: user.departmentId,
                 expiredPwd: user.expiredPwd,
             }
         })
@@ -82,7 +91,7 @@ export async function updateUser(userId: number, user: IUser) {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 middleName: user.middleName,
-                departmentId: user.department.id,
+                departmentId: user.departmentId,
                 expiredPwd: user.expiredPwd,
             }
         })
@@ -109,15 +118,7 @@ export async function getInputForms(q: string | null = null) {
     if (!q) {
         return await prisma.inputForm.findMany({
             include: {
-                groups: {
-                    select: {
-                        id: true,
-                        pos: true,
-                        title: true,
-                        tableName: true,
-                        isMulty: true
-                    }
-                }
+                groups: true,
             },
             orderBy: {
                 pos: 'asc'
@@ -131,15 +132,7 @@ export async function getInputForms(q: string | null = null) {
                 }
             },
             include: {
-                groups: {
-                    select: {
-                        id: true,
-                        pos: true,
-                        title: true,
-                        tableName: true,
-                        isMulty: true
-                    }
-                }
+                groups: true
             },
             orderBy: {
                 pos: 'asc'
@@ -157,7 +150,7 @@ export async function createEmptyInputForm(cnt: number) {
     })
 }
 
-export async function updateInputForm(formId: number, form: IInputForm) {
+export async function updateInputForm(formId: number, form: InputForm) {
     return await prisma.inputForm.update({
         where: {
             id: formId
@@ -185,7 +178,8 @@ export async function deleteInputForm(formId: number) {
     })
 }
 
-export async function getGroups(formId: number, q: string | null = null) {
+export async function getGroups(formId: number | null, q: string | null = null) {
+    if (!formId) return []
     if (!q) {
         return await prisma.group.findMany({
             where: {
@@ -229,13 +223,16 @@ export async function createEmptyGroup(formId: number, cnt: number) {
 
 export async function getGroup(groupId: number) {
     return await prisma.group.findFirst({
+        include: {
+            fields: true
+        },
         where: {
             id: groupId
         }
     })
 }
 
-export async function updateGroup(inputFormId: number, groupId: number, group: IGroup) {
+export async function updateGroup(inputFormId: number, groupId: number, group: Group) {
     return await prisma.group.update({
         where: {
             id: groupId
@@ -259,6 +256,7 @@ export async function deleteGroup(groupId: number) {
 }
 
 export async function getSearchFields(searchFormId: number, q: string | null = null) {
+    if (!searchFormId) return []
     if (!q) {
         return await prisma.searchField.findMany({
             where: {
@@ -302,7 +300,7 @@ export async function getSearchField(searchFieldId: number) {
     })
 }
 
-export async function updateSearchField(searchFieldId: number, searchField: ISearchField) {
+export async function updateSearchField(searchFieldId: number, searchField: SearchField) {
     return await prisma.searchField.update({
         where: {
             id: searchFieldId
@@ -323,6 +321,7 @@ export async function deleteSearchField(searchFieldId: number) {
 }
 
 export async function getInputFields(groupId: number, q: string | null = null) {
+    if (!groupId) return []
     if (!q) {
         return await prisma.inputField.findMany({
             where: {
@@ -367,7 +366,7 @@ export async function getInputField(inputFieldId: number) {
     })
 }
 
-export async function updateInputField(inputFieldId: number, inputField: IInputField) {
+export async function updateInputField(inputFieldId: number, inputField: InputField) {
     return await prisma.inputField.update({
         where: {
             id: inputFieldId
@@ -426,7 +425,7 @@ export async function createEmptySeacrhForm(cnt: number) {
     })
 }
 
-export async function updateSeacrhForm(formId: number, form: ISearchForm) {
+export async function updateSeacrhForm(formId: number, form: SearchForm) {
     return await prisma.searchForm.update({
         where: {
             id: formId
@@ -489,7 +488,7 @@ export async function createEmptyDictionary(cnt: number) {
     })
 }
 
-export async function updateDictionary(dictId: number, dict: IDictionary) {
+export async function updateDictionary(dictId: number, dict: Dictionary) {
     return prisma.dictionary.update({
         where: {
             id: dictId

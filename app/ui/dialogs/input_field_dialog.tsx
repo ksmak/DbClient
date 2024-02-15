@@ -1,20 +1,18 @@
 import MaterialTailwind from "@material-tailwind/react";
-import { Department, User, Role } from "@prisma/client";
+import { Department, User, Role, InputField } from "@prisma/client";
 import { Form } from "@remix-run/react";
-import InputField from "../elements/input_field";
+import Input from "../elements/input_field";
 import SelectField from "../elements/select_field";
 import moment from "moment";
 const { Button, Dialog, Card, CardBody, CardFooter } = MaterialTailwind;
 
-type UserDialogProps = {
+type InputFieldDialogProps = {
     handleOpen: () => void
     open: boolean,
-    user: User | null,
-    roles: Role[],
-    departments: Department[],
+    field: InputField | null
 }
 
-export default function UserDialog({ handleOpen, open, user, roles, departments }: UserDialogProps) {
+export default function UserDialog({ handleOpen, open, field }: InputFieldDialogProps) {
     return (
         <Dialog
             placeholder=""
@@ -27,63 +25,21 @@ export default function UserDialog({ handleOpen, open, user, roles, departments 
                 <CardBody className="flex flex-col gap-4 overflow-auto" placeholder="">
                     <Form
                         id="updateUserForm"
-                        key={user?.id}
+                        key={field?.id}
                         className="flex flex-col gap-3"
                         method="post"
                     >
-                        <input type="hidden" name="id" defaultValue={user?.id ? user.id : ''} />
-                        <InputField
+                        <input type="hidden" name="id" defaultValue={field?.id ? field.id : ''} />
+                        <Input
                             type="text"
-                            name="login"
-                            title="Login: "
-                            value={user?.login}
-                            required={true}
-                        />
-                        <InputField
-                            type="password"
-                            name="password"
-                            title="Password: "
-                            value={user?.password}
-                            required={false}
-                        />
-                        <InputField
-                            type="text"
-                            name="firstName"
-                            title="First Name: "
-                            value={user?.firstName}
-                            required={false}
-                        />
-                        <InputField
-                            type="text"
-                            name="lastName"
-                            title="Last Name: "
-                            value={user?.lastName}
-                            required={false}
-                        />
-                        <InputField
-                            type="text"
-                            name="middleName"
-                            title="Middle Name: "
-                            value={user?.middleName}
-                            required={false}
-                        />
-                        <SelectField
-                            name="departmentId"
-                            title="Department: "
-                            options={departments}
-                            value={user?.departmentId}
-                            required={false}
-                        />
-                        <InputField
-                            type="date"
-                            name="expiredPwd"
-                            title="Expired Password: "
-                            value={moment(user?.expiredPwd).format("YYYY-MM-DD")}
+                            name="title"
+                            title="Title: "
+                            value={field?.title}
                             required={true}
                         />
                     </Form>
                     <Form
-                        id="deleteUserForm"
+                        id="deleteInputFieldForm"
                         method="post"
                         onSubmit={(event) => {
                             const response = confirm(
@@ -94,7 +50,8 @@ export default function UserDialog({ handleOpen, open, user, roles, departments 
                             }
                         }}
                     >
-                        <input type="hidden" name="id" defaultValue={user?.id ? user.id : ''} />
+                        <input type="hidden" name="groupId" defaultValue={field?.groupId} />
+                        <input type="hidden" name="id" defaultValue={field?.id} />
                     </Form>
                 </CardBody>
                 <CardFooter className="pt-0 flex flex-row gap-3" placeholder="">

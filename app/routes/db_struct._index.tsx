@@ -1,4 +1,5 @@
 import MaterialTailwind from "@material-tailwind/react"
+import { Dictionary, Group, InputForm, SearchForm, InputField } from "@prisma/client"
 const { Button } = MaterialTailwind
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { Form, useLoaderData } from "@remix-run/react"
@@ -6,29 +7,29 @@ import invariant from "tiny-invariant"
 import {
     createEmptyDictionary,
     createEmptyGroup,
+    createEmptyInputField,
     createEmptyInputForm,
     createEmptySeacrhForm,
     deleteDictionary,
     deleteGroup,
+    deleteInputField,
     deleteInputForm,
     deleteSeacrhForm,
     getDictionaries,
     getDictionary,
     getGroup,
     getGroups,
-    getInputField,
-    getInputFields,
     getInputForm,
     getInputForms,
     getSeacrhForm,
-    getSearchField,
     getSearchForms,
     updateDictionary,
     updateGroup,
+    updateInputField,
     updateInputForm,
     updateSeacrhForm
 } from "~/api/api"
-import InputField from "~/ui/elements/input_field"
+import Input from "~/ui/elements/input_field"
 import DictionaryForm from "~/ui/forms/dictionary"
 import GroupForm from "~/ui/forms/group_form"
 import InputFormForm from "~/ui/forms/input_form"
@@ -44,13 +45,12 @@ export async function loader({
     const searchFormId = url.searchParams.get("searchFormId")
     const dictionaryId = url.searchParams.get("dictionaryId")
     const groupId = url.searchParams.get("groupId")
-    const inputFieldId = url.searchParams.get("inputFieldId")
-    const searchFieldId = url.searchParams.get("searchFieldId")
     const q = url.searchParams.get("q")
     const inputForms = await getInputForms(q)
     const searchForms = await getSearchForms(q)
     const dictionaries = await getDictionaries(q)
-    let inputForm, searchForm, dictionary, group, inputField, searchField
+    const groups = await getGroups(Number(inputFormId), q)
+    let inputForm, searchForm, dictionary, group
     switch (state) {
         case 'inputForm': {
             invariant(inputFormId, "Missing inputFormId param")
@@ -69,29 +69,20 @@ export async function loader({
         }
         case 'group': {
             invariant(groupId, "Missing groupId param")
-            inputForm = await getInputForm(Number(groupId))
-            break
-        }
-        case 'inputField': {
-            invariant(inputFieldId, "Missing inputFieldId param")
-            inputField = await getInputField(Number(inputFieldId))
-            break
-        }
-        case 'searchField': {
-            invariant(searchFieldId, "Missing searchFieldId param")
-            searchField = await getSearchField(Number(inputFormId))
+            group = await getGroup(Number(groupId))
             break
         }
     }
     return json({
         state,
+        dictionary,
         inputForm,
         searchForm,
-        dictionary,
         group,
+        dictionaries,
         inputForms,
         searchForms,
-        dictionaries,
+        groups
     })
 }
 
@@ -102,12 +93,10 @@ export async function action({
     const { _action, ...values } = Object.fromEntries(formData)
     if (_action === 'updateInputForm') {
         await updateInputForm(Number(values.id), {
-            id: null,
+            id: Number(values.id),
             pos: Number(values.pos),
             title: String(values.title),
-            createAt: null,
-            updateAt: null,
-        })
+        } as InputForm)
         return redirect(`/db_struct?state=inputForm&inputFormId=${values.id}`)
     }
     if (_action === 'createEmptyInputForm') {
@@ -120,12 +109,10 @@ export async function action({
     }
     if (_action === 'updateSearchForm') {
         await updateSeacrhForm(Number(values.id), {
-            id: null,
+            id: Number(values.id),
             pos: Number(values.pos),
             title: String(values.title),
-            createAt: null,
-            updateAt: null,
-        })
+        } as SearchForm)
         return redirect(`/db_struct?state=searchForm&searchFormId=${values.id}`)
     }
     if (_action === 'createEmptySearchForm') {
@@ -138,13 +125,10 @@ export async function action({
     }
     if (_action === 'updateDictionary') {
         await updateDictionary(Number(values.id), {
-            id: null,
-            pos: Number(values.pos),
+            id: Number(values.id),
             title: String(values.title),
             tableName: String(values.tableName),
-            createAt: null,
-            updateAt: null,
-        })
+        } as Dictionary)
         return redirect(`/db_struct?state=dictionary&dictionaryId=${values.id}`)
     }
     if (_action === 'createEmptyDictionary') {
@@ -160,21 +144,38 @@ export async function action({
         return redirect(`/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}`)
     }
     if (_action === 'updateGroup') {
-        const group = await updateGroup(Number(values.inputFormId), Number(values.{
+        const group = await updateGroup(Number(values.inputFormId), Number(values.id), {
             id: Number(values.id),
-            inputFormId: Number(values.inputFormId),
             pos: Number(values.pos),
             title: String(values.title),
             tableName: String(values.tableName),
             isMulty: Boolean(values.isMulty),
-            createAt: null,
-            updateAt: null,
-        })
+        } as Group)
         return redirect(`/db_struct?state=group&inputFormId=${group.inputFormId}&groupId=${group.id}`)
     }
     if (_action === 'deleteGroup') {
         await deleteGroup(Number(values.id))
         return redirect('/db_struct')
+    }
+
+    if (_action === 'updateInputField') {
+        await updateInputField(Number(values.id), {
+            id: Number(values.id),
+            groupId: Number(values.groupId),
+            pos: Number(values.pos),
+            title: String(values.title),
+            fieldName: String(values.fieldName),
+            fieldType: String(values.fieldType)
+        } as InputField)
+        return redirect(`/db_struct?state=group&inputFormId=${values.inputFormId}&groupId=${values.id}`)
+    }
+    if (_action === 'createEmptyInputField') {
+        const field = await createEmptyInputField(Number(values.groupId), Number(values.cnt))
+        return redirect(`/db_struct?state=group&inputFormId=${values.inputFormId}&groupId=${field.id}`)
+    }
+    if (_action === 'deleteInputField') {
+        await deleteInputField(Number(values.id))
+        return redirect(`/db_struct?state=group&inputFormId=${values.inputFormId}&groupId=${values.id}`)
     }
 
     return null
@@ -183,15 +184,14 @@ export async function action({
 export default function DbStruct() {
     const {
         state,
+        dictionary,
         inputForm,
         searchForm,
-        dictionary,
         group,
+        dictionaries,
         inputForms,
         searchForms,
-        dictionaries,
         groups,
-        inputFields,
     } = useLoaderData<typeof loader>()
 
     return (
@@ -274,7 +274,7 @@ export default function DbStruct() {
                             : state === 'dictionary' && dictionary
                                 ? <DictionaryForm dictionary={dictionary} />
                                 : state === 'group' && group
-                                    ? <GroupForm group={group} inputFields={inputFields} />
+                                    ? <GroupForm group={group} />
                                     : null}
                 </div>
             </div>

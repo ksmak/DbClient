@@ -1,4 +1,4 @@
-type InputFieldProps = {
+type InputProps = {
     type: string,
     name: string,
     title: string,
@@ -6,7 +6,7 @@ type InputFieldProps = {
     required: boolean
 }
 
-export default function InputField({ type, name, title, value, required }: InputFieldProps) {
+export default function Input({ type, name, title, value, required }: InputProps) {
     return (
         <div
             className="flex flex-col gap-1"
