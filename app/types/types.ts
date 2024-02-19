@@ -28,7 +28,7 @@ export interface IUserRole {
 }
 
 export interface IUser {
-    id: number | null,
+    id?: number | null,
     login: string,
     password: string,
     firstName: string | null,
@@ -36,8 +36,6 @@ export interface IUser {
     middleName: string | null,
     department: IDepartment,
     expiredPwd: Date | null,
-    createAt: Date | null,
-    updateAt: Date | null,
 }
 
 export interface IBase {

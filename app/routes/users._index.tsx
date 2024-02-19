@@ -1,39 +1,40 @@
-import MaterialTailwind from "@material-tailwind/react";
-import { User } from "@prisma/client";
-const { Button } = MaterialTailwind;
+import MaterialTailwind from "@material-tailwind/react"
+import { Department, Prisma, Role, User } from "@prisma/client"
+const { Button } = MaterialTailwind
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
-import { Form, useLoaderData, useNavigate } from "@remix-run/react"
-import moment from "moment";
-import { createEmptyUser, deleteUser, getDepartments, getRoles, getUser, getUsers, updateUser } from "~/api/api"
-import UserDialog from "~/ui/dialogs/user_dialog";
+import { useActionData, useFetcher, useLoaderData, useNavigate } from "@remix-run/react"
+import moment from "moment"
+import UserDialog from "~/ui/dialogs/user_dialog"
+import api from "~/api"
+import { useEffect, useState } from "react"
 
 export async function loader({
     request,
 }: LoaderFunctionArgs) {
-    const roles = await getRoles()
-    const departments = await getDepartments()
-    const users = await getUsers()
+    const roles: Role[] = await api.users.getRoles()
+    const departments: Department[] = await api.users.getDepartments()
+    const users = await api.users.getUsers()
     const url = new URL(request.url)
     const userId = url.searchParams.get("userId")
+    const isNew = url.searchParams.get("new")
     let user
-    if (userId) {
-        user = await getUser(Number(userId))
+    if (isNew) {
+        user = {}
+    } else if (userId) {
+        user = await api.users.getUser(Number(userId))
         user = { ...user, password: undefined }
     }
-    return json({ user, users, roles, departments })
+    return json({ user, users, roles, departments, isNew })
 }
 
 export async function action({
     request,
 }: ActionFunctionArgs) {
-    const formData = await request.formData();
-    const { _action, ...values } = Object.fromEntries(formData);
-    if (_action === 'createEmptyUser') {
-        const user = await createEmptyUser(Number(values.cnt))
-        return redirect(`/users?userId=${user.id}`);
-    }
-    if (_action === 'updateUser') {
-        await updateUser(Number(values.id), {
+    let errors: string | null = null
+    const formData = await request.formData()
+    const { _action, ...values } = Object.fromEntries(formData)
+    if (_action === 'createUser') {
+        const createUser = {
             id: Number(values.id),
             login: String(values.login),
             password: String(values.password),
@@ -44,50 +45,104 @@ export async function action({
             expiredPwd: new Date(String(values.expiredPwd)),
             createdAt: null,
             updatedAt: null,
-        });
-        return redirect(`/users`);
+        }
+        try {
+            await api.users.createUser(createUser)
+            return redirect("/users")
+        } catch (e) {
+            if (e instanceof Prisma.PrismaClientKnownRequestError) {
+                errors = e.message
+            }
+            // throw e
+        }
+    }
+    if (_action === 'updateUser') {
+        const userId = Number(values.id)
+        const updateUser = {
+            id: Number(values.id),
+            login: String(values.login),
+            password: String(values.password),
+            firstName: String(values.firstName),
+            lastName: String(values.lastName),
+            middleName: String(values.middleName),
+            departmentId: Number(values.departmentId),
+            expiredPwd: new Date(String(values.expiredPwd)),
+            createdAt: null,
+            updatedAt: null,
+        }
+        try {
+            await api.users.updateUser(userId, updateUser)
+            return redirect("/users")
+        } catch (e) {
+            if (e instanceof Prisma.PrismaClientKnownRequestError) {
+                errors = e.message
+            }
+            // throw e
+        }
     }
     if (_action === 'deleteUser') {
-        await deleteUser(Number(values.id));
-        return redirect(`/users`);
+        const userId = Number(values.id)
+        try {
+            await api.users.deleteUser(userId)
+            return redirect("/users")
+        } catch (e) {
+            if (e instanceof Prisma.PrismaClientKnownRequestError) {
+                errors = e.message
+            }
+            // throw e
+        }
     }
-    return null
+    return json({ errors })
 }
 
 export default function Users() {
-    const { user, users, roles, departments } = useLoaderData<typeof loader>()
+    const [open, setOpen] = useState(false)
+    const { user, users, roles, departments, isNew } = useLoaderData<typeof loader>()
+    const actionData = useActionData<typeof action>()
     const navigate = useNavigate()
+    const fetcher = useFetcher()
+    const isDeleting = fetcher.state !== "idle"
+
+    useEffect(() => {
+        setOpen(user ? true : false)
+    }, [user])
+
+    const handleDelete = async (event: any) => {
+        const response = confirm(
+            "Please confirm you want to delete this record."
+        )
+        if (!response) {
+            event.preventDefault()
+        }
+    }
 
     return (
         <div className="container mx-auto flex flex-col gap-3 h-screen pb-5">
             <UserDialog
-                handleOpen={() => { navigate('/users') }}
-                open={user ? true : false}
+                isNew={isNew ? true : false}
+                handleOpen={() => navigate("/users")}
+                open={open}
                 user={user ? user as User : null}
                 roles={roles}
                 departments={departments}
+                errors={actionData?.errors}
             />
             <h1 className="self-center text-amber-700 text-3xl font-bold mt-4">Users</h1>
             <div
                 className="flex items-center gap-3"
             >
-                <Form method="post">
-                    <input type="hidden" name="cnt" defaultValue={users.length + 1} />
-                    <Button
-                        className="flex items-center gap-3"
-                        color="blue-gray"
-                        placeholder=''
-                        size="sm"
-                        type="submit"
-                        name="_action"
-                        value="createEmptyUser"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        Add User
-                    </Button>
-                </Form>
+                <Button
+                    className="flex items-center gap-3"
+                    color="blue-gray"
+                    placeholder=''
+                    size="sm"
+                    onClick={() => { navigate("/users?new=true") }}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    New User
+                </Button>
             </div>
             <table
                 className="border-2 border-blue-gray-700"
@@ -105,24 +160,59 @@ export default function Users() {
                         <th className="p-1 text-sm border border-blue-gray-700">Expired Password</th>
                         <th className="p-1 text-sm border border-blue-gray-700">created</th>
                         <th className="p-1 text-sm border border-blue-gray-700">updated</th>
+                        <th className="p-1 text-sm border border-blue-gray-700">#</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => (
+                    {users.map((user: User, index: number) => (
                         <tr
-                            className="hover:cursor-pointer hover:bg-blue-gray-100"
                             key={user.id}
-                            onClick={() => navigate(`/users?userId=${user.id}`)}
+                        // onClick={() => navigate(`/users?userId=${user.id}`)}
                         >
                             <td className="p-1 text-sm border border-blue-gray-700">{index + 1}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{user.login}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{user.firstName}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{user.lastName}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{user.middleName}</td>
+                            <td
+                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
+                                onClick={() => navigate(`/users?userId=${user.id}`)}
+                            >
+                                {user.login}
+                            </td>
+                            <td
+                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
+                                onClick={() => navigate(`/users?userId=${user.id}`)}
+                            >
+                                {user.firstName}
+                            </td>
+                            <td
+                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
+                                onClick={() => navigate(`/users?userId=${user.id}`)}
+                            >
+                                {user.lastName}
+                            </td>
+                            <td
+                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
+                                onClick={() => navigate(`/users?userId=${user.id}`)}
+                            >
+                                {user.middleName}
+                            </td>
                             <td className="p-1 text-sm border border-blue-gray-700">{departments.find(item => item.id === user.departmentId)?.title}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{moment(user.expiredPwd).format('DD.MM.YYYY')}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{moment(user.createdAt).format('DD.MM.YYYY H:m:s')}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{moment(user.updatedAt).format('DD.MM.YYYY H:m:s')}</td>
+                            <td className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer">
+                                <fetcher.Form method="post">
+                                    <input type="hidden" name="id" defaultValue={user?.id ? user.id : ''} />
+                                    <button
+                                        className="hover:underline"
+                                        disabled={isDeleting}
+                                        onClick={handleDelete}
+                                        type="submit"
+                                        name="_action"
+                                        value="deleteUser"
+                                    >
+                                        {isDeleting ? "Deleting..." : "Delete"}
+                                    </button>
+                                </fetcher.Form>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

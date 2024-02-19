@@ -1,8 +1,10 @@
+import { useState } from "react"
+
 type CheckFieldProps = {
     type: string,
     name: string,
     title: string,
-    value: any,
+    value: boolean,
     required: boolean
 }
 

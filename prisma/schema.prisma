@@ -19,7 +19,8 @@ model Department {
 model Role {
   id           Int            @id @default(autoincrement())
   title        String         @unique
-  access       Access[]
+  accessInput  AccessInputForm[]
+  accessSearch AccessSearchForm[]
   userRoles    UserRole[]
 }
 
@@ -29,11 +30,21 @@ enum AccessType {
   DELETE
 }
 
-model Access {
+model AccessInputForm {
   id           Int            @id @default(autoincrement())
   role         Role           @relation(fields: [roleId], references: [id])
   roleId       Int
-  obj          Int
+  form         InputForm      @relation(fields: [formId], references: [id])
+  formId       Int
+  accessType   AccessType     @default(READ)
+}
+
+model AccessSearchForm {
+  id           Int            @id @default(autoincrement())
+  role         Role           @relation(fields: [roleId], references: [id])
+  roleId       Int
+  form         SearchForm     @relation(fields: [formId], references: [id])
+  formId       Int
   accessType   AccessType     @default(READ)
 }
 
@@ -58,14 +69,12 @@ model User {
   createdAt    DateTime?      @default(now())
   updatedAt    DateTime?      @updatedAt
   roles        UserRole[]
+  queries      Query[]
 }
 
 model Dictionary {
   id           Int            @id @default(autoincrement())
   title        String
-  tableName    String         @unique
-  createdAt    DateTime?      @default(now())
-  updatedAt    DateTime?      @updatedAt
 }
 
 model InputForm {
@@ -73,17 +82,15 @@ model InputForm {
   pos          Int            @default(0)
   title        String
   groups       Group[]
-  createdAt    DateTime?      @default(now())
-  updatedAt    DateTime?      @updatedAt
+  access       AccessInputForm[]
 }
 
 model SearchForm {
   id           Int            @id @default(autoincrement())
   pos          Int            @default(0)
   title        String
-  createdAt    DateTime?      @default(now())
-  updatedAt    DateTime?      @updatedAt
   fields       SearchField[]
+  access       AccessSearchForm[]
 }
 
 model Group {
@@ -93,10 +100,14 @@ model Group {
   inputForm    InputForm      @relation(fields: [inputFormId], references: [id])
   inputFormId  Int
   isMulty      Boolean        @default(false)
-  tableName    String
-  createdAt    DateTime?      @default(now())
-  updatedAt    DateTime?      @updatedAt
   fields       InputField[]
+}
+
+enum FieldType {
+  TEXT
+  CYRILLIC
+  INTEGER
+  DICT
 }
 
 model InputField {
@@ -105,8 +116,7 @@ model InputField {
   title        String
   group        Group          @relation(fields: [groupId], references: [id])
   groupId      Int
-  fieldName    String
-  fieldType    String
+  filedType    FieldType      @default(TEXT)
   len          Int            @default(0)
   isKey        Boolean        @default(false)
   isVisible    Boolean        @default(true)
@@ -114,9 +124,8 @@ model InputField {
   isRequire    Boolean        @default(false)
   precision    Int            @default(0)
   isDuplicate  Boolean        @default(false)
-  createdAt    DateTime?      @default(now())
-  updatedAt    DateTime?      @updatedAt
   searchField  SearchField[]
+  conditions   Condition[]
 }
 
 model SearchField {
@@ -127,6 +136,62 @@ model SearchField {
   searchFormId Int
   field        InputField     @relation(fields: [fieldId], references: [id])
   fieldId      Int
-  createdAt    DateTime?      @default(now())
-  updatedAt    DateTime?      @updatedAt
+}
+
+model Report {
+  id           Int            @id @default(autoincrement())
+  pos          Int            @default(0)
+  title        String
+  template     String
+  start_row    Int            @default(1)
+  start_col    Int            @default(1)
+  cols         ReportCol[]
+}
+
+model ReportCol {
+  id           Int            @id @default(autoincrement())
+  pos          Int            @default(1)
+  report       Report         @relation(fields: [reportId], references: [id])
+  reportId     Int
+  query        Query          @relation(fields: [queryId], references: [id])
+  queryId      Int
+  rows         ReportRow[]
+}
+
+model ReportRow {
+  id           Int            @id @default(autoincrement())
+  pos          Int            @default(1)
+  col          ReportCol      @relation(fields: [colId], references: [id])
+  colId        Int
+  query        Query          @relation(fields: [queryId], references: [id])
+  queryId      Int
+}
+
+model Query {
+  id           Int            @id @default(autoincrement())
+  title        String?
+  user         User?          @relation(fields: [userId], references: [id])
+  userId       Int?
+  isPublic     Boolean        @default(false)
+  cols         ReportCol[]
+  rows         ReportRow[]
+  conditions   Condition[]
+}
+
+model Condition {
+  id           Int            @id @default(autoincrement())
+  query        Query          @relation(fields: [queryId], references: [id])
+  queryId      Int
+  log          String?
+  field        InputField?    @relation(fields: [fieldId], references: [id])
+  fieldId      Int?
+  oper         String?
+  valList      ValList[]
+}
+
+model ValList {
+  id           Int            @id @default(autoincrement())
+  cond         Condition      @relation(fields: [condId], references: [id])
+  condId       Int
+  value        String
 }

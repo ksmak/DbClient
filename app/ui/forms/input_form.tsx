@@ -1,6 +1,8 @@
-import MaterialTailwind from "@material-tailwind/react";
-const { Button } = MaterialTailwind;
+import MaterialTailwind from "@material-tailwind/react"
+const { Button } = MaterialTailwind
 import { Form } from "@remix-run/react"
+import Inpu from "../elements/input_field";
+import Input from "../elements/input_field";
 
 type InputFormProps = {
     inputForm: any,
@@ -72,37 +74,20 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                 method="post"
             >
                 <input type="hidden" name="id" defaultValue={inputForm.id ? inputForm.id : ''} />
-                <div
-                    className="w-full"
-                >
-                    <label
-                        className="block text-sm font-bold text-slate-700"
-                        htmlFor="pos"
-                    >
-                        Pos:
-                    </label>
-                    <input
-                        id="pos"
-                        type="number"
-                        defaultValue={inputForm?.pos}
-                        aria-label="pos"
-                        name="pos"
-                        required
-                    />
-                </div>
-                <div
-                    className="w-full"
-                >
-                    <label className="block text-sm font-bold text-slate-700" htmlFor="title">Title: </label>
-                    <input
-                        id="title"
-                        type="text"
-                        defaultValue={inputForm?.title}
-                        aria-label="title"
-                        name="title"
-                        required
-                    />
-                </div>
+                <Input
+                    title="Pos: "
+                    type="number"
+                    value={inputForm?.pos}
+                    name="pos"
+                    required={true}
+                />
+                <Input
+                    title="Title: "
+                    type="text"
+                    value={inputForm?.title}
+                    name="title"
+                    required={true}
+                />
             </Form>
             <Form
                 id="deleteInputForm"

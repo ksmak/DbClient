@@ -25,11 +25,18 @@ export default function DbStrucPanel({
 }: DbStructPanelProps) {
     return (
         <ul>
-            <li className="flex items-center gap-1 font-bold">
+            <li
+                className={["flex items-center gap-1 font-bold",
+                    state === 'inputForm' && !inputFormId ? "bg-blue-gray-200" : ""].join(' ')}
+            >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                 </svg>
-                Input Forms
+                <Link
+                    to={`/db_struct?state=inputForm&inputFormId=0`}
+                >
+                    Input Forms
+                </Link>
             </li>
             <ul>
                 {inputForms.map((form: InputForm & { groups: Group[] }) => (
@@ -68,11 +75,18 @@ export default function DbStrucPanel({
                     </div>
                 ))}
             </ul>
-            <li className="flex items-center gap-1 font-bold">
+            <li
+                className={["flex items-center gap-1 font-bold",
+                    state === 'searchForm' && !searchFormId ? "bg-blue-gray-200" : ""].join(' ')}
+            >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                 </svg>
-                Search Forms
+                <Link
+                    to={`/db_struct?state=searchForm&searchFormId=0`}
+                >
+                    Search Forms
+                </Link>
             </li>
             <ul>
                 {searchForms.map((form: SearchForm) => (
@@ -92,11 +106,18 @@ export default function DbStrucPanel({
                     </Link>
                 ))}
             </ul>
-            <li className="flex items-center gap-1 font-bold">
+            <li
+                className={["flex items-center gap-1 font-bold",
+                    state === 'dictionary' && !dictionaryId ? "bg-blue-gray-200" : ""].join(' ')}
+            >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                 </svg>
-                Dictionaries
+                <Link
+                    to={`/db_struct?state=dictionary&dictionaryId=0`}
+                >
+                    Dictionaries
+                </Link>
             </li>
             <ul>
                 {dictionaries.map((dict: Dictionary) => (

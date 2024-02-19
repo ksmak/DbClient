@@ -3,10 +3,12 @@ type InputProps = {
     name: string,
     title: string,
     value: any,
-    required: boolean
+    required: boolean,
+    readonly?: boolean,
+    onChange?: () => void
 }
 
-export default function Input({ type, name, title, value, required }: InputProps) {
+export default function Input({ type, name, title, value, required, readonly, onChange }: InputProps) {
     return (
         <div
             className="flex flex-col gap-1"
@@ -24,6 +26,8 @@ export default function Input({ type, name, title, value, required }: InputProps
                 aria-label={name}
                 name={name}
                 required={required}
+                readOnly={readonly}
+                onChange={onChange}
             />
         </div >
     )

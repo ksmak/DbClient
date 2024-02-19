@@ -1,9 +1,7 @@
 import MaterialTailwind from "@material-tailwind/react";
-import { Department, User, Role, InputField } from "@prisma/client";
+import { InputField } from "@prisma/client";
 import { Form } from "@remix-run/react";
 import Input from "../elements/input_field";
-import SelectField from "../elements/select_field";
-import moment from "moment";
 const { Button, Dialog, Card, CardBody, CardFooter } = MaterialTailwind;
 
 type InputFieldDialogProps = {
@@ -12,7 +10,7 @@ type InputFieldDialogProps = {
     field: InputField | null
 }
 
-export default function UserDialog({ handleOpen, open, field }: InputFieldDialogProps) {
+export default function InputFieldDialog({ handleOpen, open, field }: InputFieldDialogProps) {
     return (
         <Dialog
             placeholder=""

@@ -1,21 +1,33 @@
 import {
+  Input,
+  require_node
+} from "/build/_shared/chunk-D6H2MT2D.js";
+import {
+  require_react as require_react2
+} from "/build/_shared/chunk-DGLILCEK.js";
+import {
+  Form,
+  useActionData,
+  useFetcher,
+  useLoaderData,
+  useNavigate
+} from "/build/_shared/chunk-HZQAXSMT.js";
+import "/build/_shared/chunk-WEAPBHQG.js";
+import {
   require_jsx_dev_runtime
 } from "/build/_shared/chunk-7PHB3BFD.js";
 import {
+  require_react
+} from "/build/_shared/chunk-CJ4MY3PQ.js";
+import {
   createHotContext
 } from "/build/_shared/chunk-Q6LMBPEP.js";
+import "/build/_shared/chunk-JR22VO6P.js";
 import {
   __commonJS,
   __require,
   __toESM
 } from "/build/_shared/chunk-PZDJHGND.js";
-
-// empty-module:@remix-run/node
-var require_node = __commonJS({
-  "empty-module:@remix-run/node"(exports, module) {
-    module.exports = {};
-  }
-});
 
 // node_modules/moment/moment.js
 var require_moment = __commonJS({
@@ -4006,7 +4018,15 @@ var require_moment = __commonJS({
   }
 });
 
-// app/ui/elements/input_field.tsx
+// app/routes/users._index.tsx
+var import_react3 = __toESM(require_react2(), 1);
+var import_node = __toESM(require_node(), 1);
+var import_moment2 = __toESM(require_moment(), 1);
+
+// app/ui/dialogs/user_dialog.tsx
+var import_react = __toESM(require_react2(), 1);
+
+// app/ui/elements/select_field.tsx
 var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
 if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
@@ -4014,7 +4034,7 @@ if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   prevRefreshReg = window.$RefreshReg$;
   prevRefreshSig = window.$RefreshSig$;
   window.$RefreshReg$ = (type, id) => {
-    window.$RefreshRuntime$.register(type, '"app/ui/elements/input_field.tsx"' + id);
+    window.$RefreshRuntime$.register(type, '"app/ui/elements/select_field.tsx"' + id);
   };
   window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
 }
@@ -4023,44 +4043,427 @@ var prevRefreshSig;
 if (import.meta) {
   import.meta.hot = createHotContext(
     //@ts-expect-error
-    "app/ui/elements/input_field.tsx"
+    "app/ui/elements/select_field.tsx"
   );
-  import.meta.hot.lastModified = "1707999480637.3755";
+  import.meta.hot.lastModified = "1707543896081.2876";
 }
-function Input({
-  type,
+function SelectField({
   name,
   title,
+  options,
   value,
   required
 }) {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-col gap-1", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("label", { className: "text-sm font-bold text-slate-700", htmlFor: name, children: title }, void 0, false, {
-      fileName: "app/ui/elements/input_field.tsx",
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("label", { className: "block text-sm font-bold text-slate-700", htmlFor: name, children: title }, void 0, false, {
+      fileName: "app/ui/elements/select_field.tsx",
       lineNumber: 29,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { id: name, type, defaultValue: value, "aria-label": name, name, required }, void 0, false, {
-      fileName: "app/ui/elements/input_field.tsx",
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { id: name, defaultValue: value, "aria-label": name, name, required, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { children: "-" }, void 0, false, {
+        fileName: "app/ui/elements/select_field.tsx",
+        lineNumber: 33,
+        columnNumber: 17
+      }, this),
+      options.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: item.id, children: item.title }, item.id, false, {
+        fileName: "app/ui/elements/select_field.tsx",
+        lineNumber: 34,
+        columnNumber: 38
+      }, this))
+    ] }, void 0, true, {
+      fileName: "app/ui/elements/select_field.tsx",
       lineNumber: 32,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
-    fileName: "app/ui/elements/input_field.tsx",
+    fileName: "app/ui/elements/select_field.tsx",
     lineNumber: 28,
     columnNumber: 10
   }, this);
 }
-_c = Input;
+_c = SelectField;
 var _c;
-$RefreshReg$(_c, "Input");
+$RefreshReg$(_c, "SelectField");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 
+// app/ui/dialogs/user_dialog.tsx
+var import_moment = __toESM(require_moment(), 1);
+var import_jsx_dev_runtime2 = __toESM(require_jsx_dev_runtime(), 1);
+if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
+  console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
+} else {
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = (type, id) => {
+    window.$RefreshRuntime$.register(type, '"app/ui/dialogs/user_dialog.tsx"' + id);
+  };
+  window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
+}
+var prevRefreshReg;
+var prevRefreshSig;
+if (import.meta) {
+  import.meta.hot = createHotContext(
+    //@ts-expect-error
+    "app/ui/dialogs/user_dialog.tsx"
+  );
+  import.meta.hot.lastModified = "1708321439572.0278";
+}
+var {
+  Button,
+  Dialog,
+  Card,
+  CardBody,
+  CardFooter
+} = import_react.default;
+function UserDialog({
+  isNew,
+  handleOpen,
+  open,
+  user,
+  roles,
+  departments,
+  errors
+}) {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Dialog, { placeholder: "", size: "sm", open, handler: handleOpen, className: "bg-transparent shadow-none", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Card, { className: "mx-auto w-full", placeholder: "", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(CardBody, { className: "flex flex-col gap-4 overflow-auto", placeholder: "", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Form, { id: "userForm", className: "flex flex-col gap-3", method: "post", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: user?.id ? user.id : "" }, void 0, false, {
+          fileName: "app/ui/dialogs/user_dialog.tsx",
+          lineNumber: 46,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "text", name: "login", title: "Login: ", value: user?.login, required: true, readonly: !isNew }, void 0, false, {
+          fileName: "app/ui/dialogs/user_dialog.tsx",
+          lineNumber: 47,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "password", name: "password", title: "Password: ", value: user?.password, required: false }, void 0, false, {
+          fileName: "app/ui/dialogs/user_dialog.tsx",
+          lineNumber: 48,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "text", name: "firstName", title: "First Name: ", value: user?.firstName, required: false }, void 0, false, {
+          fileName: "app/ui/dialogs/user_dialog.tsx",
+          lineNumber: 49,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "text", name: "lastName", title: "Last Name: ", value: user?.lastName, required: false }, void 0, false, {
+          fileName: "app/ui/dialogs/user_dialog.tsx",
+          lineNumber: 50,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "text", name: "middleName", title: "Middle Name: ", value: user?.middleName, required: false }, void 0, false, {
+          fileName: "app/ui/dialogs/user_dialog.tsx",
+          lineNumber: 51,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(SelectField, { name: "departmentId", title: "Department: ", options: departments, value: user?.departmentId, required: false }, void 0, false, {
+          fileName: "app/ui/dialogs/user_dialog.tsx",
+          lineNumber: 52,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "date", name: "expiredPwd", title: "Expired Password: ", value: (0, import_moment.default)(user?.expiredPwd).format("YYYY-MM-DD"), required: true }, void 0, false, {
+          fileName: "app/ui/dialogs/user_dialog.tsx",
+          lineNumber: 53,
+          columnNumber: 25
+        }, this)
+      ] }, user?.id, true, {
+        fileName: "app/ui/dialogs/user_dialog.tsx",
+        lineNumber: 45,
+        columnNumber: 21
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("span", { className: "text-red-500 text-sm", children: errors }, void 0, false, {
+        fileName: "app/ui/dialogs/user_dialog.tsx",
+        lineNumber: 55,
+        columnNumber: 21
+      }, this)
+    ] }, void 0, true, {
+      fileName: "app/ui/dialogs/user_dialog.tsx",
+      lineNumber: 44,
+      columnNumber: 17
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(CardFooter, { className: "pt-0 flex flex-row gap-3", placeholder: "", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Button, { variant: "gradient", color: "green", form: "userForm", placeholder: "", type: "submit", name: "_action", value: isNew ? "createUser" : "updateUser", fullWidth: true, children: "Save" }, void 0, false, {
+        fileName: "app/ui/dialogs/user_dialog.tsx",
+        lineNumber: 58,
+        columnNumber: 21
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Button, { variant: "gradient", onClick: handleOpen, fullWidth: true, placeholder: "", children: "Close" }, void 0, false, {
+        fileName: "app/ui/dialogs/user_dialog.tsx",
+        lineNumber: 61,
+        columnNumber: 21
+      }, this)
+    ] }, void 0, true, {
+      fileName: "app/ui/dialogs/user_dialog.tsx",
+      lineNumber: 57,
+      columnNumber: 17
+    }, this)
+  ] }, void 0, true, {
+    fileName: "app/ui/dialogs/user_dialog.tsx",
+    lineNumber: 43,
+    columnNumber: 13
+  }, this) }, void 0, false, {
+    fileName: "app/ui/dialogs/user_dialog.tsx",
+    lineNumber: 42,
+    columnNumber: 10
+  }, this);
+}
+_c2 = UserDialog;
+var _c2;
+$RefreshReg$(_c2, "UserDialog");
+window.$RefreshReg$ = prevRefreshReg;
+window.$RefreshSig$ = prevRefreshSig;
+
+// app/routes/users._index.tsx
+var import_react5 = __toESM(require_react(), 1);
+var import_jsx_dev_runtime3 = __toESM(require_jsx_dev_runtime(), 1);
+if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
+  console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
+} else {
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = (type, id) => {
+    window.$RefreshRuntime$.register(type, '"app/routes/users._index.tsx"' + id);
+  };
+  window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
+}
+var prevRefreshReg;
+var prevRefreshSig;
+var _s = $RefreshSig$();
+if (import.meta) {
+  import.meta.hot = createHotContext(
+    //@ts-expect-error
+    "app/routes/users._index.tsx"
+  );
+  import.meta.hot.lastModified = "1708321290925.646";
+}
+var {
+  Button: Button2
+} = import_react3.default;
+function Users() {
+  _s();
+  const [open, setOpen] = (0, import_react5.useState)(false);
+  const {
+    user,
+    users,
+    roles,
+    departments,
+    isNew
+  } = useLoaderData();
+  const actionData = useActionData();
+  const navigate = useNavigate();
+  const fetcher = useFetcher();
+  const isDeleting = fetcher.state !== "idle";
+  (0, import_react5.useEffect)(() => {
+    setOpen(user ? true : false);
+  }, [user]);
+  const handleDelete = async (event) => {
+    const response = confirm("Please confirm you want to delete this record.");
+    if (!response) {
+      event.preventDefault();
+    }
+  };
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "container mx-auto flex flex-col gap-3 h-screen pb-5", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(UserDialog, { isNew: isNew ? true : false, handleOpen: () => navigate("/users"), open, user: user ? user : null, roles, departments, errors: actionData?.errors }, void 0, false, {
+      fileName: "app/routes/users._index.tsx",
+      lineNumber: 156,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: "self-center text-amber-700 text-3xl font-bold mt-4", children: "Users" }, void 0, false, {
+      fileName: "app/routes/users._index.tsx",
+      lineNumber: 157,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "flex items-center gap-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(Button2, { className: "flex items-center gap-3", color: "blue-gray", placeholder: "", size: "sm", onClick: () => {
+      navigate("/users?new=true");
+    }, children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
+        fileName: "app/routes/users._index.tsx",
+        lineNumber: 163,
+        columnNumber: 25
+      }, this) }, void 0, false, {
+        fileName: "app/routes/users._index.tsx",
+        lineNumber: 162,
+        columnNumber: 21
+      }, this),
+      "New User"
+    ] }, void 0, true, {
+      fileName: "app/routes/users._index.tsx",
+      lineNumber: 159,
+      columnNumber: 17
+    }, this) }, void 0, false, {
+      fileName: "app/routes/users._index.tsx",
+      lineNumber: 158,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("table", { className: "border-2 border-blue-gray-700", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("thead", { className: "bg-blue-gray-400 text-white", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("tr", { children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 171,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Login" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 172,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "First Name" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 173,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Last Name" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 174,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Middle Name" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 175,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Department" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 176,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Expired Password" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 177,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "created" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 178,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "updated" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 179,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 180,
+          columnNumber: 25
+        }, this)
+      ] }, void 0, true, {
+        fileName: "app/routes/users._index.tsx",
+        lineNumber: 170,
+        columnNumber: 21
+      }, this) }, void 0, false, {
+        fileName: "app/routes/users._index.tsx",
+        lineNumber: 169,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("tbody", { children: users.map((user2, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+        "tr",
+        {
+          children: [
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 187,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.login }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 188,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.firstName }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 191,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.lastName }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 194,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.middleName }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 197,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: departments.find((item) => item.id === user2.departmentId)?.title }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 200,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.expiredPwd).format("DD.MM.YYYY") }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 201,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.createdAt).format("DD.MM.YYYY H:m:s") }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 202,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.updatedAt).format("DD.MM.YYYY H:m:s") }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 203,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(fetcher.Form, { method: "post", children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: user2?.id ? user2.id : "" }, void 0, false, {
+                fileName: "app/routes/users._index.tsx",
+                lineNumber: 206,
+                columnNumber: 37
+              }, this),
+              /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { className: "hover:underline", disabled: isDeleting, onClick: handleDelete, type: "submit", name: "_action", value: "deleteUser", children: isDeleting ? "Deleting..." : "Delete" }, void 0, false, {
+                fileName: "app/routes/users._index.tsx",
+                lineNumber: 207,
+                columnNumber: 37
+              }, this)
+            ] }, void 0, true, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 205,
+              columnNumber: 33
+            }, this) }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 204,
+              columnNumber: 29
+            }, this)
+          ]
+        },
+        user2.id,
+        true,
+        {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 184,
+          columnNumber: 49
+        },
+        this
+      )) }, void 0, false, {
+        fileName: "app/routes/users._index.tsx",
+        lineNumber: 183,
+        columnNumber: 17
+      }, this)
+    ] }, void 0, true, {
+      fileName: "app/routes/users._index.tsx",
+      lineNumber: 168,
+      columnNumber: 13
+    }, this)
+  ] }, void 0, true, {
+    fileName: "app/routes/users._index.tsx",
+    lineNumber: 155,
+    columnNumber: 10
+  }, this);
+}
+_s(Users, "MmhcMXbiOrEwUqxizumls+jQpp8=", false, function() {
+  return [useLoaderData, useActionData, useNavigate, useFetcher];
+});
+_c3 = Users;
+var _c3;
+$RefreshReg$(_c3, "Users");
+window.$RefreshReg$ = prevRefreshReg;
+window.$RefreshSig$ = prevRefreshSig;
 export {
-  require_node,
-  Input,
-  require_moment
+  Users as default
 };
 /*! Bundled license information:
 
@@ -4071,4 +4474,4 @@ moment/moment.js:
   (*! license : MIT *)
   (*! momentjs.com *)
 */
-//# sourceMappingURL=/build/_shared/chunk-JD7QYX3J.js.map
+//# sourceMappingURL=/build/routes/users._index-RK6SI6TG.js.map

@@ -1,6 +1,7 @@
 import MaterialTailwind from "@material-tailwind/react"
 const { Button } = MaterialTailwind;
 import { Form } from "@remix-run/react"
+import Input from "../elements/input_field";
 
 type DictionaryFormProps = {
     dictionary: any
@@ -48,38 +49,15 @@ export default function DictionaryForm({ dictionary }: DictionaryFormProps) {
                 method="post"
             >
                 <input type="hidden" name="id" defaultValue={dictionary.id ? dictionary.id : ''} />
-                <div
-                    className="w-full"
-                >
-                    <label className="block text-sm font-bold text-slate-700" htmlFor="title">Title: </label>
-                    <input
-                        id="title"
-                        type="text"
-                        defaultValue={dictionary?.title}
-                        aria-label="title"
-                        name="title"
-                        required
-                    />
-                </div>
-                <div
-                    className="w-full"
-                >
-                    <label
-                        className="block text-sm font-bold text-slate-700"
-                        htmlFor="tableName"
-                    >
-                        Table:
-                    </label>
-                    <input
-                        id="tableName"
-                        type="text"
-                        defaultValue={dictionary?.tableName}
-                        aria-label="tableName"
-                        name="tableName"
-                        required
-                    />
-                </div>
-            </Form>
+                <Input
+                    title="Title"
+                    type="text"
+                    value={dictionary?.title}
+                    aria-label="title"
+                    name="title"
+                    required={true}
+                />
+            </Form >
             <Form
                 id="deleteDictionary"
                 method="post"

@@ -1,29 +1,28 @@
 import MaterialTailwind from "@material-tailwind/react";
 const { Button } = MaterialTailwind;
-import { Form, useNavigate } from "@remix-run/react"
+import { Form, useFetcher, useNavigate } from "@remix-run/react"
 import Input from "../elements/input_field";
 import CheckField from "../elements/check_field";
 import { InputField } from "@prisma/client";
-import { ActionFunctionArgs } from "@remix-run/node";
-import moment from "moment";
+import { MouseEventHandler, useState } from "react";
 
 type GroupFormProps = {
     group: any
 }
 
-export async function action({
-    request,
-}: ActionFunctionArgs) {
-    const formData = await request.formData()
-    const { _action, ...values } = Object.fromEntries(formData)
-
-
-    return null
-}
-
-export default function GroupForm({ group }: GroupFormProps
-) {
+export default function GroupForm({ group }: GroupFormProps) {
     const navigate = useNavigate()
+    const fetcher = useFetcher()
+    const isDeleting = fetcher.state !== "idle"
+
+    const handleDelete = async (event: any) => {
+        const response = confirm(
+            "Please confirm you want to delete this record."
+        )
+        if (!response) {
+            event.preventDefault()
+        }
+    }
 
     return (
         <>
@@ -44,12 +43,12 @@ export default function GroupForm({ group }: GroupFormProps
                     Add Field
                 </Button>
                 <Button
+                    id="updateGroupButton"
                     className="flex items-center gap-1"
                     color="green"
                     form="updateGroupForm"
                     placeholder=""
                     size="sm"
-                    type="submit"
                     name="_action"
                     value="updateGroup"
                 >
@@ -74,29 +73,32 @@ export default function GroupForm({ group }: GroupFormProps
                     Delete
                 </Button>
             </div>
-            <Form
+            <fetcher.Form
                 id="addInputFieldForm"
-                key={1}
                 method="post"
             >
                 <input type="hidden" name="inputFormId" defaultValue={group.inputFormId} />
                 <input type="hidden" name="groupId" defaultValue={group.id} />
                 <input type="hidden" name="cnt" defaultValue={group.fields.length + 1} />
-            </Form>
+            </fetcher.Form>
             <Form
                 id="updateGroupForm"
-                key={2}
                 className="flex flex-col gap-3"
                 method="post"
             >
                 <input type="hidden" name="id" defaultValue={group.id} />
                 <input type="hidden" name="inputFormId" defaultValue={group.inputFormId} />
+
                 <Input
                     type="number"
                     name="pos"
                     title="Pos: "
                     value={group?.pos}
                     required={true}
+                    onChange={() => {
+                        const button = document.getElementById("updateGroupButton") as HTMLButtonElement
+                        button.click()
+                    }}
                 />
                 <Input
                     type="text"
@@ -105,72 +107,211 @@ export default function GroupForm({ group }: GroupFormProps
                     value={group?.title}
                     required={true}
                 />
-                <Input
-                    type="text"
-                    name="tableName"
-                    title="Table name: "
-                    value={group?.tableName}
-                    required={true}
-                />
                 <CheckField
                     type="checkbox"
                     name="isMulty"
                     title="Is Multy: "
-                    value={group?.isMulty}
+                    value={group?.isMulty ? true : false}
                     required={false}
                 />
-                <div className="overflow-x-auto">
-                    <table className="w-full">
-                        <thead
-                            className="bg-blue-gray-400 text-white"
-                        >
-                            <tr>
-                                <th className="p-1 text-sm border border-blue-gray-700">#</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">pos</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">title</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">name</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">type</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">Len</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">1</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">2</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">3</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">4</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">5</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">6</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">createAt</th>
-                                <th className="p-1 text-sm border border-blue-gray-700">updateAt</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {group?.fields && group.fields.map((field: InputField, index: number) => (
-                                <tr
-                                    className="hover:cursor-pointer hover:bg-blue-gray-100"
-                                    key={field.id}
-                                    onClick={() => navigate(`/fields?fieldId=${field.id}`)}
-                                >
-                                    <td className="p-1 text-sm border border-blue-gray-700">{index + 1}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.pos}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.title}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.fieldName}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.fieldType}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.len}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.isKey}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.isVisible}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.isEnable}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.isRequire}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.precision}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{field.isDuplicate}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{moment(field.createdAt).format('DD.MM.YYYY H:m:s')}</td>
-                                    <td className="p-1 text-sm border border-blue-gray-700">{moment(field.updatedAt).format('DD.MM.YYYY H:m:s')}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
             </Form>
+            {group?.fields && group.fields.map((field: InputField) => (
+                <Form
+                    className="hidden"
+                    id={`updateInputFieldForm_${field.id}`}
+                    key={`updateInputFieldForm_${field.id}`}
+                    method="post"
+                >
+                    <input type="hidden" name="id" defaultValue={field.id} />
+                    <input type="hidden" name="groupId" defaultValue={field.groupId} />
+                    <Button
+                        id={`updateInputFieldButton_${field.id}`}
+                        className="flex items-center gap-1"
+                        color="green"
+                        form={`updateInputFieldForm_${field.id}`}
+                        placeholder=""
+                        size="sm"
+                        type="submit"
+                        name="_action"
+                        value="updateInputField"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                        Save
+                    </Button>
+                </Form>
+            ))}
+            <div className="overflow-x-auto mt-4">
+                <table className="w-full">
+                    <thead
+                        className="bg-blue-gray-400 text-white text-center"
+                    >
+                        <tr>
+                            <th className="p-1 text-sm border border-blue-gray-700">#</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Pos</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Title</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Type</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Len</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Precision</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Key</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Visible</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Enable</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Require</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Duplicate</th>
+                            <th className="p-1 text-sm border border-blue-gray-700"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {group?.fields && group.fields.map((field: InputField, index: number) => (
+                            <tr key={field.id} >
+                                <td className="p-1 text-sm border border-blue-gray-700">{index + 1}</td>
+                                <td className="p-1 text-sm border border-blue-gray-700 w-20">
+                                    <input
+                                        className="text-sm w-full"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="number"
+                                        name="pos"
+                                        defaultValue={field.pos}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td
+                                    className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40"
+                                    onClick={() => navigate(`/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}&inputFieldId=${field.id}`)}
+                                >
+                                    <input
+                                        className="text-sm w-full"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="text"
+                                        name="title"
+                                        defaultValue={field.title}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700">{field.filedType}</td>
+                                <td className="p-1 text-sm border border-blue-gray-700 w-20">
+                                    <input
+                                        className="text-sm w-full"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="number"
+                                        name="len"
+                                        defaultValue={field.len}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700 w-20">
+                                    <input
+                                        className="text-sm w-full"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="number"
+                                        name="precision"
+                                        defaultValue={field.precision}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700">
+                                    <input
+                                        className="text-sm"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="checkbox"
+                                        name="isKey"
+                                        defaultChecked={field.isKey}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700">
+                                    <input
+                                        className="text-sm"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="checkbox"
+                                        name="isVisible"
+                                        defaultChecked={field.isVisible}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700">
+                                    <input
+                                        className="text-sm"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="checkbox"
+                                        name="isEnable"
+                                        defaultChecked={field.isEnable}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700">
+                                    <input
+                                        className="text-sm"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="checkbox"
+                                        name="isRequire"
+                                        defaultChecked={field.isRequire}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700">
+                                    <input
+                                        className="text-sm"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="checkbox"
+                                        name="isDuplicate"
+                                        defaultChecked={field.isDuplicate}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer">
+                                    <fetcher.Form method="post">
+                                        <input type="hidden" name="id" defaultValue={field?.id ? field.id : ''} />
+                                        <Button
+                                            className="hover:underline"
+                                            color="red"
+                                            placeholder=""
+                                            size="sm"
+                                            disabled={isDeleting}
+                                            onClick={handleDelete}
+                                            type="submit"
+                                            name="_action"
+                                            value="deleteInputField"
+                                        >
+                                            {isDeleting ? "Deleting..." : "Delete"}
+                                        </Button>
+                                    </fetcher.Form>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
             <Form
                 id="deleteGroupForm"
-                key={3}
                 method="post"
                 onSubmit={(event) => {
                     const response = confirm(

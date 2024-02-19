@@ -1,6 +1,7 @@
 import MaterialTailwind from "@material-tailwind/react"
 const { Button } = MaterialTailwind;
 import { Form } from "@remix-run/react"
+import Input from "../elements/input_field";
 
 type SearchFormProps = {
     searchForm: any
@@ -47,37 +48,20 @@ export default function SearchFormForm({ searchForm }: SearchFormProps) {
                 method="post"
             >
                 <input type="hidden" name="id" defaultValue={searchForm.id ? searchForm.id : ''} />
-                <div
-                    className="w-full"
-                >
-                    <label
-                        className="block text-sm font-bold text-slate-700"
-                        htmlFor="pos"
-                    >
-                        Pos:
-                    </label>
-                    <input
-                        id="pos"
-                        type="number"
-                        defaultValue={searchForm?.pos}
-                        aria-label="pos"
-                        name="pos"
-                        required
-                    />
-                </div>
-                <div
-                    className="w-full"
-                >
-                    <label className="block text-sm font-bold text-slate-700" htmlFor="title">Title: </label>
-                    <input
-                        id="title"
-                        type="text"
-                        defaultValue={searchForm?.title}
-                        aria-label="title"
-                        name="title"
-                        required
-                    />
-                </div>
+                <Input
+                    title="Pos: "
+                    type="number"
+                    value={searchForm?.pos}
+                    name="pos"
+                    required={true}
+                />
+                <Input
+                    title="Title: "
+                    type="text"
+                    value={searchForm?.title}
+                    name="title"
+                    required={true}
+                />
             </Form>
             <Form
                 id="deleteSearchForm"

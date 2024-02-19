@@ -7,14 +7,16 @@ import moment from "moment";
 const { Button, Dialog, Card, CardBody, CardFooter } = MaterialTailwind;
 
 type UserDialogProps = {
+    isNew: boolean
     handleOpen: () => void
     open: boolean,
     user: User | null,
     roles: Role[],
     departments: Department[],
+    errors: string | null | undefined
 }
 
-export default function UserDialog({ handleOpen, open, user, roles, departments }: UserDialogProps) {
+export default function UserDialog({ isNew, handleOpen, open, user, roles, departments, errors }: UserDialogProps) {
     return (
         <Dialog
             placeholder=""
@@ -26,7 +28,7 @@ export default function UserDialog({ handleOpen, open, user, roles, departments 
             <Card className="mx-auto w-full" placeholder="">
                 <CardBody className="flex flex-col gap-4 overflow-auto" placeholder="">
                     <Form
-                        id="updateUserForm"
+                        id="userForm"
                         key={user?.id}
                         className="flex flex-col gap-3"
                         method="post"
@@ -38,6 +40,7 @@ export default function UserDialog({ handleOpen, open, user, roles, departments 
                             title="Login: "
                             value={user?.login}
                             required={true}
+                            readonly={!isNew}
                         />
                         <InputField
                             type="password"
@@ -82,45 +85,20 @@ export default function UserDialog({ handleOpen, open, user, roles, departments 
                             required={true}
                         />
                     </Form>
-                    <Form
-                        id="deleteUserForm"
-                        method="post"
-                        onSubmit={(event) => {
-                            const response = confirm(
-                                "Please confirm you want to delete this record."
-                            );
-                            if (!response) {
-                                event.preventDefault();
-                            }
-                        }}
-                    >
-                        <input type="hidden" name="id" defaultValue={user?.id ? user.id : ''} />
-                    </Form>
+                    <span className="text-red-500 text-sm">{errors}</span>
                 </CardBody>
                 <CardFooter className="pt-0 flex flex-row gap-3" placeholder="">
                     <Button
                         variant="gradient"
                         color="green"
-                        form="updateUserForm"
+                        form="userForm"
                         placeholder=""
                         type="submit"
                         name="_action"
-                        value="updateUser"
+                        value={isNew ? "createUser" : "updateUser"}
                         fullWidth
                     >
                         Save
-                    </Button>
-                    <Button
-                        variant="gradient"
-                        color="red"
-                        form="deleteUserForm"
-                        placeholder=""
-                        type="submit"
-                        name="_action"
-                        value="deleteUser"
-                        fullWidth
-                    >
-                        Delete
                     </Button>
                     <Button variant="gradient" onClick={handleOpen} fullWidth placeholder="">
                         Close
