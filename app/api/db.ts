@@ -270,13 +270,12 @@ export default function DbModule(prisma: PrismaClient) {
                 })
             }
         },
-        createEmptySearchField(formId: number, fieldId: number, cnt: number) {
+        createEmptySearchField(formId: number, cnt: number) {
             return prisma.searchField.create({
                 data: {
                     pos: cnt,
                     searchFormId: formId,
                     title: `Search Field ${cnt}`,
-                    fieldId: fieldId,
                 }
             })
         },

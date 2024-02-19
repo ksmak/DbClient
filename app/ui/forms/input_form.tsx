@@ -1,7 +1,6 @@
 import MaterialTailwind from "@material-tailwind/react"
 const { Button } = MaterialTailwind
 import { Form } from "@remix-run/react"
-import Inpu from "../elements/input_field";
 import Input from "../elements/input_field";
 
 type InputFormProps = {
@@ -29,7 +28,8 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                     Add Group
                 </Button>
                 <Button
-                    className="flex items-center gap-1"
+                    id="updateInputFormButton"
+                    className="hidden"
                     color="green"
                     form="updateInputForm"
                     placeholder=""
@@ -80,6 +80,10 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                     value={inputForm?.pos}
                     name="pos"
                     required={true}
+                    onChange={() => {
+                        const button = document.getElementById("updateInputFormButton") as HTMLButtonElement
+                        button.click()
+                    }}
                 />
                 <Input
                     title="Title: "
@@ -87,6 +91,10 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                     value={inputForm?.title}
                     name="title"
                     required={true}
+                    onChange={() => {
+                        const button = document.getElementById("updateInputFormButton") as HTMLButtonElement
+                        button.click()
+                    }}
                 />
             </Form>
             <Form

@@ -4,7 +4,6 @@ import { Form, useFetcher, useNavigate } from "@remix-run/react"
 import Input from "../elements/input_field";
 import CheckField from "../elements/check_field";
 import { InputField } from "@prisma/client";
-import { MouseEventHandler, useState } from "react";
 
 type GroupFormProps = {
     group: any
@@ -44,10 +43,11 @@ export default function GroupForm({ group }: GroupFormProps) {
                 </Button>
                 <Button
                     id="updateGroupButton"
-                    className="flex items-center gap-1"
+                    className="hidden"
                     color="green"
                     form="updateGroupForm"
                     placeholder=""
+                    type="submit"
                     size="sm"
                     name="_action"
                     value="updateGroup"
@@ -106,6 +106,10 @@ export default function GroupForm({ group }: GroupFormProps) {
                     title="Title: "
                     value={group?.title}
                     required={true}
+                    onChange={() => {
+                        const button = document.getElementById("updateGroupButton") as HTMLButtonElement
+                        button.click()
+                    }}
                 />
                 <CheckField
                     type="checkbox"
@@ -113,7 +117,11 @@ export default function GroupForm({ group }: GroupFormProps) {
                     title="Is Multy: "
                     value={group?.isMulty ? true : false}
                     required={false}
-                />
+                    onChange={() => {
+                        const button = document.getElementById("updateGroupButton") as HTMLButtonElement
+                        button.click()
+                    }}
+                />on
             </Form>
             {group?.fields && group.fields.map((field: InputField) => (
                 <Form

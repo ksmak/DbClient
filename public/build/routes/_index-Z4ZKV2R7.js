@@ -37,7 +37,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/_index.tsx"
   );
-  import.meta.hot.lastModified = "1707543896077.2876";
+  import.meta.hot.lastModified = "1707391590000";
 }
 var {
   Button
@@ -82,4 +82,4 @@ export {
   Index as default,
   meta
 };
-//# sourceMappingURL=/build/routes/_index-G57PV55O.js.map
+//# sourceMappingURL=/build/routes/_index-Z4ZKV2R7.js.map

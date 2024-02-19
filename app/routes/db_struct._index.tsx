@@ -160,7 +160,22 @@ export async function action({
     if (_action === 'deleteInputField') {
         await api.db.deleteInputField(Number(values.id))
     }
-
+    if (_action === 'createEmptySearchField') {
+        await api.db.createEmptySearchField(Number(values.searchFormId), Number(values.cnt))
+    }
+    if (_action === 'updateSearchField') {
+        await api.db.updateSearchField(Number(values.id), {
+            id: Number(values.id),
+            pos: Number(values.pos),
+            searchFormId: Number(values.searchFormId),
+            title: String(values.title),
+            fieldId: Number(values.fieldId),
+        })
+        return redirect(`/db_struct?state=searchForm&searchFormId=${values.searchFormId}`)
+    }
+    if (_action === 'deleteSearchField') {
+        await api.db.deleteSearchField(Number(values.id))
+    }
     return null
 }
 
