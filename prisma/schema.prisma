@@ -75,6 +75,7 @@ model User {
 model Dictionary {
   id           Int            @id @default(autoincrement())
   title        String
+  fields       InputField[]
 }
 
 model InputForm {
@@ -107,7 +108,11 @@ enum FieldType {
   TEXT
   CYRILLIC
   INTEGER
+  NUMERIC
   DICT
+  DATE
+  TIME
+  FILE
 }
 
 model InputField {
@@ -116,7 +121,9 @@ model InputField {
   title        String
   group        Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
   groupId      Int
-  filedType    FieldType      @default(TEXT)
+  fieldType    FieldType      @default(TEXT)
+  dictionary   Dictionary?     @relation(fields: [dicId], references: [id], onDelete: SetNull)
+  dicId        Int?
   len          Int            @default(0)
   isKey        Boolean        @default(false)
   isVisible    Boolean        @default(true)
@@ -134,7 +141,7 @@ model SearchField {
   title        String
   searchForm   SearchForm     @relation(fields: [searchFormId], references: [id], onDelete: Cascade)
   searchFormId Int
-  field        InputField?     @relation(fields: [fieldId], references: [id], onDelete: SetNull)
+  field        InputField?    @relation(fields: [fieldId], references: [id], onDelete: SetNull)
   fieldId      Int?
 }
 

@@ -3,18 +3,12 @@ import { PrismaClient } from "@prisma/client/extension";
 
 export default function DbModule(prisma: PrismaClient) {
     return {
-        getDictionaries(q: string | null = null) {
-            if (!q) {
-                return prisma.dictionary.findMany()
-            } else {
-                return prisma.dictionary.findMany({
-                    where: {
-                        title: {
-                            startsWith: q
-                        }
-                    },
-                })
-            }
+        getDictionaries() {
+            return prisma.dictionary.findMany({
+                orderBy: {
+                    title: 'asc'
+                }
+            })
         },
         createEmptyDictionary(cnt: number) {
             return prisma.dictionary.create({
@@ -48,31 +42,15 @@ export default function DbModule(prisma: PrismaClient) {
                 }
             })
         },
-        getInputForms(q: string | null = null) {
-            if (!q) {
-                return prisma.inputForm.findMany({
-                    include: {
-                        groups: true,
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            } else {
-                return prisma.inputForm.findMany({
-                    where: {
-                        title: {
-                            startsWith: q
-                        }
-                    },
-                    include: {
-                        groups: true
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            }
+        getInputForms() {
+            return prisma.inputForm.findMany({
+                include: {
+                    groups: true,
+                },
+                orderBy: {
+                    pos: 'asc'
+                }
+            })
         },
         createEmptyInputForm(cnt: number) {
             return prisma.inputForm.create({
@@ -107,31 +85,15 @@ export default function DbModule(prisma: PrismaClient) {
                 }
             })
         },
-        getSearchForms(q: string | null = null) {
-            if (!q) {
-                return prisma.searchForm.findMany({
-                    include: {
-                        fields: true,
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            } else {
-                return prisma.searchForm.findMany({
-                    where: {
-                        title: {
-                            startsWith: q
-                        }
-                    },
-                    include: {
-                        fields: true
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            }
+        getSearchForms() {
+            return prisma.searchForm.findMany({
+                include: {
+                    fields: true,
+                },
+                orderBy: {
+                    pos: 'asc'
+                }
+            })
         },
         createEmptySearchForm(cnt: number) {
             return prisma.searchForm.create({
@@ -154,8 +116,18 @@ export default function DbModule(prisma: PrismaClient) {
         },
         getSearchForm(formId: number) {
             return prisma.searchForm.findFirst({
+                include: {
+                    fields: {
+                        orderBy: {
+                            pos: 'asc'
+                        }
+                    }
+                },
                 where: {
                     id: formId
+                },
+                orderBy: {
+                    pos: 'asc'
                 }
             })
         },
@@ -166,36 +138,19 @@ export default function DbModule(prisma: PrismaClient) {
                 }
             })
         },
-        getGroups(formId: number | null, q: string | null = null) {
+        getGroups(formId: number | null) {
             if (!formId) return []
-            if (!q) {
-                return prisma.group.findMany({
-                    where: {
-                        inputFormId: formId
-                    },
-                    include: {
-                        fields: true
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            } else {
-                return prisma.group.findMany({
-                    where: {
-                        inputFormId: formId,
-                        title: {
-                            startsWith: q
-                        },
-                    },
-                    include: {
-                        fields: true
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            }
+            return prisma.group.findMany({
+                where: {
+                    inputFormId: formId
+                },
+                include: {
+                    fields: true
+                },
+                orderBy: {
+                    pos: 'asc'
+                }
+            })
         },
         createEmptyGroup(formId: number, cnt: number) {
             return prisma.group.create({
@@ -231,10 +186,6 @@ export default function DbModule(prisma: PrismaClient) {
                 data: {
                     ...group,
                     id: undefined,
-                    // fields: {
-                    //     deleteMany: { id: { in: fields.map(({ id }) => id) } },
-                    //     createMany: { data: fields },
-                    // }
                 }
             })
         },
@@ -244,31 +195,6 @@ export default function DbModule(prisma: PrismaClient) {
                     id: groupId
                 }
             })
-        },
-        getSearchFields(formId: number, q: string | null = null) {
-            if (!formId) return []
-            if (!q) {
-                return prisma.searchField.findMany({
-                    where: {
-                        searchFormId: formId,
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            } else {
-                return prisma.searchField.findMany({
-                    where: {
-                        searchFormId: formId,
-                        title: {
-                            startsWith: q
-                        },
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            }
         },
         createEmptySearchField(formId: number, cnt: number) {
             return prisma.searchField.create({
@@ -304,37 +230,19 @@ export default function DbModule(prisma: PrismaClient) {
                 }
             })
         },
-        getInputFields(groupId: number, q: string | null = null) {
-            if (!groupId) return []
-            if (!q) {
-                return prisma.inputField.findMany({
-                    where: {
-                        groupId: groupId,
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            } else {
-                return prisma.inputField.findMany({
-                    where: {
-                        groupId: groupId,
-                        title: {
-                            startsWith: q
-                        },
-                    },
-                    orderBy: {
-                        pos: 'asc'
-                    }
-                })
-            }
-        },
         createEmptyInputField(groupId: number, cnt: number) {
             return prisma.inputField.create({
                 data: {
                     pos: cnt,
                     groupId: groupId,
                     title: `Input Field ${cnt}`,
+                }
+            })
+        },
+        getInputFields() {
+            return prisma.inputField.findMany({
+                include: {
+                    group: true
                 }
             })
         },
@@ -362,6 +270,9 @@ export default function DbModule(prisma: PrismaClient) {
                     id: fieldId
                 }
             })
+        },
+        generateStructDb() {
+            return prisma.$executeRaw`CALL restructure_db()`
         },
     }
 }

@@ -12,7 +12,8 @@ export default function DictionaryForm({ dictionary }: DictionaryFormProps) {
         <>
             <div className="flex flex-row gap-3 justify-end">
                 <Button
-                    className="flex items-center gap-1"
+                    id="updateDictionaryButton"
+                    className="hidden"
                     color="green"
                     form="updateDictionary"
                     placeholder=""
@@ -56,6 +57,10 @@ export default function DictionaryForm({ dictionary }: DictionaryFormProps) {
                     aria-label="title"
                     name="title"
                     required={true}
+                    onChange={() => {
+                        const button = document.getElementById("updateDictionaryButton") as HTMLButtonElement
+                        button.click()
+                    }}
                 />
             </Form >
             <Form

@@ -23,7 +23,7 @@ export default function CheckField({ type, name, title, value, required, onChang
             <input
                 id={name}
                 type={type}
-                defaultChecked={value}
+                // defaultChecked={value}
                 checked={value}
                 aria-label={name}
                 name={name}

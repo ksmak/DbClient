@@ -2,12 +2,13 @@ import MaterialTailwind from "@material-tailwind/react"
 const { Button } = MaterialTailwind;
 import { Form, useFetcher } from "@remix-run/react"
 import Input from "../elements/input_field";
-import { SearchField } from "@prisma/client";
+import { InputField, SearchField } from "@prisma/client";
 
 type SearchFormProps = {
-    searchForm: any
+    searchForm: any,
+    inputFields: any,
 }
-export default function SearchFormForm({ searchForm }: SearchFormProps) {
+export default function SearchFormForm({ searchForm, inputFields }: SearchFormProps) {
     const fetcher = useFetcher()
     const isDeleting = fetcher.state !== "idle"
 
@@ -129,6 +130,7 @@ export default function SearchFormForm({ searchForm }: SearchFormProps) {
                     method="post"
                 >
                     <input type="hidden" name="id" defaultValue={field.id} />
+                    <input type="hidden" name="searchFormId" defaultValue={field.searchFormId} />
                     <Button
                         id={`updateSearchFieldButton_${field.id}`}
                         className="flex items-center gap-1"
@@ -192,7 +194,25 @@ export default function SearchFormForm({ searchForm }: SearchFormProps) {
                                         }}
                                     />
                                 </td>
-                                <td className="p-1 text-sm border border-blue-gray-700">{field.fieldId}</td>
+                                <td className="p-1 text-sm border border-blue-gray-700">
+                                    <select
+                                        className="text-sm w-full"
+                                        form={`updateSearchFieldForm_${field.id}`}
+                                        name="fieldId"
+                                        defaultValue={String(field.fieldId)}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateSearchFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    >
+                                        <option value="">-</option>
+                                        {inputFields && inputFields.map(
+                                            (fld: InputField) =>
+                                                <option key={fld.id} value={fld.id}>
+                                                    {`${fld.group.pos}. ${fld.group.title} -> ${fld.title}`}
+                                                </option>)}
+                                    </select>
+                                </td>
                                 <td className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer">
                                     <fetcher.Form method="post">
                                         <input type="hidden" name="id" defaultValue={field.id} />

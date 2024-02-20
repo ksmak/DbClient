@@ -3,13 +3,14 @@ const { Button } = MaterialTailwind;
 import { Form, useFetcher, useNavigate } from "@remix-run/react"
 import Input from "../elements/input_field";
 import CheckField from "../elements/check_field";
-import { InputField } from "@prisma/client";
+import { InputField, FieldType, Dictionary } from "@prisma/client";
 
 type GroupFormProps = {
-    group: any
+    group: any,
+    dicts: any,
 }
 
-export default function GroupForm({ group }: GroupFormProps) {
+export default function GroupForm({ group, dicts }: GroupFormProps) {
     const navigate = useNavigate()
     const fetcher = useFetcher()
     const isDeleting = fetcher.state !== "idle"
@@ -121,7 +122,7 @@ export default function GroupForm({ group }: GroupFormProps) {
                         const button = document.getElementById("updateGroupButton") as HTMLButtonElement
                         button.click()
                     }}
-                />on
+                />
             </Form>
             {group?.fields && group.fields.map((field: InputField) => (
                 <Form
@@ -160,6 +161,7 @@ export default function GroupForm({ group }: GroupFormProps) {
                             <th className="p-1 text-sm border border-blue-gray-700">Pos</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Title</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Type</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Dict</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Len</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Precision</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Key</th>
@@ -170,7 +172,7 @@ export default function GroupForm({ group }: GroupFormProps) {
                             <th className="p-1 text-sm border border-blue-gray-700"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-center">
                         {group?.fields && group.fields.map((field: InputField, index: number) => (
                             <tr key={field.id} >
                                 <td className="p-1 text-sm border border-blue-gray-700">{index + 1}</td>
@@ -203,7 +205,37 @@ export default function GroupForm({ group }: GroupFormProps) {
                                         }}
                                     />
                                 </td>
-                                <td className="p-1 text-sm border border-blue-gray-700">{field.filedType}</td>
+                                <td className="p-1 text-sm border border-blue-gray-700">
+                                    <select
+                                        className="text-sm w-full"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        name="fieldType"
+                                        defaultValue={field.fieldType}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    >
+                                        {Object.keys(FieldType).map((key) => <option key={key} value={key}>{key}</option>)}
+                                    </select>
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700">
+                                    {field.fieldType === 'DICT'
+                                        ? <select
+                                            className="text-sm w-full"
+                                            form={`updateInputFieldForm_${field.id}`}
+                                            name="dicId"
+                                            defaultValue={String(field.dicId)}
+                                            onChange={() => {
+                                                const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                                button.click()
+                                            }}
+                                        >
+                                            <option value="">-</option>
+                                            {dicts.map((dic: Dictionary) => <option key={dic.id} value={dic.id}>{dic.title}</option>)}
+                                        </select>
+                                        : null}
+                                </td>
                                 <td className="p-1 text-sm border border-blue-gray-700 w-20">
                                     <input
                                         className="text-sm w-full"
