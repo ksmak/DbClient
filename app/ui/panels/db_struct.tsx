@@ -1,4 +1,4 @@
-import { Dictionary, Group, InputField, InputForm, SearchForm } from "@prisma/client"
+import { Dictionary, Group, InputForm, SearchForm } from "@prisma/client"
 import { Link } from "@remix-run/react"
 
 type DbStructPanelProps = {
@@ -17,7 +17,6 @@ export default function DbStrucPanel({
     inputForms,
     searchForms,
     dictionaries,
-    groups,
     inputFormId,
     searchFormId,
     dictionaryId,

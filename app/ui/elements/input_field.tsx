@@ -11,7 +11,7 @@ type InputProps = {
 export default function Input({ type, name, title, value, required, readonly, onChange }: InputProps) {
     return (
         <div
-            className="flex flex-col gap-1"
+            className="flex flex-col gap-1 w-fit"
         >
             <label
                 className="text-sm font-bold text-slate-700"
@@ -20,6 +20,7 @@ export default function Input({ type, name, title, value, required, readonly, on
                 {title}
             </label>
             <input
+                className="font-mono"
                 id={name}
                 type={type}
                 defaultValue={value}
@@ -28,6 +29,8 @@ export default function Input({ type, name, title, value, required, readonly, on
                 required={required}
                 readOnly={readonly}
                 onChange={onChange}
+                size={5}
+                maxLength={10}
             />
         </div >
     )

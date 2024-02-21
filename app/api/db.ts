@@ -75,6 +75,20 @@ export default function DbModule(prisma: PrismaClient) {
             return prisma.inputForm.findFirst({
                 where: {
                     id: formId
+                },
+                include: {
+                    groups: {
+                        orderBy: {
+                            pos: 'asc'
+                        },
+                        include: {
+                            fields: {
+                                orderBy: {
+                                    pos: 'asc'
+                                }
+                            }
+                        }
+                    }
                 }
             })
         },

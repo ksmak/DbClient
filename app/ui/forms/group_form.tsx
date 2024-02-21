@@ -159,6 +159,8 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                         <tr>
                             <th className="p-1 text-sm border border-blue-gray-700">#</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Pos</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Span</th>
+                            <th className="p-1 text-sm border border-blue-gray-700">Start</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Title</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Type</th>
                             <th className="p-1 text-sm border border-blue-gray-700">Dict</th>
@@ -189,6 +191,36 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                                         }}
                                     />
                                 </td>
+                                <td className="p-1 text-sm border border-blue-gray-700 w-20">
+                                    <input
+                                        className="text-sm w-full"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="number"
+                                        name="colSpan"
+                                        min={1}
+                                        max={3}
+                                        defaultValue={field.colSpan}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td className="p-1 text-sm border border-blue-gray-700 w-20">
+                                    <input
+                                        className="text-sm w-full"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="number"
+                                        name="colStart"
+                                        min={1}
+                                        max={3}
+                                        defaultValue={field.colStart}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
                                 <td
                                     className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40"
                                     onClick={() => navigate(`/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}&inputFieldId=${field.id}`)}
@@ -199,6 +231,7 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                                         type="text"
                                         name="title"
                                         defaultValue={field.title}
+                                        maxLength={23}
                                         onChange={() => {
                                             const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
                                             button.click()

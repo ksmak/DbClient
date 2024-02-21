@@ -6,6 +6,9 @@ export default withMT({
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        'mono': ["Roboto Mono"],
+      },
       colors: {
         primary: '#42a5f5',
         secondary: '#ff6f61',
@@ -14,7 +17,7 @@ export default withMT({
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
+  // plugins: [
+  //   require('@tailwindcss/forms'),
+  // ],
 } satisfies Config)

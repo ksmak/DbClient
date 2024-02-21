@@ -1,8 +1,10 @@
 import {
-  Input,
+  Input
+} from "/build/_shared/chunk-ZYEIHSR3.js";
+import {
   require_index_browser,
   require_node
-} from "/build/_shared/chunk-UAYSWF5B.js";
+} from "/build/_shared/chunk-KDA2VXG4.js";
 import {
   require_react as require_react2
 } from "/build/_shared/chunk-DGLILCEK.js";
@@ -13,7 +15,10 @@ import {
   useFetcher,
   useLoaderData,
   useNavigate
-} from "/build/_shared/chunk-HZQAXSMT.js";
+} from "/build/_shared/chunk-TJ4YKIVD.js";
+import {
+  createHotContext
+} from "/build/_shared/chunk-Q6LMBPEP.js";
 import "/build/_shared/chunk-WEAPBHQG.js";
 import {
   require_jsx_dev_runtime
@@ -21,9 +26,6 @@ import {
 import {
   require_react
 } from "/build/_shared/chunk-CJ4MY3PQ.js";
-import {
-  createHotContext
-} from "/build/_shared/chunk-Q6LMBPEP.js";
 import "/build/_shared/chunk-JR22VO6P.js";
 import {
   __toESM
@@ -236,7 +238,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/ui/forms/group_form.tsx"
   );
-  import.meta.hot.lastModified = "1708431673674.6973";
+  import.meta.hot.lastModified = "1708515398069.7725";
 }
 var {
   Button: Button2
@@ -415,59 +417,69 @@ function GroupForm({
           lineNumber: 102,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Title" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Span" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 103,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Type" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Start" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 104,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Dict" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Title" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 105,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Len" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Type" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 106,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Precision" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Dict" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 107,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Key" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Len" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 108,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Visible" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Precision" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 109,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Enable" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Key" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 110,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Require" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Visible" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 111,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Duplicate" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Enable" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 112,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Require" }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
           lineNumber: 113,
+          columnNumber: 29
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Duplicate" }, void 0, false, {
+          fileName: "app/ui/forms/group_form.tsx",
+          lineNumber: 114,
+          columnNumber: 29
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700" }, void 0, false, {
+          fileName: "app/ui/forms/group_form.tsx",
+          lineNumber: 115,
           columnNumber: 29
         }, this)
       ] }, void 0, true, {
@@ -482,7 +494,7 @@ function GroupForm({
       /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("tbody", { className: "text-center", children: group?.fields && group.fields.map((field, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 118,
+          lineNumber: 120,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, type: "number", name: "pos", defaultValue: field.pos, onChange: () => {
@@ -490,23 +502,47 @@ function GroupForm({
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 120,
+          lineNumber: 122,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 119,
+          lineNumber: 121,
           columnNumber: 33
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40", onClick: () => navigate(`/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}&inputFieldId=${field.id}`), children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, type: "text", name: "title", defaultValue: field.title, onChange: () => {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, type: "number", name: "colSpan", min: 1, max: 3, defaultValue: field.colSpan, onChange: () => {
           const button = document.getElementById(`updateInputFieldButton_${field.id}`);
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 126,
+          lineNumber: 128,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 125,
+          lineNumber: 127,
+          columnNumber: 33
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, type: "number", name: "colStart", min: 1, max: 3, defaultValue: field.colStart, onChange: () => {
+          const button = document.getElementById(`updateInputFieldButton_${field.id}`);
+          button.click();
+        } }, void 0, false, {
+          fileName: "app/ui/forms/group_form.tsx",
+          lineNumber: 134,
+          columnNumber: 37
+        }, this) }, void 0, false, {
+          fileName: "app/ui/forms/group_form.tsx",
+          lineNumber: 133,
+          columnNumber: 33
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40", onClick: () => navigate(`/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}&inputFieldId=${field.id}`), children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, type: "text", name: "title", defaultValue: field.title, maxLength: 23, onChange: () => {
+          const button = document.getElementById(`updateInputFieldButton_${field.id}`);
+          button.click();
+        } }, void 0, false, {
+          fileName: "app/ui/forms/group_form.tsx",
+          lineNumber: 140,
+          columnNumber: 37
+        }, this) }, void 0, false, {
+          fileName: "app/ui/forms/group_form.tsx",
+          lineNumber: 139,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("select", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, name: "fieldType", defaultValue: field.fieldType, onChange: () => {
@@ -514,15 +550,15 @@ function GroupForm({
           button.click();
         }, children: Object.keys(import_client.FieldType).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("option", { value: key, children: key }, key, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 136,
+          lineNumber: 150,
           columnNumber: 76
         }, this)) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 132,
+          lineNumber: 146,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 131,
+          lineNumber: 145,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: field.fieldType === "DICT" ? /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("select", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, name: "dicId", defaultValue: String(field.dicId), onChange: () => {
@@ -531,21 +567,21 @@ function GroupForm({
         }, children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("option", { value: "", children: "-" }, void 0, false, {
             fileName: "app/ui/forms/group_form.tsx",
-            lineNumber: 144,
+            lineNumber: 158,
             columnNumber: 45
           }, this),
           dicts.map((dic) => /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("option", { value: dic.id, children: dic.title }, dic.id, false, {
             fileName: "app/ui/forms/group_form.tsx",
-            lineNumber: 145,
+            lineNumber: 159,
             columnNumber: 63
           }, this))
         ] }, void 0, true, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 140,
+          lineNumber: 154,
           columnNumber: 67
         }, this) : null }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 139,
+          lineNumber: 153,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, type: "number", name: "len", defaultValue: field.len, onChange: () => {
@@ -553,11 +589,11 @@ function GroupForm({
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 149,
+          lineNumber: 163,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 148,
+          lineNumber: 162,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm w-full", form: `updateInputFieldForm_${field.id}`, type: "number", name: "precision", defaultValue: field.precision, onChange: () => {
@@ -565,11 +601,11 @@ function GroupForm({
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 155,
+          lineNumber: 169,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 154,
+          lineNumber: 168,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm", form: `updateInputFieldForm_${field.id}`, type: "checkbox", name: "isKey", defaultChecked: field.isKey, onChange: () => {
@@ -577,11 +613,11 @@ function GroupForm({
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 161,
+          lineNumber: 175,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 160,
+          lineNumber: 174,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm", form: `updateInputFieldForm_${field.id}`, type: "checkbox", name: "isVisible", defaultChecked: field.isVisible, onChange: () => {
@@ -589,11 +625,11 @@ function GroupForm({
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 167,
+          lineNumber: 181,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 166,
+          lineNumber: 180,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm", form: `updateInputFieldForm_${field.id}`, type: "checkbox", name: "isEnable", defaultChecked: field.isEnable, onChange: () => {
@@ -601,11 +637,11 @@ function GroupForm({
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 173,
+          lineNumber: 187,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 172,
+          lineNumber: 186,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm", form: `updateInputFieldForm_${field.id}`, type: "checkbox", name: "isRequire", defaultChecked: field.isRequire, onChange: () => {
@@ -613,11 +649,11 @@ function GroupForm({
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 179,
+          lineNumber: 193,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 178,
+          lineNumber: 192,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { className: "text-sm", form: `updateInputFieldForm_${field.id}`, type: "checkbox", name: "isDuplicate", defaultChecked: field.isDuplicate, onChange: () => {
@@ -625,40 +661,40 @@ function GroupForm({
           button.click();
         } }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 185,
+          lineNumber: 199,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 184,
+          lineNumber: 198,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(fetcher.Form, { method: "post", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: field?.id ? field.id : "" }, void 0, false, {
             fileName: "app/ui/forms/group_form.tsx",
-            lineNumber: 192,
+            lineNumber: 206,
             columnNumber: 41
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(Button2, { className: "hover:underline", color: "red", placeholder: "", size: "sm", disabled: isDeleting, onClick: handleDelete, type: "submit", name: "_action", value: "deleteInputField", children: isDeleting ? "Deleting..." : "Delete" }, void 0, false, {
             fileName: "app/ui/forms/group_form.tsx",
-            lineNumber: 193,
+            lineNumber: 207,
             columnNumber: 41
           }, this)
         ] }, void 0, true, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 191,
+          lineNumber: 205,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/forms/group_form.tsx",
-          lineNumber: 190,
+          lineNumber: 204,
           columnNumber: 33
         }, this)
       ] }, field.id, true, {
         fileName: "app/ui/forms/group_form.tsx",
-        lineNumber: 117,
+        lineNumber: 119,
         columnNumber: 78
       }, this)) }, void 0, false, {
         fileName: "app/ui/forms/group_form.tsx",
-        lineNumber: 116,
+        lineNumber: 118,
         columnNumber: 21
       }, this)
     ] }, void 0, true, {
@@ -678,17 +714,17 @@ function GroupForm({
     }, children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { type: "hidden", name: "inputFormId", defaultValue: group.inputFormId }, void 0, false, {
         fileName: "app/ui/forms/group_form.tsx",
-        lineNumber: 208,
+        lineNumber: 222,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: group.id }, void 0, false, {
         fileName: "app/ui/forms/group_form.tsx",
-        lineNumber: 209,
+        lineNumber: 223,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/ui/forms/group_form.tsx",
-      lineNumber: 202,
+      lineNumber: 216,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
@@ -1203,14 +1239,13 @@ if (import.meta) {
     //@ts-expect-error
     "app/ui/panels/db_struct.tsx"
   );
-  import.meta.hot.lastModified = "1708333736974.0247";
+  import.meta.hot.lastModified = "1708509117242.5852";
 }
 function DbStrucPanel({
   state,
   inputForms,
   searchForms,
   dictionaries,
-  groups,
   inputFormId,
   searchFormId,
   dictionaryId,
@@ -1220,32 +1255,32 @@ function DbStrucPanel({
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("li", { className: ["flex items-center gap-1 font-bold", state === "inputForm" && !inputFormId ? "bg-blue-gray-200" : ""].join(" "), children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 36,
+        lineNumber: 35,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 35,
+        lineNumber: 34,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Link, { to: `/db_struct?state=inputForm&inputFormId=0`, children: "Input Forms" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 38,
+        lineNumber: 37,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 34,
+      lineNumber: 33,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("ul", { children: inputForms.map((form) => /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Link, { to: `/db_struct?state=inputForm&inputFormId=${form.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "inputForm" && form.id === inputFormId ? "bg-blue-gray-200" : ""].join(" "), children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, false, {
           fileName: "app/ui/panels/db_struct.tsx",
-          lineNumber: 47,
+          lineNumber: 46,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/ui/panels/db_struct.tsx",
-          lineNumber: 46,
+          lineNumber: 45,
           columnNumber: 33
         }, this),
         form.pos,
@@ -1253,21 +1288,21 @@ function DbStrucPanel({
         form.title
       ] }, void 0, true, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 45,
+        lineNumber: 44,
         columnNumber: 29
       }, this) }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 44,
+        lineNumber: 43,
         columnNumber: 25
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("ul", { children: form.groups.map((gr) => /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Link, { to: `/db_struct?state=group&inputFormId=${gr.inputFormId}&groupId=${gr.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("li", { className: ["pl-8 flex items-center gap-1 hover:cursor-pointer", state === "group" && gr.id === groupId ? "bg-blue-gray-200" : ""].join(" "), children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, false, {
           fileName: "app/ui/panels/db_struct.tsx",
-          lineNumber: 56,
+          lineNumber: 55,
           columnNumber: 45
         }, this) }, void 0, false, {
           fileName: "app/ui/panels/db_struct.tsx",
-          lineNumber: 55,
+          lineNumber: 54,
           columnNumber: 41
         }, this),
         gr.pos,
@@ -1275,54 +1310,54 @@ function DbStrucPanel({
         gr.title
       ] }, void 0, true, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 54,
+        lineNumber: 53,
         columnNumber: 37
       }, this) }, gr.id, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 53,
+        lineNumber: 52,
         columnNumber: 52
       }, this)) }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 52,
+        lineNumber: 51,
         columnNumber: 25
       }, this)
     ] }, form.id, true, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 43,
+      lineNumber: 42,
       columnNumber: 41
     }, this)) }, void 0, false, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 42,
+      lineNumber: 41,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("li", { className: ["flex items-center gap-1 font-bold", state === "searchForm" && !searchFormId ? "bg-blue-gray-200" : ""].join(" "), children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 66,
+        lineNumber: 65,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 65,
+        lineNumber: 64,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Link, { to: `/db_struct?state=searchForm&searchFormId=0`, children: "Search Forms" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 68,
+        lineNumber: 67,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 64,
+      lineNumber: 63,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("ul", { children: searchForms.map((form) => /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Link, { to: `/db_struct?state=searchForm&searchFormId=${form.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "searchForm" && form.id === searchFormId ? "bg-blue-gray-200" : ""].join(" "), children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 76,
+        lineNumber: 75,
         columnNumber: 33
       }, this) }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 75,
+        lineNumber: 74,
         columnNumber: 29
       }, this),
       form.pos,
@@ -1330,64 +1365,64 @@ function DbStrucPanel({
       form.title
     ] }, void 0, true, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 74,
+      lineNumber: 73,
       columnNumber: 25
     }, this) }, form.id, false, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 73,
+      lineNumber: 72,
       columnNumber: 42
     }, this)) }, void 0, false, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 72,
+      lineNumber: 71,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("li", { className: ["flex items-center gap-1 font-bold", state === "dictionary" && !dictionaryId ? "bg-blue-gray-200" : ""].join(" "), children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 84,
+        lineNumber: 83,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 83,
+        lineNumber: 82,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Link, { to: `/db_struct?state=dictionary&dictionaryId=0`, children: "Dictionaries" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 86,
+        lineNumber: 85,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 82,
+      lineNumber: 81,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("ul", { children: dictionaries.map((dict) => /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Link, { to: `/db_struct?state=dictionary&dictionaryId=${dict.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "dictionary" && dict.id === dictionaryId ? "bg-blue-gray-200" : ""].join(" "), children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 94,
+        lineNumber: 93,
         columnNumber: 33
       }, this) }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
-        lineNumber: 93,
+        lineNumber: 92,
         columnNumber: 29
       }, this),
       dict.title
     ] }, void 0, true, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 92,
+      lineNumber: 91,
       columnNumber: 25
     }, this) }, dict.id, false, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 91,
+      lineNumber: 90,
       columnNumber: 43
     }, this)) }, void 0, false, {
       fileName: "app/ui/panels/db_struct.tsx",
-      lineNumber: 90,
+      lineNumber: 89,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/ui/panels/db_struct.tsx",
-    lineNumber: 33,
+    lineNumber: 32,
     columnNumber: 10
   }, this);
 }
@@ -1418,7 +1453,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/db_struct._index.tsx"
   );
-  import.meta.hot.lastModified = "1708431840795.7092";
+  import.meta.hot.lastModified = "1708512740358.567";
 }
 var {
   Alert,
@@ -1456,158 +1491,158 @@ function DbStruct() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "mx-4 flex flex-col gap-3 h-screen pb-5", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("h1", { className: "self-center text-amber-700 text-3xl font-bold mt-4", children: "Db Struct" }, void 0, false, {
       fileName: "app/routes/db_struct._index.tsx",
-      lineNumber: 362,
+      lineNumber: 364,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Alert, { className: "text-white bg-red-500", open, onClose: () => setOpen(false), children: data?.errors ? data.errors : "" }, void 0, false, {
       fileName: "app/routes/db_struct._index.tsx",
-      lineNumber: 363,
+      lineNumber: 365,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "flex justify-end items-center gap-3 h-14", children: [
       state === "dictionary" ? /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Form, { method: "post", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { type: "hidden", name: "cnt", defaultValue: dictionaries.length + 1 }, void 0, false, {
           fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 368,
+          lineNumber: 370,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Button5, { className: "flex items-center gap-3", color: "blue-gray", placeholder: "", size: "sm", type: "submit", name: "_action", value: "createEmptyDictionary", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
             fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 371,
+            lineNumber: 373,
             columnNumber: 33
           }, this) }, void 0, false, {
             fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 370,
+            lineNumber: 372,
             columnNumber: 29
           }, this),
           "Add Dictionary"
         ] }, void 0, true, {
           fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 369,
+          lineNumber: 371,
           columnNumber: 25
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 367,
+        lineNumber: 369,
         columnNumber: 43
       }, this) : state === "inputForm" ? /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Form, { method: "post", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { type: "hidden", name: "cnt", defaultValue: inputForms.length + 1 }, void 0, false, {
           fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 376,
+          lineNumber: 378,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Button5, { className: "flex items-center gap-3", color: "blue-gray", placeholder: "", size: "sm", type: "submit", name: "_action", value: "createEmptyInputForm", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
             fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 379,
+            lineNumber: 381,
             columnNumber: 37
           }, this) }, void 0, false, {
             fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 378,
+            lineNumber: 380,
             columnNumber: 33
           }, this),
           "Add InputForm"
         ] }, void 0, true, {
           fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 377,
+          lineNumber: 379,
           columnNumber: 29
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 375,
+        lineNumber: 377,
         columnNumber: 55
       }, this) : state === "searchForm" ? /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Form, { method: "post", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { type: "hidden", name: "cnt", defaultValue: searchForms.length + 1 }, void 0, false, {
           fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 384,
+          lineNumber: 386,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Button5, { className: "flex items-center gap-3", color: "blue-gray", placeholder: "", size: "sm", type: "submit", name: "_action", value: "createEmptySearchForm", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
             fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 387,
+            lineNumber: 389,
             columnNumber: 41
           }, this) }, void 0, false, {
             fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 386,
+            lineNumber: 388,
             columnNumber: 37
           }, this),
           "Add SearchForm"
         ] }, void 0, true, {
           fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 385,
+          lineNumber: 387,
           columnNumber: 33
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 383,
+        lineNumber: 385,
         columnNumber: 60
       }, this) : null,
       /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Form, { method: "post", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Button5, { className: "flex items-center gap-3", color: "blue", placeholder: "", size: "sm", type: "submit", name: "_action", value: "generateStructDb", disabled: isRestruct, onClick: handleRestruct, children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" }, void 0, false, {
           fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 395,
+          lineNumber: 397,
           columnNumber: 29
         }, this) }, void 0, false, {
           fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 394,
+          lineNumber: 396,
           columnNumber: 25
         }, this),
         isRestruct ? "Restructuring..." : "Restruct Database"
       ] }, void 0, true, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 393,
+        lineNumber: 395,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 392,
+        lineNumber: 394,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/routes/db_struct._index.tsx",
-      lineNumber: 366,
+      lineNumber: 368,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "flex flex-row h-full w-full", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "bg-white p-4 mr-5 w-1/3 border shadow-blue-gray-700 shadow-md overflow-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(DbStrucPanel, { state, inputForms, searchForms, dictionaries, groups, inputFormId: inputForm?.id, searchFormId: searchForm?.id, dictionaryId: dictionary?.id, groupId: group?.id }, void 0, false, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 403,
+        lineNumber: 405,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 402,
+        lineNumber: 404,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("div", { className: "bg-white w-full border p-4 shadow-blue-gray-700 shadow-md overflow-auto", children: state === "inputForm" && inputForm ? /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(InputFormForm, { inputForm, groups }, void 0, false, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 406,
+        lineNumber: 408,
         columnNumber: 59
       }, this) : state === "searchForm" && searchForm ? /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(SearchFormForm, { searchForm, inputFields }, void 0, false, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 406,
+        lineNumber: 408,
         columnNumber: 156
       }, this) : state === "dictionary" && dictionary ? /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(DictionaryForm, { dictionary }, void 0, false, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 406,
+        lineNumber: 408,
         columnNumber: 266
       }, this) : state === "group" && group ? /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(GroupForm, { group, dicts: dictionaries }, void 0, false, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 406,
+        lineNumber: 408,
         columnNumber: 340
       }, this) : null }, void 0, false, {
         fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 405,
+        lineNumber: 407,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/routes/db_struct._index.tsx",
-      lineNumber: 401,
+      lineNumber: 403,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/routes/db_struct._index.tsx",
-    lineNumber: 361,
+    lineNumber: 363,
     columnNumber: 10
   }, this);
 }
@@ -1622,4 +1657,4 @@ window.$RefreshSig$ = prevRefreshSig;
 export {
   DbStruct as default
 };
-//# sourceMappingURL=/build/routes/db_struct._index-RCGDMCZV.js.map
+//# sourceMappingURL=/build/routes/db_struct._index-FSRVIAUN.js.map

@@ -2,16 +2,17 @@ import {
   require_react
 } from "/build/_shared/chunk-DGLILCEK.js";
 import {
-  Link
-} from "/build/_shared/chunk-HZQAXSMT.js";
+  Link,
+  useLoaderData
+} from "/build/_shared/chunk-TJ4YKIVD.js";
+import {
+  createHotContext
+} from "/build/_shared/chunk-Q6LMBPEP.js";
 import "/build/_shared/chunk-WEAPBHQG.js";
 import {
   require_jsx_dev_runtime
 } from "/build/_shared/chunk-7PHB3BFD.js";
 import "/build/_shared/chunk-CJ4MY3PQ.js";
-import {
-  createHotContext
-} from "/build/_shared/chunk-Q6LMBPEP.js";
 import "/build/_shared/chunk-JR22VO6P.js";
 import {
   __toESM
@@ -32,12 +33,13 @@ if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
 }
 var prevRefreshReg;
 var prevRefreshSig;
+var _s = $RefreshSig$();
 if (import.meta) {
   import.meta.hot = createHotContext(
     //@ts-expect-error
     "app/routes/_index.tsx"
   );
-  import.meta.hot.lastModified = "1707543896077.2876";
+  import.meta.hot.lastModified = "1708499356004.199";
 }
 var {
   Button
@@ -51,28 +53,43 @@ var meta = () => {
   }];
 };
 function Index() {
+  _s();
+  const {
+    inputForms
+  } = useLoaderData();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-col gap-3", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h1", { className: "text-3xl text-amber-700 font-bold", children: "DbClient" }, void 0, false, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 36,
+      lineNumber: 48,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "/users", children: "Users" }, void 0, false, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 37,
+      lineNumber: 49,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "/db_struct", children: "Db Struct" }, void 0, false, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 38,
+      lineNumber: 50,
       columnNumber: 7
-    }, this)
+    }, this),
+    inputForms.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: `/forms/${item.id}`, children: [
+      "Form: ",
+      item.title
+    ] }, item.id, true, {
+      fileName: "app/routes/_index.tsx",
+      lineNumber: 51,
+      columnNumber: 31
+    }, this))
   ] }, void 0, true, {
     fileName: "app/routes/_index.tsx",
-    lineNumber: 35,
+    lineNumber: 47,
     columnNumber: 10
   }, this);
 }
+_s(Index, "9108qSvdGRo+DmwUY6Wem+xrK5U=", false, function() {
+  return [useLoaderData];
+});
 _c = Index;
 var _c;
 $RefreshReg$(_c, "Index");
@@ -82,4 +99,4 @@ export {
   Index as default,
   meta
 };
-//# sourceMappingURL=/build/routes/_index-G57PV55O.js.map
+//# sourceMappingURL=/build/routes/_index-UMS6HD7T.js.map

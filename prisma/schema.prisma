@@ -118,6 +118,8 @@ enum FieldType {
 model InputField {
   id           Int            @id @default(autoincrement())
   pos          Int            @default(0)
+  colSpan      Int            @default(1)
+  colStart     Int            @default(1)
   title        String
   group        Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
   groupId      Int

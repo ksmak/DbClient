@@ -216,6 +216,8 @@ export async function action({
             await api.db.updateInputField(Number(values.id), {
                 id: Number(values.id),
                 groupId: Number(values.groupId),
+                colSpan: Number(values.colSpan),
+                colStart: Number(values.colStart),
                 pos: Number(values.pos),
                 title: String(values.title),
                 len: Number(values.len),
