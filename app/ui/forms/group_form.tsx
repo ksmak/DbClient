@@ -4,6 +4,7 @@ import { Form, useFetcher, useNavigate } from "@remix-run/react"
 import Input from "../elements/input_field";
 import CheckField from "../elements/check_field";
 import { InputField, FieldType, Dictionary } from "@prisma/client";
+import CustomButton from "../elements/custom_button";
 
 type GroupFormProps = {
     group: any,
@@ -27,12 +28,9 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
     return (
         <>
             <div className="flex flex-row gap-3 justify-end">
-                <Button
-                    className="flex items-center gap-1"
-                    color="blue-gray"
+                <CustomButton
+                    className="bg-blue-gray-500 hover:shadow-blue-gray-100"
                     form="addInputFieldForm"
-                    placeholder=""
-                    size="sm"
                     type="submit"
                     name="_action"
                     value="createEmptyInputField"
@@ -41,7 +39,7 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Add Field
-                </Button>
+                </CustomButton>
                 <Button
                     id="updateGroupButton"
                     className="hidden"

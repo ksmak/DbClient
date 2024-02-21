@@ -1,12 +1,13 @@
 import MaterialTailwind from "@material-tailwind/react"
+const { Spinner, Button } = MaterialTailwind
 import { Department, Prisma, Role, User } from "@prisma/client"
-const { Button } = MaterialTailwind
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useActionData, useFetcher, useLoaderData, useNavigate } from "@remix-run/react"
 import moment from "moment"
 import UserDialog from "~/ui/dialogs/user_dialog"
 import api from "~/api"
 import { useEffect, useState } from "react"
+import CustomButton from "~/ui/elements/custom_button"
 
 export async function loader({
     request,
@@ -148,7 +149,7 @@ export default function Users() {
                 className="border-2 border-blue-gray-700"
             >
                 <thead
-                    className="bg-blue-gray-400 text-white"
+                    className="bg-blue-gray-400 text-white text-center"
                 >
                     <tr>
                         <th className="p-1 text-sm border border-blue-gray-700">#</th>
@@ -198,19 +199,29 @@ export default function Users() {
                             <td className="p-1 text-sm border border-blue-gray-700">{moment(user.expiredPwd).format('DD.MM.YYYY')}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{moment(user.createdAt).format('DD.MM.YYYY H:m:s')}</td>
                             <td className="p-1 text-sm border border-blue-gray-700">{moment(user.updatedAt).format('DD.MM.YYYY H:m:s')}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer">
+                            <td className="p-1 text-sm border border-blue-gray-700 flex justify-center">
                                 <fetcher.Form method="post">
                                     <input type="hidden" name="id" defaultValue={user?.id ? user.id : ''} />
-                                    <button
-                                        className="hover:underline"
+                                    <CustomButton
+                                        className="bg-red-500 hover:shadow-red-100"
                                         disabled={isDeleting}
                                         onClick={handleDelete}
                                         type="submit"
                                         name="_action"
                                         value="deleteUser"
                                     >
-                                        {isDeleting ? "Deleting..." : "Delete"}
-                                    </button>
+                                        {isDeleting
+                                            ? <>
+                                                <Spinner className="w-4 h-4" />
+                                                Deleting...
+                                            </>
+                                            : <>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                                </svg>
+                                                Delete
+                                            </>}
+                                    </CustomButton>
                                 </fetcher.Form>
                             </td>
                         </tr>
