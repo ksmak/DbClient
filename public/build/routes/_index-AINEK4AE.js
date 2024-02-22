@@ -39,7 +39,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/_index.tsx"
   );
-  import.meta.hot.lastModified = "1708531360978.6316";
+  import.meta.hot.lastModified = "1708570403413.1914";
 }
 var {
   Button
@@ -73,7 +73,7 @@ function Index() {
       lineNumber: 50,
       columnNumber: 7
     }, this),
-    inputForms.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: `/forms/${item.id}`, children: [
+    inputForms.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: `/input_forms/${item.id}`, children: [
       "Form: ",
       item.title
     ] }, item.id, true, {
@@ -99,4 +99,4 @@ export {
   Index as default,
   meta
 };
-//# sourceMappingURL=/build/routes/_index-EFNIGA2A.js.map
+//# sourceMappingURL=/build/routes/_index-AINEK4AE.js.map

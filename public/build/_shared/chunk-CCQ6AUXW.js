@@ -1,5 +1,12 @@
 import {
-  __commonJS
+  createHotContext
+} from "/build/_shared/chunk-Q6LMBPEP.js";
+import {
+  require_jsx_dev_runtime
+} from "/build/_shared/chunk-7PHB3BFD.js";
+import {
+  __commonJS,
+  __toESM
 } from "/build/_shared/chunk-PZDJHGND.js";
 
 // node_modules/@prisma/client/runtime/index-browser.js
@@ -1253,6 +1260,7 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
     };
     exports.Prisma.UserScalarFieldEnum = {
       id: "id",
+      isActive: "isActive",
       login: "login",
       password: "password",
       firstName: "firstName",
@@ -1346,6 +1354,16 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
       condId: "condId",
       value: "value"
     };
+    exports.Prisma.DocScalarFieldEnum = {
+      id: "id",
+      isActive: "isActive",
+      dateStart: "dateStart",
+      dateEnd: "dateEnd",
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
+      createdUserId: "createdUserId",
+      updatedUserId: "updatedUserId"
+    };
     exports.Prisma.SortOrder = {
       asc: "asc",
       desc: "desc"
@@ -1391,7 +1409,8 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
       ReportRow: "ReportRow",
       Query: "Query",
       Condition: "Condition",
-      ValList: "ValList"
+      ValList: "ValList",
+      Doc: "Doc"
     };
     var PrismaClient = class {
       constructor() {
@@ -1437,9 +1456,112 @@ var require_node = __commonJS({
   }
 });
 
+// app/ui/elements/custom_button.tsx
+var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
+if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
+  console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
+} else {
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = (type, id) => {
+    window.$RefreshRuntime$.register(type, '"app/ui/elements/custom_button.tsx"' + id);
+  };
+  window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
+}
+var prevRefreshReg;
+var prevRefreshSig;
+if (import.meta) {
+  import.meta.hot = createHotContext(
+    //@ts-expect-error
+    "app/ui/elements/custom_button.tsx"
+  );
+  import.meta.hot.lastModified = "1708568435060.9858";
+}
+function CustomButton({
+  className,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { ...props, className: `text-white text-xs py-1.5 px-3.5 flex items-center gap-2 rounded-md hover:cursor-pointer hover:shadow-lg font-semibold uppercase ${className}`, children }, void 0, false, {
+    fileName: "app/ui/elements/custom_button.tsx",
+    lineNumber: 26,
+    columnNumber: 10
+  }, this);
+}
+_c = CustomButton;
+var _c;
+$RefreshReg$(_c, "CustomButton");
+window.$RefreshReg$ = prevRefreshReg;
+window.$RefreshSig$ = prevRefreshSig;
+
+// app/ui/elements/custom_input.tsx
+var import_jsx_dev_runtime2 = __toESM(require_jsx_dev_runtime(), 1);
+if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
+  console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
+} else {
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = (type, id) => {
+    window.$RefreshRuntime$.register(type, '"app/ui/elements/custom_input.tsx"' + id);
+  };
+  window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
+}
+var prevRefreshReg;
+var prevRefreshSig;
+if (import.meta) {
+  import.meta.hot = createHotContext(
+    //@ts-expect-error
+    "app/ui/elements/custom_input.tsx"
+  );
+  import.meta.hot.lastModified = "1708575034765.753";
+}
+function CustomInput({
+  className,
+  id,
+  title,
+  errors,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("div", { className: `${className} p-1 flex items-baseline`, children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("label", { className: "font-bold text-sm mr-1 min-w-40", htmlFor: id, children: title }, void 0, false, {
+      fileName: "app/ui/elements/custom_input.tsx",
+      lineNumber: 30,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("div", { className: "flex flex-col justify-between", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("input", { id, className: "font-mono text-sm border-2 p-1 focus:outline-blue-gray-500", ...props, children }, void 0, false, {
+        fileName: "app/ui/elements/custom_input.tsx",
+        lineNumber: 34,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("span", { className: "text-sm text-red-500 h-4", children: errors }, void 0, false, {
+        fileName: "app/ui/elements/custom_input.tsx",
+        lineNumber: 37,
+        columnNumber: 17
+      }, this)
+    ] }, void 0, true, {
+      fileName: "app/ui/elements/custom_input.tsx",
+      lineNumber: 33,
+      columnNumber: 13
+    }, this)
+  ] }, void 0, true, {
+    fileName: "app/ui/elements/custom_input.tsx",
+    lineNumber: 29,
+    columnNumber: 10
+  }, this);
+}
+_c2 = CustomInput;
+var _c2;
+$RefreshReg$(_c2, "CustomInput");
+window.$RefreshReg$ = prevRefreshReg;
+window.$RefreshSig$ = prevRefreshSig;
+
 export {
   require_index_browser3 as require_index_browser,
-  require_node
+  require_node,
+  CustomButton,
+  CustomInput
 };
 /*! Bundled license information:
 
@@ -1456,4 +1578,4 @@ export {
      *)
   *)
 */
-//# sourceMappingURL=/build/_shared/chunk-KDA2VXG4.js.map
+//# sourceMappingURL=/build/_shared/chunk-CCQ6AUXW.js.map

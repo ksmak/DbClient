@@ -25,7 +25,7 @@ export default function Index() {
       <h1 className="text-3xl text-amber-700 font-bold">DbClient</h1>
       <Link to="/users">Users</Link>
       <Link to="/db_struct">Db Struct</Link>
-      {inputForms.map((item: InputForm) => <Link key={item.id} to={`/forms/${item.id}`}>Form: {item.title}</Link>)}
+      {inputForms.map((item: InputForm) => <Link key={item.id} to={`/input_forms/${item.id}`}>Form: {item.title}</Link>)}
     </div >
   );
 }

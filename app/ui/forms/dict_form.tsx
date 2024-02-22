@@ -1,8 +1,8 @@
 import MaterialTailwind from "@material-tailwind/react"
 const { Spinner } = MaterialTailwind;
 import { Form, useFetcher } from "@remix-run/react"
-import Input from "../elements/input_field";
 import CustomButton from "../elements/custom_button";
+import CustomInput from "../elements/custom_input";
 
 type DictionaryFormProps = {
     dictionary: any
@@ -67,11 +67,11 @@ export default function DictionaryForm({ dictionary }: DictionaryFormProps) {
                 method="post"
             >
                 <input type="hidden" name="id" defaultValue={dictionary.id ? dictionary.id : ''} />
-                <Input
+                <CustomInput
+                    id={dictionary.id}
                     title="Title"
                     type="text"
-                    value={dictionary?.title}
-                    aria-label="title"
+                    defaultValue={dictionary?.title}
                     name="title"
                     required={true}
                     onChange={() => {

@@ -1,10 +1,11 @@
 import {
-  CustomButton,
-  Input
-} from "/build/_shared/chunk-WNBUWJKY.js";
+  CustomSelect
+} from "/build/_shared/chunk-ZPTKG4AS.js";
 import {
+  CustomButton,
+  CustomInput,
   require_node
-} from "/build/_shared/chunk-KDA2VXG4.js";
+} from "/build/_shared/chunk-CCQ6AUXW.js";
 import {
   require_react as require_react2
 } from "/build/_shared/chunk-DGLILCEK.js";
@@ -4028,72 +4029,8 @@ var import_moment2 = __toESM(require_moment(), 1);
 
 // app/ui/dialogs/user_dialog.tsx
 var import_react = __toESM(require_react2(), 1);
-
-// app/ui/elements/select_field.tsx
-var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
-if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
-  console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
-} else {
-  prevRefreshReg = window.$RefreshReg$;
-  prevRefreshSig = window.$RefreshSig$;
-  window.$RefreshReg$ = (type, id) => {
-    window.$RefreshRuntime$.register(type, '"app/ui/elements/select_field.tsx"' + id);
-  };
-  window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
-}
-var prevRefreshReg;
-var prevRefreshSig;
-if (import.meta) {
-  import.meta.hot = createHotContext(
-    //@ts-expect-error
-    "app/ui/elements/select_field.tsx"
-  );
-  import.meta.hot.lastModified = "1707481313000";
-}
-function SelectField({
-  name,
-  title,
-  options,
-  value,
-  required
-}) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-col gap-1", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("label", { className: "block text-sm font-bold text-slate-700", htmlFor: name, children: title }, void 0, false, {
-      fileName: "app/ui/elements/select_field.tsx",
-      lineNumber: 29,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { id: name, defaultValue: value, "aria-label": name, name, required, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { children: "-" }, void 0, false, {
-        fileName: "app/ui/elements/select_field.tsx",
-        lineNumber: 33,
-        columnNumber: 17
-      }, this),
-      options.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: item.id, children: item.title }, item.id, false, {
-        fileName: "app/ui/elements/select_field.tsx",
-        lineNumber: 34,
-        columnNumber: 38
-      }, this))
-    ] }, void 0, true, {
-      fileName: "app/ui/elements/select_field.tsx",
-      lineNumber: 32,
-      columnNumber: 13
-    }, this)
-  ] }, void 0, true, {
-    fileName: "app/ui/elements/select_field.tsx",
-    lineNumber: 28,
-    columnNumber: 10
-  }, this);
-}
-_c = SelectField;
-var _c;
-$RefreshReg$(_c, "SelectField");
-window.$RefreshReg$ = prevRefreshReg;
-window.$RefreshSig$ = prevRefreshSig;
-
-// app/ui/dialogs/user_dialog.tsx
 var import_moment = __toESM(require_moment(), 1);
-var import_jsx_dev_runtime2 = __toESM(require_jsx_dev_runtime(), 1);
+var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
 if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
 } else {
@@ -4111,10 +4048,9 @@ if (import.meta) {
     //@ts-expect-error
     "app/ui/dialogs/user_dialog.tsx"
   );
-  import.meta.hot.lastModified = "1708354414814.59";
+  import.meta.hot.lastModified = "1708576482562.8347";
 }
 var {
-  Button,
   Dialog,
   Card,
   CardBody,
@@ -4129,47 +4065,58 @@ function UserDialog({
   departments,
   errors
 }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Dialog, { placeholder: "", size: "sm", open, handler: handleOpen, className: "bg-transparent shadow-none", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Card, { className: "mx-auto w-full", placeholder: "", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(CardBody, { className: "flex flex-col gap-4 overflow-auto", placeholder: "", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Form, { id: "userForm", className: "flex flex-col gap-3", method: "post", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: user?.id ? user.id : "" }, void 0, false, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Dialog, { placeholder: "", size: "sm", open, handler: handleOpen, className: "bg-transparent shadow-none", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Card, { className: "mx-auto w-full", placeholder: "", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CardBody, { className: "flex flex-col gap-4 overflow-auto", placeholder: "", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Form, { id: "userForm", className: "flex flex-col gap-3", method: "post", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: user?.id ? user.id : "" }, void 0, false, {
           fileName: "app/ui/dialogs/user_dialog.tsx",
           lineNumber: 46,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "text", name: "login", title: "Login: ", value: user?.login, required: true, readonly: !isNew }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_login", type: "text", name: "login", title: "Login: ", defaultValue: user?.login, required: true, readOnly: !isNew }, void 0, false, {
           fileName: "app/ui/dialogs/user_dialog.tsx",
           lineNumber: 47,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "password", name: "password", title: "Password: ", value: user?.password, required: false }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_password", type: "password", name: "password", title: "Password: ", defaultValue: user?.password, required: false }, void 0, false, {
           fileName: "app/ui/dialogs/user_dialog.tsx",
           lineNumber: 48,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "text", name: "firstName", title: "First Name: ", value: user?.firstName, required: false }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_firsName", type: "text", name: "firstName", title: "First Name: ", defaultValue: user?.firstName ? user.firstName : "", required: false }, void 0, false, {
           fileName: "app/ui/dialogs/user_dialog.tsx",
           lineNumber: 49,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "text", name: "lastName", title: "Last Name: ", value: user?.lastName, required: false }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_lastName", type: "text", name: "lastName", title: "Last Name: ", defaultValue: user?.lastName ? user.lastName : "", required: false }, void 0, false, {
           fileName: "app/ui/dialogs/user_dialog.tsx",
           lineNumber: 50,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "text", name: "middleName", title: "Middle Name: ", value: user?.middleName, required: false }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_middleName", type: "text", name: "middleName", title: "Middle Name: ", defaultValue: user?.middleName ? user.middleName : "", required: false }, void 0, false, {
           fileName: "app/ui/dialogs/user_dialog.tsx",
           lineNumber: 51,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(SelectField, { name: "departmentId", title: "Department: ", options: departments, value: user?.departmentId, required: false }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomSelect, { id: "user_department", name: "departmentId", title: "Department: ", defaultValue: user?.departmentId ? user.departmentId : "", required: false, children: [
+          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { children: "-" }, void 0, false, {
+            fileName: "app/ui/dialogs/user_dialog.tsx",
+            lineNumber: 53,
+            columnNumber: 29
+          }, this),
+          departments.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: item.id, children: item.title }, void 0, false, {
+            fileName: "app/ui/dialogs/user_dialog.tsx",
+            lineNumber: 54,
+            columnNumber: 54
+          }, this))
+        ] }, void 0, true, {
           fileName: "app/ui/dialogs/user_dialog.tsx",
           lineNumber: 52,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Input, { type: "date", name: "expiredPwd", title: "Expired Password: ", value: (0, import_moment.default)(user?.expiredPwd).format("YYYY-MM-DD"), required: true }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_expiredPwd", type: "date", name: "expiredPwd", title: "Expired Password: ", defaultValue: (0, import_moment.default)(user?.expiredPwd).format("YYYY-MM-DD"), required: true }, void 0, false, {
           fileName: "app/ui/dialogs/user_dialog.tsx",
-          lineNumber: 53,
+          lineNumber: 56,
           columnNumber: 25
         }, this)
       ] }, user?.id, true, {
@@ -4177,9 +4124,9 @@ function UserDialog({
         lineNumber: 45,
         columnNumber: 21
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("span", { className: "text-red-500 text-sm", children: errors }, void 0, false, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-red-500 text-sm", children: errors }, void 0, false, {
         fileName: "app/ui/dialogs/user_dialog.tsx",
-        lineNumber: 55,
+        lineNumber: 58,
         columnNumber: 21
       }, this)
     ] }, void 0, true, {
@@ -4187,20 +4134,20 @@ function UserDialog({
       lineNumber: 44,
       columnNumber: 17
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(CardFooter, { className: "pt-0 flex flex-row gap-3", placeholder: "", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Button, { variant: "gradient", color: "green", form: "userForm", placeholder: "", type: "submit", name: "_action", value: isNew ? "createUser" : "updateUser", fullWidth: true, children: "Save" }, void 0, false, {
-        fileName: "app/ui/dialogs/user_dialog.tsx",
-        lineNumber: 58,
-        columnNumber: 21
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Button, { variant: "gradient", onClick: handleOpen, fullWidth: true, placeholder: "", children: "Close" }, void 0, false, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CardFooter, { className: "pt-0 flex flex-row gap-3", placeholder: "", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", form: "userForm", type: "submit", name: "_action", value: isNew ? "createUser" : "updateUser", children: "Save" }, void 0, false, {
         fileName: "app/ui/dialogs/user_dialog.tsx",
         lineNumber: 61,
+        columnNumber: 21
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", onClick: handleOpen, children: "Close" }, void 0, false, {
+        fileName: "app/ui/dialogs/user_dialog.tsx",
+        lineNumber: 64,
         columnNumber: 21
       }, this)
     ] }, void 0, true, {
       fileName: "app/ui/dialogs/user_dialog.tsx",
-      lineNumber: 57,
+      lineNumber: 60,
       columnNumber: 17
     }, this)
   ] }, void 0, true, {
@@ -4213,15 +4160,15 @@ function UserDialog({
     columnNumber: 10
   }, this);
 }
-_c2 = UserDialog;
-var _c2;
-$RefreshReg$(_c2, "UserDialog");
+_c = UserDialog;
+var _c;
+$RefreshReg$(_c, "UserDialog");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 
 // app/routes/users._index.tsx
 var import_react5 = __toESM(require_react(), 1);
-var import_jsx_dev_runtime3 = __toESM(require_jsx_dev_runtime(), 1);
+var import_jsx_dev_runtime2 = __toESM(require_jsx_dev_runtime(), 1);
 if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
 } else {
@@ -4240,11 +4187,10 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/users._index.tsx"
   );
-  import.meta.hot.lastModified = "1708540429364.228";
+  import.meta.hot.lastModified = "1708569511302.504";
 }
 var {
-  Spinner,
-  Button: Button2
+  Spinner
 } = import_react3.default;
 function Users() {
   _s();
@@ -4269,193 +4215,193 @@ function Users() {
       event.preventDefault();
     }
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "container mx-auto flex flex-col gap-3 h-screen pb-5", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(UserDialog, { isNew: isNew ? true : false, handleOpen: () => navigate("/users"), open, user: user ? user : null, roles, departments, errors: actionData?.errors }, void 0, false, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("div", { className: "container mx-auto flex flex-col gap-3 h-screen pb-5", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(UserDialog, { isNew: isNew ? true : false, handleOpen: () => navigate("/users"), open, user: user ? user : null, roles, departments, errors: actionData?.errors }, void 0, false, {
+      fileName: "app/routes/users._index.tsx",
+      lineNumber: 157,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("h1", { className: "self-center text-amber-700 text-3xl font-bold mt-4", children: "Users" }, void 0, false, {
       fileName: "app/routes/users._index.tsx",
       lineNumber: 158,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("h1", { className: "self-center text-amber-700 text-3xl font-bold mt-4", children: "Users" }, void 0, false, {
-      fileName: "app/routes/users._index.tsx",
-      lineNumber: 159,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("div", { className: "flex items-center gap-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(Button2, { className: "flex items-center gap-3", color: "blue-gray", placeholder: "", size: "sm", onClick: () => {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("div", { className: "flex items-center gap-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", onClick: () => {
       navigate("/users?new=true");
     }, children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
         fileName: "app/routes/users._index.tsx",
-        lineNumber: 165,
+        lineNumber: 164,
         columnNumber: 25
       }, this) }, void 0, false, {
         fileName: "app/routes/users._index.tsx",
-        lineNumber: 164,
+        lineNumber: 163,
         columnNumber: 21
       }, this),
       "New User"
     ] }, void 0, true, {
       fileName: "app/routes/users._index.tsx",
-      lineNumber: 161,
+      lineNumber: 160,
       columnNumber: 17
     }, this) }, void 0, false, {
       fileName: "app/routes/users._index.tsx",
-      lineNumber: 160,
+      lineNumber: 159,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("table", { className: "border-2 border-blue-gray-700", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("thead", { className: "bg-blue-gray-400 text-white text-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("tr", { children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, false, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("table", { className: "border-2 border-blue-gray-700", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("thead", { className: "bg-blue-gray-400 text-white text-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("tr", { children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, false, {
+          fileName: "app/routes/users._index.tsx",
+          lineNumber: 172,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Login" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 173,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Login" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "First Name" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 174,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "First Name" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Last Name" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 175,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Last Name" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Middle Name" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 176,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Middle Name" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Department" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 177,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Department" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Expired Password" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 178,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "Expired Password" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "created" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 179,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "created" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "updated" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 180,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "updated" }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, false, {
           fileName: "app/routes/users._index.tsx",
           lineNumber: 181,
-          columnNumber: 25
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, false, {
-          fileName: "app/routes/users._index.tsx",
-          lineNumber: 182,
           columnNumber: 25
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/users._index.tsx",
-        lineNumber: 172,
+        lineNumber: 171,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/routes/users._index.tsx",
-        lineNumber: 171,
+        lineNumber: 170,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("tbody", { children: users.map((user2, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("tbody", { children: users.map((user2, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(
         "tr",
         {
           children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, false, {
+              fileName: "app/routes/users._index.tsx",
+              lineNumber: 188,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.login }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
               lineNumber: 189,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.login }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.firstName }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
-              lineNumber: 190,
+              lineNumber: 192,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.firstName }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.lastName }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
-              lineNumber: 193,
+              lineNumber: 195,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.lastName }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.middleName }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
-              lineNumber: 196,
+              lineNumber: 198,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline", onClick: () => navigate(`/users?userId=${user2.id}`), children: user2.middleName }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: departments.find((item) => item.id === user2.departmentId)?.title }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
-              lineNumber: 199,
+              lineNumber: 201,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: departments.find((item) => item.id === user2.departmentId)?.title }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.expiredPwd).format("DD.MM.YYYY") }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
               lineNumber: 202,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.expiredPwd).format("DD.MM.YYYY") }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.createdAt).format("DD.MM.YYYY H:m:s") }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
               lineNumber: 203,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.createdAt).format("DD.MM.YYYY H:m:s") }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.updatedAt).format("DD.MM.YYYY H:m:s") }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
               lineNumber: 204,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: (0, import_moment2.default)(user2.updatedAt).format("DD.MM.YYYY H:m:s") }, void 0, false, {
-              fileName: "app/routes/users._index.tsx",
-              lineNumber: 205,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 flex justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(fetcher.Form, { method: "post", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: user2?.id ? user2.id : "" }, void 0, false, {
+            /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700 flex justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(fetcher.Form, { method: "post", children: [
+              /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: user2?.id ? user2.id : "" }, void 0, false, {
                 fileName: "app/routes/users._index.tsx",
-                lineNumber: 208,
+                lineNumber: 207,
                 columnNumber: 37
               }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(CustomButton, { className: "bg-red-500 hover:shadow-red-100", disabled: isDeleting, onClick: handleDelete, type: "submit", name: "_action", value: "deleteUser", children: isDeleting ? /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_jsx_dev_runtime3.Fragment, { children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(Spinner, { className: "w-4 h-4" }, void 0, false, {
+              /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(CustomButton, { className: "bg-red-500 hover:shadow-red-100", disabled: isDeleting, onClick: handleDelete, type: "submit", name: "_action", value: "deleteUser", children: isDeleting ? /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_jsx_dev_runtime2.Fragment, { children: [
+                /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Spinner, { className: "w-4 h-4" }, void 0, false, {
                   fileName: "app/routes/users._index.tsx",
-                  lineNumber: 211,
+                  lineNumber: 210,
                   columnNumber: 49
                 }, this),
                 "Deleting..."
               ] }, void 0, true, {
                 fileName: "app/routes/users._index.tsx",
-                lineNumber: 210,
+                lineNumber: 209,
                 columnNumber: 55
-              }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)(import_jsx_dev_runtime3.Fragment, { children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, false, {
+              }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(import_jsx_dev_runtime2.Fragment, { children: [
+                /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, false, {
                   fileName: "app/routes/users._index.tsx",
-                  lineNumber: 215,
+                  lineNumber: 214,
                   columnNumber: 53
                 }, this) }, void 0, false, {
                   fileName: "app/routes/users._index.tsx",
-                  lineNumber: 214,
+                  lineNumber: 213,
                   columnNumber: 49
                 }, this),
                 "Delete"
               ] }, void 0, true, {
                 fileName: "app/routes/users._index.tsx",
-                lineNumber: 213,
+                lineNumber: 212,
                 columnNumber: 51
               }, this) }, void 0, false, {
                 fileName: "app/routes/users._index.tsx",
-                lineNumber: 209,
+                lineNumber: 208,
                 columnNumber: 37
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/users._index.tsx",
-              lineNumber: 207,
+              lineNumber: 206,
               columnNumber: 33
             }, this) }, void 0, false, {
               fileName: "app/routes/users._index.tsx",
-              lineNumber: 206,
+              lineNumber: 205,
               columnNumber: 29
             }, this)
           ]
@@ -4464,32 +4410,32 @@ function Users() {
         true,
         {
           fileName: "app/routes/users._index.tsx",
-          lineNumber: 186,
+          lineNumber: 185,
           columnNumber: 49
         },
         this
       )) }, void 0, false, {
         fileName: "app/routes/users._index.tsx",
-        lineNumber: 185,
+        lineNumber: 184,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/routes/users._index.tsx",
-      lineNumber: 170,
+      lineNumber: 169,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/routes/users._index.tsx",
-    lineNumber: 157,
+    lineNumber: 156,
     columnNumber: 10
   }, this);
 }
 _s(Users, "MmhcMXbiOrEwUqxizumls+jQpp8=", false, function() {
   return [useLoaderData, useActionData, useNavigate, useFetcher];
 });
-_c3 = Users;
-var _c3;
-$RefreshReg$(_c3, "Users");
+_c2 = Users;
+var _c2;
+$RefreshReg$(_c2, "Users");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 export {
@@ -4504,4 +4450,4 @@ moment/moment.js:
   (*! license : MIT *)
   (*! momentjs.com *)
 */
-//# sourceMappingURL=/build/routes/users._index-QHNN6OXU.js.map
+//# sourceMappingURL=/build/routes/users._index-SBHGCKD7.js.map

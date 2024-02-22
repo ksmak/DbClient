@@ -1,8 +1,9 @@
 import MaterialTailwind from "@material-tailwind/react"
-const { Button } = MaterialTailwind;
+const { Spinner } = MaterialTailwind;
 import { Form, useFetcher } from "@remix-run/react"
-import Input from "../elements/input_field";
-import { InputField, SearchField } from "@prisma/client";
+import { Group, InputField, SearchField } from "@prisma/client";
+import CustomButton from "../elements/custom_button";
+import CustomInput from "../elements/custom_input";
 
 type SearchFormProps = {
     searchForm: any,
@@ -24,12 +25,9 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
     return (
         <>
             <div className="flex flex-row gap-3 justify-end">
-                <Button
-                    className="flex items-center gap-1"
-                    color="blue-gray"
+                <CustomButton
+                    className="bg-blue-gray-500 hover:shadow-blue-gray-100"
                     form="addSearchFieldForm"
-                    placeholder=""
-                    size="sm"
                     type="submit"
                     name="_action"
                     value="createEmptySearchField"
@@ -38,14 +36,11 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Add Field
-                </Button>
-                <Button
-                    id="updateSearchFormButton"
+                </CustomButton>
+                <CustomButton
                     className="hidden"
-                    color="green"
+                    id="updateSearchFormButton"
                     form="updateSearchForm"
-                    placeholder=""
-                    size="sm"
                     type="submit"
                     name="_action"
                     value="updateSearchForm"
@@ -54,13 +49,10 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
                     Save
-                </Button>
-                <Button
-                    className="flex items-center gap-1"
-                    color="red"
+                </CustomButton>
+                <CustomButton
+                    className="bg-red-500 hover:shadow-red-100"
                     form="deleteSearchForm"
-                    placeholder=""
-                    size="sm"
                     type="submit"
                     name="_action"
                     value="deleteSearchForm"
@@ -69,7 +61,7 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                     Delete
-                </Button>
+                </CustomButton>
             </div>
             <fetcher.Form
                 id="addSearchFieldForm"
@@ -85,7 +77,8 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                 method="post"
             >
                 <input type="hidden" name="id" defaultValue={searchForm.id} />
-                <Input
+                <CustomInput
+                    id="searchForm_pos"
                     title="Pos: "
                     type="number"
                     value={searchForm?.pos}
@@ -96,7 +89,8 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                         button.click()
                     }}
                 />
-                <Input
+                <CustomInput
+                    id="searchForm_title"
                     title="Title: "
                     type="text"
                     value={searchForm?.title}
@@ -131,13 +125,10 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                 >
                     <input type="hidden" name="id" defaultValue={field.id} />
                     <input type="hidden" name="searchFormId" defaultValue={field.searchFormId} />
-                    <Button
+                    <CustomButton
+                        className="bg-green-500 hover:shadow-green-100"
                         id={`updateSearchFieldButton_${field.id}`}
-                        className="flex items-center gap-1"
-                        color="green"
                         form={`updateSearchFieldForm_${field.id}`}
-                        placeholder=""
-                        size="sm"
                         type="submit"
                         name="_action"
                         value="updateSearchField"
@@ -146,7 +137,7 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>
                         Save
-                    </Button>
+                    </CustomButton>
                 </Form>
             ))}
             <div className="overflow-x-auto mt-4">
@@ -207,7 +198,7 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                                     >
                                         <option value="">-</option>
                                         {inputFields && inputFields.map(
-                                            (fld: InputField) =>
+                                            (fld: InputField & { group: Group }) =>
                                                 <option key={fld.id} value={fld.id}>
                                                     {`${fld.group.pos}. ${fld.group.title} -> ${fld.title}`}
                                                 </option>)}
@@ -216,19 +207,26 @@ export default function SearchFormForm({ searchForm, inputFields }: SearchFormPr
                                 <td className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer">
                                     <fetcher.Form method="post">
                                         <input type="hidden" name="id" defaultValue={field.id} />
-                                        <Button
-                                            className="hover:underline"
-                                            color="red"
-                                            placeholder=""
-                                            size="sm"
+                                        <CustomButton
+                                            className="bg-red-500 hover:shadow-red-100"
                                             disabled={isDeleting}
                                             onClick={handleDelete}
                                             type="submit"
                                             name="_action"
                                             value="deleteSearchField"
                                         >
-                                            {isDeleting ? "Deleting..." : "Delete"}
-                                        </Button>
+                                            {isDeleting
+                                                ? <>
+                                                    <Spinner className="w-4 h-4" />
+                                                    Deleting...
+                                                </>
+                                                : <>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                                    </svg>
+                                                    Delete
+                                                </>}
+                                        </CustomButton>
                                     </fetcher.Form>
                                 </td>
                             </tr>

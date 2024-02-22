@@ -1,7 +1,8 @@
 import MaterialTailwind from "@material-tailwind/react"
-const { Button } = MaterialTailwind
+const { Spinner } = MaterialTailwind
 import { Form } from "@remix-run/react"
-import Input from "../elements/input_field";
+import CustomButton from "../elements/custom_button";
+import CustomInput from "../elements/custom_input";
 
 type InputFormProps = {
     inputForm: any,
@@ -12,12 +13,9 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
     return (
         <>
             <div className="flex flex-row gap-3 justify-end">
-                <Button
-                    className="flex items-center gap-1"
-                    color="blue-gray"
+                <CustomButton
+                    className="bg-blue-gray-500 hover:shadow-blue-gray-100"
                     form="addGroupForm"
-                    placeholder=""
-                    size="sm"
                     type="submit"
                     name="_action"
                     value="createEmptyGroup"
@@ -26,14 +24,11 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Add Group
-                </Button>
-                <Button
-                    id="updateInputFormButton"
+                </CustomButton>
+                <CustomButton
                     className="hidden"
-                    color="green"
+                    id="updateInputFormButton"
                     form="updateInputForm"
-                    placeholder=""
-                    size="sm"
                     type="submit"
                     name="_action"
                     value="updateInputForm"
@@ -42,13 +37,10 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
                     Save
-                </Button>
-                <Button
-                    className="flex items-center gap-1"
-                    color="red"
+                </CustomButton>
+                <CustomButton
+                    className="bg-red-500 hover:shadow-red-100"
                     form="deleteInputForm"
-                    placeholder=""
-                    size="sm"
                     type="submit"
                     name="_action"
                     value="deleteInputForm"
@@ -57,7 +49,7 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                     Delete
-                </Button>
+                </CustomButton>
             </div>
             <Form
                 id="addGroupForm"
@@ -74,10 +66,11 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                 method="post"
             >
                 <input type="hidden" name="id" defaultValue={inputForm.id ? inputForm.id : ''} />
-                <Input
+                <CustomInput
+                    id="inputForm_pos"
                     title="Pos: "
                     type="number"
-                    value={inputForm?.pos}
+                    defaultValue={inputForm?.pos}
                     name="pos"
                     required={true}
                     onChange={() => {
@@ -85,10 +78,11 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                         button.click()
                     }}
                 />
-                <Input
+                <CustomInput
+                    id="inputForm_title"
                     title="Title: "
                     type="text"
-                    value={inputForm?.title}
+                    defaultValue={inputForm?.title}
                     name="title"
                     required={true}
                     onChange={() => {

@@ -1,8 +1,9 @@
 import MaterialTailwind from "@material-tailwind/react";
 import { InputField } from "@prisma/client";
 import { Form } from "@remix-run/react";
-import Input from "../elements/input_field";
-const { Button, Dialog, Card, CardBody, CardFooter } = MaterialTailwind;
+import CustomInput from "../elements/custom_input";
+import CustomButton from "../elements/custom_button";
+const { Dialog, Card, CardBody, CardFooter } = MaterialTailwind;
 
 type InputFieldDialogProps = {
     handleOpen: () => void
@@ -28,11 +29,12 @@ export default function InputFieldDialog({ handleOpen, open, field }: InputField
                         method="post"
                     >
                         <input type="hidden" name="id" defaultValue={field?.id ? field.id : ''} />
-                        <Input
+                        <CustomInput
+                            id="inputField_title"
                             type="text"
                             name="title"
                             title="Title: "
-                            value={field?.title}
+                            defaultValue={field?.title}
                             required={true}
                         />
                     </Form>
@@ -53,33 +55,30 @@ export default function InputFieldDialog({ handleOpen, open, field }: InputField
                     </Form>
                 </CardBody>
                 <CardFooter className="pt-0 flex flex-row gap-3" placeholder="">
-                    <Button
-                        variant="gradient"
-                        color="green"
+                    <CustomButton
+                        className="bg-green-500 hover:shadow-green-100"
                         form="updateUserForm"
-                        placeholder=""
                         type="submit"
                         name="_action"
                         value="updateUser"
-                        fullWidth
                     >
                         Save
-                    </Button>
-                    <Button
-                        variant="gradient"
-                        color="red"
+                    </CustomButton>
+                    <CustomButton
+                        className="bg-blue-gray-500 hover:shadow-blue-gray-100"
                         form="deleteUserForm"
-                        placeholder=""
                         type="submit"
                         name="_action"
                         value="deleteUser"
-                        fullWidth
                     >
                         Delete
-                    </Button>
-                    <Button variant="gradient" onClick={handleOpen} fullWidth placeholder="">
+                    </CustomButton>
+                    <CustomButton
+                        className="bg-blue-gray-500 hover:shadow-blue-gray-100"
+                        onClick={handleOpen}
+                    >
                         Close
-                    </Button>
+                    </CustomButton>
                 </CardFooter>
             </Card>
         </Dialog>

@@ -1,10 +1,9 @@
-import MaterialTailwind from "@material-tailwind/react";
-const { Button } = MaterialTailwind;
+import MaterialTailwind from "@material-tailwind/react"
+const { Spinner } = MaterialTailwind;
 import { Form, useFetcher, useNavigate } from "@remix-run/react"
-import Input from "../elements/input_field";
-import CheckField from "../elements/check_field";
 import { InputField, FieldType, Dictionary } from "@prisma/client";
 import CustomButton from "../elements/custom_button";
+import CustomInput from "../elements/custom_input";
 
 type GroupFormProps = {
     group: any,
@@ -40,14 +39,12 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                     </svg>
                     Add Field
                 </CustomButton>
-                <Button
-                    id="updateGroupButton"
+                <CustomButton
                     className="hidden"
+                    id="updateGroupButton"
                     color="green"
                     form="updateGroupForm"
-                    placeholder=""
                     type="submit"
-                    size="sm"
                     name="_action"
                     value="updateGroup"
                 >
@@ -55,13 +52,10 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
                     Save
-                </Button>
-                <Button
-                    className="flex items-center gap-1"
-                    color="red"
+                </CustomButton>
+                <CustomButton
+                    className="bg-red-500 hover:shadow-red-100"
                     form="deleteGroupForm"
-                    placeholder=""
-                    size="sm"
                     type="submit"
                     name="_action"
                     value="deleteGroup"
@@ -70,7 +64,7 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                     Delete
-                </Button>
+                </CustomButton>
             </div>
             <fetcher.Form
                 id="addInputFieldForm"
@@ -88,33 +82,36 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                 <input type="hidden" name="id" defaultValue={group.id} />
                 <input type="hidden" name="inputFormId" defaultValue={group.inputFormId} />
 
-                <Input
+                <CustomInput
+                    id="group_pos"
                     type="number"
                     name="pos"
                     title="Pos: "
-                    value={group?.pos}
+                    defaultValue={group?.pos}
                     required={true}
                     onChange={() => {
                         const button = document.getElementById("updateGroupButton") as HTMLButtonElement
                         button.click()
                     }}
                 />
-                <Input
+                <CustomInput
+                    id="group_title"
                     type="text"
                     name="title"
                     title="Title: "
-                    value={group?.title}
+                    defaultValue={group?.title}
                     required={true}
                     onChange={() => {
                         const button = document.getElementById("updateGroupButton") as HTMLButtonElement
                         button.click()
                     }}
                 />
-                <CheckField
+                <CustomInput
+                    id="group_ismulty"
                     type="checkbox"
                     name="isMulty"
                     title="Is Multy: "
-                    value={group?.isMulty ? true : false}
+                    checked={group?.isMulty ? true : false}
                     required={false}
                     onChange={() => {
                         const button = document.getElementById("updateGroupButton") as HTMLButtonElement
@@ -131,13 +128,10 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                 >
                     <input type="hidden" name="id" defaultValue={field.id} />
                     <input type="hidden" name="groupId" defaultValue={field.groupId} />
-                    <Button
+                    <CustomButton
+                        className="bg-green-500 hover:shadow-green-100"
                         id={`updateInputFieldButton_${field.id}`}
-                        className="flex items-center gap-1"
-                        color="green"
                         form={`updateInputFieldForm_${field.id}`}
-                        placeholder=""
-                        size="sm"
                         type="submit"
                         name="_action"
                         value="updateInputField"
@@ -146,7 +140,7 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>
                         Save
-                    </Button>
+                    </CustomButton>
                 </Form>
             ))}
             <div className="overflow-x-auto mt-4">
@@ -361,19 +355,26 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                                 <td className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer">
                                     <fetcher.Form method="post">
                                         <input type="hidden" name="id" defaultValue={field?.id ? field.id : ''} />
-                                        <Button
-                                            className="hover:underline"
-                                            color="red"
-                                            placeholder=""
-                                            size="sm"
+                                        <CustomButton
+                                            className="bg-red-500 hover:shadow-red-100"
                                             disabled={isDeleting}
                                             onClick={handleDelete}
                                             type="submit"
                                             name="_action"
                                             value="deleteInputField"
                                         >
-                                            {isDeleting ? "Deleting..." : "Delete"}
-                                        </Button>
+                                            {isDeleting
+                                                ? <>
+                                                    <Spinner className="w-4 h-4" />
+                                                    Deleting...
+                                                </>
+                                                : <>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                                    </svg>
+                                                    Delete
+                                                </>}
+                                        </CustomButton>
                                     </fetcher.Form>
                                 </td>
                             </tr>

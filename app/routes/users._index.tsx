@@ -1,5 +1,5 @@
 import MaterialTailwind from "@material-tailwind/react"
-const { Spinner, Button } = MaterialTailwind
+const { Spinner } = MaterialTailwind
 import { Department, Prisma, Role, User } from "@prisma/client"
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
 import { useActionData, useFetcher, useLoaderData, useNavigate } from "@remix-run/react"
@@ -132,18 +132,15 @@ export default function Users() {
             <div
                 className="flex items-center gap-3"
             >
-                <Button
-                    className="flex items-center gap-3"
-                    color="blue-gray"
-                    placeholder=''
-                    size="sm"
+                <CustomButton
+                    className="bg-blue-gray-500 hover:shadow-blue-gray-100"
                     onClick={() => { navigate("/users?new=true") }}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     New User
-                </Button>
+                </CustomButton>
             </div>
             <table
                 className="border-2 border-blue-gray-700"

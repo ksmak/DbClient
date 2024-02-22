@@ -1,10 +1,11 @@
 import MaterialTailwind from "@material-tailwind/react";
 import { Department, User, Role } from "@prisma/client";
 import { Form } from "@remix-run/react";
-import InputField from "../elements/input_field";
-import SelectField from "../elements/select_field";
 import moment from "moment";
-const { Button, Dialog, Card, CardBody, CardFooter } = MaterialTailwind;
+import CustomInput from "../elements/custom_input";
+import CustomSelect from "../elements/custom_select";
+import CustomButton from "../elements/custom_button";
+const { Dialog, Card, CardBody, CardFooter } = MaterialTailwind;
 
 type UserDialogProps = {
     isNew: boolean
@@ -34,75 +35,86 @@ export default function UserDialog({ isNew, handleOpen, open, user, roles, depar
                         method="post"
                     >
                         <input type="hidden" name="id" defaultValue={user?.id ? user.id : ''} />
-                        <InputField
+                        <CustomInput
+                            id="user_login"
                             type="text"
                             name="login"
                             title="Login: "
-                            value={user?.login}
+                            defaultValue={user?.login}
                             required={true}
-                            readonly={!isNew}
+                            readOnly={!isNew}
                         />
-                        <InputField
+                        <CustomInput
+                            id="user_password"
                             type="password"
                             name="password"
                             title="Password: "
-                            value={user?.password}
+                            defaultValue={user?.password}
                             required={false}
                         />
-                        <InputField
+                        <CustomInput
+                            id="user_firsName"
                             type="text"
                             name="firstName"
                             title="First Name: "
-                            value={user?.firstName}
+                            defaultValue={user?.firstName ? user.firstName : ""}
                             required={false}
                         />
-                        <InputField
+                        <CustomInput
+                            id="user_lastName"
                             type="text"
                             name="lastName"
                             title="Last Name: "
-                            value={user?.lastName}
+                            defaultValue={user?.lastName ? user.lastName : ""}
                             required={false}
                         />
-                        <InputField
+                        <CustomInput
+                            id="user_middleName"
                             type="text"
                             name="middleName"
                             title="Middle Name: "
-                            value={user?.middleName}
+                            defaultValue={user?.middleName ? user.middleName : ""}
                             required={false}
                         />
-                        <SelectField
+                        <CustomSelect
+                            id="user_department"
                             name="departmentId"
                             title="Department: "
-                            options={departments}
-                            value={user?.departmentId}
+                            defaultValue={user?.departmentId ? user.departmentId : ""}
                             required={false}
-                        />
-                        <InputField
+                        >
+                            <option>-</option>
+                            {departments.map(item => (
+                                <option value={item.id}>{item.title}</option>
+                            ))}
+                        </CustomSelect>
+                        <CustomInput
+                            id="user_expiredPwd"
                             type="date"
                             name="expiredPwd"
                             title="Expired Password: "
-                            value={moment(user?.expiredPwd).format("YYYY-MM-DD")}
+                            defaultValue={moment(user?.expiredPwd).format("YYYY-MM-DD")}
                             required={true}
                         />
                     </Form>
                     <span className="text-red-500 text-sm">{errors}</span>
                 </CardBody>
                 <CardFooter className="pt-0 flex flex-row gap-3" placeholder="">
-                    <Button
-                        variant="gradient"
-                        color="green"
+                    <CustomButton
+                        className="bg-blue-gray-500 hover:shadow-blue-gray-100"
                         form="userForm"
-                        placeholder=""
                         type="submit"
                         name="_action"
                         value={isNew ? "createUser" : "updateUser"}
-                        fullWidth
                     >
                         Save
-                    </Button>
-                    <Button variant="gradient" onClick={handleOpen} fullWidth placeholder="">
+                    </CustomButton>
+                    <CustomButton
+                        className="bg-blue-gray-500 hover:shadow-blue-gray-100"
+                        onClick={handleOpen}
+                    >
                         Close
-                    </Button>
+                    </CustomButton>
                 </CardFooter>
             </Card>
         </Dialog>
