@@ -1,3 +1,16 @@
+export interface IDict {
+    id: number,
+    title: string,
+    data_browse: {
+        id: number,
+        title: string,
+    }[],
+    data_edit: {
+        id: number,
+        title: string,
+    }[],
+}
+
 export interface IField {
     name: string,
     _type: string,
@@ -10,6 +23,6 @@ export interface ITable {
 }
 
 export interface IDocument {
-    id?: number,
+    id: number | null,
     tables: ITable[]
 }

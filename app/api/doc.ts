@@ -4,38 +4,51 @@ import { IDocument, IField, ITable } from "~/types/types"
 
 export default function DocModule(prisma: PrismaClient) {
     return {
-        getDic(dicId: number, isEdit: boolean) {
-            if (isEdit) {
-                return prisma.$queryRawUnsafe(`SELECT * FROM dic_${dicId} WHERE is_enabled = true`)
-            }
-            return prisma.$queryRawUnsafe(`SELECT * FROM dic_${dicId}`)
-        },
-        async getDoc(sid: number, inputForm: any) {
-            let tables: ITable[] = []
-            for (const group of inputForm.groups) {
-                let sql = 'SELECT id'
-                group.fields.forEach((fld: InputField) => {
-                    switch (fld.fieldType) {
-                        case "DATE":
-                            sql = sql + `, to_char(f${fld.id}, 'DD.MM.YYYY') f${fld.id}`
-                            break
-                        case "TIME":
-                            sql = sql + `, to_char(f${fld.id}, 'HH:MI') f${fld.id}`
-                            break
-                        default:
-                            sql = sql + `, f${fld.id}`
+        async getDoc(sid: number | null, inputForm: any) {
+            let doc: any = {}
+            if (sid) {
+                doc = await prisma.doc.findFirst({
+                    where: {
+                        id: sid,
+                        isActive: true
                     }
                 })
-                sql = sql + ` FROM tbl_${group.id} WHERE sid = ${sid}`
-                const data = await prisma.$queryRawUnsafe(`${sql}`)
+            }
+            let tables: ITable[] = []
+            for (const group of inputForm.groups) {
                 let fields: IField[] = []
-                group.fields.forEach((fld: InputField) => {
-                    fields.push({
-                        name: `f${fld.id}`,
-                        _type: fld.fieldType,
-                        value: data[0][`f${fld.id}`],
+                if (doc?.id) {
+                    let sql = 'SELECT id'
+                    group.fields.forEach((fld: InputField) => {
+                        switch (fld.fieldType) {
+                            case "DATE":
+                                sql = sql + `, to_char(f${fld.id}, 'DD.MM.YYYY') f${fld.id}`
+                                break
+                            case "TIME":
+                                sql = sql + `, to_char(f${fld.id}, 'HH:MI') f${fld.id}`
+                                break
+                            default:
+                                sql = sql + `, f${fld.id}`
+                        }
                     })
-                })
+                    sql = sql + ` FROM tbl_${group.id} WHERE sid = ${sid}`
+                    const data = await prisma.$queryRawUnsafe(`${sql}`)
+                    group.fields.forEach((fld: InputField) => {
+                        fields.push({
+                            name: `f${fld.id}`,
+                            _type: fld.fieldType,
+                            value: data && data.length && data[0][`f${fld.id}`] ? data[0][`f${fld.id}`] : '',
+                        })
+                    })
+                } else {
+                    group.fields.forEach((fld: InputField) => {
+                        fields.push({
+                            name: `f${fld.id}`,
+                            _type: fld.fieldType,
+                            value: '',
+                        })
+                    })
+                }
                 tables.push({
                     name: `tbl_${group.id}`,
                     fields: fields
@@ -46,7 +59,7 @@ export default function DocModule(prisma: PrismaClient) {
                 tables: tables
             } as IDocument
         },
-        async createDoc(userId: number, inputForm: any, values: { [k: string]: FormDataEntryValue }) {
+        async createDoc(userId: number | null, inputForm: any, values: { [k: string]: FormDataEntryValue }) {
             const seq = await prisma.$queryRaw`SELECT nextval('doc_id_seq')`
             const sid = Number(seq[0].nextval)
             let tr = []
@@ -88,16 +101,15 @@ export default function DocModule(prisma: PrismaClient) {
             }
             return prisma.$transaction(tr)
         },
-        updateDoc(userId: number, inputForm: any, values: { [k: string]: FormDataEntryValue }) {
-            const sid = Number(values.id)
+        updateDoc(docId: number | undefined, userId: number | null, inputForm: any, values: { [k: string]: FormDataEntryValue }) {
             let tr = []
             tr.push(
                 prisma.doc.update({
                     where: {
-                        id: sid
+                        id: docId
                     },
                     data: {
-                        isActive: Boolean(values.isActive),
+                        isActive: true,
                         dateStart: undefined,
                         dateEnd: undefined,
                         createdAt: undefined,
@@ -109,7 +121,7 @@ export default function DocModule(prisma: PrismaClient) {
             )
             for (const group of inputForm.groups) {
                 const tbl = `tbl_${group.id}`
-                let flds = `sid='${sid}'`
+                let flds = `lst = 0`
                 group.fields.forEach((fld: InputField) => {
                     const fieldName = `f${fld.id}`
                     const fieldVal: string = String(values[`f${fld.id}`])
@@ -125,7 +137,7 @@ export default function DocModule(prisma: PrismaClient) {
                             flds = flds + `, ${['', '-'].includes(fieldVal) ? `${fieldName} = null` : `${fieldName} = ${fieldVal}`}`
                     }
                 })
-                tr.push(prisma.$executeRawUnsafe(`UPDATE ${tbl} SET ${flds} WHERE sid = ${sid}`))
+                tr.push(prisma.$executeRawUnsafe(`UPDATE ${tbl} SET ${flds} WHERE sid = ${docId}`))
             }
             return prisma.$transaction(tr)
         },
@@ -163,6 +175,16 @@ export default function DocModule(prisma: PrismaClient) {
             }
             sf = select + from + where
             return prisma.$queryRawUnsafe(`${sf}`)
+        },
+        deleteDoc(sid: number) {
+            return prisma.doc.update({
+                where: {
+                    id: sid
+                },
+                data: {
+                    isActive: false
+                }
+            })
         },
     }
 }

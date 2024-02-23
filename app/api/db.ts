@@ -1,14 +1,38 @@
 import { Dictionary, InputForm, SearchForm, Group, InputField, SearchField } from "@prisma/client"
 import { PrismaClient } from "@prisma/client/extension";
+import { IDict } from "~/types/types";
 
 export default function DbModule(prisma: PrismaClient) {
     return {
-        getDictionaries() {
-            return prisma.dictionary.findMany({
+        async getDictionaries() {
+            let dicts: IDict[] = []
+            const dictionaries = await prisma.dictionary.findMany({
                 orderBy: {
                     title: 'asc'
                 }
             })
+            for (const dict of dictionaries) {
+                try {
+                    const [dic1, dic2] = await prisma.$transaction([
+                        prisma.$queryRawUnsafe(`SELECT * FROM dic_${dict.id}`),
+                        prisma.$queryRawUnsafe(`SELECT * FROM dic_${dict.id} WHERE is_enabled = true`)
+                    ])
+                    dicts.push({
+                        id: dict.id,
+                        title: dict.title,
+                        data_browse: dic1,
+                        data_edit: dic2
+                    })
+                } catch (e) {
+                    dicts.push({
+                        id: dict.id,
+                        title: dict.title,
+                        data_browse: [],
+                        data_edit: []
+                    })
+                }
+            }
+            return dicts
         },
         createEmptyDictionary(cnt: number) {
             return prisma.dictionary.create({

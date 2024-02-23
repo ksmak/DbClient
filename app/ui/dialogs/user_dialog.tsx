@@ -36,6 +36,13 @@ export default function UserDialog({ isNew, handleOpen, open, user, roles, depar
                     >
                         <input type="hidden" name="id" defaultValue={user?.id ? user.id : ''} />
                         <CustomInput
+                            id="user_is_active"
+                            type="checkbox"
+                            name="isActive"
+                            title="is Active: "
+                            defaultChecked={user?.isActive}
+                        />
+                        <CustomInput
                             id="user_login"
                             type="text"
                             name="login"

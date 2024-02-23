@@ -2,7 +2,7 @@ import MaterialTailwind from "@material-tailwind/react"
 const { Spinner, Alert } = MaterialTailwind
 import { InputForm, SearchForm, InputField, FieldType, Prisma } from "@prisma/client"
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
-import { Form, useActionData, useFetcher, useLoaderData } from "@remix-run/react"
+import { Form, useActionData, useFetcher, useLoaderData, useOutletContext } from "@remix-run/react"
 import invariant from "tiny-invariant"
 import DictionaryForm from "~/ui/forms/dict_form"
 import GroupForm from "~/ui/forms/group_form"
@@ -12,6 +12,7 @@ import DbStrucPanel from "~/ui/panels/db_struct"
 import api from "~/api"
 import { useEffect, useState } from "react"
 import CustomButton from "~/ui/elements/custom_button"
+import { ContexType } from "./dashboard"
 
 export async function loader({
     request,
@@ -23,9 +24,6 @@ export async function loader({
     const dictionaryId = url.searchParams.get("dictionaryId")
     const groupId = url.searchParams.get("groupId")
     const inputFieldId = url.searchParams.get("inputFieldId")
-    const inputForms = await api.db.getInputForms()
-    const searchForms = await api.db.getSearchForms()
-    const dictionaries = await api.db.getDictionaries()
     const groups = await api.db.getGroups(Number(inputFormId))
     const inputFields = await api.db.getInputFields()
     let inputForm, searchForm, dictionary, group, inputField
@@ -59,9 +57,6 @@ export async function loader({
         searchForm,
         group,
         inputField,
-        dictionaries,
-        inputForms,
-        searchForms,
         groups,
         inputFields,
     })
@@ -80,7 +75,7 @@ export async function action({
                 pos: Number(values.pos),
                 title: String(values.title),
             } as InputForm)
-            return redirect(`/db_struct?state=inputForm&inputFormId=${values.id}`)
+            return redirect(`/dashboard/db_struct?state=inputForm&inputFormId=${values.id}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -90,7 +85,7 @@ export async function action({
     if (_action === 'createEmptyInputForm') {
         try {
             const form = await api.db.createEmptyInputForm(Number(values.cnt))
-            return redirect(`/db_struct?state=inputForm&inputFormId=${form.id}`)
+            return redirect(`/dashboard/db_struct?state=inputForm&inputFormId=${form.id}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -100,7 +95,7 @@ export async function action({
     if (_action === 'deleteInputForm') {
         try {
             await api.db.deleteInputForm(Number(values.id))
-            return redirect(`/db_struct`)
+            return redirect(`/dashboard/db_struct`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -114,7 +109,7 @@ export async function action({
                 pos: Number(values.pos),
                 title: String(values.title),
             } as SearchForm)
-            return redirect(`/db_struct?state=searchForm&searchFormId=${values.id}`)
+            return redirect(`/dashboard/db_struct?state=searchForm&searchFormId=${values.id}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -124,7 +119,7 @@ export async function action({
     if (_action === 'createEmptySearchForm') {
         try {
             const form = await api.db.createEmptySearchForm(Number(values.cnt))
-            return redirect(`/db_struct?state=searchForm&searchFormId=${form.id}`)
+            return redirect(`/dashboard/db_struct?state=searchForm&searchFormId=${form.id}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -134,7 +129,7 @@ export async function action({
     if (_action === 'deleteSearchForm') {
         try {
             await api.db.deleteSearchForm(Number(values.id))
-            return redirect(`/db_struct`)
+            return redirect(`/dashboard/db_struct`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -147,7 +142,7 @@ export async function action({
                 id: Number(values.id),
                 title: String(values.title),
             })
-            return redirect(`/db_struct?state=dictionary&dictionaryId=${values.id}`)
+            return redirect(`/dashboard/db_struct?state=dictionary&dictionaryId=${values.id}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -157,7 +152,7 @@ export async function action({
     if (_action === 'createEmptyDictionary') {
         try {
             const dict = await api.db.createEmptyDictionary(Number(values.cnt))
-            return redirect(`/db_struct?state=dictionary&dictionaryId=${dict.id}`)
+            return redirect(`/dashboard/db_struct?state=dictionary&dictionaryId=${dict.id}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -167,7 +162,7 @@ export async function action({
     if (_action === 'deleteDictionary') {
         try {
             await api.db.deleteDictionary(Number(values.id))
-            return redirect(`/db_struct`)
+            return redirect(`/dashboard/db_struct`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -177,7 +172,7 @@ export async function action({
     if (_action === 'createEmptyGroup') {
         try {
             const group = await api.db.createEmptyGroup(Number(values.inputFormId), Number(values.cnt))
-            return redirect(`/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}`)
+            return redirect(`/dashboard/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -195,7 +190,7 @@ export async function action({
                     isMulty: Boolean(values.isMulty),
                 },
             )
-            return redirect(`/db_struct?state=group&inputFormId=${group.inputFormId}&groupId=${group.id}`)
+            return redirect(`/dashboard/db_struct?state=group&inputFormId=${group.inputFormId}&groupId=${group.id}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -205,7 +200,7 @@ export async function action({
     if (_action === 'deleteGroup') {
         try {
             await api.db.deleteGroup(Number(values.id))
-            return redirect('/db_struct')
+            return redirect('/dashboard/db_struct')
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -231,7 +226,7 @@ export async function action({
                 precision: Number(values.precision),
                 isDuplicate: Boolean(values.isDuplicate),
             })
-            return redirect(`/db_struct?state=group&inputFormId=${values.inputFormId}&groupId=${values.groupId}`)
+            return redirect(`/dashboard/db_struct?state=group&inputFormId=${values.inputFormId}&groupId=${values.groupId}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -274,7 +269,7 @@ export async function action({
                 title: String(values.title),
                 fieldId: Number(values.fieldId),
             })
-            return redirect(`/db_struct?state=searchForm&searchFormId=${values.searchFormId}`)
+            return redirect(`/dashboard/db_struct?state=searchForm&searchFormId=${values.searchFormId}`)
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -303,6 +298,7 @@ export async function action({
 }
 
 export default function DbStruct() {
+    const { dictionaries, inputForms, searchForms } = useOutletContext<ContexType>()
     const [open, setOpen] = useState(false)
     const {
         state,
@@ -310,9 +306,6 @@ export default function DbStruct() {
         inputForm,
         searchForm,
         group,
-        dictionaries,
-        inputForms,
-        searchForms,
         groups,
         inputFields
     } = useLoaderData<typeof loader>()

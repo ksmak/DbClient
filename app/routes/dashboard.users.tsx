@@ -37,6 +37,7 @@ export async function action({
     if (_action === 'createUser') {
         const createUser = {
             id: Number(values.id),
+            isActive: Boolean(values.isActive),
             login: String(values.login),
             password: String(values.password),
             firstName: String(values.firstName),
@@ -49,7 +50,7 @@ export async function action({
         }
         try {
             await api.users.createUser(createUser)
-            return redirect("/users")
+            return redirect("/dashboard/users")
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -61,6 +62,7 @@ export async function action({
         const userId = Number(values.id)
         const updateUser = {
             id: Number(values.id),
+            isActive: Boolean(values.isActive),
             login: String(values.login),
             password: String(values.password),
             firstName: String(values.firstName),
@@ -73,7 +75,7 @@ export async function action({
         }
         try {
             await api.users.updateUser(userId, updateUser)
-            return redirect("/users")
+            return redirect("/dashboard/users")
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -85,7 +87,7 @@ export async function action({
         const userId = Number(values.id)
         try {
             await api.users.deleteUser(userId)
-            return redirect("/users")
+            return redirect("/dashboard/users")
         } catch (e) {
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
@@ -121,7 +123,7 @@ export default function Users() {
         <div className="container mx-auto flex flex-col gap-3 h-screen pb-5">
             <UserDialog
                 isNew={isNew ? true : false}
-                handleOpen={() => navigate("/users")}
+                handleOpen={() => navigate("/dashboard/users")}
                 open={open}
                 user={user ? user as User : null}
                 roles={roles}
@@ -134,7 +136,7 @@ export default function Users() {
             >
                 <CustomButton
                     className="bg-blue-gray-500 hover:shadow-blue-gray-100"
-                    onClick={() => { navigate("/users?new=true") }}
+                    onClick={() => { navigate("/dashboard/users?new=true") }}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -150,6 +152,7 @@ export default function Users() {
                 >
                     <tr>
                         <th className="p-1 text-sm border border-blue-gray-700">#</th>
+                        <th className="p-1 text-sm border border-blue-gray-700">IsActive</th>
                         <th className="p-1 text-sm border border-blue-gray-700">Login</th>
                         <th className="p-1 text-sm border border-blue-gray-700">First Name</th>
                         <th className="p-1 text-sm border border-blue-gray-700">Last Name</th>
@@ -165,30 +168,35 @@ export default function Users() {
                     {users.map((user: User, index: number) => (
                         <tr
                             key={user.id}
-                        // onClick={() => navigate(`/users?userId=${user.id}`)}
+                        // onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
                         >
                             <td className="p-1 text-sm border border-blue-gray-700">{index + 1}</td>
                             <td
                                 className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/users?userId=${user.id}`)}
+                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}>
+                                {user.isActive ? 'Yes' : 'No'}
+                            </td>
+                            <td
+                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
+                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
                             >
                                 {user.login}
                             </td>
                             <td
                                 className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/users?userId=${user.id}`)}
+                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
                             >
                                 {user.firstName}
                             </td>
                             <td
                                 className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/users?userId=${user.id}`)}
+                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
                             >
                                 {user.lastName}
                             </td>
                             <td
                                 className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/users?userId=${user.id}`)}
+                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
                             >
                                 {user.middleName}
                             </td>

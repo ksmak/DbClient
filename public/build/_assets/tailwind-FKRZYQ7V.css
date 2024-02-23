@@ -2197,6 +2197,9 @@ video {
   --tw-text-opacity: 1;
   color: rgb(245 127 23 / var(--tw-text-opacity));
 }
+.underline {
+  text-decoration-line: underline;
+}
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -4775,4 +4778,4 @@ video {
 .\[\&\:\:-webkit-slider-thumb\]\:\[-webkit-appearance\:none\]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-/*# sourceMappingURL=/build/_assets/tailwind-YQX5YCIJ.css.map */
+/*# sourceMappingURL=/build/_assets/tailwind-XQMHVYRE.css.map */

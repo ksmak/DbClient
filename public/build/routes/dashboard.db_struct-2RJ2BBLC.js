@@ -13,11 +13,13 @@ import {
   useActionData,
   useFetcher,
   useLoaderData,
-  useNavigate
+  useNavigate,
+  useOutletContext
 } from "/build/_shared/chunk-TJ4YKIVD.js";
 import {
   createHotContext
 } from "/build/_shared/chunk-Q6LMBPEP.js";
+import "/build/_shared/chunk-JR22VO6P.js";
 import "/build/_shared/chunk-WEAPBHQG.js";
 import {
   require_jsx_dev_runtime
@@ -25,12 +27,11 @@ import {
 import {
   require_react
 } from "/build/_shared/chunk-CJ4MY3PQ.js";
-import "/build/_shared/chunk-JR22VO6P.js";
 import {
   __toESM
 } from "/build/_shared/chunk-PZDJHGND.js";
 
-// app/routes/db_struct._index.tsx
+// app/routes/dashboard.db_struct.tsx
 var import_react10 = __toESM(require_react2(), 1);
 var import_node = __toESM(require_node(), 1);
 
@@ -1260,7 +1261,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/ui/panels/db_struct.tsx"
   );
-  import.meta.hot.lastModified = "1708509117242.5852";
+  import.meta.hot.lastModified = "1708671185681.6826";
 }
 function DbStrucPanel({
   state,
@@ -1283,7 +1284,7 @@ function DbStrucPanel({
         lineNumber: 34,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/db_struct?state=inputForm&inputFormId=0`, children: "Input Forms" }, void 0, false, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/dashboard/db_struct?state=inputForm&inputFormId=0`, children: "Input Forms" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
         lineNumber: 37,
         columnNumber: 17
@@ -1294,7 +1295,7 @@ function DbStrucPanel({
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("ul", { children: inputForms.map((form) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/db_struct?state=inputForm&inputFormId=${form.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "inputForm" && form.id === inputFormId ? "bg-blue-gray-200" : ""].join(" "), children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/dashboard/db_struct?state=inputForm&inputFormId=${form.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "inputForm" && form.id === inputFormId ? "bg-blue-gray-200" : ""].join(" "), children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, false, {
           fileName: "app/ui/panels/db_struct.tsx",
           lineNumber: 46,
@@ -1316,7 +1317,7 @@ function DbStrucPanel({
         lineNumber: 43,
         columnNumber: 25
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("ul", { children: form.groups.map((gr) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/db_struct?state=group&inputFormId=${gr.inputFormId}&groupId=${gr.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("li", { className: ["pl-8 flex items-center gap-1 hover:cursor-pointer", state === "group" && gr.id === groupId ? "bg-blue-gray-200" : ""].join(" "), children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("ul", { children: form.groups.map((gr) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/dashboard/db_struct?state=group&inputFormId=${gr.inputFormId}&groupId=${gr.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("li", { className: ["pl-8 flex items-center gap-1 hover:cursor-pointer", state === "group" && gr.id === groupId ? "bg-blue-gray-200" : ""].join(" "), children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, false, {
           fileName: "app/ui/panels/db_struct.tsx",
           lineNumber: 55,
@@ -1361,7 +1362,7 @@ function DbStrucPanel({
         lineNumber: 64,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/db_struct?state=searchForm&searchFormId=0`, children: "Search Forms" }, void 0, false, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/dashboard/db_struct?state=searchForm&searchFormId=0`, children: "Search Forms" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
         lineNumber: 67,
         columnNumber: 17
@@ -1371,7 +1372,7 @@ function DbStrucPanel({
       lineNumber: 63,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("ul", { children: searchForms.map((form) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/db_struct?state=searchForm&searchFormId=${form.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "searchForm" && form.id === searchFormId ? "bg-blue-gray-200" : ""].join(" "), children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("ul", { children: searchForms.map((form) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/dashboard/db_struct?state=searchForm&searchFormId=${form.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "searchForm" && form.id === searchFormId ? "bg-blue-gray-200" : ""].join(" "), children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
         lineNumber: 75,
@@ -1407,7 +1408,7 @@ function DbStrucPanel({
         lineNumber: 82,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/db_struct?state=dictionary&dictionaryId=0`, children: "Dictionaries" }, void 0, false, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/dashboard/db_struct?state=dictionary&dictionaryId=0`, children: "Dictionaries" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
         lineNumber: 85,
         columnNumber: 17
@@ -1417,7 +1418,7 @@ function DbStrucPanel({
       lineNumber: 81,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("ul", { children: dictionaries.map((dict) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/db_struct?state=dictionary&dictionaryId=${dict.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "dictionary" && dict.id === dictionaryId ? "bg-blue-gray-200" : ""].join(" "), children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("ul", { children: dictionaries.map((dict) => /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: `/dashboard/db_struct?state=dictionary&dictionaryId=${dict.id}`, children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("li", { className: ["pl-4 flex items-center gap-1 hover:cursor-pointer", state === "dictionary" && dict.id === dictionaryId ? "bg-blue-gray-200" : ""].join(" "), children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, false, {
         fileName: "app/ui/panels/db_struct.tsx",
         lineNumber: 93,
@@ -1453,7 +1454,7 @@ $RefreshReg$(_c5, "DbStrucPanel");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 
-// app/routes/db_struct._index.tsx
+// app/routes/dashboard.db_struct.tsx
 var import_react12 = __toESM(require_react(), 1);
 var import_jsx_dev_runtime6 = __toESM(require_jsx_dev_runtime(), 1);
 if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
@@ -1462,7 +1463,7 @@ if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   prevRefreshReg = window.$RefreshReg$;
   prevRefreshSig = window.$RefreshSig$;
   window.$RefreshReg$ = (type, id) => {
-    window.$RefreshRuntime$.register(type, '"app/routes/db_struct._index.tsx"' + id);
+    window.$RefreshRuntime$.register(type, '"app/routes/dashboard.db_struct.tsx"' + id);
   };
   window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
 }
@@ -1472,9 +1473,9 @@ var _s4 = $RefreshSig$();
 if (import.meta) {
   import.meta.hot = createHotContext(
     //@ts-expect-error
-    "app/routes/db_struct._index.tsx"
+    "app/routes/dashboard.db_struct.tsx"
   );
-  import.meta.hot.lastModified = "1708569373037.4004";
+  import.meta.hot.lastModified = "1708673101273.735";
 }
 var {
   Spinner: Spinner5,
@@ -1482,6 +1483,11 @@ var {
 } = import_react10.default;
 function DbStruct() {
   _s4();
+  const {
+    dictionaries,
+    inputForms,
+    searchForms
+  } = useOutletContext();
   const [open, setOpen] = (0, import_react12.useState)(false);
   const {
     state,
@@ -1489,9 +1495,6 @@ function DbStruct() {
     inputForm,
     searchForm,
     group,
-    dictionaries,
-    inputForms,
-    searchForms,
     groups,
     inputFields
   } = useLoaderData();
@@ -1511,179 +1514,179 @@ function DbStruct() {
   }, [data]);
   return /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "mx-4 flex flex-col gap-3 h-screen pb-5", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("h1", { className: "self-center text-amber-700 text-3xl font-bold mt-4", children: "Db Struct" }, void 0, false, {
-      fileName: "app/routes/db_struct._index.tsx",
-      lineNumber: 365,
+      fileName: "app/routes/dashboard.db_struct.tsx",
+      lineNumber: 361,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Alert, { className: "text-white bg-red-500", open, onClose: () => setOpen(false), children: data?.errors ? data.errors : "" }, void 0, false, {
-      fileName: "app/routes/db_struct._index.tsx",
-      lineNumber: 366,
+      fileName: "app/routes/dashboard.db_struct.tsx",
+      lineNumber: 362,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "flex justify-end items-center gap-3 h-14", children: [
       state === "dictionary" ? /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Form, { method: "post", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("input", { type: "hidden", name: "cnt", defaultValue: dictionaries.length + 1 }, void 0, false, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 371,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 367,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", type: "submit", name: "_action", value: "createEmptyDictionary", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
-            fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 374,
+            fileName: "app/routes/dashboard.db_struct.tsx",
+            lineNumber: 370,
             columnNumber: 33
           }, this) }, void 0, false, {
-            fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 373,
+            fileName: "app/routes/dashboard.db_struct.tsx",
+            lineNumber: 369,
             columnNumber: 29
           }, this),
           "Add Dictionary"
         ] }, void 0, true, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 372,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 368,
           columnNumber: 25
         }, this)
       ] }, void 0, true, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 370,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 366,
         columnNumber: 43
       }, this) : state === "inputForm" ? /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Form, { method: "post", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("input", { type: "hidden", name: "cnt", defaultValue: inputForms.length + 1 }, void 0, false, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 379,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 375,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", type: "submit", name: "_action", value: "createEmptyInputForm", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
-            fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 382,
+            fileName: "app/routes/dashboard.db_struct.tsx",
+            lineNumber: 378,
             columnNumber: 37
           }, this) }, void 0, false, {
-            fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 381,
+            fileName: "app/routes/dashboard.db_struct.tsx",
+            lineNumber: 377,
             columnNumber: 33
           }, this),
           "Add InputForm"
         ] }, void 0, true, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 380,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 376,
           columnNumber: 29
         }, this)
       ] }, void 0, true, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 378,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 374,
         columnNumber: 55
       }, this) : state === "searchForm" ? /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Form, { method: "post", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("input", { type: "hidden", name: "cnt", defaultValue: searchForms.length + 1 }, void 0, false, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 387,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 383,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", type: "submit", name: "_action", value: "createEmptySearchForm", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
-            fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 390,
+            fileName: "app/routes/dashboard.db_struct.tsx",
+            lineNumber: 386,
             columnNumber: 41
           }, this) }, void 0, false, {
-            fileName: "app/routes/db_struct._index.tsx",
-            lineNumber: 389,
+            fileName: "app/routes/dashboard.db_struct.tsx",
+            lineNumber: 385,
             columnNumber: 37
           }, this),
           "Add SearchForm"
         ] }, void 0, true, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 388,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 384,
           columnNumber: 33
         }, this)
       ] }, void 0, true, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 386,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 382,
         columnNumber: 60
       }, this) : null,
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Form, { method: "post", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(CustomButton, { className: "bg-blue-500 hover:shadow-blue-100", type: "submit", name: "_action", value: "generateStructDb", disabled: isRestruct, onClick: handleRestruct, children: isRestruct ? /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(Spinner5, { className: "w-4 h-4" }, void 0, false, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 398,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 394,
           columnNumber: 33
         }, this),
         "Restructuring..."
       ] }, void 0, true, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 397,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 393,
         columnNumber: 39
       }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(import_jsx_dev_runtime6.Fragment, { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" }, void 0, false, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 402,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 398,
           columnNumber: 37
         }, this) }, void 0, false, {
-          fileName: "app/routes/db_struct._index.tsx",
-          lineNumber: 401,
+          fileName: "app/routes/dashboard.db_struct.tsx",
+          lineNumber: 397,
           columnNumber: 33
         }, this),
         "Restruct Database"
       ] }, void 0, true, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 400,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 396,
         columnNumber: 35
       }, this) }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 396,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 392,
         columnNumber: 21
       }, this) }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 395,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 391,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
-      fileName: "app/routes/db_struct._index.tsx",
-      lineNumber: 369,
+      fileName: "app/routes/dashboard.db_struct.tsx",
+      lineNumber: 365,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "flex flex-row h-full w-full", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "bg-white p-4 mr-5 w-1/3 border shadow-blue-gray-700 shadow-md overflow-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(DbStrucPanel, { state, inputForms, searchForms, dictionaries, groups, inputFormId: inputForm?.id, searchFormId: searchForm?.id, dictionaryId: dictionary?.id, groupId: group?.id }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 411,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 407,
         columnNumber: 21
       }, this) }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 410,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 406,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)("div", { className: "bg-white w-full border p-4 shadow-blue-gray-700 shadow-md overflow-auto", children: state === "inputForm" && inputForm ? /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(InputFormForm, { inputForm, groups }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 414,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 410,
         columnNumber: 59
       }, this) : state === "searchForm" && searchForm ? /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(SearchFormForm, { searchForm, inputFields }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 414,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 410,
         columnNumber: 156
       }, this) : state === "dictionary" && dictionary ? /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(DictionaryForm, { dictionary }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 414,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 410,
         columnNumber: 266
       }, this) : state === "group" && group ? /* @__PURE__ */ (0, import_jsx_dev_runtime6.jsxDEV)(GroupForm, { group, dicts: dictionaries }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 414,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 410,
         columnNumber: 340
       }, this) : null }, void 0, false, {
-        fileName: "app/routes/db_struct._index.tsx",
-        lineNumber: 413,
+        fileName: "app/routes/dashboard.db_struct.tsx",
+        lineNumber: 409,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
-      fileName: "app/routes/db_struct._index.tsx",
-      lineNumber: 409,
+      fileName: "app/routes/dashboard.db_struct.tsx",
+      lineNumber: 405,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
-    fileName: "app/routes/db_struct._index.tsx",
-    lineNumber: 364,
+    fileName: "app/routes/dashboard.db_struct.tsx",
+    lineNumber: 360,
     columnNumber: 10
   }, this);
 }
-_s4(DbStruct, "zq16SIMyhwA8BaNRC+TAYWmviXU=", false, function() {
-  return [useLoaderData, useActionData, useFetcher];
+_s4(DbStruct, "2sQJUgaajDkOgkoW76YT9wq4F6s=", false, function() {
+  return [useOutletContext, useLoaderData, useActionData, useFetcher];
 });
 _c6 = DbStruct;
 var _c6;
@@ -1693,4 +1696,4 @@ window.$RefreshSig$ = prevRefreshSig;
 export {
   DbStruct as default
 };
-//# sourceMappingURL=/build/routes/db_struct._index-3CDBNUDH.js.map
+//# sourceMappingURL=/build/routes/dashboard.db_struct-2RJ2BBLC.js.map

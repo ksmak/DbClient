@@ -32,7 +32,7 @@ export default function DbStrucPanel({
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                 </svg>
                 <Link
-                    to={`/db_struct?state=inputForm&inputFormId=0`}
+                    to={`/dashboard/db_struct?state=inputForm&inputFormId=0`}
                 >
                     Input Forms
                 </Link>
@@ -41,7 +41,7 @@ export default function DbStrucPanel({
                 {inputForms.map((form: InputForm & { groups: Group[] }) => (
                     <div key={form.id}>
                         <Link
-                            to={`/db_struct?state=inputForm&inputFormId=${form.id}`}
+                            to={`/dashboard/db_struct?state=inputForm&inputFormId=${form.id}`}
                         >
                             <li
                                 className={["pl-4 flex items-center gap-1 hover:cursor-pointer",
@@ -57,7 +57,7 @@ export default function DbStrucPanel({
                             {form.groups.map((gr: Group) => (
                                 <Link
                                     key={gr.id}
-                                    to={`/db_struct?state=group&inputFormId=${gr.inputFormId}&groupId=${gr.id}`}
+                                    to={`/dashboard/db_struct?state=group&inputFormId=${gr.inputFormId}&groupId=${gr.id}`}
                                 >
                                     <li
                                         className={["pl-8 flex items-center gap-1 hover:cursor-pointer",
@@ -82,7 +82,7 @@ export default function DbStrucPanel({
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                 </svg>
                 <Link
-                    to={`/db_struct?state=searchForm&searchFormId=0`}
+                    to={`/dashboard/db_struct?state=searchForm&searchFormId=0`}
                 >
                     Search Forms
                 </Link>
@@ -91,7 +91,7 @@ export default function DbStrucPanel({
                 {searchForms.map((form: SearchForm) => (
                     <Link
                         key={form.id}
-                        to={`/db_struct?state=searchForm&searchFormId=${form.id}`}
+                        to={`/dashboard/db_struct?state=searchForm&searchFormId=${form.id}`}
                     >
                         <li
                             className={["pl-4 flex items-center gap-1 hover:cursor-pointer",
@@ -113,7 +113,7 @@ export default function DbStrucPanel({
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
                 </svg>
                 <Link
-                    to={`/db_struct?state=dictionary&dictionaryId=0`}
+                    to={`/dashboard/db_struct?state=dictionary&dictionaryId=0`}
                 >
                     Dictionaries
                 </Link>
@@ -122,7 +122,7 @@ export default function DbStrucPanel({
                 {dictionaries.map((dict: Dictionary) => (
                     <Link
                         key={dict.id}
-                        to={`/db_struct?state=dictionary&dictionaryId=${dict.id}`}
+                        to={`/dashboard/db_struct?state=dictionary&dictionaryId=${dict.id}`}
                     >
                         <li
                             className={["pl-4 flex items-center gap-1 hover:cursor-pointer",
