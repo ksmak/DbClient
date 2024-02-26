@@ -9,6 +9,8 @@ export type ContexType = {
     searchForms?: any,
     docs: { formId?: number, ids?: number[] },
     setDocs: Dispatch<SetStateAction<{ formId?: number, ids?: number[] }>>,
+    current: number,
+    setCurrent: Dispatch<SetStateAction<number>>,
 }
 
 export async function loader() {
@@ -24,11 +26,14 @@ export async function loader() {
 
 export default function dashboard() {
     const [docs, setDocs] = useState<{ formId?: number, ids?: number[] }>({})
+    const [current, setCurrent] = useState(0)
     const data = useLoaderData<typeof loader>()
     const context: ContexType = {
         ...data,
         docs,
         setDocs,
+        current,
+        setCurrent
     }
 
 
@@ -36,7 +41,6 @@ export default function dashboard() {
         <div className="container mx-auto flex flex-col gap-3 h-screen pb-5">
 
             <h1 className="text-3xl text-amber-700 font-bold">DbClient</h1>
-            <p>{docs.ids?.map((id) => (<Link className="text-blue-500 underline hover:cursor-pointer p-1" key={id} to={`/dashboard/enter_data/${docs.formId}?docId=${id}`}>{id}</Link>))}</p>
             <ul className="text-blue-500 text-bold">
                 <li>
                     Enter Data

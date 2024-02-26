@@ -2,14 +2,14 @@ import MaterialTailwind from "@material-tailwind/react"
 const { Spinner, Alert, Dialog, Card, CardBody, CardFooter } = MaterialTailwind
 import { InputField, Prisma } from "@prisma/client"
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
-import { Form, useActionData, useFetcher, useLoaderData, useLocation, useNavigate, useNavigation, useOutletContext } from "@remix-run/react"
+import { Form, useActionData, useFetcher, useLoaderData, useLocation, useNavigate, useNavigation, useOutletContext, useSubmit } from "@remix-run/react"
 import { useEffect, useRef, useState } from "react"
 import api from '~/api'
 import CustomButton from "~/ui/elements/custom_button"
-import { IDict, IDocument, IField, ITable } from "~/types/types"
-import CustomInput from "~/ui/elements/custom_input"
-import CustomSelect from "~/ui/elements/custom_select"
 import { ContexType } from "./dashboard"
+import SingleGroup from "~/widgets/single_group"
+import MultyGroup from "~/widgets/multy_group"
+import RecNavigator from "~/widgets/rec_navigator"
 
 export async function loader({
     request,
@@ -19,7 +19,7 @@ export async function loader({
     const docId = url.searchParams.get("docId")
     const state = url.searchParams.get("state")
     let inputForm: any | undefined
-    let doc: IDocument
+    let doc: any
     inputForm = await api.db.getInputForm(Number(params.formId))
     doc = await api.doc.getDoc(docId ? Number(docId) : null, inputForm)
     return json({ inputForm, doc, state })
@@ -30,7 +30,8 @@ export async function action({
 }: ActionFunctionArgs) {
     let ok: boolean = false
     let errors: string = ''
-    let docs: { formId?: number, ids?: number[] } = {}
+    let docs: { formId?: number, ids?: number[] } | null = null
+    let deletedDocId: number | null = null
     const formData = await request.formData()
     const {
         _action,
@@ -52,16 +53,18 @@ export async function action({
             return redirect(`/dashboard/enter_data/${_inputFormId}?state=search`)
         }
         else if (_action === 'saveDocument') {
+            let jsonData = JSON.parse(String(values.json))
             if (_id) {
-                await api.doc.updateDoc(Number(_id), Number(_user), inputForm, values)
+                await api.doc.updateDoc(Number(_user), inputForm, jsonData)
                 return redirect(`/dashboard/enter_data/${_inputFormId}?docId=${_id}`)
             } else {
-                await api.doc.createDoc(Number(_user), inputForm, values)
+                await api.doc.createDoc(Number(_user), inputForm, jsonData)
                 return redirect(`/dashboard/enter_data/${_inputFormId}?`)
             }
         }
         else if (_action === 'findDocument') {
-            const results: { id: number }[] | [] = await api.doc.findDoc(inputForm, values)
+            let jsonData = JSON.parse(String(values.json))
+            const results: { id: number }[] | [] = await api.doc.findDoc(inputForm, jsonData)
             if (results.length > 100) {
                 errors = "Find records more 100"
             } else {
@@ -82,7 +85,8 @@ export async function action({
         else if (_action === 'deleteDocument') {
             if (_id) {
                 await api.doc.deleteDoc(Number(_id))
-                return redirect(`/dashboard/enter_data/${_inputFormId}`)
+                deletedDocId = (Number(_id))
+                ok = true
             }
         }
     } catch (e) {
@@ -93,22 +97,53 @@ export async function action({
         }
     }
 
-    return json({ errors, docs, ok })
+    return json({ errors, docs, deletedDocId, ok })
 }
 
 export default function InputForms() {
+    const { dictionaries, docs, setDocs, current, setCurrent } = useOutletContext<ContexType>()
+    const { inputForm, doc, state } = useLoaderData<typeof loader>()
+    const [document, setDocument] = useState<typeof doc>(doc)
     const location = useLocation()
     const navigation = useNavigation()
     const navigate = useNavigate()
     const formRef = useRef<HTMLFormElement>(null)
-    const { dictionaries, docs, setDocs } = useOutletContext<ContexType>()
     const userId = 19;
     const [open, setOpen] = useState(false)
-    const { inputForm, doc, state } = useLoaderData<typeof loader>()
     const data = useActionData<typeof action>()
     const [showFind, setShowFind] = useState(false)
     const fetcher = useFetcher()
     const isDeleting = fetcher.state !== "idle"
+    const submit = useSubmit()
+
+    useEffect(() => {
+        setDocument(doc)
+        console.log("useEffect")
+    }, [doc])
+
+    const handleSave = () => {
+        submit({
+            _action: "saveDocument",
+            _user: userId ? userId : '',
+            _inputFormId: inputForm.id ? inputForm.id : '',
+            _id: document.id ? document.id : '',
+            json: JSON.stringify(document)
+        }, {
+            method: "post",
+        })
+    }
+
+    const handleFind = () => {
+        submit({
+            _action: "findDocument",
+            _user: userId ? userId : '',
+            _inputFormId: inputForm.id ? inputForm.id : '',
+            _id: document.id ? document.id : '',
+            json: JSON.stringify(document)
+        }, {
+            method: "post",
+        })
+    }
 
     const handleOpenInputForm = () => {
         setShowFind(false)
@@ -139,11 +174,13 @@ export default function InputForms() {
         if (navigation.state === "idle" && data?.ok) {
             formRef.current?.reset()
         }
+        if (data?.deletedDocId && data?.ok) {
+            setDocs(prev => ({ formId: prev.formId, ids: prev.ids?.filter(item => item !== data.deletedDocId) }))
+        }
     }, [data])
 
     return (
         <div className="container mx-auto flex flex-col gap-3 h-screen pb-5">
-            {state} {data?.ok}
             <Dialog
                 placeholder=""
                 size="sm"
@@ -169,6 +206,7 @@ export default function InputForms() {
             <Alert className="text-white bg-red-500" open={open} onClose={() => setOpen(false)}>
                 {data?.errors ? data.errors : ""}
             </Alert>
+            <RecNavigator docs={docs} current={current} setCurrent={setCurrent} />
             <div
                 className="flex items-center gap-3"
             >
@@ -209,10 +247,11 @@ export default function InputForms() {
                 {state === "search"
                     ? <CustomButton
                         className="bg-blue-gray-500 hover:shadow-blue-gray-100"
-                        form="documentForm"
-                        type="submit"
-                        name="_action"
-                        value="findDocument"
+                        // form="documentForm"
+                        // type="submit"
+                        // name="_action"
+                        // value="findDocument"
+                        onClick={() => handleFind()}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -241,10 +280,11 @@ export default function InputForms() {
                 {state === 'edit'
                     ? <CustomButton
                         className="bg-blue-gray-500 hover:shadow-blue-gray-100"
-                        form="documentForm"
-                        type="submit"
-                        name="_action"
-                        value="saveDocument"
+                        // form="documentForm"
+                        // type="submit"
+                        // name="_action"
+                        // value="saveDocument"
+                        onClick={() => handleSave()}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
@@ -252,7 +292,7 @@ export default function InputForms() {
                         Save
                     </CustomButton>
                     : null}
-                {state === 'edit'
+                {state === 'edit' || state === 'search'
                     ? <Form method="post">
                         <input type="hidden" name="_user" value={userId} />
                         <input type="hidden" name="_inputFormId" value={inputForm.id} />
@@ -312,153 +352,21 @@ export default function InputForms() {
                     {inputForm?.groups && inputForm.groups.map((group: any) => (
                         <div key={group.id} className="mb-2">
                             <h2 className="col-span-3 bg-orange-700 text-white font-bold text-sm p-1 pl-4">{group.title}</h2>
-                            <div className="border p-1 grid grid-cols-3 gap-1">
-                                {group?.fields && group.fields.map((fld: InputField) => {
-                                    const tableName = `tbl_${fld.groupId}`
-                                    const fieldName = `f${fld.id}`
-                                    let defVal = doc.tables.find(tbl => tbl.name === tableName)?.fields.find(fld => fld.name === fieldName)?.value
-                                    defVal = defVal ? defVal : ''
-                                    const cls = `col-span-${fld.colSpan} col-start-${fld.colStart}`
-                                    switch (fld.fieldType) {
-                                        case "TEXT":
-                                            return (
-                                                <CustomInput
-                                                    key={fld.id}
-                                                    className={cls}
-                                                    id={fieldName}
-                                                    title={fld.title}
-                                                    type="text"
-                                                    name={fieldName}
-                                                    defaultValue={defVal}
-                                                    required={fld.isRequire && state === 'edit'}
-                                                    disabled={!fld.isEnable || !(['create', 'edit', 'search', 'find'].includes(String(state)))}
-                                                    size={fld.len ? fld.len : 30}
-                                                    maxLength={fld.len ? fld.len : 30}
-                                                />
-                                            )
-                                        case "CYRILLIC":
-                                            return (
-                                                <CustomInput
-                                                    key={fld.id}
-                                                    className={cls}
-                                                    id={fieldName}
-                                                    title={fld.title}
-                                                    type="text"
-                                                    name={fieldName}
-                                                    defaultValue={defVal}
-                                                    required={fld.isRequire && state === 'edit'}
-                                                    disabled={!fld.isEnable || !(['create', 'edit', 'search', 'find'].includes(String(state)))}
-                                                    size={fld.len ? fld.len : 30}
-                                                    maxLength={fld.len ? fld.len : 30}
-                                                />
-                                            )
-                                        case "INTEGER":
-                                            return (
-                                                <CustomInput
-                                                    key={fld.id}
-                                                    className={cls}
-                                                    id={fieldName}
-                                                    title={fld.title}
-                                                    type="number"
-                                                    name={fieldName}
-                                                    defaultValue={defVal}
-                                                    required={fld.isRequire && state === 'edit'}
-                                                    disabled={!fld.isEnable || !(['create', 'edit', 'search', 'find'].includes(String(state)))}
-                                                    size={fld.len ? fld.len : 30}
-                                                    maxLength={fld.len ? fld.len : 30}
-                                                />
-                                            )
-                                        case "NUMERIC":
-                                            return (
-                                                <CustomInput
-                                                    key={fld.id}
-                                                    className={cls}
-                                                    id={fieldName}
-                                                    title={fld.title}
-                                                    type="number"
-                                                    step="0.01"
-                                                    name={fieldName}
-                                                    defaultValue={defVal}
-                                                    required={fld.isRequire && state === 'edit'}
-                                                    disabled={!fld.isEnable || !(['create', 'edit', 'search', 'find'].includes(String(state)))}
-                                                    size={fld.len ? fld.len : 30}
-                                                    maxLength={fld.len ? fld.len : 30}
-                                                />
-                                            )
-                                        case "DICT":
-                                            const dic = dictionaries.find((item: IDict) => item.id === fld.dicId)
-                                            return (
-                                                <CustomSelect
-                                                    key={fld.id}
-                                                    className={cls}
-                                                    id={fieldName}
-                                                    title={fld.title}
-                                                    name={fieldName}
-                                                    defaultValue={defVal}
-                                                    required={fld.isRequire && state === 'edit'}
-                                                    disabled={!fld.isEnable || !(['create', 'edit', 'search', 'find'].includes(String(state)))}
-                                                >
-                                                    <option>-</option>
-                                                    {['create', 'edit', 'search', 'find'].includes(String(state))
-                                                        ? dic?.data_edit.map((item: any) => (
-                                                            <option key={item.id} value={item.id}>{item.title}</option>
-                                                        ))
-                                                        : dic?.data_browse.map((item: any) => (
-                                                            <option key={item.id} value={item.id}>{item.title}</option>
-                                                        ))}
-                                                </CustomSelect>
-                                            )
-                                        case "DATE":
-                                            return (
-                                                <CustomInput
-                                                    key={fld.id}
-                                                    className={cls}
-                                                    id={fieldName}
-                                                    title={fld.title}
-                                                    type="date"
-                                                    name={fieldName}
-                                                    defaultValue={defVal}
-                                                    required={fld.isRequire && state === 'edit'}
-                                                    disabled={!fld.isEnable || !(['create', 'edit', 'search', 'find'].includes(String(state)))}
-                                                    size={fld.len ? fld.len : 30}
-                                                    maxLength={fld.len ? fld.len : 30}
-                                                />
-                                            )
-                                        case "TIME":
-                                            return (
-                                                <CustomInput
-                                                    key={fld.id}
-                                                    className={cls}
-                                                    id={fieldName}
-                                                    title={fld.title}
-                                                    type="time"
-                                                    name={fieldName}
-                                                    defaultValue={defVal}
-                                                    required={fld.isRequire && state === 'edit'}
-                                                    disabled={!fld.isEnable || !(['create', 'edit', 'search', 'find'].includes(String(state)))}
-                                                    size={fld.len ? fld.len : 30}
-                                                    maxLength={fld.len ? fld.len : 30}
-                                                />
-                                            )
-                                        // case "FILE":
-                                        //     return (
-                                        //         <CustomInput
-                                        //             key={fld.id}
-                                        //             className={cls}
-                                        //             id={fieldName}
-                                        //             title={fld.title}
-                                        //             type="file"
-                                        //             name={fieldName}
-                                        //             defaultValue={defVal}
-                                        //             required={fld.isRequire && state === 'edit'}
-                                        //             disabled={!fld.isEnable || !(['create', 'edit', 'search', 'find'].includes(String(state)))}
-                                        //             size={fld.len ? fld.len : 30}
-                                        //             maxLength={fld.len ? fld.len : 30}
-                                        //         />
-                                        //     )
-                                    }
-                                })}
-                            </div>
+                            {!group.isMulty
+                                ? <SingleGroup
+                                    state={state}
+                                    dictionaries={dictionaries}
+                                    group={group}
+                                    doc={document}
+                                    setDoc={setDocument}
+                                />
+                                : <MultyGroup
+                                    state={state}
+                                    dictionaries={dictionaries}
+                                    group={group}
+                                    doc={document}
+                                    setDoc={setDocument}
+                                />}
                         </div>
                     ))}
                 </Form>

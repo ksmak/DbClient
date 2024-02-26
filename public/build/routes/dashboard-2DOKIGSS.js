@@ -26,29 +26,23 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/dashboard.tsx"
   );
-  import.meta.hot.lastModified = "1708692280288.233";
+  import.meta.hot.lastModified = "1708943983734.9038";
 }
 function dashboard() {
   const [docs, setDocs] = (0, import_react2.useState)({});
+  const [current, setCurrent] = (0, import_react2.useState)(0);
   const data = useLoaderData();
   const context = {
     ...data,
     docs,
-    setDocs
+    setDocs,
+    current,
+    setCurrent
   };
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "container mx-auto flex flex-col gap-3 h-screen pb-5", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h1", { className: "text-3xl text-amber-700 font-bold", children: "DbClient" }, void 0, false, {
       fileName: "app/routes/dashboard.tsx",
-      lineNumber: 49,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { children: docs.ids?.map((id) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { className: "text-blue-500 underline hover:cursor-pointer p-1", to: `/dashboard/enter_data/${docs.formId}?docId=${id}`, children: id }, id, false, {
-      fileName: "app/routes/dashboard.tsx",
-      lineNumber: 50,
-      columnNumber: 40
-    }, this)) }, void 0, false, {
-      fileName: "app/routes/dashboard.tsx",
-      lineNumber: 50,
+      lineNumber: 54,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("ul", { className: "text-blue-500 text-bold", children: [
@@ -59,20 +53,20 @@ function dashboard() {
           item.title
         ] }, void 0, true, {
           fileName: "app/routes/dashboard.tsx",
-          lineNumber: 56,
+          lineNumber: 60,
           columnNumber: 47
         }, this) }, item.id, false, {
           fileName: "app/routes/dashboard.tsx",
-          lineNumber: 56,
+          lineNumber: 60,
           columnNumber: 29
         }, this)) }, void 0, false, {
           fileName: "app/routes/dashboard.tsx",
-          lineNumber: 54,
+          lineNumber: 58,
           columnNumber: 21
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/dashboard.tsx",
-        lineNumber: 52,
+        lineNumber: 56,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("li", { children: [
@@ -82,20 +76,20 @@ function dashboard() {
           item.title
         ] }, void 0, true, {
           fileName: "app/routes/dashboard.tsx",
-          lineNumber: 65,
+          lineNumber: 69,
           columnNumber: 47
         }, this) }, item.id, false, {
           fileName: "app/routes/dashboard.tsx",
-          lineNumber: 65,
+          lineNumber: 69,
           columnNumber: 29
         }, this)) }, void 0, false, {
           fileName: "app/routes/dashboard.tsx",
-          lineNumber: 63,
+          lineNumber: 67,
           columnNumber: 21
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/dashboard.tsx",
-        lineNumber: 61,
+        lineNumber: 65,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("li", { children: [
@@ -103,54 +97,54 @@ function dashboard() {
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("ul", { className: "ml-4", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("li", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "db_struct", children: "Db Structure" }, void 0, false, {
             fileName: "app/routes/dashboard.tsx",
-            lineNumber: 73,
+            lineNumber: 77,
             columnNumber: 29
           }, this) }, void 0, false, {
             fileName: "app/routes/dashboard.tsx",
-            lineNumber: 73,
+            lineNumber: 77,
             columnNumber: 25
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("li", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "users", children: "Users" }, void 0, false, {
             fileName: "app/routes/dashboard.tsx",
-            lineNumber: 74,
+            lineNumber: 78,
             columnNumber: 29
           }, this) }, void 0, false, {
             fileName: "app/routes/dashboard.tsx",
-            lineNumber: 74,
+            lineNumber: 78,
             columnNumber: 25
           }, this)
         ] }, void 0, true, {
           fileName: "app/routes/dashboard.tsx",
-          lineNumber: 72,
+          lineNumber: 76,
           columnNumber: 21
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/dashboard.tsx",
-        lineNumber: 70,
+        lineNumber: 74,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("li", { children: "Help" }, void 0, false, {
         fileName: "app/routes/dashboard.tsx",
-        lineNumber: 77,
+        lineNumber: 81,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/routes/dashboard.tsx",
-      lineNumber: 51,
+      lineNumber: 55,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Outlet, { context }, void 0, false, {
       fileName: "app/routes/dashboard.tsx",
-      lineNumber: 79,
+      lineNumber: 83,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/routes/dashboard.tsx",
-    lineNumber: 47,
+    lineNumber: 52,
     columnNumber: 9
   }, this);
 }
 export {
   dashboard as default
 };
-//# sourceMappingURL=/build/routes/dashboard-36FIJDQZ.js.map
+//# sourceMappingURL=/build/routes/dashboard-2DOKIGSS.js.map
