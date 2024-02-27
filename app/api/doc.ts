@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client/extension"
+import { ICondition } from "~/types/types"
 
 export default function DocModule(prisma: PrismaClient) {
     return {
@@ -203,6 +204,62 @@ export default function DocModule(prisma: PrismaClient) {
                     isActive: false
                 }
             })
+        },
+        searchDoc(conditions: ICondition[]) {
+            let sf = ''
+            let select = 'SELECT distinct doc.id'
+            let from = ' FROM "Doc" doc'
+            let where = ' WHERE doc."isActive" is true'
+            let tbls: string[] = []
+            let val1 = '', val2 = '', conds = '', sids = ''
+            for (const cond of conditions) {
+                if (cond.log) {
+                    conds = conds + ` ${cond.log}`
+                } else {
+                    const tbl = `tbl_${cond.field?.field.groupId}`
+                    const fieldName = `f${cond.field?.fieldId}`
+                    if (!tbls.includes(tbl)) {
+                        tbls.push(tbl)
+                        sids = sids + ` AND doc.id = ${tbl}.sid`
+                        from = from + `, ${tbl}`
+                    }
+                    switch (cond.field?.field.fieldType) {
+                        case "TEXT":
+                        case "CYRILLIC":
+                        case "DATE":
+                        case "TIME":
+                        case "FILE":
+                            val1 = `'${cond.val1}'`
+                            val2 = `'${cond.val2}'`
+                            break
+                        default:
+                            val1 = `${cond.val1}`
+                            val2 = `${cond.val2}`
+                            break
+                    }
+                    switch (cond.oper) {
+                        case 'between':
+                            conds = conds + ` ${fieldName} BETWEEN ${val2} AND ${val2}`
+                            break
+                        case '=':
+                        case '>=':
+                        case '>':
+                        case '<':
+                        case '<=':
+                        case '<>':
+                            conds = conds + ` ${fieldName} ${cond.oper} ${val1}`
+                            break
+                        case '=()':
+                            conds = conds + ` ${fieldName} IS NULL`
+                            break
+                        case '<>()':
+                            conds = conds + ` ${fieldName} IS NOT NULL`
+                            break
+                    }
+                }
+            }
+            sf = select + from + where + sids + ' AND ' + conds
+            return prisma.$queryRawUnsafe(`${sf}`)
         },
     }
 }

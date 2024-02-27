@@ -5,7 +5,7 @@ import {
   CustomButton,
   CustomInput,
   require_node
-} from "/build/_shared/chunk-CCQ6AUXW.js";
+} from "/build/_shared/chunk-7I5FVRXN.js";
 import {
   require_react as require_react2
 } from "/build/_shared/chunk-DGLILCEK.js";
@@ -505,7 +505,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/dashboard.enter_data.$formId.tsx"
   );
-  import.meta.hot.lastModified = "1708941786330.0444";
+  import.meta.hot.lastModified = "1709004140557.6475";
 }
 var {
   Spinner,
@@ -515,7 +515,7 @@ var {
   CardBody,
   CardFooter
 } = import_react3.default;
-function InputForms() {
+function EnterData() {
   _s2();
   const {
     dictionaries,
@@ -947,15 +947,15 @@ function InputForms() {
     columnNumber: 10
   }, this);
 }
-_s2(InputForms, "boAPRmDy6wosEk/wQ00CNkdLTEI=", false, function() {
+_s2(EnterData, "boAPRmDy6wosEk/wQ00CNkdLTEI=", false, function() {
   return [useOutletContext, useLoaderData, useLocation, useNavigation, useNavigate, useActionData, useFetcher, useSubmit];
 });
-_c5 = InputForms;
+_c5 = EnterData;
 var _c5;
-$RefreshReg$(_c5, "InputForms");
+$RefreshReg$(_c5, "EnterData");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 export {
-  InputForms as default
+  EnterData as default
 };
-//# sourceMappingURL=/build/routes/dashboard.enter_data.$formId-ME2Q5EMW.js.map
+//# sourceMappingURL=/build/routes/dashboard.enter_data.$formId-2GYUHTMU.js.map

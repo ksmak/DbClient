@@ -1,7 +1,8 @@
-import { InputForm, SearchForm } from "@prisma/client";
-import { Link, Outlet, json, useLoaderData, useNavigate } from "@remix-run/react";
+import { Condition, InputForm, SearchForm } from "@prisma/client";
+import { Link, Outlet, json, useLoaderData } from "@remix-run/react";
 import { Dispatch, SetStateAction, useState } from "react";
 import api from "~/api";
+import { ICondition } from "~/types/types";
 
 export type ContexType = {
     dictionaries?: any,
@@ -11,6 +12,8 @@ export type ContexType = {
     setDocs: Dispatch<SetStateAction<{ formId?: number, ids?: number[] }>>,
     current: number,
     setCurrent: Dispatch<SetStateAction<number>>,
+    conditions: ICondition[],
+    setConditions: Dispatch<SetStateAction<ICondition[]>>
 }
 
 export async function loader() {
@@ -25,21 +28,22 @@ export async function loader() {
 }
 
 export default function dashboard() {
+    const data = useLoaderData<typeof loader>()
     const [docs, setDocs] = useState<{ formId?: number, ids?: number[] }>({})
     const [current, setCurrent] = useState(0)
-    const data = useLoaderData<typeof loader>()
+    const [conditions, setConditions] = useState<ICondition[]>([])
     const context: ContexType = {
         ...data,
         docs,
         setDocs,
         current,
-        setCurrent
+        setCurrent,
+        conditions,
+        setConditions
     }
-
 
     return (
         <div className="container mx-auto flex flex-col gap-3 h-screen pb-5">
-
             <h1 className="text-3xl text-amber-700 font-bold">DbClient</h1>
             <ul className="text-blue-500 text-bold">
                 <li>

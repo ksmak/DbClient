@@ -158,6 +158,9 @@ export default function DbModule(prisma: PrismaClient) {
                     fields: {
                         orderBy: {
                             pos: 'asc'
+                        },
+                        include: {
+                            field: true
                         }
                     }
                 },
@@ -247,6 +250,9 @@ export default function DbModule(prisma: PrismaClient) {
             return prisma.searchField.findFirst({
                 where: {
                     id: fieldId
+                },
+                include: {
+                    field: true
                 }
             })
         },
@@ -288,7 +294,7 @@ export default function DbModule(prisma: PrismaClient) {
             return prisma.inputField.findFirst({
                 where: {
                     id: fieldId
-                }
+                },
             })
         },
         updateInputField(fieldId: number, field: InputField) {

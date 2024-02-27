@@ -100,7 +100,7 @@ export async function action({
     return json({ errors, docs, deletedDocId, ok })
 }
 
-export default function InputForms() {
+export default function EnterData() {
     const { dictionaries, docs, setDocs, current, setCurrent } = useOutletContext<ContexType>()
     const { inputForm, doc, state } = useLoaderData<typeof loader>()
     const [document, setDocument] = useState<typeof doc>(doc)
