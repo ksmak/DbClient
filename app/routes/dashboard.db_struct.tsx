@@ -1,18 +1,10 @@
-import MaterialTailwind from "@material-tailwind/react"
-const { Spinner, Alert } = MaterialTailwind
-import { InputForm, SearchForm, InputField, FieldType, Prisma } from "@prisma/client"
-import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
-import { Form, useActionData, useFetcher, useLoaderData, useOutletContext } from "@remix-run/react"
-import invariant from "tiny-invariant"
-import DictionaryForm from "~/ui/forms/dict_form"
-import GroupForm from "~/ui/forms/group_form"
-import InputFormForm from "~/ui/forms/input_form"
-import SearchFormForm from "~/ui/forms/search_form"
-import DbStrucPanel from "~/ui/panels/db_struct"
-import api from "~/api"
-import { useEffect, useState } from "react"
-import CustomButton from "~/ui/elements/custom_button"
-import { ContexType } from "./dashboard"
+import { InputForm, SearchForm, InputField, FieldType, Prisma } from "@prisma/client";
+import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import { useActionData, useLoaderData, useOutletContext } from "@remix-run/react";
+import invariant from "tiny-invariant";
+import api from "~/components/api";
+import DbStructView from "~/components/UI/widgets/db_struct/view";
+import { ContexType } from "~/types/types";
 
 export async function loader({
     request,
@@ -299,7 +291,6 @@ export async function action({
 
 export default function DbStruct() {
     const { dictionaries, inputForms, searchForms } = useOutletContext<ContexType>()
-    const [open, setOpen] = useState(false)
     const {
         state,
         dictionary,
@@ -309,128 +300,26 @@ export default function DbStruct() {
         groups,
         inputFields
     } = useLoaderData<typeof loader>()
-    const data = useActionData<typeof action>()
-    const fetcher = useFetcher()
-    const isRestruct = fetcher.state !== "idle"
-    const handleRestruct = async (event: any) => {
-        const response = confirm(
-            "Please confirm you want to restructure database."
-        )
-        if (!response) {
-            event.preventDefault()
-        }
-    }
 
-    useEffect(() => {
-        if (data?.errors) {
-            setOpen(true)
-        }
-    }, [data])
+    const data = useActionData<typeof action>()
 
     return (
-        <div className="mx-4 flex flex-col gap-3 h-screen pb-5">
-            <h1 className="self-center text-amber-700 text-3xl font-bold mt-4">Db Struct</h1>
-            <Alert className="text-white bg-red-500" open={open} onClose={() => setOpen(false)}>
-                {data?.errors ? data.errors : ""}
-            </Alert>
-            <div
-                className="flex justify-end items-center gap-3 h-14"
-            >
-                {state === 'dictionary'
-                    ? <Form method="post">
-                        <input type="hidden" name="cnt" defaultValue={dictionaries.length + 1} />
-                        <CustomButton
-                            className="bg-blue-gray-500 hover:shadow-blue-gray-100"
-                            type="submit"
-                            name="_action"
-                            value="createEmptyDictionary"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            </svg>
-                            Add Dictionary
-                        </CustomButton>
-                    </Form>
-                    : state === 'inputForm'
-                        ? <Form method="post">
-                            <input type="hidden" name="cnt" defaultValue={inputForms.length + 1} />
-                            <CustomButton
-                                className="bg-blue-gray-500 hover:shadow-blue-gray-100"
-                                type="submit"
-                                name="_action"
-                                value="createEmptyInputForm"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                                Add InputForm
-                            </CustomButton>
-                        </Form>
-                        : state === 'searchForm'
-                            ? <Form method="post">
-                                <input type="hidden" name="cnt" defaultValue={searchForms.length + 1} />
-                                <CustomButton
-                                    className="bg-blue-gray-500 hover:shadow-blue-gray-100"
-                                    type="submit"
-                                    name="_action"
-                                    value="createEmptySearchForm"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                    </svg>
-                                    Add SearchForm
-                                </CustomButton>
-                            </Form>
-                            : null}
-                <Form method="post">
-                    <CustomButton
-                        className="bg-blue-500 hover:shadow-blue-100"
-                        type="submit"
-                        name="_action"
-                        value="generateStructDb"
-                        disabled={isRestruct}
-                        onClick={handleRestruct}
-                    >
-                        {isRestruct
-                            ? <>
-                                <Spinner className="w-4 h-4" />
-                                Restructuring...
-                            </>
-                            : <>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
-                                </svg>
-                                Restruct Database
-                            </>}
-                    </CustomButton>
-                </Form>
-            </div>
-            <div className="flex flex-row h-full w-full">
-                <div className="bg-white p-4 mr-5 w-1/3 border shadow-blue-gray-700 shadow-md overflow-auto">
-                    <DbStrucPanel
-                        state={state}
-                        inputForms={inputForms}
-                        searchForms={searchForms}
-                        dictionaries={dictionaries}
-                        groups={groups}
-                        inputFormId={inputForm?.id}
-                        searchFormId={searchForm?.id}
-                        dictionaryId={dictionary?.id}
-                        groupId={group?.id}
-                    />
-                </div>
-                <div className="bg-white w-full border p-4 shadow-blue-gray-700 shadow-md overflow-auto">
-                    {state === 'inputForm' && inputForm
-                        ? <InputFormForm inputForm={inputForm} groups={groups} />
-                        : state === 'searchForm' && searchForm
-                            ? <SearchFormForm searchForm={searchForm} inputFields={inputFields} />
-                            : state === 'dictionary' && dictionary
-                                ? <DictionaryForm dictionary={dictionary} />
-                                : state === 'group' && group
-                                    ? <GroupForm group={group} dicts={dictionaries} />
-                                    : null}
-                </div>
-            </div>
-        </div>
+        <DbStructView
+            errors={data?.errors ? data?.errors : undefined}
+            state={state}
+            inputForms={inputForms}
+            searchForms={searchForms}
+            dictionaries={dictionaries}
+            groups={groups}
+            inputFormId={inputForm?.id}
+            searchFormId={searchForm?.id}
+            dictionaryId={dictionary?.id}
+            groupId={group?.id}
+            inputForm={inputForm}
+            searchForm={searchForm}
+            dictionary={dictionary}
+            group={group}
+            inputFields={inputFields}
+        />
     )
 }

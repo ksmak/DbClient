@@ -1,20 +1,16 @@
-import { Condition, InputForm, SearchForm } from "@prisma/client";
-import { Link, Outlet, json, useLoaderData } from "@remix-run/react";
-import { Dispatch, SetStateAction, useState } from "react";
-import api from "~/api";
-import { ICondition } from "~/types/types";
+import { InputForm, SearchForm } from "@prisma/client";
+import { json, useLoaderData } from "@remix-run/react";
+import { useEffect, useState } from "react";
+import api from "~/components/api";
+import { ContexType, ICondition } from "~/types/types";
+import {
+    NewspaperIcon,
+    UsersIcon,
+    CircleStackIcon
+} from "@heroicons/react/24/solid";
 
-export type ContexType = {
-    dictionaries?: any,
-    inputForms?: any,
-    searchForms?: any,
-    docs: { formId?: number, ids?: number[] },
-    setDocs: Dispatch<SetStateAction<{ formId?: number, ids?: number[] }>>,
-    current: number,
-    setCurrent: Dispatch<SetStateAction<number>>,
-    conditions: ICondition[],
-    setConditions: Dispatch<SetStateAction<ICondition[]>>
-}
+import { useTranslation } from "react-i18next";
+import DashboardView from "~/components/UI/widgets/dashboard/view";
 
 export async function loader() {
     const dictionaries = await api.db.getDictionaries()
@@ -28,6 +24,7 @@ export async function loader() {
 }
 
 export default function dashboard() {
+    const { t } = useTranslation()
     const data = useLoaderData<typeof loader>()
     const [docs, setDocs] = useState<{ formId?: number, ids?: number[] }>({})
     const [current, setCurrent] = useState(0)
@@ -41,39 +38,54 @@ export default function dashboard() {
         conditions,
         setConditions
     }
+    const [openNav, setOpenNav] = useState(false);
+
+    const editDataMenuItems =
+        data.inputForms.map((item: InputForm) => {
+            return {
+                title: item.title,
+                link: `/dashboard/enter_data/${item.id}`,
+                icon: NewspaperIcon,
+            }
+        })
+
+    const searchDataMenuItems =
+        data.searchForms.map((item: SearchForm) => {
+            return {
+                title: item.title,
+                link: `/dashboard/search_data/${item.id}`,
+                icon: NewspaperIcon,
+            }
+        })
+
+    const serviceMenuItems = [
+        {
+            title: t('db_structure'),
+            link: "db_struct",
+            icon: CircleStackIcon
+        },
+        {
+            title: t('users'),
+            link: "users",
+            icon: UsersIcon
+        },
+    ]
+
+    useEffect(() => {
+        window.addEventListener(
+            "resize",
+            () => window.innerWidth >= 960 && setOpenNav(false),
+        );
+    }, []);
 
     return (
-        <div className="container mx-auto flex flex-col gap-3 h-screen pb-5">
-            <h1 className="text-3xl text-amber-700 font-bold">DbClient</h1>
-            <ul className="text-blue-500 text-bold">
-                <li>
-                    Enter Data
-                    <ul className="ml-4">
-                        {data.inputForms.map((item: InputForm) =>
-                            <li key={item.id}><Link to={`/dashboard/enter_data/${item.id}`}>
-                                Form: {item.title}
-                            </Link></li>)}
-                    </ul>
-                </li>
-                <li>
-                    Search Data
-                    <ul className="ml-4">
-                        {data.searchForms.map((item: SearchForm) =>
-                            <li key={item.id}><Link to={`/dashboard/search_data/${item.id}`}>
-                                Form: {item.title}
-                            </Link></li>)}
-                    </ul>
-                </li>
-                <li>
-                    Service
-                    <ul className="ml-4">
-                        <li><Link to="db_struct">Db Structure</Link></li>
-                        <li><Link to="users">Users</Link></li>
-                    </ul>
-                </li>
-                <li>Help</li>
-            </ul>
-            <Outlet context={context} />
-        </div>
+        <DashboardView
+            openNav={openNav}
+            setOpenNav={setOpenNav}
+            editDataMenuItems={editDataMenuItems}
+            searchDataMenuItems={searchDataMenuItems}
+            serviceMenuItems={serviceMenuItems}
+            context={context}
+        />
     )
 }

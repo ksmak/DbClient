@@ -1,4 +1,5 @@
 import { InputField, SearchField } from "@prisma/client"
+import { Dispatch, SetStateAction } from "react"
 
 export interface IDict {
     id: number,
@@ -35,4 +36,22 @@ export interface ICondition {
     oper?: string,
     val1?: string,
     val2?: string,
+}
+
+export interface MenuItem {
+    title: string,
+    link: string,
+    icon: any
+}
+
+export type ContexType = {
+    dictionaries?: any,
+    inputForms?: any,
+    searchForms?: any,
+    docs: { formId?: number, ids?: number[] },
+    setDocs: Dispatch<SetStateAction<{ formId?: number, ids?: number[] }>>,
+    current: number,
+    setCurrent: Dispatch<SetStateAction<number>>,
+    conditions: ICondition[],
+    setConditions: Dispatch<SetStateAction<ICondition[]>>
 }

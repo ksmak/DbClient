@@ -1,13 +1,8 @@
-import MaterialTailwind from "@material-tailwind/react"
-const { Spinner } = MaterialTailwind
-import { Department, Prisma, Role, User } from "@prisma/client"
-import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node"
-import { useActionData, useFetcher, useLoaderData, useNavigate } from "@remix-run/react"
-import moment from "moment"
-import UserDialog from "~/ui/dialogs/user_dialog"
-import api from "~/api"
-import { useEffect, useState } from "react"
-import CustomButton from "~/ui/elements/custom_button"
+import { Department, Prisma, Role } from "@prisma/client";
+import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import { useActionData, useLoaderData } from "@remix-run/react";
+import api from "~/components/api";
+import UsersView from "~/components/UI/widgets/users/view";
 
 export async function loader({
     request,
@@ -55,7 +50,6 @@ export async function action({
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
             }
-            // throw e
         }
     }
     if (_action === 'updateUser') {
@@ -80,7 +74,6 @@ export async function action({
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
             }
-            // throw e
         }
     }
     if (_action === 'deleteUser') {
@@ -92,147 +85,22 @@ export async function action({
             if (e instanceof Prisma.PrismaClientKnownRequestError) {
                 errors = e.message
             }
-            // throw e
         }
     }
     return json({ errors })
 }
 
 export default function Users() {
-    const [open, setOpen] = useState(false)
-    const { user, users, roles, departments, isNew } = useLoaderData<typeof loader>()
-    const actionData = useActionData<typeof action>()
-    const navigate = useNavigate()
-    const fetcher = useFetcher()
-    const isDeleting = fetcher.state !== "idle"
-
-    useEffect(() => {
-        setOpen(user ? true : false)
-    }, [user])
-
-    const handleDelete = async (event: any) => {
-        const response = confirm(
-            "Please confirm you want to delete this record."
-        )
-        if (!response) {
-            event.preventDefault()
-        }
-    }
+    const { user, users, departments, isNew } = useLoaderData<typeof loader>()
+    const data = useActionData<typeof action>()
 
     return (
-        <div className="container mx-auto flex flex-col gap-3 h-screen pb-5">
-            <UserDialog
-                isNew={isNew ? true : false}
-                handleOpen={() => navigate("/dashboard/users")}
-                open={open}
-                user={user ? user as User : null}
-                roles={roles}
-                departments={departments}
-                errors={actionData?.errors}
-            />
-            <h1 className="self-center text-amber-700 text-3xl font-bold mt-4">Users</h1>
-            <div
-                className="flex items-center gap-3"
-            >
-                <CustomButton
-                    className="bg-blue-gray-500 hover:shadow-blue-gray-100"
-                    onClick={() => { navigate("/dashboard/users?new=true") }}
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    New User
-                </CustomButton>
-            </div>
-            <table
-                className="border-2 border-blue-gray-700"
-            >
-                <thead
-                    className="bg-blue-gray-400 text-white text-center"
-                >
-                    <tr>
-                        <th className="p-1 text-sm border border-blue-gray-700">#</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">IsActive</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">Login</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">First Name</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">Last Name</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">Middle Name</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">Department</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">Expired Password</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">created</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">updated</th>
-                        <th className="p-1 text-sm border border-blue-gray-700">#</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user: User, index: number) => (
-                        <tr
-                            key={user.id}
-                        // onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
-                        >
-                            <td className="p-1 text-sm border border-blue-gray-700">{index + 1}</td>
-                            <td
-                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}>
-                                {user.isActive ? 'Yes' : 'No'}
-                            </td>
-                            <td
-                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
-                            >
-                                {user.login}
-                            </td>
-                            <td
-                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
-                            >
-                                {user.firstName}
-                            </td>
-                            <td
-                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
-                            >
-                                {user.lastName}
-                            </td>
-                            <td
-                                className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline"
-                                onClick={() => navigate(`/dashboard/users?userId=${user.id}`)}
-                            >
-                                {user.middleName}
-                            </td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{departments.find(item => item.id === user.departmentId)?.title}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{moment(user.expiredPwd).format('DD.MM.YYYY')}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{moment(user.createdAt).format('DD.MM.YYYY H:m:s')}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700">{moment(user.updatedAt).format('DD.MM.YYYY H:m:s')}</td>
-                            <td className="p-1 text-sm border border-blue-gray-700 flex justify-center">
-                                <fetcher.Form method="post">
-                                    <input type="hidden" name="id" defaultValue={user?.id ? user.id : ''} />
-                                    <CustomButton
-                                        className="bg-red-500 hover:shadow-red-100"
-                                        disabled={isDeleting}
-                                        onClick={handleDelete}
-                                        type="submit"
-                                        name="_action"
-                                        value="deleteUser"
-                                    >
-                                        {isDeleting
-                                            ? <>
-                                                <Spinner className="w-4 h-4" />
-                                                Deleting...
-                                            </>
-                                            : <>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                                                </svg>
-                                                Delete
-                                            </>}
-                                    </CustomButton>
-                                </fetcher.Form>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
+        <UsersView
+            isNew={isNew ? true : false}
+            user={user}
+            users={users}
+            departments={departments}
+            errors={data?.errors ? data.errors : undefined}
+        />
     )
 }
