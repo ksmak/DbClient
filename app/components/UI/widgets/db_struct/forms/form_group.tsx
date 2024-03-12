@@ -10,7 +10,7 @@ type GroupFormProps = {
 }
 
 export default function GroupForm({ group, dicts }: GroupFormProps) {
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
     const navigate = useNavigate()
 
     const handleDelete = async (event: any) => {
@@ -26,7 +26,7 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
         <>
             <div className="flex flex-row gap-3 justify-end">
                 <CustomButton
-                    className="bg-blue-gray-500 hover:shadow-blue-gray-100"
+                    className="bg-primary hover:shadow-primary_shadow"
                     form="addInputFieldForm"
                     type="submit"
                     name="_action"
@@ -52,7 +52,7 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                     {t('save')}
                 </CustomButton>
                 <CustomButton
-                    className="bg-red-500 hover:shadow-red-100"
+                    className="bg-danger hover:shadow-danger_shadow"
                     form="deleteGroupForm"
                     type="submit"
                     name="_action"
@@ -94,11 +94,24 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                     subClass="w-16"
                 />
                 <CustomInput
-                    id="group_title"
+                    id="group_title_kk"
                     type="text"
-                    name="title"
-                    title={t('title')}
-                    defaultValue={group?.title}
+                    name="title_kk"
+                    title={t('title_kk')}
+                    defaultValue={group?.title_kk}
+                    required={true}
+                    onChange={() => {
+                        const button = document.getElementById("updateGroupButton") as HTMLButtonElement
+                        button.click()
+                    }}
+                    size={100}
+                />
+                <CustomInput
+                    id="group_title_ru"
+                    type="text"
+                    name="title_ru"
+                    title={t('title_ru')}
+                    defaultValue={group?.title_ru}
                     required={true}
                     onChange={() => {
                         const button = document.getElementById("updateGroupButton") as HTMLButtonElement
@@ -146,24 +159,25 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
             <div className="overflow-x-auto mt-4">
                 <table className="w-full">
                     <thead
-                        className="bg-blue-gray-400 text-white text-center"
+                        className="bg-primary text-white text-center"
                     >
                         <tr>
-                            <th className="p-1 text-sm border border-blue-gray-700">#</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('pos')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('span')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('start')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('title')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('type_data')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('dictionary')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('len')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('precision')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('is_key')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('is_visible')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('is_enable')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('is_require')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700">{t('duplicate')}</th>
-                            <th className="p-1 text-sm border border-blue-gray-700"></th>
+                            <th className="p-1 text-sm border">#</th>
+                            <th className="p-1 text-sm border">1</th>
+                            <th className="p-1 text-sm border">2</th>
+                            <th className="p-1 text-sm border">3</th>
+                            <th className="p-1 text-sm border">{t('title_kk')}</th>
+                            <th className="p-1 text-sm border">{t('title_ru')}</th>
+                            <th className="p-1 text-sm border">{t('type_data')}</th>
+                            <th className="p-1 text-sm border">{t('dictionary')}</th>
+                            <th className="p-1 text-sm border">{t('len')}</th>
+                            <th className="p-1 text-sm border">{t('precision')}</th>
+                            <th className="p-1 text-sm border">4</th>
+                            <th className="p-1 text-sm border">5</th>
+                            <th className="p-1 text-sm border">6</th>
+                            <th className="p-1 text-sm border">7</th>
+                            <th className="p-1 text-sm border">8</th>
+                            <th className="p-1 text-sm border"></th>
                         </tr>
                     </thead>
                     <tbody className="text-center">
@@ -215,14 +229,29 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                                 </td>
                                 <td
                                     className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40"
-                                    onClick={() => navigate(`/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}&inputFieldId=${field.id}`)}
                                 >
                                     <input
                                         className="text-sm w-full"
                                         form={`updateInputFieldForm_${field.id}`}
                                         type="text"
-                                        name="title"
-                                        defaultValue={field.title}
+                                        name="title_kk"
+                                        defaultValue={field.title_kk}
+                                        maxLength={23}
+                                        onChange={() => {
+                                            const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
+                                            button.click()
+                                        }}
+                                    />
+                                </td>
+                                <td
+                                    className="p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40"
+                                >
+                                    <input
+                                        className="text-sm w-full"
+                                        form={`updateInputFieldForm_${field.id}`}
+                                        type="text"
+                                        name="title_ru"
+                                        defaultValue={field.title_ru}
                                         maxLength={23}
                                         onChange={() => {
                                             const button = document.getElementById(`updateInputFieldButton_${field.id}`) as HTMLButtonElement
@@ -257,7 +286,7 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                                             }}
                                         >
                                             <option value="">-</option>
-                                            {dicts.map((dic: Dictionary) => <option key={dic.id} value={dic.id}>{dic.title}</option>)}
+                                            {dicts.map((dic: Dictionary) => <option key={dic.id} value={dic.id}>{dic[`title_${i18n.language}` as keyof typeof dic]}</option>)}
                                         </select>
                                         : null}
                                 </td>
@@ -356,16 +385,15 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                                     <Form method="post">
                                         <input type="hidden" name="id" defaultValue={field?.id ? field.id : ''} />
                                         <CustomButton
-                                            className="bg-red-500 hover:shadow-red-100"
+                                            className="bg-danger hover:shadow-danger_shadow"
                                             onClick={handleDelete}
                                             type="submit"
                                             name="_action"
                                             value="deleteInputField"
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                             </svg>
-                                            {t('delete')}
                                         </CustomButton>
                                     </Form>
                                 </td>
@@ -389,6 +417,16 @@ export default function GroupForm({ group, dicts }: GroupFormProps) {
                 <input type="hidden" name="inputFormId" defaultValue={group.inputFormId} />
                 <input type="hidden" name="id" defaultValue={group.id} />
             </Form>
+            <div className="pt-5">
+                <div className="text-sm">1-{t('pos')}</div>
+                <div className="text-sm">2-{t('span')}</div>
+                <div className="text-sm">3-{t('start')}</div>
+                <div className="text-sm">4-{t('is_key')}</div>
+                <div className="text-sm">5-{t('is_visible')}</div>
+                <div className="text-sm">6-{t('is_enable')}</div>
+                <div className="text-sm">7-{t('is_require')}</div>
+                <div className="text-sm">8-{t('duplicate')}</div>
+            </div>
         </>
     )
 }

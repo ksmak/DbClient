@@ -118,7 +118,7 @@ export async function action({
             }
         }
     }
-    if (_action === 'createRole') {
+    if (_action === 'createEmptyRole') {
         try {
             await api.users.createEmptyRole(Number(values.cnt))
             return redirect("/dashboard/users")
@@ -132,7 +132,8 @@ export async function action({
         const roleId = Number(values.id)
         const updateRole = {
             id: Number(values.id),
-            title: String(values.title),
+            title_kk: String(values.title_kk),
+            title_ru: String(values.title_ru),
         }
         try {
             await api.users.updateRole(roleId, updateRole)

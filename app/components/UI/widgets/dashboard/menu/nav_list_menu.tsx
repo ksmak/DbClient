@@ -26,7 +26,7 @@ export default function NavListMenu({ menuTitle, navListMenuItems }: NavListMenu
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const renderItems = navListMenuItems.map(
         ({ icon, title, link }, key) => (
-            <a href="#" key={key}>
+            <div key={key}>
                 <MenuItem
                     placeholder=""
                     className="flex items-center gap-3 rounded-lg"
@@ -35,7 +35,7 @@ export default function NavListMenu({ menuTitle, navListMenuItems }: NavListMenu
                         {" "}
                         {createElement(icon, {
                             strokeWidth: 2,
-                            className: "h-6 text-gray-900 w-6",
+                            className: "h-6 text-primary w-6",
                         })}
                     </div>
                     <div>
@@ -48,7 +48,7 @@ export default function NavListMenu({ menuTitle, navListMenuItems }: NavListMenu
                         </Typography>
                     </div>
                 </MenuItem>
-            </a>
+            </div>
         ),
     );
 
@@ -68,7 +68,7 @@ export default function NavListMenu({ menuTitle, navListMenuItems }: NavListMenu
                         placeholder=""
                     >
                         <ListItem
-                            className="flex items-center gap-2 py-2 pr-4 font-medium text-primary"
+                            className="flex items-center gap-2 py-2 pr-4 font-bold text-primary h-6"
                             selected={isMenuOpen || isMobileMenuOpen}
                             onClick={() => setIsMobileMenuOpen((cur) => !cur)}
                             placeholder=""

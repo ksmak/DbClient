@@ -3,6 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react"
 import { IDict } from "~/types/types"
 import CustomInput from "~/components/UI/elements/custom_input"
 import CustomSelect from "~/components/UI/elements/custom_select"
+import { useTranslation } from "react-i18next"
 
 type FieldProps = {
     state: string | null,
@@ -14,6 +15,7 @@ type FieldProps = {
 }
 
 export default function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }: FieldProps) {
+    const { i18n } = useTranslation()
     const tableName = `tbl_${fld.groupId}`
     const fieldName = `f${fld.id}`
     let val = doc[tableName][recordIndex][fieldName] ? doc[tableName][recordIndex][fieldName] : ''
@@ -23,6 +25,7 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
         d[tableName][recordIndex][fieldName] = e.target.value
         setDoc(d)
     }
+    let fieldTitle: string = fld[`title_${i18n.language}` as keyof typeof fld] as string
     switch (fld.fieldType) {
         case "TEXT":
             return (
@@ -30,7 +33,7 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
                     key={fld.id}
                     className={cls}
                     id={fieldName}
-                    title={fld.title}
+                    title={fieldTitle}
                     type="text"
                     name={fieldName}
                     value={val}
@@ -47,7 +50,7 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
                     key={fld.id}
                     className={cls}
                     id={fieldName}
-                    title={fld.title}
+                    title={fieldTitle}
                     type="text"
                     name={fieldName}
                     value={val}
@@ -64,7 +67,7 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
                     key={fld.id}
                     className={cls}
                     id={fieldName}
-                    title={fld.title}
+                    title={fieldTitle}
                     type="number"
                     name={fieldName}
                     value={val}
@@ -81,7 +84,7 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
                     key={fld.id}
                     className={cls}
                     id={fieldName}
-                    title={fld.title}
+                    title={fieldTitle}
                     type="number"
                     step="0.01"
                     name={fieldName}
@@ -100,7 +103,7 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
                     key={fld.id}
                     className={cls}
                     id={fieldName}
-                    title={fld.title}
+                    title={fieldTitle}
                     name={fieldName}
                     value={val}
                     onChange={handleChange}
@@ -123,7 +126,7 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
                     key={fld.id}
                     className={cls}
                     id={fieldName}
-                    title={fld.title}
+                    title={fieldTitle}
                     type="date"
                     name={fieldName}
                     value={val}
@@ -140,7 +143,7 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
                     key={fld.id}
                     className={cls}
                     id={fieldName}
-                    title={fld.title}
+                    title={fieldTitle}
                     type="time"
                     name={fieldName}
                     value={val}

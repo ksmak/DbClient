@@ -8,7 +8,7 @@ type DictionaryFormProps = {
 }
 
 export default function DictionaryForm({ dictionary }: DictionaryFormProps) {
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
     const handleDelete = async (event: any) => {
         const response = confirm(
             t('confirm_delete')
@@ -59,10 +59,23 @@ export default function DictionaryForm({ dictionary }: DictionaryFormProps) {
                 <input type="hidden" name="id" defaultValue={dictionary.id ? dictionary.id : ''} />
                 <CustomInput
                     id={dictionary.id}
-                    title={t('title')}
+                    title={t('title_kk')}
                     type="text"
-                    defaultValue={dictionary?.title}
-                    name="title"
+                    defaultValue={dictionary?.title_kk}
+                    name="title_kk"
+                    required={true}
+                    onChange={() => {
+                        const button = document.getElementById("updateDictionaryButton") as HTMLButtonElement
+                        button.click()
+                    }}
+                    size={100}
+                />
+                <CustomInput
+                    id={dictionary.id}
+                    title={t('title_ru')}
+                    type="text"
+                    defaultValue={dictionary?.title_ru}
+                    name="title_ru"
                     required={true}
                     onChange={() => {
                         const button = document.getElementById("updateDictionaryButton") as HTMLButtonElement

@@ -13,7 +13,7 @@ export default function ButtonAddSearchForm({ count }: ButtonAddSearchFormProps)
         <Form method="post">
             <input type="hidden" name="cnt" defaultValue={count + 1} />
             <CustomButton
-                className="bg-blue-gray-500 hover:shadow-blue-gray-100"
+                className="bg-primary hover:shadow-primary_shadow"
                 type="submit"
                 name="_action"
                 value="createEmptySearchForm"

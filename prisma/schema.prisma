@@ -12,13 +12,15 @@ datasource db {
 
 model Department {
   id           Int            @id @default(autoincrement())
-  title        String         @unique
+  title_kk     String         
+  title_ru     String         
   users        User[]
 }
 
 model Role {
   id           Int            @id @default(autoincrement())
-  title        String         @unique
+  title_kk     String         
+  title_ru     String         
   accessInput  AccessInputForm[]
   accessSearch AccessSearchForm[]
   userRoles    UserRole[]
@@ -50,8 +52,8 @@ model AccessSearchForm {
 
 model UserRole {
   id           Int            @id @default(autoincrement())
-  user         User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
-  userId       Int?
+  user         User           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId       Int
   role         Role?          @relation(fields: [roleId], references: [id], onDelete: SetNull)
   roleId       Int?
 }
@@ -77,14 +79,16 @@ model User {
 
 model Dictionary {
   id           Int            @id @default(autoincrement())
-  title        String
+  title_kk     String         
+  title_ru     String         
   fields       InputField[]
 }
 
 model InputForm {
   id           Int            @id @default(autoincrement())
   pos          Int            @default(0)
-  title        String
+  title_kk     String         
+  title_ru     String         
   groups       Group[]
   access       AccessInputForm[]
 }
@@ -92,7 +96,8 @@ model InputForm {
 model SearchForm {
   id           Int            @id @default(autoincrement())
   pos          Int            @default(0)
-  title        String
+  title_kk     String         
+  title_ru     String         
   fields       SearchField[]
   access       AccessSearchForm[]
 }
@@ -100,7 +105,8 @@ model SearchForm {
 model Group {
   id           Int            @id @default(autoincrement())
   pos          Int            @default(0)
-  title        String
+  title_kk     String         
+  title_ru     String         
   inputForm    InputForm      @relation(fields: [inputFormId], references: [id], onDelete: Cascade)
   inputFormId  Int
   isMulty      Boolean        @default(false)
@@ -123,7 +129,8 @@ model InputField {
   pos          Int            @default(0)
   colSpan      Int            @default(1)
   colStart     Int            @default(1)
-  title        String
+  title_kk     String         
+  title_ru     String         
   group        Group          @relation(fields: [groupId], references: [id], onDelete: Cascade)
   groupId      Int
   fieldType    FieldType      @default(TEXT)
@@ -143,7 +150,8 @@ model InputField {
 model SearchField {
   id           Int            @id @default(autoincrement())
   pos          Int            @default(0)
-  title        String
+  title_kk     String         
+  title_ru     String         
   searchForm   SearchForm     @relation(fields: [searchFormId], references: [id], onDelete: Cascade)
   searchFormId Int
   field        InputField?    @relation(fields: [fieldId], references: [id], onDelete: SetNull)
@@ -153,7 +161,8 @@ model SearchField {
 model Report {
   id           Int            @id @default(autoincrement())
   pos          Int            @default(0)
-  title        String
+  title_kk     String         
+  title_ru     String         
   template     String
   start_row    Int            @default(1)
   start_col    Int            @default(1)
@@ -181,7 +190,8 @@ model ReportRow {
 
 model Query {
   id           Int            @id @default(autoincrement())
-  title        String?
+  title_kk     String?         
+  title_ru     String?        
   user         User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
   userId       Int?
   isPublic     Boolean        @default(false)

@@ -88,16 +88,13 @@ export default function UsersModule(prisma: PrismaClient) {
             })
         },
         getRoles() {
-            return prisma.role.findMany({
-                orderBy: {
-                    title: 'asc',
-                }
-            })
+            return prisma.role.findMany()
         },
         createEmptyRole(cnt: number) {
             return prisma.role.create({
                 data: {
-                    title: `Role ${cnt}`
+                    title_kk: `Role ${cnt}`,
+                    title_ru: `Role ${cnt}`
                 }
             })
         },

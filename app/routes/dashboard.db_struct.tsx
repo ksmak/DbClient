@@ -65,7 +65,8 @@ export async function action({
             await api.db.updateInputForm(Number(values.id), {
                 id: Number(values.id),
                 pos: Number(values.pos),
-                title: String(values.title),
+                title_kk: String(values.title_kk),
+                title_ru: String(values.title_ru),
             } as InputForm)
             return redirect(`/dashboard/db_struct?state=inputForm&inputFormId=${values.id}`)
         } catch (e) {
@@ -99,7 +100,8 @@ export async function action({
             await api.db.updateSearchForm(Number(values.id), {
                 id: Number(values.id),
                 pos: Number(values.pos),
-                title: String(values.title),
+                title_kk: String(values.title_kk),
+                title_ru: String(values.title_ru),
             } as SearchForm)
             return redirect(`/dashboard/db_struct?state=searchForm&searchFormId=${values.id}`)
         } catch (e) {
@@ -132,7 +134,8 @@ export async function action({
         try {
             await api.db.updateDictionary(Number(values.id), {
                 id: Number(values.id),
-                title: String(values.title),
+                title_kk: String(values.title_kk),
+                title_ru: String(values.title_ru),
             })
             return redirect(`/dashboard/db_struct?state=dictionary&dictionaryId=${values.id}`)
         } catch (e) {
@@ -178,7 +181,8 @@ export async function action({
                     id: Number(values.id),
                     inputFormId: Number(values.inputFormId),
                     pos: Number(values.pos),
-                    title: String(values.title),
+                    title_kk: String(values.title_kk),
+                    title_ru: String(values.title_ru),
                     isMulty: Boolean(values.isMulty),
                 },
             )
@@ -207,7 +211,8 @@ export async function action({
                 colSpan: Number(values.colSpan),
                 colStart: Number(values.colStart),
                 pos: Number(values.pos),
-                title: String(values.title),
+                title_kk: String(values.title_kk),
+                title_ru: String(values.title_ru),
                 len: Number(values.len),
                 fieldType: String(values.fieldType) as FieldType,
                 dicId: Number(values.dicId),
@@ -258,7 +263,8 @@ export async function action({
                 id: Number(values.id),
                 pos: Number(values.pos),
                 searchFormId: Number(values.searchFormId),
-                title: String(values.title),
+                title_kk: String(values.title_kk),
+                title_ru: String(values.title_ru),
                 fieldId: Number(values.fieldId),
             })
             return redirect(`/dashboard/db_struct?state=searchForm&searchFormId=${values.searchFormId}`)

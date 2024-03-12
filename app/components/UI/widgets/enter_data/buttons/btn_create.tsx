@@ -15,7 +15,7 @@ export default function ButtonCreate({ userId, inputFormId }: ButtonCreateProps)
             <input type="hidden" name="_user" value={userId} />
             <input type="hidden" name="_inputFormId" value={inputFormId} />
             <CustomButton
-                className="bg-blue-gray-500 hover:shadow-blue-gray-100"
+                className="bg-primary hover:shadow-primary_shadow"
                 type="submit"
                 name="_action"
                 value="openForCreate"

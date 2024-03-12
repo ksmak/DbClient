@@ -11,7 +11,7 @@ type AccessInputFormsTableProps = {
 }
 
 export default function AccessInputFormsTable({ aforms, inputForms }: AccessInputFormsTableProps) {
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
 
     return (
         <>
@@ -66,7 +66,7 @@ export default function AccessInputFormsTable({ aforms, inputForms }: AccessInpu
                                 >
                                     {inputForms.map((inputForm: InputForm) => (
                                         <option key={inputForm.id} value={inputForm.id}>
-                                            {inputForm.title}
+                                            {inputForm[`title_${i18n.language}` as keyof typeof inputForm]}
                                         </option>
                                     ))}
                                 </select>

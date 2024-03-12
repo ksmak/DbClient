@@ -25,7 +25,7 @@ export default function Forms({
     inputFields
 }: FormsProps) {
     return (
-        <div className="p-4 border border-gray-900 grow">
+        <div className="p-4 border w-2/3">
             {state === 'inputForm' && inputForm
                 ? <InputFormForm inputForm={inputForm} groups={groups} />
                 : state === 'searchForm' && searchForm

@@ -15,7 +15,7 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
         <>
             <div className="flex flex-row gap-3 justify-end">
                 <CustomButton
-                    className="bg-blue-gray-500 hover:shadow-blue-gray-100"
+                    className="bg-primary hover:shadow-primary_shadow"
                     form="addGroupForm"
                     type="submit"
                     name="_action"
@@ -40,7 +40,7 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                     {t('save')}
                 </CustomButton>
                 <CustomButton
-                    className="bg-red-500 hover:shadow-red-100"
+                    className="bg-danger hover:shadow-danger_shadow"
                     form="deleteInputForm"
                     type="submit"
                     name="_action"
@@ -81,11 +81,24 @@ export default function InputFormForm({ inputForm, groups }: InputFormProps) {
                     subClass="w-16"
                 />
                 <CustomInput
-                    id="inputForm_title"
-                    title={t('title')}
+                    id="inputForm_title_kk"
+                    title={t('title_kk')}
                     type="text"
-                    defaultValue={inputForm?.title}
-                    name="title"
+                    defaultValue={inputForm?.title_kk}
+                    name="title_kk"
+                    required={true}
+                    onChange={() => {
+                        const button = document.getElementById("updateInputFormButton") as HTMLButtonElement
+                        button.click()
+                    }}
+                    size={100}
+                />
+                <CustomInput
+                    id="inputForm_title_ru"
+                    title={t('title_ru')}
+                    type="text"
+                    defaultValue={inputForm?.title_ru}
+                    name="title_ru"
                     required={true}
                     onChange={() => {
                         const button = document.getElementById("updateInputFormButton") as HTMLButtonElement

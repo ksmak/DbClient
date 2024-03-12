@@ -8,7 +8,7 @@ import {
   Panel,
   require_index_browser,
   require_node
-} from "/build/_shared/chunk-FMBQK5TO.js";
+} from "/build/_shared/chunk-N4W3YWYJ.js";
 import {
   require_react as require_react2
 } from "/build/_shared/chunk-DGLILCEK.js";
@@ -4651,7 +4651,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/users/tbl_roles.tsx"
   );
-  import.meta.hot.lastModified = "1710238243656.6";
+  import.meta.hot.lastModified = "1710246361755.3818";
 }
 function RolesTable({
   role,
@@ -4660,99 +4660,117 @@ function RolesTable({
   _s7();
   const navigate = useNavigate();
   const {
+    i18n,
     t
   } = useTranslation();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(import_jsx_dev_runtime7.Fragment, { children: [
     roles.map((role2) => /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Form, { method: "post", className: "hidden", id: `updateRoleForm_${role2.id}`, children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: role2.id }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-        lineNumber: 36,
+        lineNumber: 37,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { id: `updateRoleButton_${role2.id}`, type: "submit", name: "_action", value: "updateRole" }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-        lineNumber: 37,
+        lineNumber: 38,
         columnNumber: 21
       }, this)
     ] }, role2.id, true, {
       fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-      lineNumber: 35,
+      lineNumber: 36,
       columnNumber: 32
     }, this)),
     /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("table", { className: "w-full", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("thead", { className: "bg-primary text-white text-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-          lineNumber: 42,
+          lineNumber: 43,
           columnNumber: 25
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title") }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title_kk") }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-          lineNumber: 43,
+          lineNumber: 44,
+          columnNumber: 25
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title_ru") }, void 0, false, {
+          fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+          lineNumber: 45,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-          lineNumber: 44,
+          lineNumber: 46,
           columnNumber: 25
         }, this)
       ] }, void 0, true, {
         fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-        lineNumber: 41,
+        lineNumber: 42,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-        lineNumber: 40,
+        lineNumber: 41,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("tbody", { children: roles.map((rl, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("tr", { className: role?.id === rl.id ? "bg-selected hover:cursor-pointer" : "hover:cursor-pointer", onClick: () => navigate(`/dashboard/users?state=roles&roleId=${rl.id}`), children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-          lineNumber: 49,
+          lineNumber: 51,
           columnNumber: 29
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 hover:cursor-pointer hover:underline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { className: "text-sm w-full focus:outline-none p-1 text-black", form: `updateRoleForm_${rl.id}`, type: "text", name: "title", defaultValue: rl.title, maxLength: 45, onChange: () => {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 hover:cursor-pointer hover:underline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { className: "text-sm w-full focus:outline-none p-1 text-black", form: `updateRoleForm_${rl.id}`, type: "text", name: "title_kk", defaultValue: rl.title_kk, maxLength: 45, onChange: () => {
           const button = document.getElementById(`updateRoleButton_${rl.id}`);
           button.click();
         } }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-          lineNumber: 51,
+          lineNumber: 53,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-          lineNumber: 50,
+          lineNumber: 52,
+          columnNumber: 29
+        }, this),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 hover:cursor-pointer hover:underline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { className: "text-sm w-full focus:outline-none p-1 text-black", form: `updateRoleForm_${rl.id}`, type: "text", name: "title_ru", defaultValue: rl.title_ru, maxLength: 45, onChange: () => {
+          const button = document.getElementById(`updateRoleButton_${rl.id}`);
+          button.click();
+        } }, void 0, false, {
+          fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+          lineNumber: 59,
+          columnNumber: 33
+        }, this) }, void 0, false, {
+          fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+          lineNumber: 58,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(ButtonDeleteRole, { roleId: rl.id }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-          lineNumber: 57,
+          lineNumber: 65,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-          lineNumber: 56,
+          lineNumber: 64,
           columnNumber: 29
         }, this)
       ] }, rl.id, true, {
         fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-        lineNumber: 48,
+        lineNumber: 50,
         columnNumber: 47
       }, this)) }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-        lineNumber: 47,
+        lineNumber: 49,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-      lineNumber: 39,
+      lineNumber: 40,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-    lineNumber: 34,
+    lineNumber: 35,
     columnNumber: 10
   }, this);
 }
-_s7(RolesTable, "GK/KaWFRYoH2IJJH58+SEoGCCyc=", false, function() {
+_s7(RolesTable, "S/mlWsZTmnR3pBaV4+wWlnjauYg=", false, function() {
   return [useNavigate, useTranslation];
 });
 _c7 = RolesTable;
@@ -4858,7 +4876,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/users/tbl_ainputforms.tsx"
   );
-  import.meta.hot.lastModified = "1710230805589.0044";
+  import.meta.hot.lastModified = "1710246544750.7942";
 }
 function AccessInputFormsTable({
   aforms,
@@ -4866,81 +4884,82 @@ function AccessInputFormsTable({
 }) {
   _s9();
   const {
+    i18n,
     t
   } = useTranslation();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(import_jsx_dev_runtime9.Fragment, { children: [
     aforms && aforms.map((aform) => /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(Form, { className: "hidden", id: `updateAccessInputForm_${aform.id}`, method: "post", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: aform.id }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-        lineNumber: 37,
+        lineNumber: 38,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("input", { type: "hidden", name: "roleId", defaultValue: aform.roleId }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-        lineNumber: 38,
+        lineNumber: 39,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(CustomButton, { className: "bg-green-500 hover:shadow-green-100", id: `updateAccessInputFormButton_${aform.id}`, form: `updateAccessInputForm_${aform.id}`, type: "submit", name: "_action", value: "updateAccessInput" }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-        lineNumber: 39,
+        lineNumber: 40,
         columnNumber: 21
       }, this)
     ] }, `updateAccessInputForm_${aform.id}`, true, {
       fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-      lineNumber: 36,
+      lineNumber: 37,
       columnNumber: 44
     }, this)),
     /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("table", { className: "w-full", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("thead", { className: "bg-primary text-white text-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 44,
+          lineNumber: 45,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("form") }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 45,
+          lineNumber: 46,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("access_type") }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 46,
+          lineNumber: 47,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 47,
+          lineNumber: 48,
           columnNumber: 25
         }, this)
       ] }, void 0, true, {
         fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-        lineNumber: 43,
+        lineNumber: 44,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-        lineNumber: 42,
+        lineNumber: 43,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("tbody", { children: aforms.map((aform, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 52,
+          lineNumber: 53,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("select", { className: "text-sm w-full", form: `updateAccessInputForm_${aform.id}`, name: "formId", defaultValue: aform.formId ? aform.formId : "", onChange: () => {
           const button = document.getElementById(`updateAccessInputFormButton_${aform.id}`);
           button.click();
-        }, children: inputForms.map((inputForm) => /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("option", { value: inputForm.id, children: inputForm.title }, inputForm.id, false, {
+        }, children: inputForms.map((inputForm) => /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("option", { value: inputForm.id, children: inputForm[`title_${i18n.language}`] }, inputForm.id, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 58,
+          lineNumber: 59,
           columnNumber: 66
         }, this)) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 54,
+          lineNumber: 55,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 53,
+          lineNumber: 54,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-24", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("select", { className: "text-sm w-full", form: `updateAccessInputForm_${aform.id}`, name: "accessType", defaultValue: aform.accessType ? aform.accessType : "", onChange: () => {
@@ -4948,47 +4967,47 @@ function AccessInputFormsTable({
           button.click();
         }, children: Object.keys(import_client.AccessType).map((key) => /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("option", { value: key, children: key }, key, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 68,
+          lineNumber: 69,
           columnNumber: 73
         }, this)) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 64,
+          lineNumber: 65,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 63,
+          lineNumber: 64,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ (0, import_jsx_dev_runtime9.jsxDEV)(ButtonDeleteAccessInputForm, { aform }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 72,
+          lineNumber: 73,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-          lineNumber: 71,
+          lineNumber: 72,
           columnNumber: 29
         }, this)
       ] }, aform.id, true, {
         fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-        lineNumber: 51,
+        lineNumber: 52,
         columnNumber: 51
       }, this)) }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-        lineNumber: 50,
+        lineNumber: 51,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-      lineNumber: 41,
+      lineNumber: 42,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
-    lineNumber: 35,
+    lineNumber: 36,
     columnNumber: 10
   }, this);
 }
-_s9(AccessInputFormsTable, "zlIdU9EjM2llFt74AbE2KsUJXyM=", false, function() {
+_s9(AccessInputFormsTable, "tesxYUfym1EdybWre/Q68xlYjtY=", false, function() {
   return [useTranslation];
 });
 _c9 = AccessInputFormsTable;
@@ -5292,7 +5311,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/users/tbl_asearchforms.tsx"
   );
-  import.meta.hot.lastModified = "1710231032028.7444";
+  import.meta.hot.lastModified = "1710246584903.56";
 }
 function AccessSearchFormsTable({
   aforms,
@@ -5300,113 +5319,114 @@ function AccessSearchFormsTable({
 }) {
   _s14();
   const {
+    i18n,
     t
   } = useTranslation();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_jsx_dev_runtime14.Fragment, { children: [
     aforms && aforms.map((aform) => /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(Form, { className: "hidden", id: `updateAccessSearchForm_${aform.id}`, method: "post", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: aform.id }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-        lineNumber: 37,
+        lineNumber: 38,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("input", { type: "hidden", name: "roleId", defaultValue: aform.roleId }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-        lineNumber: 38,
+        lineNumber: 39,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("input", { type: "hidden", name: "accessType", defaultValue: import_client2.AccessType.READ }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-        lineNumber: 39,
+        lineNumber: 40,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(CustomButton, { className: "bg-green-500 hover:shadow-green-100", id: `updateAccessSearchFormButton_${aform.id}`, form: `updateAccessSearchForm_${aform.id}`, type: "submit", name: "_action", value: "updateAccessSearch" }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-        lineNumber: 40,
+        lineNumber: 41,
         columnNumber: 21
       }, this)
     ] }, `updateAccessSearchForm_${aform.id}`, true, {
       fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-      lineNumber: 36,
+      lineNumber: 37,
       columnNumber: 44
     }, this)),
     /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("table", { className: "w-full", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("thead", { className: "bg-primary text-white text-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 45,
+          lineNumber: 46,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("form") }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 46,
+          lineNumber: 47,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 47,
+          lineNumber: 48,
           columnNumber: 25
         }, this)
       ] }, void 0, true, {
         fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-        lineNumber: 44,
+        lineNumber: 45,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-        lineNumber: 43,
+        lineNumber: 44,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("tbody", { children: aforms.map((aform, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 52,
+          lineNumber: 53,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("select", { className: "text-sm w-full", form: `updateAccessSearchForm_${aform.id}`, name: "formId", defaultValue: aform.formId ? aform.formId : "", onChange: () => {
           const button = document.getElementById(`updateAccessSearchFormButton_${aform.id}`);
           button.click();
-        }, children: searchForms.map((searchForm) => /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("option", { value: searchForm.id, children: searchForm.title }, searchForm.id, false, {
+        }, children: searchForms.map((searchForm) => /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("option", { value: searchForm.id, children: searchForm[`title_${i18n.language}`] }, searchForm.id, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 58,
+          lineNumber: 59,
           columnNumber: 68
         }, this)) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 54,
+          lineNumber: 55,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 53,
+          lineNumber: 54,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(ButtonDeleteAccessSearchForm, { aform }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 64,
+          lineNumber: 65,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-          lineNumber: 63,
+          lineNumber: 64,
           columnNumber: 29
         }, this)
       ] }, aform.id, true, {
         fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-        lineNumber: 51,
+        lineNumber: 52,
         columnNumber: 51
       }, this)) }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-        lineNumber: 50,
+        lineNumber: 51,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-      lineNumber: 42,
+      lineNumber: 43,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
-    lineNumber: 35,
+    lineNumber: 36,
     columnNumber: 10
   }, this);
 }
-_s14(AccessSearchFormsTable, "zlIdU9EjM2llFt74AbE2KsUJXyM=", false, function() {
+_s14(AccessSearchFormsTable, "tesxYUfym1EdybWre/Q68xlYjtY=", false, function() {
   return [useTranslation];
 });
 _c14 = AccessSearchFormsTable;
@@ -5597,7 +5617,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/users/tbl_roles_only_title.tsx"
   );
-  import.meta.hot.lastModified = "1710236654588.688";
+  import.meta.hot.lastModified = "1710246644748.711";
 }
 function RolesOnlyTitleTable({
   userRoles,
@@ -5605,108 +5625,109 @@ function RolesOnlyTitleTable({
 }) {
   _s17();
   const {
+    i18n,
     t
   } = useTranslation();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(import_jsx_dev_runtime17.Fragment, { children: [
     userRoles && userRoles.map((ur) => /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(Form, { className: "hidden", id: `updateUserRole_${ur.id}`, method: "post", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: ur.id }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-        lineNumber: 35,
+        lineNumber: 36,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("input", { type: "hidden", name: "userId", defaultValue: ur.userId ? ur.userId : "" }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-        lineNumber: 36,
+        lineNumber: 37,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("input", { type: "submit", id: `updateUserRoleButton_${ur.id}`, form: `updateUserRole_${ur.id}`, name: "_action", value: "updateUserRole" }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-        lineNumber: 37,
+        lineNumber: 38,
         columnNumber: 21
       }, this)
     ] }, `updateUserRole_${ur.id}`, true, {
       fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-      lineNumber: 34,
+      lineNumber: 35,
       columnNumber: 47
     }, this)),
     /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("table", { className: "w-full", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("thead", { className: "bg-primary text-white text-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 42,
+          lineNumber: 43,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title") }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 43,
+          lineNumber: 44,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 44,
+          lineNumber: 45,
           columnNumber: 25
         }, this)
       ] }, void 0, true, {
         fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-        lineNumber: 41,
+        lineNumber: 42,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-        lineNumber: 40,
+        lineNumber: 41,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("tbody", { children: userRoles.map((ur, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 49,
+          lineNumber: 50,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("select", { className: "text-sm w-full", form: `updateUserRole_${ur.id}`, name: "roleId", defaultValue: ur.roleId ? ur.roleId : "", onChange: () => {
           const button = document.getElementById(`updateUserRoleButton_${ur.id}`);
           button.click();
-        }, children: roles.map((role) => /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("option", { value: role.id, children: role.title }, role.id, false, {
+        }, children: roles.map((role) => /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("option", { value: role.id, children: role[`title_${i18n.language}`] }, role.id, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 55,
+          lineNumber: 56,
           columnNumber: 56
         }, this)) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 51,
+          lineNumber: 52,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 50,
+          lineNumber: 51,
           columnNumber: 29
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(ButtonDeleteUserRole, { userRoleId: ur.id, userId: ur.userId }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 61,
+          lineNumber: 62,
           columnNumber: 33
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-          lineNumber: 60,
+          lineNumber: 61,
           columnNumber: 29
         }, this)
       ] }, ur.id, true, {
         fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-        lineNumber: 48,
+        lineNumber: 49,
         columnNumber: 51
       }, this)) }, void 0, false, {
         fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-        lineNumber: 47,
+        lineNumber: 48,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-      lineNumber: 39,
+      lineNumber: 40,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
-    lineNumber: 33,
+    lineNumber: 34,
     columnNumber: 10
   }, this);
 }
-_s17(RolesOnlyTitleTable, "zlIdU9EjM2llFt74AbE2KsUJXyM=", false, function() {
+_s17(RolesOnlyTitleTable, "tesxYUfym1EdybWre/Q68xlYjtY=", false, function() {
   return [useTranslation];
 });
 _c17 = RolesOnlyTitleTable;
@@ -6079,7 +6100,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/dashboard.users.tsx"
   );
-  import.meta.hot.lastModified = "1710235380135.7622";
+  import.meta.hot.lastModified = "1710246472441.4294";
 }
 function Users() {
   _s20();
@@ -6101,7 +6122,7 @@ function Users() {
   const data = useActionData();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime20.jsxDEV)(UsersView, { state, roles, role, isNewUser: isNewUser ? true : false, user, users, departments, inputForms, searchForms, accessInputForms, accessSearchForms, currentUserId: Number(currenUserId), userRoles, errors: data?.errors ? data.errors : void 0 }, void 0, false, {
     fileName: "app/routes/dashboard.users.tsx",
-    lineNumber: 317,
+    lineNumber: 318,
     columnNumber: 10
   }, this);
 }
@@ -6125,4 +6146,4 @@ moment/moment.js:
   (*! license : MIT *)
   (*! momentjs.com *)
 */
-//# sourceMappingURL=/build/routes/dashboard.users-Z3L5J5BI.js.map
+//# sourceMappingURL=/build/routes/dashboard.users-4Y6JHGEE.js.map

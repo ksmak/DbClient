@@ -131,16 +131,16 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/elements/logo.tsx"
   );
-  import.meta.hot.lastModified = "1709708134333.8994";
+  import.meta.hot.lastModified = "1710245389718.5515";
 }
 var Logo = () => {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "/", className: "flex gap-3", children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "/dashboard", className: "flex gap-3", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("img", { className: "h-14 object-cover object-center", src: "/logo.png", alt: "logo" }, void 0, false, {
       fileName: "app/components/UI/elements/logo.tsx",
       lineNumber: 24,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "font-bold text-lg self-center pt-1 text-blue-gray-800", children: "Db Creator" }, void 0, false, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "font-bold text-lg self-center text-primary text-bold h-4", children: "Db Creator" }, void 0, false, {
       fileName: "app/components/UI/elements/logo.tsx",
       lineNumber: 25,
       columnNumber: 13
@@ -269,7 +269,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx"
   );
-  import.meta.hot.lastModified = "1710154475968.134";
+  import.meta.hot.lastModified = "1710246138475.452";
 }
 var {
   Collapse,
@@ -291,12 +291,12 @@ function NavListMenu({
     icon,
     title,
     link
-  }, key) => /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("a", { href: "#", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(MenuItem, { placeholder: "", className: "flex items-center gap-3 rounded-lg", children: [
+  }, key) => /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(MenuItem, { placeholder: "", className: "flex items-center gap-3 rounded-lg", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("div", { className: "flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ", children: [
       " ",
       (0, import_react3.createElement)(icon, {
         strokeWidth: 2,
-        className: "h-6 text-gray-900 w-6"
+        className: "h-6 text-primary w-6"
       })
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
@@ -329,7 +329,7 @@ function NavListMenu({
     /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Menu, { open: isMenuOpen, handler: setIsMenuOpen, offset: {
       mainAxis: 20
     }, placement: "bottom", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(MenuHandler, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Typography, { className: "font-medium", as: "div", variant: "small", placeholder: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ListItem, { className: "flex items-center gap-2 py-2 pr-4 font-medium text-primary", selected: isMenuOpen || isMobileMenuOpen, onClick: () => setIsMobileMenuOpen((cur) => !cur), placeholder: "", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(MenuHandler, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Typography, { className: "font-medium", as: "div", variant: "small", placeholder: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ListItem, { className: "flex items-center gap-2 py-2 pr-4 font-bold text-primary h-6", selected: isMenuOpen || isMobileMenuOpen, onClick: () => setIsMobileMenuOpen((cur) => !cur), placeholder: "", children: [
         menuTitle,
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ChevronDownIcon_default, { strokeWidth: 2.5, className: `hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""}` }, void 0, false, {
           fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
@@ -475,7 +475,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/elements/language.tsx"
   );
-  import.meta.hot.lastModified = "1709633026782.287";
+  import.meta.hot.lastModified = "1710245259530.3564";
 }
 function LanguagePanel() {
   _s3();
@@ -489,7 +489,7 @@ function LanguagePanel() {
     title: "RUS",
     label: "ru"
   }];
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "flex flex-row justify-center items-center gap-4 font-bold", children: langs.map((item, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("span", { className: `${i18n.language === item.label ? "border-2 border-blue-gray-500" : ""} p-1 text-sm rounded-md hover:cursor-pointer`, onClick: () => i18n.changeLanguage(item.label), children: item.title }, index, false, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "flex flex-row justify-center items-center gap-4 font-bold", children: langs.map((item, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("span", { className: `${i18n.language === item.label ? "bg-primary text-white" : "border-2 border-blue-gray-500"} p-1 text-sm rounded-md hover:cursor-pointer`, onClick: () => i18n.changeLanguage(item.label), children: item.title }, index, false, {
     fileName: "app/components/UI/elements/language.tsx",
     lineNumber: 36,
     columnNumber: 41
@@ -527,7 +527,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/dashboard/menu/main_menu.tsx"
   );
-  import.meta.hot.lastModified = "1709721111547.7046";
+  import.meta.hot.lastModified = "1710244921865.7837";
 }
 var {
   IconButton,
@@ -540,7 +540,7 @@ function MainMenu({
   searchDataMenuItems,
   serviceMenuItems
 }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "w-full px-4 bg-white shadow shadow-blue-gray-300 mb-2", children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "w-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "w-full px-4 bg-white shadow shadow-blue-gray-500 mb-2", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "w-full flex items-center justify-between text-blue-gray-900", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "shrink-0 h-16", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(logo_default, {}, void 0, false, {
         fileName: "app/components/UI/widgets/dashboard/menu/main_menu.tsx",
@@ -671,10 +671,10 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/dashboard.tsx"
   );
-  import.meta.hot.lastModified = "1710237974877.5964";
+  import.meta.hot.lastModified = "1710239843641.1697";
 }
 function dashboard() {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const data = useLoaderData();
   const [docs, setDocs] = (0, import_react9.useState)({});
   const [current, setCurrent] = (0, import_react9.useState)(0);
@@ -691,14 +691,14 @@ function dashboard() {
   const [openNav, setOpenNav] = (0, import_react9.useState)(false);
   const editDataMenuItems = data.inputForms.map((item) => {
     return {
-      title: item.title,
+      title: item[`title_${i18n.language}`],
       link: `/dashboard/enter_data/${item.id}`,
       icon: NewspaperIcon_default
     };
   });
   const searchDataMenuItems = data.searchForms.map((item) => {
     return {
-      title: item.title,
+      title: item[`title_${i18n.language}`],
       link: `/dashboard/search_data/${item.id}`,
       icon: NewspaperIcon_default
     };
@@ -744,4 +744,4 @@ function dashboard() {
 export {
   dashboard as default
 };
-//# sourceMappingURL=/build/routes/dashboard-5HHWBALD.js.map
+//# sourceMappingURL=/build/routes/dashboard-ZOWHK627.js.map

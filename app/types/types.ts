@@ -3,14 +3,17 @@ import { Dispatch, SetStateAction } from "react"
 
 export interface IDict {
     id: number,
-    title: string,
+    title_kk: string,
+    title_ru: string,
     data_browse: {
         id: number,
-        title: string,
+        title_kk: string,
+        title_ru: string,
     }[],
     data_edit: {
         id: number,
-        title: string,
+        title_kk: string,
+        title_ru: string,
     }[],
 }
 

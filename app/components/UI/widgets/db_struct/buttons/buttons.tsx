@@ -17,7 +17,7 @@ export default function Buttons({
     searchForms_count
 }: ButtonsProps) {
     return (
-        <div className="mb-2 flex justify-between py-2 px-2 border border-gray-900">
+        <div className="mb-2 flex justify-between py-2 px-2 border">
             <div className="flex items-center gap-3">
                 {state === 'dictionary'
                     ? <ButtonAddDicionary count={dictionaries_count} />

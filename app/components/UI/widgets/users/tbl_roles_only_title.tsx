@@ -9,7 +9,7 @@ type RolesOnlyTitleTableProps = {
 }
 
 export default function RolesOnlyTitleTable({ userRoles, roles }: RolesOnlyTitleTableProps) {
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
 
     return (
         <>
@@ -64,7 +64,7 @@ export default function RolesOnlyTitleTable({ userRoles, roles }: RolesOnlyTitle
                                 >
                                     {roles.map((role: Role) => (
                                         <option key={role.id} value={role.id}>
-                                            {role.title}
+                                            {role[`title_${i18n.language}` as keyof typeof role]}
                                         </option>
                                     ))}
                                 </select>

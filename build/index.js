@@ -125,7 +125,7 @@ import { useChangeLanguage } from "remix-i18next/react";
 import { useTranslation } from "react-i18next";
 
 // app/tailwind.css
-var tailwind_default = "/build/_assets/tailwind-7NQCPLVF.css";
+var tailwind_default = "/build/_assets/tailwind-PTJOSTG6.css";
 
 // app/root.tsx
 import { jsxDEV as jsxDEV2 } from "react/jsx-dev-runtime";
@@ -301,16 +301,13 @@ function UsersModule(prisma2) {
       });
     },
     getRoles() {
-      return prisma2.role.findMany({
-        orderBy: {
-          title: "asc"
-        }
-      });
+      return prisma2.role.findMany();
     },
     createEmptyRole(cnt) {
       return prisma2.role.create({
         data: {
-          title: `Role ${cnt}`
+          title_kk: `Role ${cnt}`,
+          title_ru: `Role ${cnt}`
         }
       });
     },
@@ -465,11 +462,7 @@ function UsersModule(prisma2) {
 function DbModule(prisma2) {
   return {
     async getDictionaries() {
-      let dicts = [], dictionaries = await prisma2.dictionary.findMany({
-        orderBy: {
-          title: "asc"
-        }
-      });
+      let dicts = [], dictionaries = await prisma2.dictionary.findMany();
       for (let dict of dictionaries)
         try {
           let [dic1, dic2] = await prisma2.$transaction([
@@ -478,14 +471,16 @@ function DbModule(prisma2) {
           ]);
           dicts.push({
             id: dict.id,
-            title: dict.title,
+            title_kk: dict.title_kk,
+            title_ru: dict.title_ru,
             data_browse: dic1,
             data_edit: dic2
           });
         } catch {
           dicts.push({
             id: dict.id,
-            title: dict.title,
+            title_kk: dict.title_kk,
+            title_ru: dict.title_ru,
             data_browse: [],
             data_edit: []
           });
@@ -495,7 +490,8 @@ function DbModule(prisma2) {
     createEmptyDictionary(cnt) {
       return prisma2.dictionary.create({
         data: {
-          title: `Dictionary ${cnt}`
+          title_kk: `Dictionary ${cnt}`,
+          title_ru: `Dictionary ${cnt}`
         }
       });
     },
@@ -538,7 +534,8 @@ function DbModule(prisma2) {
       return prisma2.inputForm.create({
         data: {
           pos: cnt,
-          title: `Input Form ${cnt}`
+          title_kk: `Input Form ${cnt}`,
+          title_ru: `Input Form ${cnt}`
         }
       });
     },
@@ -595,7 +592,8 @@ function DbModule(prisma2) {
       return prisma2.searchForm.create({
         data: {
           pos: cnt,
-          title: `Search Form ${cnt}`
+          title_kk: `Search Form ${cnt}`,
+          title_ru: `Search Form ${cnt}`
         }
       });
     },
@@ -655,7 +653,8 @@ function DbModule(prisma2) {
         data: {
           pos: cnt,
           inputFormId: formId,
-          title: `Group ${cnt}`
+          title_kk: `Group ${cnt}`,
+          title_ru: `Group ${cnt}`
         }
       });
     },
@@ -699,7 +698,8 @@ function DbModule(prisma2) {
         data: {
           pos: cnt,
           searchFormId: formId,
-          title: `Search Field ${cnt}`
+          title_kk: `Search Field ${cnt}`,
+          title_ru: `Search Field ${cnt}`
         }
       });
     },
@@ -736,14 +736,19 @@ function DbModule(prisma2) {
         data: {
           pos: cnt,
           groupId,
-          title: `Input Field ${cnt}`
+          title_kk: `Input Field ${cnt}`,
+          title_ru: `Input Field ${cnt}`
         }
       });
     },
     getInputFields() {
       return prisma2.inputField.findMany({
         include: {
-          group: !0
+          group: {
+            include: {
+              inputForm: !0
+            }
+          }
         }
       });
     },
@@ -2114,7 +2119,7 @@ function ButtonCreate({ userId, inputFormId }) {
     /* @__PURE__ */ jsxDEV16(
       CustomButton,
       {
-        className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+        className: "bg-primary hover:shadow-primary_shadow",
         type: "submit",
         name: "_action",
         value: "openForCreate",
@@ -2746,13 +2751,14 @@ function CustomSelect({ className, id, title, errors, children, ...props }) {
   );
 }
 
-// app/components/UI/widgets/enter_data/edit_form/field.tsx
+// app/components/UI/widgets/enter_data/edit_form/field_single.tsx
+import { useTranslation as useTranslation11 } from "react-i18next";
 import { jsxDEV as jsxDEV26 } from "react/jsx-dev-runtime";
 function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
-  let tableName = `tbl_${fld.groupId}`, fieldName = `f${fld.id}`, val = doc[tableName][recordIndex][fieldName] ? doc[tableName][recordIndex][fieldName] : "", cls = `col-span-${fld.colSpan} col-start-${fld.colStart}`, handleChange = (e) => {
+  let { i18n } = useTranslation11(), tableName = `tbl_${fld.groupId}`, fieldName = `f${fld.id}`, val = doc[tableName][recordIndex][fieldName] ? doc[tableName][recordIndex][fieldName] : "", cls = `col-span-${fld.colSpan} col-start-${fld.colStart}`, handleChange = (e) => {
     let d = { ...doc };
     d[tableName][recordIndex][fieldName] = e.target.value, setDoc(d);
-  };
+  }, fieldTitle = fld[`title_${i18n.language}`];
   switch (fld.fieldType) {
     case "TEXT":
       return /* @__PURE__ */ jsxDEV26(
@@ -2760,7 +2766,7 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         {
           className: cls,
           id: fieldName,
-          title: fld.title,
+          title: fieldTitle,
           type: "text",
           name: fieldName,
           value: val,
@@ -2773,8 +2779,8 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         fld.id,
         !1,
         {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-          lineNumber: 29,
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+          lineNumber: 32,
           columnNumber: 17
         },
         this
@@ -2785,7 +2791,7 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         {
           className: cls,
           id: fieldName,
-          title: fld.title,
+          title: fieldTitle,
           type: "text",
           name: fieldName,
           value: val,
@@ -2798,8 +2804,8 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         fld.id,
         !1,
         {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-          lineNumber: 46,
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+          lineNumber: 49,
           columnNumber: 17
         },
         this
@@ -2810,7 +2816,7 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         {
           className: cls,
           id: fieldName,
-          title: fld.title,
+          title: fieldTitle,
           type: "number",
           name: fieldName,
           value: val,
@@ -2823,8 +2829,8 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         fld.id,
         !1,
         {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-          lineNumber: 63,
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+          lineNumber: 66,
           columnNumber: 17
         },
         this
@@ -2835,7 +2841,7 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         {
           className: cls,
           id: fieldName,
-          title: fld.title,
+          title: fieldTitle,
           type: "number",
           step: "0.01",
           name: fieldName,
@@ -2849,8 +2855,8 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         fld.id,
         !1,
         {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-          lineNumber: 80,
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+          lineNumber: 83,
           columnNumber: 17
         },
         this
@@ -2862,7 +2868,7 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         {
           className: cls,
           id: fieldName,
-          title: fld.title,
+          title: fieldTitle,
           name: fieldName,
           value: val,
           onChange: handleChange,
@@ -2870,17 +2876,17 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
           disabled: !fld.isEnable || !["create", "edit", "search", "find"].includes(String(state)),
           children: [
             /* @__PURE__ */ jsxDEV26("option", { children: "-" }, void 0, !1, {
-              fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-              lineNumber: 110,
+              fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+              lineNumber: 113,
               columnNumber: 21
             }, this),
             ["create", "edit", "search", "find"].includes(String(state)) ? dic?.data_edit.map((item) => /* @__PURE__ */ jsxDEV26("option", { value: item.id, children: item.title }, item.id, !1, {
-              fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-              lineNumber: 113,
+              fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+              lineNumber: 116,
               columnNumber: 29
             }, this)) : dic?.data_browse.map((item) => /* @__PURE__ */ jsxDEV26("option", { value: item.id, children: item.title }, item.id, !1, {
-              fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-              lineNumber: 116,
+              fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+              lineNumber: 119,
               columnNumber: 29
             }, this))
           ]
@@ -2888,8 +2894,8 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         fld.id,
         !0,
         {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-          lineNumber: 99,
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+          lineNumber: 102,
           columnNumber: 17
         },
         this
@@ -2900,7 +2906,7 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         {
           className: cls,
           id: fieldName,
-          title: fld.title,
+          title: fieldTitle,
           type: "date",
           name: fieldName,
           value: val,
@@ -2913,8 +2919,8 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         fld.id,
         !1,
         {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-          lineNumber: 122,
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+          lineNumber: 125,
           columnNumber: 17
         },
         this
@@ -2925,7 +2931,7 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         {
           className: cls,
           id: fieldName,
-          title: fld.title,
+          title: fieldTitle,
           type: "time",
           name: fieldName,
           value: val,
@@ -2938,8 +2944,8 @@ function Field({ state, dictionaries, doc, setDoc, recordIndex, fld }) {
         fld.id,
         !1,
         {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
-          lineNumber: 139,
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+          lineNumber: 142,
           columnNumber: 17
         },
         this
@@ -2976,9 +2982,10 @@ function SingleGroup({ state, dictionaries, group, doc, setDoc }) {
 }
 
 // app/components/UI/widgets/enter_data/edit_form/multy_group.tsx
+import { useTranslation as useTranslation12 } from "react-i18next";
 import { jsxDEV as jsxDEV28 } from "react/jsx-dev-runtime";
 function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
-  let handleAdd = (e) => {
+  let { i18n } = useTranslation12(), handleAdd = (e) => {
     e.preventDefault();
     let d = { ...doc }, tbl = `tbl_${group.id}`, fields = { id: null, sid: null, lst: 0 };
     for (let field of group.fields)
@@ -3005,11 +3012,11 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
             children: [
               /* @__PURE__ */ jsxDEV28("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV28("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, !1, {
                 fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                lineNumber: 50,
+                lineNumber: 52,
                 columnNumber: 29
               }, this) }, void 0, !1, {
                 fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                lineNumber: 49,
+                lineNumber: 51,
                 columnNumber: 25
               }, this),
               "Add"
@@ -3019,7 +3026,7 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
           !0,
           {
             fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-            lineNumber: 45,
+            lineNumber: 47,
             columnNumber: 23
           },
           this
@@ -3029,7 +3036,7 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
       !1,
       {
         fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-        lineNumber: 41,
+        lineNumber: 43,
         columnNumber: 13
       },
       this
@@ -3046,22 +3053,22 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
               children: /* @__PURE__ */ jsxDEV28("tr", { children: [
                 /* @__PURE__ */ jsxDEV28("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, !1, {
                   fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                  lineNumber: 63,
+                  lineNumber: 65,
                   columnNumber: 25
                 }, this),
-                group?.fields && group.fields.map((fld) => /* @__PURE__ */ jsxDEV28("th", { className: "p-1 text-sm border border-blue-gray-700", children: fld.title }, fld.id, !1, {
+                group?.fields && group.fields.map((fld) => /* @__PURE__ */ jsxDEV28("th", { className: "p-1 text-sm border border-blue-gray-700", children: fld[`title_${i18n.language}`] }, fld.id, !1, {
                   fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                  lineNumber: 65,
+                  lineNumber: 67,
                   columnNumber: 29
                 }, this)),
                 /* @__PURE__ */ jsxDEV28("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, !1, {
                   fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                  lineNumber: 69,
+                  lineNumber: 71,
                   columnNumber: 25
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                lineNumber: 62,
+                lineNumber: 64,
                 columnNumber: 21
               }, this)
             },
@@ -3069,7 +3076,7 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
             !1,
             {
               fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-              lineNumber: 59,
+              lineNumber: 61,
               columnNumber: 17
             },
             this
@@ -3077,7 +3084,7 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
           /* @__PURE__ */ jsxDEV28("tbody", { children: doc[`tbl_${group.id}`].map((record, index) => /* @__PURE__ */ jsxDEV28("tr", { children: [
             /* @__PURE__ */ jsxDEV28("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, !1, {
               fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-              lineNumber: 75,
+              lineNumber: 77,
               columnNumber: 29
             }, this),
             group?.fields && group.fields.map((fld) => /* @__PURE__ */ jsxDEV28("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ jsxDEV28(
@@ -3094,13 +3101,13 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
               !1,
               {
                 fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                lineNumber: 78,
+                lineNumber: 80,
                 columnNumber: 37
               },
               this
             ) }, fld.id, !1, {
               fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-              lineNumber: 77,
+              lineNumber: 79,
               columnNumber: 33
             }, this)),
             state === "edit" && index !== 0 ? /* @__PURE__ */ jsxDEV28("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ jsxDEV28(
@@ -3111,11 +3118,11 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
                 children: [
                   /* @__PURE__ */ jsxDEV28("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV28("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, !1, {
                     fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                    lineNumber: 95,
+                    lineNumber: 97,
                     columnNumber: 45
                   }, this) }, void 0, !1, {
                     fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                    lineNumber: 94,
+                    lineNumber: 96,
                     columnNumber: 41
                   }, this),
                   "Delete"
@@ -3125,22 +3132,22 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
               !0,
               {
                 fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-                lineNumber: 90,
+                lineNumber: 92,
                 columnNumber: 37
               },
               this
             ) }, void 0, !1, {
               fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-              lineNumber: 89,
+              lineNumber: 91,
               columnNumber: 35
             }, this) : null
           ] }, index, !0, {
             fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-            lineNumber: 74,
+            lineNumber: 76,
             columnNumber: 25
           }, this)) }, void 0, !1, {
             fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-            lineNumber: 72,
+            lineNumber: 74,
             columnNumber: 17
           }, this)
         ]
@@ -3149,19 +3156,20 @@ function MultyGroup({ state, dictionaries, group, doc, setDoc }) {
       !0,
       {
         fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-        lineNumber: 56,
+        lineNumber: 58,
         columnNumber: 13
       },
       this
     )
   ] }, void 0, !0, {
     fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-    lineNumber: 40,
+    lineNumber: 42,
     columnNumber: 9
   }, this);
 }
 
 // app/components/UI/widgets/enter_data/edit_form/edit_form.tsx
+import { useTranslation as useTranslation13 } from "react-i18next";
 import { jsxDEV as jsxDEV29 } from "react/jsx-dev-runtime";
 function EditForm({
   formRef,
@@ -3172,7 +3180,7 @@ function EditForm({
   doc,
   setDoc
 }) {
-  let location = useLocation();
+  let { i18n } = useTranslation13(), location = useLocation();
   return /* @__PURE__ */ jsxDEV29(
     Form6,
     {
@@ -3182,72 +3190,75 @@ function EditForm({
       children: [
         /* @__PURE__ */ jsxDEV29("input", { type: "hidden", name: "_user", value: userId }, void 0, !1, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
-          lineNumber: 34,
+          lineNumber: 37,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV29("input", { type: "hidden", name: "_inputFormId", value: inputForm.id }, void 0, !1, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
-          lineNumber: 35,
+          lineNumber: 38,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ jsxDEV29("input", { type: "hidden", name: "_id", value: doc.id ? doc.id : "" }, void 0, !1, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
-          lineNumber: 36,
+          lineNumber: 39,
           columnNumber: 13
         }, this),
-        inputForm?.groups && inputForm.groups.map((group) => /* @__PURE__ */ jsxDEV29("div", { className: "mb-2", children: [
-          /* @__PURE__ */ jsxDEV29("h2", { className: "col-span-3 bg-orange-700 text-white font-bold text-sm p-1 pl-4", children: group.title }, void 0, !1, {
+        inputForm?.groups && inputForm.groups.map((group) => {
+          let groupTitle = group[`title_${i18n.language}`];
+          return /* @__PURE__ */ jsxDEV29("div", { className: "mb-2", children: [
+            /* @__PURE__ */ jsxDEV29("h2", { className: "col-span-3 bg-primary text-white font-bold text-sm p-1 pl-4", children: groupTitle }, void 0, !1, {
+              fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
+              lineNumber: 44,
+              columnNumber: 25
+            }, this),
+            group.isMulty ? /* @__PURE__ */ jsxDEV29(
+              MultyGroup,
+              {
+                state,
+                dictionaries,
+                group,
+                doc,
+                setDoc
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
+                lineNumber: 55,
+                columnNumber: 31
+              },
+              this
+            ) : /* @__PURE__ */ jsxDEV29(
+              SingleGroup,
+              {
+                state,
+                dictionaries,
+                group,
+                doc,
+                setDoc
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
+                lineNumber: 48,
+                columnNumber: 31
+              },
+              this
+            )
+          ] }, group.id, !0, {
             fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
-            lineNumber: 39,
+            lineNumber: 43,
             columnNumber: 21
-          }, this),
-          group.isMulty ? /* @__PURE__ */ jsxDEV29(
-            MultyGroup,
-            {
-              state,
-              dictionaries,
-              group,
-              doc,
-              setDoc
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
-              lineNumber: 48,
-              columnNumber: 27
-            },
-            this
-          ) : /* @__PURE__ */ jsxDEV29(
-            SingleGroup,
-            {
-              state,
-              dictionaries,
-              group,
-              doc,
-              setDoc
-            },
-            void 0,
-            !1,
-            {
-              fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
-              lineNumber: 41,
-              columnNumber: 27
-            },
-            this
-          )
-        ] }, group.id, !0, {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
-          lineNumber: 38,
-          columnNumber: 17
-        }, this))
+          }, this);
+        })
       ]
     },
     location.key,
     !0,
     {
       fileName: "app/components/UI/widgets/enter_data/edit_form/edit_form.tsx",
-      lineNumber: 28,
+      lineNumber: 31,
       columnNumber: 9
     },
     this
@@ -3439,10 +3450,10 @@ import invariant from "tiny-invariant";
 
 // app/components/UI/widgets/db_struct/buttons/btn_add_dictionary.tsx
 import { Form as Form7 } from "@remix-run/react";
-import { useTranslation as useTranslation11 } from "react-i18next";
+import { useTranslation as useTranslation14 } from "react-i18next";
 import { jsxDEV as jsxDEV32 } from "react/jsx-dev-runtime";
 function ButtonAddDicionary({ count }) {
-  let { t } = useTranslation11();
+  let { t } = useTranslation14();
   return /* @__PURE__ */ jsxDEV32(Form7, { method: "post", children: [
     /* @__PURE__ */ jsxDEV32("input", { type: "hidden", name: "cnt", defaultValue: count + 1 }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/buttons/btn_add_dictionary.tsx",
@@ -3452,7 +3463,7 @@ function ButtonAddDicionary({ count }) {
     /* @__PURE__ */ jsxDEV32(
       CustomButton,
       {
-        className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+        className: "bg-primary hover:shadow-primary_shadow",
         type: "submit",
         name: "_action",
         value: "createEmptyDictionary",
@@ -3487,10 +3498,10 @@ function ButtonAddDicionary({ count }) {
 
 // app/components/UI/widgets/db_struct/buttons/btn_add_inputform.tsx
 import { Form as Form8 } from "@remix-run/react";
-import { useTranslation as useTranslation12 } from "react-i18next";
+import { useTranslation as useTranslation15 } from "react-i18next";
 import { jsxDEV as jsxDEV33 } from "react/jsx-dev-runtime";
 function ButtonAddInputForm({ count }) {
-  let { t } = useTranslation12();
+  let { t } = useTranslation15();
   return /* @__PURE__ */ jsxDEV33(Form8, { method: "post", children: [
     /* @__PURE__ */ jsxDEV33("input", { type: "hidden", name: "cnt", defaultValue: count + 1 }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/buttons/btn_add_inputform.tsx",
@@ -3500,7 +3511,7 @@ function ButtonAddInputForm({ count }) {
     /* @__PURE__ */ jsxDEV33(
       CustomButton,
       {
-        className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+        className: "bg-primary hover:shadow-primary_shadow",
         type: "submit",
         name: "_action",
         value: "createEmptyInputForm",
@@ -3535,10 +3546,10 @@ function ButtonAddInputForm({ count }) {
 
 // app/components/UI/widgets/db_struct/buttons/btn_add_searchform.tsx
 import { Form as Form9 } from "@remix-run/react";
-import { useTranslation as useTranslation13 } from "react-i18next";
+import { useTranslation as useTranslation16 } from "react-i18next";
 import { jsxDEV as jsxDEV34 } from "react/jsx-dev-runtime";
 function ButtonAddSearchForm({ count }) {
-  let { t } = useTranslation13();
+  let { t } = useTranslation16();
   return /* @__PURE__ */ jsxDEV34(Form9, { method: "post", children: [
     /* @__PURE__ */ jsxDEV34("input", { type: "hidden", name: "cnt", defaultValue: count + 1 }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/buttons/btn_add_searchform.tsx",
@@ -3548,7 +3559,7 @@ function ButtonAddSearchForm({ count }) {
     /* @__PURE__ */ jsxDEV34(
       CustomButton,
       {
-        className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+        className: "bg-primary hover:shadow-primary_shadow",
         type: "submit",
         name: "_action",
         value: "createEmptySearchForm",
@@ -3584,14 +3595,15 @@ function ButtonAddSearchForm({ count }) {
 // app/components/UI/widgets/db_struct/buttons/btn_restruct_db.tsx
 import MaterialTailwind4 from "@material-tailwind/react";
 import { Form as Form10, useFetcher } from "@remix-run/react";
+import { useTranslation as useTranslation17 } from "react-i18next";
 import { Fragment, jsxDEV as jsxDEV35 } from "react/jsx-dev-runtime";
 var { Spinner } = MaterialTailwind4;
 function ButtonRestructDb() {
-  let isRestruct = useFetcher().state !== "idle";
+  let { t } = useTranslation17(), isRestruct = useFetcher().state !== "idle";
   return /* @__PURE__ */ jsxDEV35(Form10, { method: "post", children: /* @__PURE__ */ jsxDEV35(
     CustomButton,
     {
-      className: "bg-blue-500 hover:shadow-blue-100",
+      className: "bg-primary hover:shadow-primary_shadow",
       type: "submit",
       name: "_action",
       value: "generateStructDb",
@@ -3604,28 +3616,29 @@ function ButtonRestructDb() {
       children: isRestruct ? /* @__PURE__ */ jsxDEV35(Fragment, { children: [
         /* @__PURE__ */ jsxDEV35(Spinner, { className: "w-4 h-4" }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/buttons/btn_restruct_db.tsx",
-          lineNumber: 30,
+          lineNumber: 32,
           columnNumber: 25
         }, this),
-        "Restructuring..."
+        t("restruct_db"),
+        " ..."
       ] }, void 0, !0, {
         fileName: "app/components/UI/widgets/db_struct/buttons/btn_restruct_db.tsx",
-        lineNumber: 29,
+        lineNumber: 31,
         columnNumber: 23
       }, this) : /* @__PURE__ */ jsxDEV35(Fragment, { children: [
         /* @__PURE__ */ jsxDEV35("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV35("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/buttons/btn_restruct_db.tsx",
-          lineNumber: 35,
+          lineNumber: 37,
           columnNumber: 29
         }, this) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/buttons/btn_restruct_db.tsx",
-          lineNumber: 34,
+          lineNumber: 36,
           columnNumber: 25
         }, this),
-        "Restruct Database"
+        t("restruct_db")
       ] }, void 0, !0, {
         fileName: "app/components/UI/widgets/db_struct/buttons/btn_restruct_db.tsx",
-        lineNumber: 33,
+        lineNumber: 35,
         columnNumber: 23
       }, this)
     },
@@ -3633,13 +3646,13 @@ function ButtonRestructDb() {
     !1,
     {
       fileName: "app/components/UI/widgets/db_struct/buttons/btn_restruct_db.tsx",
-      lineNumber: 20,
+      lineNumber: 22,
       columnNumber: 13
     },
     this
   ) }, void 0, !1, {
     fileName: "app/components/UI/widgets/db_struct/buttons/btn_restruct_db.tsx",
-    lineNumber: 19,
+    lineNumber: 21,
     columnNumber: 9
   }, this);
 }
@@ -3652,7 +3665,7 @@ function Buttons3({
   inputForms_count,
   searchForms_count
 }) {
-  return /* @__PURE__ */ jsxDEV36("div", { className: "mb-2 flex justify-between py-2 px-2 border border-gray-900", children: [
+  return /* @__PURE__ */ jsxDEV36("div", { className: "mb-2 flex justify-between py-2 px-2 border", children: [
     /* @__PURE__ */ jsxDEV36("div", { className: "flex items-center gap-3", children: state === "dictionary" ? /* @__PURE__ */ jsxDEV36(ButtonAddDicionary, { count: dictionaries_count }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/buttons/buttons.tsx",
       lineNumber: 23,
@@ -3684,7 +3697,7 @@ function Buttons3({
 
 // app/components/UI/widgets/db_struct/navigator.tsx
 import { Link as Link2 } from "@remix-run/react";
-import { useTranslation as useTranslation14 } from "react-i18next";
+import { useTranslation as useTranslation18 } from "react-i18next";
 import { jsxDEV as jsxDEV37 } from "react/jsx-dev-runtime";
 function DbStructNav({
   state,
@@ -3696,14 +3709,14 @@ function DbStructNav({
   dictionaryId,
   groupId
 }) {
-  let { t } = useTranslation14();
-  return /* @__PURE__ */ jsxDEV37("div", { className: "p-4 mr-5 w-1/3 border border-gray-900", children: /* @__PURE__ */ jsxDEV37("ul", { children: [
+  let { i18n, t } = useTranslation18();
+  return /* @__PURE__ */ jsxDEV37("div", { className: "p-4 mr-5 w-1/3 border", children: /* @__PURE__ */ jsxDEV37("ul", { children: [
     /* @__PURE__ */ jsxDEV37(
       "li",
       {
         className: [
           "flex items-center gap-1 font-bold",
-          state === "inputForm" && !inputFormId ? "bg-blue-gray-200" : ""
+          state === "inputForm" && !inputFormId ? "bg-selected" : ""
         ].join(" "),
         children: [
           /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, !1, {
@@ -3741,106 +3754,108 @@ function DbStructNav({
       },
       this
     ),
-    /* @__PURE__ */ jsxDEV37("ul", { children: inputForms.map((form) => /* @__PURE__ */ jsxDEV37("div", { children: [
-      /* @__PURE__ */ jsxDEV37(
-        Link2,
-        {
-          to: `/dashboard/db_struct?state=inputForm&inputFormId=${form.id}`,
-          children: /* @__PURE__ */ jsxDEV37(
-            "li",
+    /* @__PURE__ */ jsxDEV37("ul", { children: inputForms.map((form) => {
+      let formTitle = `${form.pos}. ${form[`title_${i18n.language}`]}`;
+      return /* @__PURE__ */ jsxDEV37("div", { children: [
+        /* @__PURE__ */ jsxDEV37(
+          Link2,
+          {
+            to: `/dashboard/db_struct?state=inputForm&inputFormId=${form.id}`,
+            children: /* @__PURE__ */ jsxDEV37(
+              "li",
+              {
+                className: [
+                  "pl-4 flex items-center gap-1 hover:cursor-pointer",
+                  state === "inputForm" && form.id === inputFormId ? "bg-selected" : ""
+                ].join(" "),
+                children: [
+                  /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
+                    fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                    lineNumber: 57,
+                    columnNumber: 45
+                  }, this) }, void 0, !1, {
+                    fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                    lineNumber: 56,
+                    columnNumber: 41
+                  }, this),
+                  formTitle
+                ]
+              },
+              void 0,
+              !0,
+              {
+                fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                lineNumber: 52,
+                columnNumber: 37
+              },
+              this
+            )
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+            lineNumber: 49,
+            columnNumber: 33
+          },
+          this
+        ),
+        /* @__PURE__ */ jsxDEV37("ul", { children: form.groups.map((gr) => {
+          let groupTitle = `${gr.pos}. ${gr[`title_${i18n.language}`]}`;
+          return /* @__PURE__ */ jsxDEV37(
+            Link2,
             {
-              className: [
-                "pl-4 flex items-center gap-1 hover:cursor-pointer",
-                state === "inputForm" && form.id === inputFormId ? "bg-blue-gray-200" : ""
-              ].join(" "),
-              children: [
-                /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
-                  fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-                  lineNumber: 55,
-                  columnNumber: 41
-                }, this) }, void 0, !1, {
-                  fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-                  lineNumber: 54,
-                  columnNumber: 37
-                }, this),
-                form.pos,
-                ". ",
-                form.title
-              ]
-            },
-            void 0,
-            !0,
-            {
-              fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-              lineNumber: 50,
-              columnNumber: 33
-            },
-            this
-          )
-        },
-        void 0,
-        !1,
-        {
-          fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-          lineNumber: 47,
-          columnNumber: 29
-        },
-        this
-      ),
-      /* @__PURE__ */ jsxDEV37("ul", { children: form.groups.map((gr) => /* @__PURE__ */ jsxDEV37(
-        Link2,
-        {
-          to: `/dashboard/db_struct?state=group&inputFormId=${gr.inputFormId}&groupId=${gr.id}`,
-          children: /* @__PURE__ */ jsxDEV37(
-            "li",
-            {
-              className: [
-                "pl-8 flex items-center gap-1 hover:cursor-pointer",
-                state === "group" && gr.id === groupId ? "bg-blue-gray-200" : ""
-              ].join(" "),
-              children: [
-                /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
-                  fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-                  lineNumber: 71,
-                  columnNumber: 49
-                }, this) }, void 0, !1, {
+              to: `/dashboard/db_struct?state=group&inputFormId=${gr.inputFormId}&groupId=${gr.id}`,
+              children: /* @__PURE__ */ jsxDEV37(
+                "li",
+                {
+                  className: [
+                    "pl-8 flex items-center gap-1 hover:cursor-pointer",
+                    state === "group" && gr.id === groupId ? "bg-selected" : ""
+                  ].join(" "),
+                  children: [
+                    /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
+                      fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                      lineNumber: 75,
+                      columnNumber: 57
+                    }, this) }, void 0, !1, {
+                      fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                      lineNumber: 74,
+                      columnNumber: 53
+                    }, this),
+                    groupTitle
+                  ]
+                },
+                void 0,
+                !0,
+                {
                   fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
                   lineNumber: 70,
-                  columnNumber: 45
-                }, this),
-                gr.pos,
-                ". ",
-                gr.title
-              ]
+                  columnNumber: 49
+                },
+                this
+              )
             },
-            void 0,
-            !0,
+            gr.id,
+            !1,
             {
               fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
               lineNumber: 66,
-              columnNumber: 41
+              columnNumber: 45
             },
             this
-          )
-        },
-        gr.id,
-        !1,
-        {
+          );
+        }) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
           lineNumber: 62,
-          columnNumber: 37
-        },
-        this
-      )) }, void 0, !1, {
+          columnNumber: 33
+        }, this)
+      ] }, form.id, !0, {
         fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-        lineNumber: 60,
+        lineNumber: 48,
         columnNumber: 29
-      }, this)
-    ] }, form.id, !0, {
-      fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-      lineNumber: 46,
-      columnNumber: 25
-    }, this)) }, void 0, !1, {
+      }, this);
+    }) }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
       lineNumber: 44,
       columnNumber: 17
@@ -3850,16 +3865,16 @@ function DbStructNav({
       {
         className: [
           "flex items-center gap-1 font-bold",
-          state === "searchForm" && !searchFormId ? "bg-blue-gray-200" : ""
+          state === "searchForm" && !searchFormId ? "bg-selected" : ""
         ].join(" "),
         children: [
           /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-            lineNumber: 86,
+            lineNumber: 92,
             columnNumber: 25
           }, this) }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-            lineNumber: 85,
+            lineNumber: 91,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ jsxDEV37(
@@ -3872,7 +3887,7 @@ function DbStructNav({
             !1,
             {
               fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-              lineNumber: 88,
+              lineNumber: 94,
               columnNumber: 21
             },
             this
@@ -3883,58 +3898,59 @@ function DbStructNav({
       !0,
       {
         fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-        lineNumber: 81,
+        lineNumber: 87,
         columnNumber: 17
       },
       this
     ),
-    /* @__PURE__ */ jsxDEV37("ul", { children: searchForms.map((form) => /* @__PURE__ */ jsxDEV37(
-      Link2,
-      {
-        to: `/dashboard/db_struct?state=searchForm&searchFormId=${form.id}`,
-        children: /* @__PURE__ */ jsxDEV37(
-          "li",
-          {
-            className: [
-              "pl-4 flex items-center gap-1 hover:cursor-pointer",
-              state === "searchForm" && form.id === searchFormId ? "bg-blue-gray-200" : ""
-            ].join(" "),
-            children: [
-              /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
-                fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-                lineNumber: 105,
-                columnNumber: 37
-              }, this) }, void 0, !1, {
-                fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-                lineNumber: 104,
-                columnNumber: 33
-              }, this),
-              form.pos,
-              ". ",
-              form.title
-            ]
-          },
-          void 0,
-          !0,
-          {
-            fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-            lineNumber: 100,
-            columnNumber: 29
-          },
-          this
-        )
-      },
-      form.id,
-      !1,
-      {
-        fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-        lineNumber: 96,
-        columnNumber: 25
-      },
-      this
-    )) }, void 0, !1, {
+    /* @__PURE__ */ jsxDEV37("ul", { children: searchForms.map((form) => {
+      let formTitle = `${form.pos}. ${form[`title_${i18n.language}`]}`;
+      return /* @__PURE__ */ jsxDEV37(
+        Link2,
+        {
+          to: `/dashboard/db_struct?state=searchForm&searchFormId=${form.id}`,
+          children: /* @__PURE__ */ jsxDEV37(
+            "li",
+            {
+              className: [
+                "pl-4 flex items-center gap-1 hover:cursor-pointer",
+                state === "searchForm" && form.id === searchFormId ? "bg-selected" : ""
+              ].join(" "),
+              children: [
+                /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                  lineNumber: 113,
+                  columnNumber: 41
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                  lineNumber: 112,
+                  columnNumber: 37
+                }, this),
+                formTitle
+              ]
+            },
+            void 0,
+            !0,
+            {
+              fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+              lineNumber: 108,
+              columnNumber: 33
+            },
+            this
+          )
+        },
+        form.id,
+        !1,
+        {
+          fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+          lineNumber: 104,
+          columnNumber: 29
+        },
+        this
+      );
+    }) }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-      lineNumber: 94,
+      lineNumber: 100,
       columnNumber: 17
     }, this),
     /* @__PURE__ */ jsxDEV37(
@@ -3942,16 +3958,16 @@ function DbStructNav({
       {
         className: [
           "flex items-center gap-1 font-bold",
-          state === "dictionary" && !dictionaryId ? "bg-blue-gray-200" : ""
+          state === "dictionary" && !dictionaryId ? "bg-selected" : ""
         ].join(" "),
         children: [
           /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-            lineNumber: 117,
+            lineNumber: 126,
             columnNumber: 25
           }, this) }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-            lineNumber: 116,
+            lineNumber: 125,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ jsxDEV37(
@@ -3964,7 +3980,7 @@ function DbStructNav({
             !1,
             {
               fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-              lineNumber: 119,
+              lineNumber: 128,
               columnNumber: 21
             },
             this
@@ -3975,56 +3991,59 @@ function DbStructNav({
       !0,
       {
         fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-        lineNumber: 112,
+        lineNumber: 121,
         columnNumber: 17
       },
       this
     ),
-    /* @__PURE__ */ jsxDEV37("ul", { children: dictionaries.map((dict) => /* @__PURE__ */ jsxDEV37(
-      Link2,
-      {
-        to: `/dashboard/db_struct?state=dictionary&dictionaryId=${dict.id}`,
-        children: /* @__PURE__ */ jsxDEV37(
-          "li",
-          {
-            className: [
-              "pl-4 flex items-center gap-1 hover:cursor-pointer",
-              state === "dictionary" && dict.id === dictionaryId ? "bg-blue-gray-200" : ""
-            ].join(" "),
-            children: [
-              /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
-                fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-                lineNumber: 136,
-                columnNumber: 37
-              }, this) }, void 0, !1, {
-                fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-                lineNumber: 135,
-                columnNumber: 33
-              }, this),
-              dict.title
-            ]
-          },
-          void 0,
-          !0,
-          {
-            fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-            lineNumber: 131,
-            columnNumber: 29
-          },
-          this
-        )
-      },
-      dict.id,
-      !1,
-      {
-        fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-        lineNumber: 127,
-        columnNumber: 25
-      },
-      this
-    )) }, void 0, !1, {
+    /* @__PURE__ */ jsxDEV37("ul", { children: dictionaries.map((dict) => {
+      let dicTitle = dict[`title_${i18n.language}`];
+      return /* @__PURE__ */ jsxDEV37(
+        Link2,
+        {
+          to: `/dashboard/db_struct?state=dictionary&dictionaryId=${dict.id}`,
+          children: /* @__PURE__ */ jsxDEV37(
+            "li",
+            {
+              className: [
+                "pl-4 flex items-center gap-1 hover:cursor-pointer",
+                state === "dictionary" && dict.id === dictionaryId ? "bg-selected" : ""
+              ].join(" "),
+              children: [
+                /* @__PURE__ */ jsxDEV37("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV37("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                  lineNumber: 147,
+                  columnNumber: 41
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+                  lineNumber: 146,
+                  columnNumber: 37
+                }, this),
+                dicTitle
+              ]
+            },
+            void 0,
+            !0,
+            {
+              fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+              lineNumber: 142,
+              columnNumber: 33
+            },
+            this
+          )
+        },
+        dict.id,
+        !1,
+        {
+          fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
+          lineNumber: 138,
+          columnNumber: 29
+        },
+        this
+      );
+    }) }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/navigator.tsx",
-      lineNumber: 125,
+      lineNumber: 134,
       columnNumber: 17
     }, this)
   ] }, void 0, !0, {
@@ -4040,10 +4059,10 @@ function DbStructNav({
 
 // app/components/UI/widgets/db_struct/forms/form_dict.tsx
 import { Form as Form11 } from "@remix-run/react";
-import { useTranslation as useTranslation15 } from "react-i18next";
+import { useTranslation as useTranslation19 } from "react-i18next";
 import { Fragment as Fragment2, jsxDEV as jsxDEV38 } from "react/jsx-dev-runtime";
 function DictionaryForm({ dictionary }) {
-  let { t } = useTranslation15(), handleDelete = async (event) => {
+  let { i18n, t } = useTranslation19(), handleDelete = async (event) => {
     confirm(
       t("confirm_delete")
     ) || event.preventDefault();
@@ -4143,10 +4162,10 @@ function DictionaryForm({ dictionary }) {
             CustomInput,
             {
               id: dictionary.id,
-              title: t("title"),
+              title: t("title_kk"),
               type: "text",
-              defaultValue: dictionary?.title,
-              name: "title",
+              defaultValue: dictionary?.title_kk,
+              name: "title_kk",
               required: !0,
               onChange: () => {
                 document.getElementById("updateDictionaryButton").click();
@@ -4158,6 +4177,29 @@ function DictionaryForm({ dictionary }) {
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_dict.tsx",
               lineNumber: 60,
+              columnNumber: 17
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV38(
+            CustomInput,
+            {
+              id: dictionary.id,
+              title: t("title_ru"),
+              type: "text",
+              defaultValue: dictionary?.title_ru,
+              name: "title_ru",
+              required: !0,
+              onChange: () => {
+                document.getElementById("updateDictionaryButton").click();
+              },
+              size: 100
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_dict.tsx",
+              lineNumber: 73,
               columnNumber: 17
             },
             this
@@ -4183,10 +4225,10 @@ function DictionaryForm({ dictionary }) {
 // app/components/UI/widgets/db_struct/forms/form_group.tsx
 import { Form as Form12, useNavigate as useNavigate3 } from "@remix-run/react";
 import { FieldType } from "@prisma/client";
-import { useTranslation as useTranslation16 } from "react-i18next";
+import { useTranslation as useTranslation20 } from "react-i18next";
 import { Fragment as Fragment3, jsxDEV as jsxDEV39 } from "react/jsx-dev-runtime";
 function GroupForm({ group, dicts }) {
-  let { t } = useTranslation16(), navigate = useNavigate3(), handleDelete = async (event) => {
+  let { i18n, t } = useTranslation20(), navigate = useNavigate3(), handleDelete = async (event) => {
     confirm(
       t("confirm_delete")
     ) || event.preventDefault();
@@ -4196,7 +4238,7 @@ function GroupForm({ group, dicts }) {
       /* @__PURE__ */ jsxDEV39(
         CustomButton,
         {
-          className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+          className: "bg-primary hover:shadow-primary_shadow",
           form: "addInputFieldForm",
           type: "submit",
           name: "_action",
@@ -4258,7 +4300,7 @@ function GroupForm({ group, dicts }) {
       /* @__PURE__ */ jsxDEV39(
         CustomButton,
         {
-          className: "bg-red-500 hover:shadow-red-100",
+          className: "bg-danger hover:shadow-danger_shadow",
           form: "deleteGroupForm",
           type: "submit",
           name: "_action",
@@ -4365,11 +4407,11 @@ function GroupForm({ group, dicts }) {
           /* @__PURE__ */ jsxDEV39(
             CustomInput,
             {
-              id: "group_title",
+              id: "group_title_kk",
               type: "text",
-              name: "title",
-              title: t("title"),
-              defaultValue: group?.title,
+              name: "title_kk",
+              title: t("title_kk"),
+              defaultValue: group?.title_kk,
               required: !0,
               onChange: () => {
                 document.getElementById("updateGroupButton").click();
@@ -4381,6 +4423,29 @@ function GroupForm({ group, dicts }) {
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
               lineNumber: 96,
+              columnNumber: 17
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV39(
+            CustomInput,
+            {
+              id: "group_title_ru",
+              type: "text",
+              name: "title_ru",
+              title: t("title_ru"),
+              defaultValue: group?.title_ru,
+              required: !0,
+              onChange: () => {
+                document.getElementById("updateGroupButton").click();
+              },
+              size: 100
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 109,
               columnNumber: 17
             },
             this
@@ -4402,7 +4467,7 @@ function GroupForm({ group, dicts }) {
             !1,
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 109,
+              lineNumber: 122,
               columnNumber: 17
             },
             this
@@ -4427,12 +4492,12 @@ function GroupForm({ group, dicts }) {
         children: [
           /* @__PURE__ */ jsxDEV39("input", { type: "hidden", name: "id", defaultValue: field.id }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 129,
+            lineNumber: 142,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ jsxDEV39("input", { type: "hidden", name: "groupId", defaultValue: field.groupId }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 130,
+            lineNumber: 143,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ jsxDEV39(
@@ -4447,11 +4512,11 @@ function GroupForm({ group, dicts }) {
               children: [
                 /* @__PURE__ */ jsxDEV39("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV39("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m4.5 12.75 6 6 9-13.5" }, void 0, !1, {
                   fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-                  lineNumber: 140,
+                  lineNumber: 153,
                   columnNumber: 29
                 }, this) }, void 0, !1, {
                   fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-                  lineNumber: 139,
+                  lineNumber: 152,
                   columnNumber: 25
                 }, this),
                 t("save")
@@ -4461,7 +4526,7 @@ function GroupForm({ group, dicts }) {
             !0,
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 131,
+              lineNumber: 144,
               columnNumber: 21
             },
             this
@@ -4472,7 +4537,7 @@ function GroupForm({ group, dicts }) {
       !0,
       {
         fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-        lineNumber: 123,
+        lineNumber: 136,
         columnNumber: 17
       },
       this
@@ -4481,86 +4546,91 @@ function GroupForm({ group, dicts }) {
       /* @__PURE__ */ jsxDEV39(
         "thead",
         {
-          className: "bg-blue-gray-400 text-white text-center",
+          className: "bg-primary text-white text-center",
           children: /* @__PURE__ */ jsxDEV39("tr", { children: [
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 152,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("pos") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 153,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("span") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 154,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("start") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 155,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("title") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 156,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("type_data") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 157,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("dictionary") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 158,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("len") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 159,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("precision") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 160,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("is_key") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 161,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("is_visible") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 162,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("is_enable") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 163,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("is_require") }, void 0, !1, {
-              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 164,
-              columnNumber: 29
-            }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("duplicate") }, void 0, !1, {
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "#" }, void 0, !1, {
               fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
               lineNumber: 165,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border border-blue-gray-700" }, void 0, !1, {
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "1" }, void 0, !1, {
               fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
               lineNumber: 166,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "2" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 167,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "3" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 168,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: t("title_kk") }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 169,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: t("title_ru") }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 170,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: t("type_data") }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 171,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: t("dictionary") }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 172,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: t("len") }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 173,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: t("precision") }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 174,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "4" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 175,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "5" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 176,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "6" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 177,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "7" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 178,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border", children: "8" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 179,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV39("th", { className: "p-1 text-sm border" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+              lineNumber: 180,
               columnNumber: 29
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 151,
+            lineNumber: 164,
             columnNumber: 25
           }, this)
         },
@@ -4568,7 +4638,7 @@ function GroupForm({ group, dicts }) {
         !1,
         {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 148,
+          lineNumber: 161,
           columnNumber: 21
         },
         this
@@ -4576,7 +4646,7 @@ function GroupForm({ group, dicts }) {
       /* @__PURE__ */ jsxDEV39("tbody", { className: "text-center", children: group?.fields && group.fields.map((field, index) => /* @__PURE__ */ jsxDEV39("tr", { children: [
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 172,
+          lineNumber: 186,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ jsxDEV39(
@@ -4595,13 +4665,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 174,
+            lineNumber: 188,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 173,
+          lineNumber: 187,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ jsxDEV39(
@@ -4622,13 +4692,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 187,
+            lineNumber: 201,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 186,
+          lineNumber: 200,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ jsxDEV39(
@@ -4649,28 +4719,27 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 202,
+            lineNumber: 216,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 201,
+          lineNumber: 215,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39(
           "td",
           {
             className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40",
-            onClick: () => navigate(`/db_struct?state=group&groupId=${group.id}&inputFormId=${group.inputFormId}&inputFieldId=${field.id}`),
             children: /* @__PURE__ */ jsxDEV39(
               "input",
               {
                 className: "text-sm w-full",
                 form: `updateInputFieldForm_${field.id}`,
                 type: "text",
-                name: "title",
-                defaultValue: field.title,
+                name: "title_kk",
+                defaultValue: field.title_kk,
                 maxLength: 23,
                 onChange: () => {
                   document.getElementById(`updateInputFieldButton_${field.id}`).click();
@@ -4680,7 +4749,7 @@ function GroupForm({ group, dicts }) {
               !1,
               {
                 fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-                lineNumber: 220,
+                lineNumber: 233,
                 columnNumber: 37
               },
               this
@@ -4690,7 +4759,43 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 216,
+            lineNumber: 230,
+            columnNumber: 33
+          },
+          this
+        ),
+        /* @__PURE__ */ jsxDEV39(
+          "td",
+          {
+            className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40",
+            children: /* @__PURE__ */ jsxDEV39(
+              "input",
+              {
+                className: "text-sm w-full",
+                form: `updateInputFieldForm_${field.id}`,
+                type: "text",
+                name: "title_ru",
+                defaultValue: field.title_ru,
+                maxLength: 23,
+                onChange: () => {
+                  document.getElementById(`updateInputFieldButton_${field.id}`).click();
+                }
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+                lineNumber: 249,
+                columnNumber: 37
+              },
+              this
+            )
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+            lineNumber: 246,
             columnNumber: 33
           },
           this
@@ -4707,7 +4812,7 @@ function GroupForm({ group, dicts }) {
             },
             children: Object.keys(FieldType).map((key) => /* @__PURE__ */ jsxDEV39("option", { value: key, children: key }, key, !1, {
               fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 244,
+              lineNumber: 273,
               columnNumber: 78
             }, this))
           },
@@ -4715,13 +4820,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 234,
+            lineNumber: 263,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 233,
+          lineNumber: 262,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700", children: field.fieldType === "DICT" ? /* @__PURE__ */ jsxDEV39(
@@ -4737,12 +4842,12 @@ function GroupForm({ group, dicts }) {
             children: [
               /* @__PURE__ */ jsxDEV39("option", { value: "", children: "-" }, void 0, !1, {
                 fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-                lineNumber: 259,
+                lineNumber: 288,
                 columnNumber: 45
               }, this),
-              dicts.map((dic) => /* @__PURE__ */ jsxDEV39("option", { value: dic.id, children: dic.title }, dic.id, !1, {
+              dicts.map((dic) => /* @__PURE__ */ jsxDEV39("option", { value: dic.id, children: dic[`title_${i18n.language}`] }, dic.id, !1, {
                 fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-                lineNumber: 260,
+                lineNumber: 289,
                 columnNumber: 77
               }, this))
             ]
@@ -4751,13 +4856,13 @@ function GroupForm({ group, dicts }) {
           !0,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 249,
+            lineNumber: 278,
             columnNumber: 43
           },
           this
         ) : null }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 247,
+          lineNumber: 276,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ jsxDEV39(
@@ -4776,13 +4881,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 265,
+            lineNumber: 294,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 264,
+          lineNumber: 293,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ jsxDEV39(
@@ -4801,13 +4906,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 278,
+            lineNumber: 307,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 277,
+          lineNumber: 306,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ jsxDEV39(
@@ -4826,13 +4931,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 291,
+            lineNumber: 320,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 290,
+          lineNumber: 319,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ jsxDEV39(
@@ -4851,13 +4956,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 304,
+            lineNumber: 333,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 303,
+          lineNumber: 332,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ jsxDEV39(
@@ -4876,13 +4981,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 317,
+            lineNumber: 346,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 316,
+          lineNumber: 345,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ jsxDEV39(
@@ -4901,13 +5006,13 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 330,
+            lineNumber: 359,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 329,
+          lineNumber: 358,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ jsxDEV39(
@@ -4926,76 +5031,73 @@ function GroupForm({ group, dicts }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 343,
+            lineNumber: 372,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 342,
+          lineNumber: 371,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV39("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer", children: /* @__PURE__ */ jsxDEV39(Form12, { method: "post", children: [
           /* @__PURE__ */ jsxDEV39("input", { type: "hidden", name: "id", defaultValue: field?.id ? field.id : "" }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 357,
+            lineNumber: 386,
             columnNumber: 41
           }, this),
           /* @__PURE__ */ jsxDEV39(
             CustomButton,
             {
-              className: "bg-red-500 hover:shadow-red-100",
+              className: "bg-danger hover:shadow-danger_shadow",
               onClick: handleDelete,
               type: "submit",
               name: "_action",
               value: "deleteInputField",
-              children: [
-                /* @__PURE__ */ jsxDEV39("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV39("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, !1, {
-                  fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-                  lineNumber: 366,
-                  columnNumber: 49
-                }, this) }, void 0, !1, {
-                  fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-                  lineNumber: 365,
-                  columnNumber: 45
-                }, this),
-                t("delete")
-              ]
+              children: /* @__PURE__ */ jsxDEV39("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV39("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" }, void 0, !1, {
+                fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+                lineNumber: 395,
+                columnNumber: 49
+              }, this) }, void 0, !1, {
+                fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+                lineNumber: 394,
+                columnNumber: 45
+              }, this)
             },
             void 0,
-            !0,
+            !1,
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-              lineNumber: 358,
+              lineNumber: 387,
               columnNumber: 41
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 356,
+          lineNumber: 385,
           columnNumber: 37
         }, this) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-          lineNumber: 355,
+          lineNumber: 384,
           columnNumber: 33
         }, this)
       ] }, field.id, !0, {
         fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-        lineNumber: 171,
+        lineNumber: 185,
         columnNumber: 29
       }, this)) }, void 0, !1, {
         fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-        lineNumber: 169,
+        lineNumber: 183,
         columnNumber: 21
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-      lineNumber: 147,
+      lineNumber: 160,
       columnNumber: 17
     }, this) }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-      lineNumber: 146,
+      lineNumber: 159,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ jsxDEV39(
@@ -5011,12 +5113,12 @@ function GroupForm({ group, dicts }) {
         children: [
           /* @__PURE__ */ jsxDEV39("input", { type: "hidden", name: "inputFormId", defaultValue: group.inputFormId }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 389,
+            lineNumber: 417,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ jsxDEV39("input", { type: "hidden", name: "id", defaultValue: group.id }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-            lineNumber: 390,
+            lineNumber: 418,
             columnNumber: 17
           }, this)
         ]
@@ -5025,11 +5127,81 @@ function GroupForm({ group, dicts }) {
       !0,
       {
         fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
-        lineNumber: 377,
+        lineNumber: 405,
         columnNumber: 13
       },
       this
-    )
+    ),
+    /* @__PURE__ */ jsxDEV39("div", { className: "pt-5", children: [
+      /* @__PURE__ */ jsxDEV39("div", { className: "text-sm", children: [
+        "1-",
+        t("pos")
+      ] }, void 0, !0, {
+        fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+        lineNumber: 421,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ jsxDEV39("div", { className: "text-sm", children: [
+        "2-",
+        t("span")
+      ] }, void 0, !0, {
+        fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+        lineNumber: 422,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ jsxDEV39("div", { className: "text-sm", children: [
+        "3-",
+        t("start")
+      ] }, void 0, !0, {
+        fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+        lineNumber: 423,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ jsxDEV39("div", { className: "text-sm", children: [
+        "4-",
+        t("is_key")
+      ] }, void 0, !0, {
+        fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+        lineNumber: 424,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ jsxDEV39("div", { className: "text-sm", children: [
+        "5-",
+        t("is_visible")
+      ] }, void 0, !0, {
+        fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+        lineNumber: 425,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ jsxDEV39("div", { className: "text-sm", children: [
+        "6-",
+        t("is_enable")
+      ] }, void 0, !0, {
+        fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+        lineNumber: 426,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ jsxDEV39("div", { className: "text-sm", children: [
+        "7-",
+        t("is_require")
+      ] }, void 0, !0, {
+        fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+        lineNumber: 427,
+        columnNumber: 17
+      }, this),
+      /* @__PURE__ */ jsxDEV39("div", { className: "text-sm", children: [
+        "8-",
+        t("duplicate")
+      ] }, void 0, !0, {
+        fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+        lineNumber: 428,
+        columnNumber: 17
+      }, this)
+    ] }, void 0, !0, {
+      fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
+      lineNumber: 420,
+      columnNumber: 13
+    }, this)
   ] }, void 0, !0, {
     fileName: "app/components/UI/widgets/db_struct/forms/form_group.tsx",
     lineNumber: 26,
@@ -5039,16 +5211,16 @@ function GroupForm({ group, dicts }) {
 
 // app/components/UI/widgets/db_struct/forms/form_input.tsx
 import { Form as Form13 } from "@remix-run/react";
-import { useTranslation as useTranslation17 } from "react-i18next";
+import { useTranslation as useTranslation21 } from "react-i18next";
 import { Fragment as Fragment4, jsxDEV as jsxDEV40 } from "react/jsx-dev-runtime";
 function InputFormForm({ inputForm, groups }) {
-  let { t } = useTranslation17();
+  let { t } = useTranslation21();
   return /* @__PURE__ */ jsxDEV40(Fragment4, { children: [
     /* @__PURE__ */ jsxDEV40("div", { className: "flex flex-row gap-3 justify-end", children: [
       /* @__PURE__ */ jsxDEV40(
         CustomButton,
         {
-          className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+          className: "bg-primary hover:shadow-primary_shadow",
           form: "addGroupForm",
           type: "submit",
           name: "_action",
@@ -5109,7 +5281,7 @@ function InputFormForm({ inputForm, groups }) {
       /* @__PURE__ */ jsxDEV40(
         CustomButton,
         {
-          className: "bg-red-500 hover:shadow-red-100",
+          className: "bg-danger hover:shadow-danger_shadow",
           form: "deleteInputForm",
           type: "submit",
           name: "_action",
@@ -5206,11 +5378,11 @@ function InputFormForm({ inputForm, groups }) {
           /* @__PURE__ */ jsxDEV40(
             CustomInput,
             {
-              id: "inputForm_title",
-              title: t("title"),
+              id: "inputForm_title_kk",
+              title: t("title_kk"),
               type: "text",
-              defaultValue: inputForm?.title,
-              name: "title",
+              defaultValue: inputForm?.title_kk,
+              name: "title_kk",
               required: !0,
               onChange: () => {
                 document.getElementById("updateInputFormButton").click();
@@ -5222,6 +5394,29 @@ function InputFormForm({ inputForm, groups }) {
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_input.tsx",
               lineNumber: 83,
+              columnNumber: 17
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV40(
+            CustomInput,
+            {
+              id: "inputForm_title_ru",
+              title: t("title_ru"),
+              type: "text",
+              defaultValue: inputForm?.title_ru,
+              name: "title_ru",
+              required: !0,
+              onChange: () => {
+                document.getElementById("updateInputFormButton").click();
+              },
+              size: 100
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_input.tsx",
+              lineNumber: 96,
               columnNumber: 17
             },
             this
@@ -5249,7 +5444,7 @@ function InputFormForm({ inputForm, groups }) {
         },
         children: /* @__PURE__ */ jsxDEV40("input", { type: "hidden", name: "id", defaultValue: inputForm.id ? inputForm.id : "" }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_input.tsx",
-          lineNumber: 110,
+          lineNumber: 123,
           columnNumber: 17
         }, this)
       },
@@ -5257,7 +5452,7 @@ function InputFormForm({ inputForm, groups }) {
       !1,
       {
         fileName: "app/components/UI/widgets/db_struct/forms/form_input.tsx",
-        lineNumber: 97,
+        lineNumber: 110,
         columnNumber: 13
       },
       this
@@ -5271,10 +5466,10 @@ function InputFormForm({ inputForm, groups }) {
 
 // app/components/UI/widgets/db_struct/forms/form_search.tsx
 import { Form as Form14 } from "@remix-run/react";
-import { useTranslation as useTranslation18 } from "react-i18next";
+import { useTranslation as useTranslation22 } from "react-i18next";
 import { Fragment as Fragment5, jsxDEV as jsxDEV41 } from "react/jsx-dev-runtime";
 function SearchFormForm({ searchForm, inputFields }) {
-  let { t } = useTranslation18(), handleDelete = async (event) => {
+  let { i18n, t } = useTranslation22(), handleDelete = async (event) => {
     confirm(
       t("confirm_delete")
     ) || event.preventDefault();
@@ -5284,7 +5479,7 @@ function SearchFormForm({ searchForm, inputFields }) {
       /* @__PURE__ */ jsxDEV41(
         CustomButton,
         {
-          className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+          className: "bg-primary hover:shadow-primary_shadow",
           form: "addSearchFieldForm",
           type: "submit",
           name: "_action",
@@ -5345,7 +5540,7 @@ function SearchFormForm({ searchForm, inputFields }) {
       /* @__PURE__ */ jsxDEV41(
         CustomButton,
         {
-          className: "bg-red-500 hover:shadow-red-100",
+          className: "bg-danger hover:shadow-danger_shadow",
           form: "deleteSearchForm",
           type: "submit",
           name: "_action",
@@ -5442,11 +5637,11 @@ function SearchFormForm({ searchForm, inputFields }) {
           /* @__PURE__ */ jsxDEV41(
             CustomInput,
             {
-              id: "searchForm_title",
-              title: t("title"),
+              id: "searchForm_title_kk",
+              title: t("title_kk"),
               type: "text",
-              value: searchForm?.title,
-              name: "title",
+              value: searchForm?.title_kk,
+              name: "title_kk",
               required: !0,
               onChange: () => {
                 document.getElementById("updateSearchFormButton").click();
@@ -5458,6 +5653,29 @@ function SearchFormForm({ searchForm, inputFields }) {
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
               lineNumber: 91,
+              columnNumber: 17
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV41(
+            CustomInput,
+            {
+              id: "searchForm_title_ru",
+              title: t("title_ru"),
+              type: "text",
+              value: searchForm?.title_ru,
+              name: "title_ru",
+              required: !0,
+              onChange: () => {
+                document.getElementById("updateSearchFormButton").click();
+              },
+              size: 100
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
+              lineNumber: 104,
               columnNumber: 17
             },
             this
@@ -5485,7 +5703,7 @@ function SearchFormForm({ searchForm, inputFields }) {
         },
         children: /* @__PURE__ */ jsxDEV41("input", { type: "hidden", name: "id", defaultValue: searchForm.id ? searchForm.id : "" }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-          lineNumber: 117,
+          lineNumber: 130,
           columnNumber: 17
         }, this)
       },
@@ -5493,7 +5711,7 @@ function SearchFormForm({ searchForm, inputFields }) {
       !1,
       {
         fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-        lineNumber: 105,
+        lineNumber: 118,
         columnNumber: 13
       },
       this
@@ -5507,12 +5725,12 @@ function SearchFormForm({ searchForm, inputFields }) {
         children: [
           /* @__PURE__ */ jsxDEV41("input", { type: "hidden", name: "id", defaultValue: field.id }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-            lineNumber: 126,
+            lineNumber: 139,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ jsxDEV41("input", { type: "hidden", name: "searchFormId", defaultValue: field.searchFormId }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-            lineNumber: 127,
+            lineNumber: 140,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ jsxDEV41(
@@ -5527,11 +5745,11 @@ function SearchFormForm({ searchForm, inputFields }) {
               children: [
                 /* @__PURE__ */ jsxDEV41("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV41("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m4.5 12.75 6 6 9-13.5" }, void 0, !1, {
                   fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-                  lineNumber: 137,
+                  lineNumber: 150,
                   columnNumber: 29
                 }, this) }, void 0, !1, {
                   fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-                  lineNumber: 136,
+                  lineNumber: 149,
                   columnNumber: 25
                 }, this),
                 t("save")
@@ -5541,7 +5759,7 @@ function SearchFormForm({ searchForm, inputFields }) {
             !0,
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-              lineNumber: 128,
+              lineNumber: 141,
               columnNumber: 21
             },
             this
@@ -5552,7 +5770,7 @@ function SearchFormForm({ searchForm, inputFields }) {
       !0,
       {
         fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-        lineNumber: 120,
+        lineNumber: 133,
         columnNumber: 17
       },
       this
@@ -5561,36 +5779,41 @@ function SearchFormForm({ searchForm, inputFields }) {
       /* @__PURE__ */ jsxDEV41(
         "thead",
         {
-          className: "bg-blue-gray-400 text-white text-center",
+          className: "bg-primary text-white text-center",
           children: /* @__PURE__ */ jsxDEV41("tr", { children: [
-            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, !1, {
+            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border", children: "#" }, void 0, !1, {
               fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-              lineNumber: 149,
+              lineNumber: 162,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("pos") }, void 0, !1, {
+            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border", children: t("pos") }, void 0, !1, {
               fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-              lineNumber: 150,
+              lineNumber: 163,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("title") }, void 0, !1, {
+            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border", children: t("title_kk") }, void 0, !1, {
               fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-              lineNumber: 151,
+              lineNumber: 164,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("field") }, void 0, !1, {
+            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border", children: t("title_ru") }, void 0, !1, {
               fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-              lineNumber: 152,
+              lineNumber: 165,
               columnNumber: 29
             }, this),
-            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border border-blue-gray-700" }, void 0, !1, {
+            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border", children: t("field") }, void 0, !1, {
               fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-              lineNumber: 153,
+              lineNumber: 166,
+              columnNumber: 29
+            }, this),
+            /* @__PURE__ */ jsxDEV41("th", { className: "p-1 text-sm border" }, void 0, !1, {
+              fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
+              lineNumber: 167,
               columnNumber: 29
             }, this)
           ] }, void 0, !0, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-            lineNumber: 148,
+            lineNumber: 161,
             columnNumber: 25
           }, this)
         },
@@ -5598,7 +5821,7 @@ function SearchFormForm({ searchForm, inputFields }) {
         !1,
         {
           fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-          lineNumber: 145,
+          lineNumber: 158,
           columnNumber: 21
         },
         this
@@ -5606,7 +5829,7 @@ function SearchFormForm({ searchForm, inputFields }) {
       /* @__PURE__ */ jsxDEV41("tbody", { children: searchForm?.fields && searchForm.fields.map((field, index) => /* @__PURE__ */ jsxDEV41("tr", { children: [
         /* @__PURE__ */ jsxDEV41("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-          lineNumber: 159,
+          lineNumber: 173,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV41("td", { className: "p-1 text-sm border border-blue-gray-700 w-20", children: /* @__PURE__ */ jsxDEV41(
@@ -5625,13 +5848,13 @@ function SearchFormForm({ searchForm, inputFields }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-            lineNumber: 161,
+            lineNumber: 175,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-          lineNumber: 160,
+          lineNumber: 174,
           columnNumber: 33
         }, this),
         /* @__PURE__ */ jsxDEV41(
@@ -5644,8 +5867,8 @@ function SearchFormForm({ searchForm, inputFields }) {
                 className: "text-sm w-full",
                 form: `updateSearchFieldForm_${field.id}`,
                 type: "text",
-                name: "title",
-                defaultValue: field.title,
+                name: "title_kk",
+                defaultValue: field.title_kk,
                 onChange: () => {
                   document.getElementById(`updateSearchFieldButton_${field.id}`).click();
                 }
@@ -5654,7 +5877,7 @@ function SearchFormForm({ searchForm, inputFields }) {
               !1,
               {
                 fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-                lineNumber: 176,
+                lineNumber: 190,
                 columnNumber: 37
               },
               this
@@ -5664,7 +5887,42 @@ function SearchFormForm({ searchForm, inputFields }) {
           !1,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-            lineNumber: 173,
+            lineNumber: 187,
+            columnNumber: 33
+          },
+          this
+        ),
+        /* @__PURE__ */ jsxDEV41(
+          "td",
+          {
+            className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline w-40",
+            children: /* @__PURE__ */ jsxDEV41(
+              "input",
+              {
+                className: "text-sm w-full",
+                form: `updateSearchFieldForm_${field.id}`,
+                type: "text",
+                name: "title_ru",
+                defaultValue: field.title_ru,
+                onChange: () => {
+                  document.getElementById(`updateSearchFieldButton_${field.id}`).click();
+                }
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
+                lineNumber: 205,
+                columnNumber: 37
+              },
+              this
+            )
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
+            lineNumber: 202,
             columnNumber: 33
           },
           this
@@ -5682,15 +5940,18 @@ function SearchFormForm({ searchForm, inputFields }) {
             children: [
               /* @__PURE__ */ jsxDEV41("option", { value: "", children: "-" }, void 0, !1, {
                 fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-                lineNumber: 199,
+                lineNumber: 228,
                 columnNumber: 41
               }, this),
               inputFields && inputFields.map(
-                (fld) => /* @__PURE__ */ jsxDEV41("option", { value: fld.id, children: `${fld.group.pos}. ${fld.group.title} -> ${fld.title}` }, fld.id, !1, {
-                  fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-                  lineNumber: 202,
-                  columnNumber: 49
-                }, this)
+                (fld) => {
+                  let frm = fld.group.inputForm.pos + ". " + fld.group.inputForm[`title_${i18n.language}`], grp = fld.group.pos + ". " + fld.group[`title_${i18n.language}`], fieldTitle = frm + " -> " + grp + " -> " + fld.pos + ". " + fld[`title_${i18n.language}`];
+                  return /* @__PURE__ */ jsxDEV41("option", { value: fld.id, children: fieldTitle }, fld.id, !1, {
+                    fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
+                    lineNumber: 235,
+                    columnNumber: 53
+                  }, this);
+                }
               )
             ]
           },
@@ -5698,76 +5959,73 @@ function SearchFormForm({ searchForm, inputFields }) {
           !0,
           {
             fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-            lineNumber: 189,
+            lineNumber: 218,
             columnNumber: 37
           },
           this
         ) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-          lineNumber: 188,
+          lineNumber: 217,
           columnNumber: 33
         }, this),
-        /* @__PURE__ */ jsxDEV41("td", { className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer", children: /* @__PURE__ */ jsxDEV41(Form14, { method: "post", children: [
+        /* @__PURE__ */ jsxDEV41("td", { className: "p-1 text-sm border border-blue-gray-700 w-10", children: /* @__PURE__ */ jsxDEV41(Form14, { method: "post", children: [
           /* @__PURE__ */ jsxDEV41("input", { type: "hidden", name: "id", defaultValue: field.id }, void 0, !1, {
             fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-            lineNumber: 209,
+            lineNumber: 243,
             columnNumber: 41
           }, this),
           /* @__PURE__ */ jsxDEV41(
             CustomButton,
             {
-              className: "bg-red-500 hover:shadow-red-100",
+              className: "bg-danger hover:shadow-danger_shadow",
               onClick: handleDelete,
               type: "submit",
               name: "_action",
               value: "deleteSearchField",
-              children: [
-                /* @__PURE__ */ jsxDEV41("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV41("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, !1, {
-                  fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-                  lineNumber: 218,
-                  columnNumber: 49
-                }, this) }, void 0, !1, {
-                  fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-                  lineNumber: 217,
-                  columnNumber: 45
-                }, this),
-                t("delete")
-              ]
+              children: /* @__PURE__ */ jsxDEV41("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV41("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" }, void 0, !1, {
+                fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
+                lineNumber: 252,
+                columnNumber: 49
+              }, this) }, void 0, !1, {
+                fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
+                lineNumber: 251,
+                columnNumber: 45
+              }, this)
             },
             void 0,
-            !0,
+            !1,
             {
               fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-              lineNumber: 210,
+              lineNumber: 244,
               columnNumber: 41
             },
             this
           )
         ] }, void 0, !0, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-          lineNumber: 208,
+          lineNumber: 242,
           columnNumber: 37
         }, this) }, void 0, !1, {
           fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-          lineNumber: 207,
+          lineNumber: 241,
           columnNumber: 33
         }, this)
       ] }, field.id, !0, {
         fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-        lineNumber: 158,
+        lineNumber: 172,
         columnNumber: 29
       }, this)) }, void 0, !1, {
         fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-        lineNumber: 156,
+        lineNumber: 170,
         columnNumber: 21
       }, this)
     ] }, void 0, !0, {
       fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-      lineNumber: 144,
+      lineNumber: 157,
       columnNumber: 17
     }, this) }, void 0, !1, {
       fileName: "app/components/UI/widgets/db_struct/forms/form_search.tsx",
-      lineNumber: 143,
+      lineNumber: 156,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
@@ -5789,7 +6047,7 @@ function Forms({
   group,
   inputFields
 }) {
-  return /* @__PURE__ */ jsxDEV42("div", { className: "p-4 border border-gray-900 grow", children: state === "inputForm" && inputForm ? /* @__PURE__ */ jsxDEV42(InputFormForm, { inputForm, groups }, void 0, !1, {
+  return /* @__PURE__ */ jsxDEV42("div", { className: "p-4 border w-2/3", children: state === "inputForm" && inputForm ? /* @__PURE__ */ jsxDEV42(InputFormForm, { inputForm, groups }, void 0, !1, {
     fileName: "app/components/UI/widgets/db_struct/forms/forms.tsx",
     lineNumber: 30,
     columnNumber: 19
@@ -5962,7 +6220,8 @@ async function action3({
       return await api_default.db.updateInputForm(Number(values.id), {
         id: Number(values.id),
         pos: Number(values.pos),
-        title: String(values.title)
+        title_kk: String(values.title_kk),
+        title_ru: String(values.title_ru)
       }), redirect2(`/dashboard/db_struct?state=inputForm&inputFormId=${values.id}`);
     } catch (e) {
       e instanceof Prisma3.PrismaClientKnownRequestError && (errors = e.message);
@@ -5985,7 +6244,8 @@ async function action3({
       return await api_default.db.updateSearchForm(Number(values.id), {
         id: Number(values.id),
         pos: Number(values.pos),
-        title: String(values.title)
+        title_kk: String(values.title_kk),
+        title_ru: String(values.title_ru)
       }), redirect2(`/dashboard/db_struct?state=searchForm&searchFormId=${values.id}`);
     } catch (e) {
       e instanceof Prisma3.PrismaClientKnownRequestError && (errors = e.message);
@@ -6007,7 +6267,8 @@ async function action3({
     try {
       return await api_default.db.updateDictionary(Number(values.id), {
         id: Number(values.id),
-        title: String(values.title)
+        title_kk: String(values.title_kk),
+        title_ru: String(values.title_ru)
       }), redirect2(`/dashboard/db_struct?state=dictionary&dictionaryId=${values.id}`);
     } catch (e) {
       e instanceof Prisma3.PrismaClientKnownRequestError && (errors = e.message);
@@ -6040,7 +6301,8 @@ async function action3({
           id: Number(values.id),
           inputFormId: Number(values.inputFormId),
           pos: Number(values.pos),
-          title: String(values.title),
+          title_kk: String(values.title_kk),
+          title_ru: String(values.title_ru),
           isMulty: Boolean(values.isMulty)
         }
       );
@@ -6062,7 +6324,8 @@ async function action3({
         colSpan: Number(values.colSpan),
         colStart: Number(values.colStart),
         pos: Number(values.pos),
-        title: String(values.title),
+        title_kk: String(values.title_kk),
+        title_ru: String(values.title_ru),
         len: Number(values.len),
         fieldType: String(values.fieldType),
         dicId: Number(values.dicId),
@@ -6100,7 +6363,8 @@ async function action3({
         id: Number(values.id),
         pos: Number(values.pos),
         searchFormId: Number(values.searchFormId),
-        title: String(values.title),
+        title_kk: String(values.title_kk),
+        title_ru: String(values.title_ru),
         fieldId: Number(values.fieldId)
       }), redirect2(`/dashboard/db_struct?state=searchForm&searchFormId=${values.searchFormId}`);
     } catch (e) {
@@ -6153,7 +6417,7 @@ function DbStruct() {
     !1,
     {
       fileName: "app/routes/dashboard.db_struct.tsx",
-      lineNumber: 307,
+      lineNumber: 313,
       columnNumber: 9
     },
     this
@@ -6176,11 +6440,11 @@ import MaterialTailwind5 from "@material-tailwind/react";
 import { Form as Form15 } from "@remix-run/react";
 import moment from "moment";
 import { useEffect as useEffect2, useState as useState5 } from "react";
-import { useTranslation as useTranslation19 } from "react-i18next";
+import { useTranslation as useTranslation23 } from "react-i18next";
 import { jsxDEV as jsxDEV45 } from "react/jsx-dev-runtime";
 var { Dialog: Dialog3, Card: Card3, CardBody: CardBody3, CardFooter: CardFooter3 } = MaterialTailwind5;
 function UserDialog({ isNew, user, departments, errors }) {
-  let { t } = useTranslation19(), [open, setOpen] = useState5(!1);
+  let { t } = useTranslation23(), [open, setOpen] = useState5(!1);
   return useEffect2(() => {
     setOpen(!!user);
   }, [user]), /* @__PURE__ */ jsxDEV45(
@@ -6455,10 +6719,10 @@ function UserDialog({ isNew, user, departments, errors }) {
 
 // app/components/UI/widgets/users/btn_new_user.tsx
 import { useNavigate as useNavigate4 } from "@remix-run/react";
-import { useTranslation as useTranslation20 } from "react-i18next";
+import { useTranslation as useTranslation24 } from "react-i18next";
 import { jsxDEV as jsxDEV46 } from "react/jsx-dev-runtime";
 function ButtonNewUser() {
-  let navigate = useNavigate4(), { t } = useTranslation20();
+  let navigate = useNavigate4(), { t } = useTranslation24();
   return /* @__PURE__ */ jsxDEV46(
     CustomButton,
     {
@@ -6494,10 +6758,10 @@ import { useNavigate as useNavigate6 } from "@remix-run/react";
 
 // app/components/UI/widgets/users/btn_delete_user.tsx
 import { Form as Form16 } from "@remix-run/react";
-import { useTranslation as useTranslation21 } from "react-i18next";
+import { useTranslation as useTranslation25 } from "react-i18next";
 import { jsxDEV as jsxDEV47 } from "react/jsx-dev-runtime";
 function ButtonDeleteUser({ userId }) {
-  let { t } = useTranslation21();
+  let { t } = useTranslation25();
   return /* @__PURE__ */ jsxDEV47(Form16, { method: "post", children: [
     /* @__PURE__ */ jsxDEV47("input", { type: "hidden", name: "id", defaultValue: userId }, void 0, !1, {
       fileName: "app/components/UI/widgets/users/btn_delete_user.tsx",
@@ -6543,14 +6807,14 @@ function ButtonDeleteUser({ userId }) {
 }
 
 // app/components/UI/widgets/users/tbl_users.tsx
-import { useTranslation as useTranslation23 } from "react-i18next";
+import { useTranslation as useTranslation27 } from "react-i18next";
 
 // app/components/UI/widgets/users/btn_edit_user.tsx
 import { useNavigate as useNavigate5 } from "@remix-run/react";
-import { useTranslation as useTranslation22 } from "react-i18next";
+import { useTranslation as useTranslation26 } from "react-i18next";
 import { jsxDEV as jsxDEV48 } from "react/jsx-dev-runtime";
 function ButtonEditUser({ userId }) {
-  let navigate = useNavigate5(), { t } = useTranslation22();
+  let navigate = useNavigate5(), { t } = useTranslation26();
   return /* @__PURE__ */ jsxDEV48(
     CustomButton,
     {
@@ -6580,7 +6844,7 @@ function ButtonEditUser({ userId }) {
 // app/components/UI/widgets/users/tbl_users.tsx
 import { jsxDEV as jsxDEV49 } from "react/jsx-dev-runtime";
 function UsersTable({ currentUserId, users, departments }) {
-  let navigate = useNavigate6(), { t } = useTranslation23();
+  let navigate = useNavigate6(), { t } = useTranslation27();
   return /* @__PURE__ */ jsxDEV49(
     "table",
     {
@@ -6879,18 +7143,18 @@ function UsersTable({ currentUserId, users, departments }) {
 
 // app/components/UI/widgets/users/view.tsx
 import MaterialTailwind6 from "@material-tailwind/react";
-import { useTranslation as useTranslation37 } from "react-i18next";
+import { useTranslation as useTranslation41 } from "react-i18next";
 
 // app/components/UI/widgets/users/tbl_roles.tsx
 import { Form as Form18, useNavigate as useNavigate7 } from "@remix-run/react";
-import { useTranslation as useTranslation25 } from "react-i18next";
+import { useTranslation as useTranslation29 } from "react-i18next";
 
 // app/components/UI/widgets/users/btn_delete_role.tsx
 import { Form as Form17 } from "@remix-run/react";
-import { useTranslation as useTranslation24 } from "react-i18next";
+import { useTranslation as useTranslation28 } from "react-i18next";
 import { jsxDEV as jsxDEV50 } from "react/jsx-dev-runtime";
 function ButtonDeleteRole({ roleId }) {
-  let { t } = useTranslation24();
+  let { t } = useTranslation28();
   return /* @__PURE__ */ jsxDEV50(Form17, { method: "post", children: [
     /* @__PURE__ */ jsxDEV50("input", { type: "hidden", name: "id", defaultValue: roleId }, void 0, !1, {
       fileName: "app/components/UI/widgets/users/btn_delete_role.tsx",
@@ -6938,7 +7202,7 @@ function ButtonDeleteRole({ roleId }) {
 // app/components/UI/widgets/users/tbl_roles.tsx
 import { Fragment as Fragment6, jsxDEV as jsxDEV51 } from "react/jsx-dev-runtime";
 function RolesTable({ role, roles }) {
-  let navigate = useNavigate7(), { t } = useTranslation25();
+  let navigate = useNavigate7(), { i18n, t } = useTranslation29();
   return /* @__PURE__ */ jsxDEV51(Fragment6, { children: [
     roles.map((role2) => /* @__PURE__ */ jsxDEV51(
       Form18,
@@ -6995,14 +7259,19 @@ function RolesTable({ role, roles }) {
                   lineNumber: 40,
                   columnNumber: 25
                 }, this),
-                /* @__PURE__ */ jsxDEV51("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title") }, void 0, !1, {
+                /* @__PURE__ */ jsxDEV51("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title_kk") }, void 0, !1, {
                   fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
                   lineNumber: 41,
                   columnNumber: 25
                 }, this),
-                /* @__PURE__ */ jsxDEV51("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, !1, {
+                /* @__PURE__ */ jsxDEV51("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title_ru") }, void 0, !1, {
                   fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
                   lineNumber: 42,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV51("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                  lineNumber: 43,
                   columnNumber: 25
                 }, this)
               ] }, void 0, !0, {
@@ -7028,7 +7297,7 @@ function RolesTable({ role, roles }) {
               children: [
                 /* @__PURE__ */ jsxDEV51("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, !1, {
                   fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-                  lineNumber: 52,
+                  lineNumber: 53,
                   columnNumber: 29
                 }, this),
                 /* @__PURE__ */ jsxDEV51(
@@ -7041,8 +7310,8 @@ function RolesTable({ role, roles }) {
                         className: "text-sm w-full focus:outline-none p-1 text-black",
                         form: `updateRoleForm_${rl.id}`,
                         type: "text",
-                        name: "title",
-                        defaultValue: rl.title,
+                        name: "title_kk",
+                        defaultValue: rl.title_kk,
                         maxLength: 45,
                         onChange: () => {
                           document.getElementById(`updateRoleButton_${rl.id}`).click();
@@ -7052,7 +7321,7 @@ function RolesTable({ role, roles }) {
                       !1,
                       {
                         fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-                        lineNumber: 56,
+                        lineNumber: 57,
                         columnNumber: 33
                       },
                       this
@@ -7062,18 +7331,54 @@ function RolesTable({ role, roles }) {
                   !1,
                   {
                     fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-                    lineNumber: 53,
+                    lineNumber: 54,
+                    columnNumber: 29
+                  },
+                  this
+                ),
+                /* @__PURE__ */ jsxDEV51(
+                  "td",
+                  {
+                    className: "p-1 text-sm border border-blue-gray-500 hover:cursor-pointer hover:underline",
+                    children: /* @__PURE__ */ jsxDEV51(
+                      "input",
+                      {
+                        className: "text-sm w-full focus:outline-none p-1 text-black",
+                        form: `updateRoleForm_${rl.id}`,
+                        type: "text",
+                        name: "title_ru",
+                        defaultValue: rl.title_ru,
+                        maxLength: 45,
+                        onChange: () => {
+                          document.getElementById(`updateRoleButton_${rl.id}`).click();
+                        }
+                      },
+                      void 0,
+                      !1,
+                      {
+                        fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                        lineNumber: 73,
+                        columnNumber: 33
+                      },
+                      this
+                    )
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                    lineNumber: 70,
                     columnNumber: 29
                   },
                   this
                 ),
                 /* @__PURE__ */ jsxDEV51("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ jsxDEV51(ButtonDeleteRole, { roleId: rl.id }, void 0, !1, {
                   fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-                  lineNumber: 70,
+                  lineNumber: 87,
                   columnNumber: 33
                 }, this) }, void 0, !1, {
                   fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-                  lineNumber: 69,
+                  lineNumber: 86,
                   columnNumber: 29
                 }, this)
               ]
@@ -7082,13 +7387,13 @@ function RolesTable({ role, roles }) {
             !0,
             {
               fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-              lineNumber: 47,
+              lineNumber: 48,
               columnNumber: 25
             },
             this
           )) }, void 0, !1, {
             fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
-            lineNumber: 45,
+            lineNumber: 46,
             columnNumber: 17
           }, this)
         ]
@@ -7112,14 +7417,14 @@ function RolesTable({ role, roles }) {
 // app/components/UI/widgets/users/tbl_ainputforms.tsx
 import { AccessType } from "@prisma/client";
 import { Form as Form20 } from "@remix-run/react";
-import { useTranslation as useTranslation27 } from "react-i18next";
+import { useTranslation as useTranslation31 } from "react-i18next";
 
 // app/components/UI/widgets/users/btn_delete_ainputform.tsx
 import { Form as Form19 } from "@remix-run/react";
-import { useTranslation as useTranslation26 } from "react-i18next";
+import { useTranslation as useTranslation30 } from "react-i18next";
 import { jsxDEV as jsxDEV52 } from "react/jsx-dev-runtime";
 function ButtonDeleteAccessInputForm({ aform }) {
-  let { t } = useTranslation26(), handleDelete = async (event) => {
+  let { t } = useTranslation30(), handleDelete = async (event) => {
     confirm(
       t("confirm_delete")
     ) || event.preventDefault();
@@ -7172,7 +7477,7 @@ function ButtonDeleteAccessInputForm({ aform }) {
 // app/components/UI/widgets/users/tbl_ainputforms.tsx
 import { Fragment as Fragment7, jsxDEV as jsxDEV53 } from "react/jsx-dev-runtime";
 function AccessInputFormsTable({ aforms, inputForms }) {
-  let { t } = useTranslation27();
+  let { i18n, t } = useTranslation31();
   return /* @__PURE__ */ jsxDEV53(Fragment7, { children: [
     aforms && aforms.map((aform) => /* @__PURE__ */ jsxDEV53(
       Form20,
@@ -7285,7 +7590,7 @@ function AccessInputFormsTable({ aforms, inputForms }) {
                     onChange: () => {
                       document.getElementById(`updateAccessInputFormButton_${aform.id}`).click();
                     },
-                    children: inputForms.map((inputForm) => /* @__PURE__ */ jsxDEV53("option", { value: inputForm.id, children: inputForm.title }, inputForm.id, !1, {
+                    children: inputForms.map((inputForm) => /* @__PURE__ */ jsxDEV53("option", { value: inputForm.id, children: inputForm[`title_${i18n.language}`] }, inputForm.id, !1, {
                       fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
                       lineNumber: 68,
                       columnNumber: 41
@@ -7377,10 +7682,10 @@ function AccessInputFormsTable({ aforms, inputForms }) {
 
 // app/components/UI/widgets/users/btn_add_ainputform.tsx
 import { Form as Form21 } from "@remix-run/react";
-import { useTranslation as useTranslation28 } from "react-i18next";
+import { useTranslation as useTranslation32 } from "react-i18next";
 import { jsxDEV as jsxDEV54 } from "react/jsx-dev-runtime";
 function ButtonAddAccessInputForm({ roleId }) {
-  let { t } = useTranslation28();
+  let { t } = useTranslation32();
   return /* @__PURE__ */ jsxDEV54(Form21, { method: "post", children: [
     /* @__PURE__ */ jsxDEV54("input", { type: "hidden", name: "roleId", value: roleId }, void 0, !1, {
       fileName: "app/components/UI/widgets/users/btn_add_ainputform.tsx",
@@ -7425,10 +7730,10 @@ function ButtonAddAccessInputForm({ roleId }) {
 
 // app/components/UI/widgets/users/btn_add_role.tsx
 import { Form as Form22 } from "@remix-run/react";
-import { useTranslation as useTranslation29 } from "react-i18next";
+import { useTranslation as useTranslation33 } from "react-i18next";
 import { jsxDEV as jsxDEV55 } from "react/jsx-dev-runtime";
 function ButtonAddRole({ count }) {
-  let { t } = useTranslation29();
+  let { t } = useTranslation33();
   return /* @__PURE__ */ jsxDEV55(Form22, { method: "post", children: [
     /* @__PURE__ */ jsxDEV55("input", { type: "hidden", name: "cnt", defaultValue: count + 1 }, void 0, !1, {
       fileName: "app/components/UI/widgets/users/btn_add_role.tsx",
@@ -7473,10 +7778,10 @@ function ButtonAddRole({ count }) {
 
 // app/components/UI/widgets/users/btn_add_asearchform.tsx
 import { Form as Form23 } from "@remix-run/react";
-import { useTranslation as useTranslation30 } from "react-i18next";
+import { useTranslation as useTranslation34 } from "react-i18next";
 import { jsxDEV as jsxDEV56 } from "react/jsx-dev-runtime";
 function ButtonAddAccessSearchForm({ roleId }) {
-  let { t } = useTranslation30();
+  let { t } = useTranslation34();
   return /* @__PURE__ */ jsxDEV56(Form23, { method: "post", children: [
     /* @__PURE__ */ jsxDEV56("input", { type: "hidden", name: "roleId", value: roleId }, void 0, !1, {
       fileName: "app/components/UI/widgets/users/btn_add_asearchform.tsx",
@@ -7522,14 +7827,14 @@ function ButtonAddAccessSearchForm({ roleId }) {
 // app/components/UI/widgets/users/tbl_asearchforms.tsx
 import { AccessType as AccessType2 } from "@prisma/client";
 import { Form as Form25 } from "@remix-run/react";
-import { useTranslation as useTranslation32 } from "react-i18next";
+import { useTranslation as useTranslation36 } from "react-i18next";
 
 // app/components/UI/widgets/users/btn_delete_asearchform.tsx
 import { Form as Form24 } from "@remix-run/react";
-import { useTranslation as useTranslation31 } from "react-i18next";
+import { useTranslation as useTranslation35 } from "react-i18next";
 import { jsxDEV as jsxDEV57 } from "react/jsx-dev-runtime";
 function ButtonDeleteAccessSearchForm({ aform }) {
-  let { t } = useTranslation31(), handleDelete = async (event) => {
+  let { t } = useTranslation35(), handleDelete = async (event) => {
     confirm(
       t("confirm_delete")
     ) || event.preventDefault();
@@ -7582,7 +7887,7 @@ function ButtonDeleteAccessSearchForm({ aform }) {
 // app/components/UI/widgets/users/tbl_asearchforms.tsx
 import { Fragment as Fragment8, jsxDEV as jsxDEV58 } from "react/jsx-dev-runtime";
 function AccessSearchFormsTable({ aforms, searchForms }) {
-  let { t } = useTranslation32();
+  let { i18n, t } = useTranslation36();
   return /* @__PURE__ */ jsxDEV58(Fragment8, { children: [
     aforms && aforms.map((aform) => /* @__PURE__ */ jsxDEV58(
       Form25,
@@ -7695,7 +8000,7 @@ function AccessSearchFormsTable({ aforms, searchForms }) {
                     onChange: () => {
                       document.getElementById(`updateAccessSearchFormButton_${aform.id}`).click();
                     },
-                    children: searchForms.map((searchForm) => /* @__PURE__ */ jsxDEV58("option", { value: searchForm.id, children: searchForm.title }, searchForm.id, !1, {
+                    children: searchForms.map((searchForm) => /* @__PURE__ */ jsxDEV58("option", { value: searchForm.id, children: searchForm[`title_${i18n.language}`] }, searchForm.id, !1, {
                       fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
                       lineNumber: 68,
                       columnNumber: 41
@@ -7758,10 +8063,10 @@ function AccessSearchFormsTable({ aforms, searchForms }) {
 
 // app/components/UI/widgets/users/tbl_users_only_login.tsx
 import { useNavigate as useNavigate10 } from "@remix-run/react";
-import { useTranslation as useTranslation33 } from "react-i18next";
+import { useTranslation as useTranslation37 } from "react-i18next";
 import { jsxDEV as jsxDEV59 } from "react/jsx-dev-runtime";
 function UsersOnlyLoginTable({ users, currentUserId }) {
-  let navigate = useNavigate10(), { t } = useTranslation33();
+  let navigate = useNavigate10(), { t } = useTranslation37();
   return /* @__PURE__ */ jsxDEV59(
     "table",
     {
@@ -7852,14 +8157,14 @@ function UsersOnlyLoginTable({ users, currentUserId }) {
 }
 
 // app/components/UI/widgets/users/tbl_roles_only_title.tsx
-import { useTranslation as useTranslation35 } from "react-i18next";
+import { useTranslation as useTranslation39 } from "react-i18next";
 
 // app/components/UI/widgets/users/btn_delete_userrole.tsx
 import { Form as Form26 } from "@remix-run/react";
-import { useTranslation as useTranslation34 } from "react-i18next";
+import { useTranslation as useTranslation38 } from "react-i18next";
 import { jsxDEV as jsxDEV60 } from "react/jsx-dev-runtime";
 function ButtonDeleteUserRole({ userRoleId, userId }) {
-  let { t } = useTranslation34();
+  let { t } = useTranslation38();
   return /* @__PURE__ */ jsxDEV60(Form26, { method: "post", children: [
     /* @__PURE__ */ jsxDEV60("input", { type: "hidden", name: "id", defaultValue: userRoleId }, void 0, !1, {
       fileName: "app/components/UI/widgets/users/btn_delete_userrole.tsx",
@@ -7913,7 +8218,7 @@ function ButtonDeleteUserRole({ userRoleId, userId }) {
 import { Form as Form27 } from "@remix-run/react";
 import { Fragment as Fragment9, jsxDEV as jsxDEV61 } from "react/jsx-dev-runtime";
 function RolesOnlyTitleTable({ userRoles, roles }) {
-  let { t } = useTranslation35();
+  let { i18n, t } = useTranslation39();
   return /* @__PURE__ */ jsxDEV61(Fragment9, { children: [
     userRoles && userRoles.map((ur) => /* @__PURE__ */ jsxDEV61(
       Form27,
@@ -8024,7 +8329,7 @@ function RolesOnlyTitleTable({ userRoles, roles }) {
                         onChange: () => {
                           document.getElementById(`updateUserRoleButton_${ur.id}`).click();
                         },
-                        children: roles.map((role) => /* @__PURE__ */ jsxDEV61("option", { value: role.id, children: role.title }, role.id, !1, {
+                        children: roles.map((role) => /* @__PURE__ */ jsxDEV61("option", { value: role.id, children: role[`title_${i18n.language}`] }, role.id, !1, {
                           fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
                           lineNumber: 66,
                           columnNumber: 41
@@ -8093,10 +8398,10 @@ function RolesOnlyTitleTable({ userRoles, roles }) {
 
 // app/components/UI/widgets/users/btn_add_userrole.tsx
 import { Form as Form28 } from "@remix-run/react";
-import { useTranslation as useTranslation36 } from "react-i18next";
+import { useTranslation as useTranslation40 } from "react-i18next";
 import { jsxDEV as jsxDEV62 } from "react/jsx-dev-runtime";
 function ButtonAddUserRole({ userId }) {
-  let { t } = useTranslation36();
+  let { t } = useTranslation40();
   return /* @__PURE__ */ jsxDEV62(Form28, { method: "post", children: [
     /* @__PURE__ */ jsxDEV62("input", { type: "hidden", name: "userId", defaultValue: userId }, void 0, !1, {
       fileName: "app/components/UI/widgets/users/btn_add_userrole.tsx",
@@ -8158,7 +8463,7 @@ function UsersView({
   userRoles,
   errors
 }) {
-  let { t } = useTranslation37();
+  let { t } = useTranslation41();
   return /* @__PURE__ */ jsxDEV63("div", { className: "mx-1 flex flex-col gap-3 h-[calc(100vh-5rem)]", children: [
     /* @__PURE__ */ jsxDEV63(ErrorMessage, { errors }, void 0, !1, {
       fileName: "app/components/UI/widgets/users/view.tsx",
@@ -8582,7 +8887,7 @@ async function action4({
       e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
     }
   }
-  if (_action === "createRole")
+  if (_action === "createEmptyRole")
     try {
       return await api_default.users.createEmptyRole(Number(values.cnt)), redirect3("/dashboard/users");
     } catch (e) {
@@ -8591,7 +8896,8 @@ async function action4({
   if (_action === "updateRole") {
     let roleId = Number(values.id), updateRole = {
       id: Number(values.id),
-      title: String(values.title)
+      title_kk: String(values.title_kk),
+      title_ru: String(values.title_ru)
     };
     try {
       return await api_default.users.updateRole(roleId, updateRole), redirect3("/dashboard/users");
@@ -8727,7 +9033,7 @@ function Users() {
     !1,
     {
       fileName: "app/routes/dashboard.users.tsx",
-      lineNumber: 292,
+      lineNumber: 293,
       columnNumber: 9
     },
     this
@@ -8747,7 +9053,7 @@ import {
   UsersIcon,
   CircleStackIcon
 } from "@heroicons/react/24/solid";
-import { useTranslation as useTranslation40 } from "react-i18next";
+import { useTranslation as useTranslation44 } from "react-i18next";
 
 // app/components/UI/widgets/dashboard/view.tsx
 import { Outlet as Outlet2 } from "@remix-run/react";
@@ -8758,7 +9064,7 @@ import MaterialTailwind9 from "@material-tailwind/react";
 // app/components/UI/elements/logo.tsx
 import { Link as Link3 } from "@remix-run/react";
 import { jsxDEV as jsxDEV65 } from "react/jsx-dev-runtime";
-var Logo = () => /* @__PURE__ */ jsxDEV65(Link3, { to: "/", className: "flex gap-3", children: [
+var Logo = () => /* @__PURE__ */ jsxDEV65(Link3, { to: "/dashboard", className: "flex gap-3", children: [
   /* @__PURE__ */ jsxDEV65(
     "img",
     {
@@ -8775,7 +9081,7 @@ var Logo = () => /* @__PURE__ */ jsxDEV65(Link3, { to: "/", className: "flex gap
     },
     this
   ),
-  /* @__PURE__ */ jsxDEV65("span", { className: "font-bold text-lg self-center pt-1 text-blue-gray-800", children: "Db Creator" }, void 0, !1, {
+  /* @__PURE__ */ jsxDEV65("span", { className: "font-bold text-lg self-center text-primary text-bold h-4", children: "Db Creator" }, void 0, !1, {
     fileName: "app/components/UI/elements/logo.tsx",
     lineNumber: 11,
     columnNumber: 13
@@ -8806,7 +9112,7 @@ var {
 } = MaterialTailwind7;
 function NavListMenu({ menuTitle, navListMenuItems }) {
   let [isMenuOpen, setIsMenuOpen] = useState6(!1), [isMobileMenuOpen, setIsMobileMenuOpen] = useState6(!1), renderItems = navListMenuItems.map(
-    ({ icon, title, link }, key) => /* @__PURE__ */ jsxDEV66("a", { href: "#", children: /* @__PURE__ */ jsxDEV66(
+    ({ icon, title, link }, key) => /* @__PURE__ */ jsxDEV66("div", { children: /* @__PURE__ */ jsxDEV66(
       MenuItem,
       {
         placeholder: "",
@@ -8816,7 +9122,7 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
             " ",
             createElement(icon, {
               strokeWidth: 2,
-              className: "h-6 text-gray-900 w-6"
+              className: "h-6 text-primary w-6"
             })
           ] }, void 0, !0, {
             fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
@@ -8883,7 +9189,7 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
               children: /* @__PURE__ */ jsxDEV66(
                 ListItem,
                 {
-                  className: "flex items-center gap-2 py-2 pr-4 font-medium text-primary",
+                  className: "flex items-center gap-2 py-2 pr-4 font-bold text-primary h-6",
                   selected: isMenuOpen || isMobileMenuOpen,
                   onClick: () => setIsMobileMenuOpen((cur) => !cur),
                   placeholder: "",
@@ -8992,7 +9298,7 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
 }
 
 // app/components/UI/widgets/dashboard/menu/nav_list.tsx
-import { useTranslation as useTranslation38 } from "react-i18next";
+import { useTranslation as useTranslation42 } from "react-i18next";
 import { jsxDEV as jsxDEV67 } from "react/jsx-dev-runtime";
 var { List } = MaterialTailwind8;
 function NavList({
@@ -9000,7 +9306,7 @@ function NavList({
   searchDataMenuItems,
   serviceMenuItems
 }) {
-  let { t } = useTranslation38();
+  let { t } = useTranslation42();
   return /* @__PURE__ */ jsxDEV67(
     List,
     {
@@ -9066,10 +9372,10 @@ function NavList({
 }
 
 // app/components/UI/elements/language.tsx
-import { useTranslation as useTranslation39 } from "react-i18next";
+import { useTranslation as useTranslation43 } from "react-i18next";
 import { jsxDEV as jsxDEV68 } from "react/jsx-dev-runtime";
 function LanguagePanel() {
-  let { i18n } = useTranslation39();
+  let { i18n } = useTranslation43();
   return /* @__PURE__ */ jsxDEV68("div", { className: "flex flex-row justify-center items-center gap-4 font-bold", children: [
     {
       title: "KAZ",
@@ -9082,7 +9388,7 @@ function LanguagePanel() {
   ].map((item, index) => /* @__PURE__ */ jsxDEV68(
     "span",
     {
-      className: `${i18n.language === item.label ? "border-2 border-blue-gray-500" : ""} p-1 text-sm rounded-md hover:cursor-pointer`,
+      className: `${i18n.language === item.label ? "bg-primary text-white" : "border-2 border-blue-gray-500"} p-1 text-sm rounded-md hover:cursor-pointer`,
       onClick: () => i18n.changeLanguage(item.label),
       children: item.title
     },
@@ -9121,7 +9427,7 @@ function MainMenu({
   return /* @__PURE__ */ jsxDEV69("div", { className: "w-full", children: /* @__PURE__ */ jsxDEV69(
     "div",
     {
-      className: "w-full px-4 bg-white shadow shadow-blue-gray-300 mb-2",
+      className: "w-full px-4 bg-white shadow shadow-blue-gray-500 mb-2",
       children: [
         /* @__PURE__ */ jsxDEV69("div", { className: "w-full flex items-center justify-between text-blue-gray-900", children: [
           /* @__PURE__ */ jsxDEV69("div", { className: "shrink-0 h-16", children: /* @__PURE__ */ jsxDEV69(logo_default, {}, void 0, !1, {
@@ -9283,7 +9589,7 @@ async function loader6() {
   });
 }
 function dashboard() {
-  let { t } = useTranslation40(), data = useLoaderData6(), [docs, setDocs] = useState7({}), [current, setCurrent] = useState7(0), [conditions, setConditions] = useState7([]), context = {
+  let { i18n, t } = useTranslation44(), data = useLoaderData6(), [docs, setDocs] = useState7({}), [current, setCurrent] = useState7(0), [conditions, setConditions] = useState7([]), context = {
     ...data,
     docs,
     setDocs,
@@ -9292,11 +9598,11 @@ function dashboard() {
     conditions,
     setConditions
   }, [openNav, setOpenNav] = useState7(!1), editDataMenuItems = data.inputForms.map((item) => ({
-    title: item.title,
+    title: item[`title_${i18n.language}`],
     link: `/dashboard/enter_data/${item.id}`,
     icon: NewspaperIcon
   })), searchDataMenuItems = data.searchForms.map((item) => ({
-    title: item.title,
+    title: item[`title_${i18n.language}`],
     link: `/dashboard/search_data/${item.id}`,
     icon: NewspaperIcon
   })), serviceMenuItems = [
@@ -9362,7 +9668,7 @@ function Index() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-TAHU6LB7.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-XJ6BYS35.js", "/build/_shared/chunk-TJ4YKIVD.js", "/build/_shared/chunk-Q6LMBPEP.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-FLDRAAC7.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-O7O22ZK6.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard": { id: "routes/dashboard", parentId: "root", path: "dashboard", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard-5HHWBALD.js", imports: ["/build/_shared/chunk-DGLILCEK.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.db_struct": { id: "routes/dashboard.db_struct", parentId: "routes/dashboard", path: "db_struct", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.db_struct-EDHQW5RW.js", imports: ["/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.enter_data.$formId": { id: "routes/dashboard.enter_data.$formId", parentId: "routes/dashboard", path: "enter_data/:formId", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.enter_data.$formId-TBBRFJS4.js", imports: ["/build/_shared/chunk-35IR2J3X.js", "/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.search_data.$formId": { id: "routes/dashboard.search_data.$formId", parentId: "routes/dashboard", path: "search_data/:formId", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.search_data.$formId-PSLAM6BY.js", imports: ["/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.users": { id: "routes/dashboard.users", parentId: "routes/dashboard", path: "users", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.users-Z3L5J5BI.js", imports: ["/build/_shared/chunk-35IR2J3X.js", "/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "5b6b78e2", hmr: { runtime: "/build/_shared/chunk-Q6LMBPEP.js", timestamp: 1710238730358 }, url: "/build/manifest-5B6B78E2.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-TAHU6LB7.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-XJ6BYS35.js", "/build/_shared/chunk-TJ4YKIVD.js", "/build/_shared/chunk-Q6LMBPEP.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-ROHAVX76.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-O7O22ZK6.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard": { id: "routes/dashboard", parentId: "root", path: "dashboard", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard-ZOWHK627.js", imports: ["/build/_shared/chunk-DGLILCEK.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.db_struct": { id: "routes/dashboard.db_struct", parentId: "routes/dashboard", path: "db_struct", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.db_struct-27O4LOI4.js", imports: ["/build/_shared/chunk-N4W3YWYJ.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.enter_data.$formId": { id: "routes/dashboard.enter_data.$formId", parentId: "routes/dashboard", path: "enter_data/:formId", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.enter_data.$formId-PBXMXJTV.js", imports: ["/build/_shared/chunk-35IR2J3X.js", "/build/_shared/chunk-N4W3YWYJ.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.search_data.$formId": { id: "routes/dashboard.search_data.$formId", parentId: "routes/dashboard", path: "search_data/:formId", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.search_data.$formId-PDQCWH2X.js", imports: ["/build/_shared/chunk-N4W3YWYJ.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.users": { id: "routes/dashboard.users", parentId: "routes/dashboard", path: "users", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.users-4Y6JHGEE.js", imports: ["/build/_shared/chunk-35IR2J3X.js", "/build/_shared/chunk-N4W3YWYJ.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "f0021b6b", hmr: { runtime: "/build/_shared/chunk-Q6LMBPEP.js", timestamp: 1710249651476 }, url: "/build/manifest-F0021B6B.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public/build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1, v3_throwAbortReason: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

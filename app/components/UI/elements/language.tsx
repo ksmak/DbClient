@@ -19,7 +19,7 @@ export default function LanguagePanel() {
             {langs.map((item, index) => (
                 <span
                     key={index}
-                    className={`${i18n.language === item.label ? 'border-2 border-blue-gray-500' : ''} p-1 text-sm rounded-md hover:cursor-pointer`}
+                    className={`${i18n.language === item.label ? 'bg-primary text-white' : 'border-2 border-blue-gray-500'} p-1 text-sm rounded-md hover:cursor-pointer`}
                     onClick={() => i18n.changeLanguage(item.label)}
                 >
                     {item.title}

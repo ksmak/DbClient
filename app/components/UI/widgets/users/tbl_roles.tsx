@@ -10,7 +10,7 @@ type RolesTableProps = {
 
 export default function RolesTable({ role, roles }: RolesTableProps) {
     const navigate = useNavigate()
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
 
     return (
         <>
@@ -38,7 +38,8 @@ export default function RolesTable({ role, roles }: RolesTableProps) {
                 >
                     <tr>
                         <th className="p-1 text-sm border border-blue-gray-500">#</th>
-                        <th className="p-1 text-sm border border-blue-gray-500">{t('title')}</th>
+                        <th className="p-1 text-sm border border-blue-gray-500">{t('title_kk')}</th>
+                        <th className="p-1 text-sm border border-blue-gray-500">{t('title_ru')}</th>
                         <th className="p-1 text-sm border border-blue-gray-500"></th>
                     </tr>
                 </thead>
@@ -57,8 +58,24 @@ export default function RolesTable({ role, roles }: RolesTableProps) {
                                     className="text-sm w-full focus:outline-none p-1 text-black"
                                     form={`updateRoleForm_${rl.id}`}
                                     type="text"
-                                    name="title"
-                                    defaultValue={rl.title}
+                                    name="title_kk"
+                                    defaultValue={rl.title_kk}
+                                    maxLength={45}
+                                    onChange={() => {
+                                        const button = document.getElementById(`updateRoleButton_${rl.id}`) as HTMLButtonElement
+                                        button.click()
+                                    }}
+                                />
+                            </td>
+                            <td
+                                className="p-1 text-sm border border-blue-gray-500 hover:cursor-pointer hover:underline"
+                            >
+                                <input
+                                    className="text-sm w-full focus:outline-none p-1 text-black"
+                                    form={`updateRoleForm_${rl.id}`}
+                                    type="text"
+                                    name="title_ru"
+                                    defaultValue={rl.title_ru}
                                     maxLength={45}
                                     onChange={() => {
                                         const button = document.getElementById(`updateRoleButton_${rl.id}`) as HTMLButtonElement

@@ -24,7 +24,7 @@ export async function loader() {
 }
 
 export default function dashboard() {
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
     const data = useLoaderData<typeof loader>()
     const [docs, setDocs] = useState<{ formId?: number, ids?: number[] }>({})
     const [current, setCurrent] = useState(0)
@@ -43,7 +43,7 @@ export default function dashboard() {
     const editDataMenuItems =
         data.inputForms.map((item: InputForm) => {
             return {
-                title: item.title,
+                title: item[`title_${i18n.language}` as keyof typeof item],
                 link: `/dashboard/enter_data/${item.id}`,
                 icon: NewspaperIcon,
             }
@@ -52,7 +52,7 @@ export default function dashboard() {
     const searchDataMenuItems =
         data.searchForms.map((item: SearchForm) => {
             return {
-                title: item.title,
+                title: item[`title_${i18n.language}` as keyof typeof item],
                 link: `/dashboard/search_data/${item.id}`,
                 icon: NewspaperIcon,
             }

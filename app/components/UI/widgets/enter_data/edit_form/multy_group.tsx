@@ -1,7 +1,8 @@
 import { InputField } from "@prisma/client"
 import { Dispatch, MouseEvent, SetStateAction } from "react"
-import Field from "./field"
+import Field from "./field_single"
 import CustomButton from "~/components/UI/elements/custom_button"
+import { useTranslation } from "react-i18next"
 
 type MultyGroupProps = {
     state: string | null,
@@ -11,6 +12,7 @@ type MultyGroupProps = {
     setDoc: Dispatch<SetStateAction<any>>,
 }
 export default function MultyGroup({ state, dictionaries, group, doc, setDoc }: MultyGroupProps) {
+    const { i18n } = useTranslation()
     const handleAdd = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         let d = { ...doc }
@@ -63,7 +65,7 @@ export default function MultyGroup({ state, dictionaries, group, doc, setDoc }: 
                         <th className="p-1 text-sm border border-blue-gray-700">#</th>
                         {group?.fields && group.fields.map((fld: InputField) => (
                             <th key={fld.id} className="p-1 text-sm border border-blue-gray-700">
-                                {fld.title}
+                                {fld[`title_${i18n.language}` as keyof typeof fld]}
                             </th>
                         ))}
                         <th className="p-1 text-sm border border-blue-gray-700">#</th>

@@ -30,7 +30,7 @@ export default function MainMenu({
     return (
         <div className="w-full">
             <div
-                className="w-full px-4 bg-white shadow shadow-blue-gray-300 mb-2"
+                className="w-full px-4 bg-white shadow shadow-blue-gray-500 mb-2"
 
             >
                 <div className="w-full flex items-center justify-between text-blue-gray-900">

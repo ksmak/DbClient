@@ -6,11 +6,7 @@ export default function DbModule(prisma: PrismaClient) {
     return {
         async getDictionaries() {
             let dicts: IDict[] = []
-            const dictionaries = await prisma.dictionary.findMany({
-                orderBy: {
-                    title: 'asc'
-                }
-            })
+            const dictionaries = await prisma.dictionary.findMany()
             for (const dict of dictionaries) {
                 try {
                     const [dic1, dic2] = await prisma.$transaction([
@@ -19,14 +15,16 @@ export default function DbModule(prisma: PrismaClient) {
                     ])
                     dicts.push({
                         id: dict.id,
-                        title: dict.title,
+                        title_kk: dict.title_kk,
+                        title_ru: dict.title_ru,
                         data_browse: dic1,
                         data_edit: dic2
                     })
                 } catch (e) {
                     dicts.push({
                         id: dict.id,
-                        title: dict.title,
+                        title_kk: dict.title_kk,
+                        title_ru: dict.title_ru,
                         data_browse: [],
                         data_edit: []
                     })
@@ -37,7 +35,8 @@ export default function DbModule(prisma: PrismaClient) {
         createEmptyDictionary(cnt: number) {
             return prisma.dictionary.create({
                 data: {
-                    title: `Dictionary ${cnt}`,
+                    title_kk: `Dictionary ${cnt}`,
+                    title_ru: `Dictionary ${cnt}`,
                 }
             })
         },
@@ -80,7 +79,8 @@ export default function DbModule(prisma: PrismaClient) {
             return prisma.inputForm.create({
                 data: {
                     pos: cnt,
-                    title: `Input Form ${cnt}`,
+                    title_kk: `Input Form ${cnt}`,
+                    title_ru: `Input Form ${cnt}`,
                 }
             })
         },
@@ -137,7 +137,8 @@ export default function DbModule(prisma: PrismaClient) {
             return prisma.searchForm.create({
                 data: {
                     pos: cnt,
-                    title: `Search Form ${cnt}`,
+                    title_kk: `Search Form ${cnt}`,
+                    title_ru: `Search Form ${cnt}`,
                 }
             })
         },
@@ -198,7 +199,8 @@ export default function DbModule(prisma: PrismaClient) {
                 data: {
                     pos: cnt,
                     inputFormId: formId,
-                    title: `Group ${cnt}`,
+                    title_kk: `Group ${cnt}`,
+                    title_ru: `Group ${cnt}`,
                 }
             })
         },
@@ -242,7 +244,8 @@ export default function DbModule(prisma: PrismaClient) {
                 data: {
                     pos: cnt,
                     searchFormId: formId,
-                    title: `Search Field ${cnt}`,
+                    title_kk: `Search Field ${cnt}`,
+                    title_ru: `Search Field ${cnt}`,
                 }
             })
         },
@@ -279,14 +282,19 @@ export default function DbModule(prisma: PrismaClient) {
                 data: {
                     pos: cnt,
                     groupId: groupId,
-                    title: `Input Field ${cnt}`,
+                    title_kk: `Input Field ${cnt}`,
+                    title_ru: `Input Field ${cnt}`,
                 }
             })
         },
         getInputFields() {
             return prisma.inputField.findMany({
                 include: {
-                    group: true
+                    group: {
+                        include: {
+                            inputForm: true
+                        }
+                    }
                 }
             })
         },

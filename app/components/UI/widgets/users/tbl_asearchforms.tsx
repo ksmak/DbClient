@@ -11,7 +11,7 @@ type AccessSearchFormsTableProps = {
 }
 
 export default function AccessSearchFormsTable({ aforms, searchForms }: AccessSearchFormsTableProps) {
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
 
     return (
         <>
@@ -66,7 +66,7 @@ export default function AccessSearchFormsTable({ aforms, searchForms }: AccessSe
                                 >
                                     {searchForms.map((searchForm: SearchForm) => (
                                         <option key={searchForm.id} value={searchForm.id}>
-                                            {searchForm.title}
+                                            {searchForm[`title_${i18n.language}` as keyof typeof searchForm]}
                                         </option>
                                     ))}
                                 </select>

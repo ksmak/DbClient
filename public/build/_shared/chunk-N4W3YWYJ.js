@@ -1241,11 +1241,13 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
     });
     exports.Prisma.DepartmentScalarFieldEnum = {
       id: "id",
-      title: "title"
+      title_kk: "title_kk",
+      title_ru: "title_ru"
     };
     exports.Prisma.RoleScalarFieldEnum = {
       id: "id",
-      title: "title"
+      title_kk: "title_kk",
+      title_ru: "title_ru"
     };
     exports.Prisma.AccessInputFormScalarFieldEnum = {
       id: "id",
@@ -1279,22 +1281,26 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
     };
     exports.Prisma.DictionaryScalarFieldEnum = {
       id: "id",
-      title: "title"
+      title_kk: "title_kk",
+      title_ru: "title_ru"
     };
     exports.Prisma.InputFormScalarFieldEnum = {
       id: "id",
       pos: "pos",
-      title: "title"
+      title_kk: "title_kk",
+      title_ru: "title_ru"
     };
     exports.Prisma.SearchFormScalarFieldEnum = {
       id: "id",
       pos: "pos",
-      title: "title"
+      title_kk: "title_kk",
+      title_ru: "title_ru"
     };
     exports.Prisma.GroupScalarFieldEnum = {
       id: "id",
       pos: "pos",
-      title: "title",
+      title_kk: "title_kk",
+      title_ru: "title_ru",
       inputFormId: "inputFormId",
       isMulty: "isMulty"
     };
@@ -1303,7 +1309,8 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
       pos: "pos",
       colSpan: "colSpan",
       colStart: "colStart",
-      title: "title",
+      title_kk: "title_kk",
+      title_ru: "title_ru",
       groupId: "groupId",
       fieldType: "fieldType",
       dicId: "dicId",
@@ -1318,14 +1325,16 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
     exports.Prisma.SearchFieldScalarFieldEnum = {
       id: "id",
       pos: "pos",
-      title: "title",
+      title_kk: "title_kk",
+      title_ru: "title_ru",
       searchFormId: "searchFormId",
       fieldId: "fieldId"
     };
     exports.Prisma.ReportScalarFieldEnum = {
       id: "id",
       pos: "pos",
-      title: "title",
+      title_kk: "title_kk",
+      title_ru: "title_ru",
       template: "template",
       start_row: "start_row",
       start_col: "start_col"
@@ -1344,7 +1353,8 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
     };
     exports.Prisma.QueryScalarFieldEnum = {
       id: "id",
-      title: "title",
+      title_kk: "title_kk",
+      title_ru: "title_ru",
       userId: "userId",
       isPublic: "isPublic"
     };
@@ -1670,4 +1680,4 @@ export {
      *)
   *)
 */
-//# sourceMappingURL=/build/_shared/chunk-FMBQK5TO.js.map
+//# sourceMappingURL=/build/_shared/chunk-N4W3YWYJ.js.map

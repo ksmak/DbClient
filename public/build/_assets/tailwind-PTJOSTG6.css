@@ -1297,6 +1297,10 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(255 235 59 / var(--tw-border-opacity));
 }
+.border-primary {
+  --tw-border-opacity: 1;
+  border-color: rgb(37 150 190 / var(--tw-border-opacity));
+}
 .\!border-t-transparent {
   border-top-color: transparent !important;
 }
@@ -1578,6 +1582,14 @@ video {
 }
 .bg-yellow-500\/20 {
   background-color: #ffeb3b33;
+}
+.bg-blue-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 222 251 / var(--tw-bg-opacity));
+}
+.bg-light-blue-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(179 229 252 / var(--tw-bg-opacity));
 }
 .bg-opacity-60 {
   --tw-bg-opacity: .6;
@@ -2514,6 +2526,10 @@ video {
 }
 .shadow-yellow-500\/40 {
   --tw-shadow-color: rgb(255 235 59 / .4);
+  --tw-shadow: var(--tw-shadow-colored);
+}
+.shadow-blue-gray-500 {
+  --tw-shadow-color: #607d8b;
   --tw-shadow: var(--tw-shadow-colored);
 }
 .outline-none {
@@ -3494,10 +3510,6 @@ video {
 }
 .hover\:shadow-amber-500\/40:hover {
   --tw-shadow-color: rgb(255 193 7 / .4);
-  --tw-shadow: var(--tw-shadow-colored);
-}
-.hover\:shadow-blue-100:hover {
-  --tw-shadow-color: #bbdefb;
   --tw-shadow: var(--tw-shadow-colored);
 }
 .hover\:shadow-blue-500\/40:hover {
@@ -4904,4 +4916,4 @@ video {
 .\[\&\:\:-webkit-slider-thumb\]\:\[-webkit-appearance\:none\]::-webkit-slider-thumb {
   -webkit-appearance: none;
 }
-/*# sourceMappingURL=/build/_assets/tailwind-Z4AG7SKS.css.map */
+/*# sourceMappingURL=/build/_assets/tailwind-5L6FZAJ4.css.map */
