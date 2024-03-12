@@ -269,7 +269,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx"
   );
-  import.meta.hot.lastModified = "1709721955427.2146";
+  import.meta.hot.lastModified = "1710154475968.134";
 }
 var {
   Collapse,
@@ -303,7 +303,7 @@ function NavListMenu({
       lineNumber: 48,
       columnNumber: 21
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Typography, { className: "flex items-center text-sm font-bold", variant: "h6", color: "blue-gray", placeholder: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Link, { to: link, children: title }, void 0, false, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Typography, { className: "flex items-center text-sm font-bold text-primary", variant: "h6", placeholder: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Link, { to: link, children: title }, void 0, false, {
       fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
       lineNumber: 57,
       columnNumber: 29
@@ -329,7 +329,7 @@ function NavListMenu({
     /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Menu, { open: isMenuOpen, handler: setIsMenuOpen, offset: {
       mainAxis: 20
     }, placement: "bottom", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(MenuHandler, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Typography, { className: "font-medium", as: "div", variant: "small", placeholder: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ListItem, { className: "flex items-center gap-2 py-2 pr-4 font-medium text-gray-900", selected: isMenuOpen || isMobileMenuOpen, onClick: () => setIsMobileMenuOpen((cur) => !cur), placeholder: "", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(MenuHandler, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Typography, { className: "font-medium", as: "div", variant: "small", placeholder: "", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ListItem, { className: "flex items-center gap-2 py-2 pr-4 font-medium text-primary", selected: isMenuOpen || isMobileMenuOpen, onClick: () => setIsMobileMenuOpen((cur) => !cur), placeholder: "", children: [
         menuTitle,
         /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ChevronDownIcon_default, { strokeWidth: 2.5, className: `hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""}` }, void 0, false, {
           fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
@@ -671,7 +671,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/dashboard.tsx"
   );
-  import.meta.hot.lastModified = "1709721471620.5154";
+  import.meta.hot.lastModified = "1710237974877.5964";
 }
 function dashboard() {
   const { t } = useTranslation();
@@ -705,12 +705,12 @@ function dashboard() {
   });
   const serviceMenuItems = [
     {
-      title: t("db_structure"),
+      title: t("menu_db_structure"),
       link: "db_struct",
       icon: CircleStackIcon_default
     },
     {
-      title: t("users"),
+      title: t("menu_db_users"),
       link: "users",
       icon: UsersIcon_default
     }
@@ -744,4 +744,4 @@ function dashboard() {
 export {
   dashboard as default
 };
-//# sourceMappingURL=/build/routes/dashboard-WCMTBFBG.js.map
+//# sourceMappingURL=/build/routes/dashboard-5HHWBALD.js.map

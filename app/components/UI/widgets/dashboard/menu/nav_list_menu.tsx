@@ -40,9 +40,8 @@ export default function NavListMenu({ menuTitle, navListMenuItems }: NavListMenu
                     </div>
                     <div>
                         <Typography
-                            className="flex items-center text-sm font-bold"
+                            className="flex items-center text-sm font-bold text-primary"
                             variant="h6"
-                            color="blue-gray"
                             placeholder=""
                         >
                             <Link to={link}>{title}</Link>
@@ -69,7 +68,7 @@ export default function NavListMenu({ menuTitle, navListMenuItems }: NavListMenu
                         placeholder=""
                     >
                         <ListItem
-                            className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+                            className="flex items-center gap-2 py-2 pr-4 font-medium text-primary"
                             selected={isMenuOpen || isMobileMenuOpen}
                             onClick={() => setIsMobileMenuOpen((cur) => !cur)}
                             placeholder=""

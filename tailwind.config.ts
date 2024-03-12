@@ -10,10 +10,13 @@ export default withMT({
         'mono': ["Roboto Mono"],
       },
       colors: {
-        primary: '#42a5f5',
-        secondary: '#ff6f61',
-        button: '#b2b2b2',
-        buttonhover: '#8b8b8b'
+        primary: '#2596be',
+        primary_shadow: '#d4edf7',
+        secondary: '#a9a9a9',
+        secondary_shadow: '#e6e6e6',
+        danger: '#ff6f61',
+        danger_shadow: '#ffd0cc',
+        selected: '#aadcee'
       },
     },
   },

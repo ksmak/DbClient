@@ -125,7 +125,7 @@ import { useChangeLanguage } from "remix-i18next/react";
 import { useTranslation } from "react-i18next";
 
 // app/tailwind.css
-var tailwind_default = "/build/_assets/tailwind-SGUIJSGJ.css";
+var tailwind_default = "/build/_assets/tailwind-7NQCPLVF.css";
 
 // app/root.tsx
 import { jsxDEV as jsxDEV2 } from "react/jsx-dev-runtime";
@@ -228,9 +228,6 @@ function UsersModule(prisma2) {
     getDepartments() {
       return prisma2.department.findMany();
     },
-    getRoles() {
-      return prisma2.role.findMany();
-    },
     getUsers(q = null) {
       return q ? prisma2.user.findMany({
         include: {
@@ -300,6 +297,164 @@ function UsersModule(prisma2) {
       return prisma2.user.delete({
         where: {
           id: userId
+        }
+      });
+    },
+    getRoles() {
+      return prisma2.role.findMany({
+        orderBy: {
+          title: "asc"
+        }
+      });
+    },
+    createEmptyRole(cnt) {
+      return prisma2.role.create({
+        data: {
+          title: `Role ${cnt}`
+        }
+      });
+    },
+    updateRole(roleId, role) {
+      return prisma2.role.update({
+        where: {
+          id: roleId
+        },
+        data: {
+          ...role,
+          id: void 0
+        }
+      });
+    },
+    getRole(roleId) {
+      return prisma2.role.findFirst({
+        where: {
+          id: roleId
+        }
+      });
+    },
+    deleteRole(roleId) {
+      return prisma2.role.delete({
+        where: {
+          id: roleId
+        }
+      });
+    },
+    getAccessInputForms(roleId) {
+      return prisma2.accessInputForm.findMany({
+        include: {
+          form: !0
+        },
+        where: {
+          roleId
+        }
+      });
+    },
+    createEmptyAccessInputForm(roleId) {
+      return prisma2.accessInputForm.create({
+        data: {
+          roleId
+        }
+      });
+    },
+    updateAccessInputForm(aformId, aform) {
+      return prisma2.accessInputForm.update({
+        where: {
+          id: aformId
+        },
+        data: {
+          ...aform,
+          id: void 0
+        }
+      });
+    },
+    getAccessInputForm(aformId) {
+      return prisma2.accessInputForm.findFirst({
+        where: {
+          id: aformId
+        }
+      });
+    },
+    deleteAccessInputForm(aformId) {
+      return prisma2.accessInputForm.delete({
+        where: {
+          id: aformId
+        }
+      });
+    },
+    getAccessSearchForms(roleId) {
+      return prisma2.accessSearchForm.findMany({
+        include: {
+          form: !0
+        },
+        where: {
+          roleId
+        }
+      });
+    },
+    createEmptyAccessSearchForm(roleId) {
+      return prisma2.accessSearchForm.create({
+        data: {
+          roleId
+        }
+      });
+    },
+    updateAccessSearchForm(aformId, aform) {
+      return prisma2.accessSearchForm.update({
+        where: {
+          id: aformId
+        },
+        data: {
+          ...aform,
+          id: void 0
+        }
+      });
+    },
+    getAccessSearchForm(aformId) {
+      return prisma2.accessSearchForm.findFirst({
+        where: {
+          id: aformId
+        }
+      });
+    },
+    deleteAccessSearchForm(aformId) {
+      return prisma2.accessSearchForm.delete({
+        where: {
+          id: aformId
+        }
+      });
+    },
+    getUserRoles(userId) {
+      return prisma2.userRole.findMany({
+        include: {
+          role: !0
+        },
+        where: {
+          userId
+        }
+      });
+    },
+    createEmptyUserRole(userId) {
+      return prisma2.userRole.create({
+        data: {
+          userId
+        }
+      });
+    },
+    updateUserRole(userRoleId, userRole) {
+      return prisma2.userRole.update({
+        where: {
+          id: userRoleId
+        },
+        data: {
+          ...userRole,
+          id: void 0
+        }
+      });
+    },
+    deleteUserRole(userRoleId) {
+      return prisma2.userRole.delete({
+        where: {
+          id: userRoleId
         }
       });
     }
@@ -6016,7 +6171,7 @@ import { Prisma as Prisma4 } from "@prisma/client";
 import { json as json5, redirect as redirect3 } from "@remix-run/node";
 import { useActionData as useActionData4, useLoaderData as useLoaderData5 } from "@remix-run/react";
 
-// app/components/UI/widgets/users/user_dialog.tsx
+// app/components/UI/widgets/users/dlg_user.tsx
 import MaterialTailwind5 from "@material-tailwind/react";
 import { Form as Form15 } from "@remix-run/react";
 import moment from "moment";
@@ -6046,7 +6201,7 @@ function UserDialog({ isNew, user, departments, errors }) {
               method: "post",
               children: [
                 /* @__PURE__ */ jsxDEV45("input", { type: "hidden", name: "id", defaultValue: user?.id ? user.id : "" }, void 0, !1, {
-                  fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                  fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                   lineNumber: 43,
                   columnNumber: 25
                 }, this),
@@ -6062,7 +6217,7 @@ function UserDialog({ isNew, user, departments, errors }) {
                   void 0,
                   !1,
                   {
-                    fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                    fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                     lineNumber: 44,
                     columnNumber: 25
                   },
@@ -6083,7 +6238,7 @@ function UserDialog({ isNew, user, departments, errors }) {
                   void 0,
                   !1,
                   {
-                    fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                    fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                     lineNumber: 51,
                     columnNumber: 25
                   },
@@ -6103,7 +6258,7 @@ function UserDialog({ isNew, user, departments, errors }) {
                   void 0,
                   !1,
                   {
-                    fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                    fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                     lineNumber: 61,
                     columnNumber: 25
                   },
@@ -6123,7 +6278,7 @@ function UserDialog({ isNew, user, departments, errors }) {
                   void 0,
                   !1,
                   {
-                    fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                    fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                     lineNumber: 70,
                     columnNumber: 25
                   },
@@ -6143,7 +6298,7 @@ function UserDialog({ isNew, user, departments, errors }) {
                   void 0,
                   !1,
                   {
-                    fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                    fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                     lineNumber: 79,
                     columnNumber: 25
                   },
@@ -6163,7 +6318,7 @@ function UserDialog({ isNew, user, departments, errors }) {
                   void 0,
                   !1,
                   {
-                    fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                    fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                     lineNumber: 88,
                     columnNumber: 25
                   },
@@ -6179,12 +6334,12 @@ function UserDialog({ isNew, user, departments, errors }) {
                     required: !1,
                     children: [
                       /* @__PURE__ */ jsxDEV45("option", { children: "-" }, void 0, !1, {
-                        fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                        fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                         lineNumber: 104,
                         columnNumber: 29
                       }, this),
                       departments.map((item) => /* @__PURE__ */ jsxDEV45("option", { value: item.id, children: item.title }, void 0, !1, {
-                        fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                        fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                         lineNumber: 106,
                         columnNumber: 33
                       }, this))
@@ -6193,7 +6348,7 @@ function UserDialog({ isNew, user, departments, errors }) {
                   void 0,
                   !0,
                   {
-                    fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                    fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                     lineNumber: 97,
                     columnNumber: 25
                   },
@@ -6213,7 +6368,7 @@ function UserDialog({ isNew, user, departments, errors }) {
                   void 0,
                   !1,
                   {
-                    fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+                    fileName: "app/components/UI/widgets/users/dlg_user.tsx",
                     lineNumber: 109,
                     columnNumber: 25
                   },
@@ -6224,19 +6379,19 @@ function UserDialog({ isNew, user, departments, errors }) {
             user?.id,
             !0,
             {
-              fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+              fileName: "app/components/UI/widgets/users/dlg_user.tsx",
               lineNumber: 37,
               columnNumber: 21
             },
             this
           ),
           /* @__PURE__ */ jsxDEV45("span", { className: "text-red-500 text-sm", children: errors }, void 0, !1, {
-            fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+            fileName: "app/components/UI/widgets/users/dlg_user.tsx",
             lineNumber: 119,
             columnNumber: 21
           }, this)
         ] }, void 0, !0, {
-          fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+          fileName: "app/components/UI/widgets/users/dlg_user.tsx",
           lineNumber: 36,
           columnNumber: 17
         }, this),
@@ -6244,7 +6399,7 @@ function UserDialog({ isNew, user, departments, errors }) {
           /* @__PURE__ */ jsxDEV45(
             CustomButton,
             {
-              className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+              className: "bg-primary hover:shadow-primary_shadow",
               form: "userForm",
               type: "submit",
               name: "_action",
@@ -6254,7 +6409,7 @@ function UserDialog({ isNew, user, departments, errors }) {
             void 0,
             !1,
             {
-              fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+              fileName: "app/components/UI/widgets/users/dlg_user.tsx",
               lineNumber: 122,
               columnNumber: 21
             },
@@ -6263,26 +6418,26 @@ function UserDialog({ isNew, user, departments, errors }) {
           /* @__PURE__ */ jsxDEV45(
             CustomButton,
             {
-              className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
+              className: "bg-primary hover:shadow-primary_shadow",
               onClick: () => setOpen(!1),
               children: t("close")
             },
             void 0,
             !1,
             {
-              fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+              fileName: "app/components/UI/widgets/users/dlg_user.tsx",
               lineNumber: 131,
               columnNumber: 21
             },
             this
           )
         ] }, void 0, !0, {
-          fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+          fileName: "app/components/UI/widgets/users/dlg_user.tsx",
           lineNumber: 121,
           columnNumber: 17
         }, this)
       ] }, void 0, !0, {
-        fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+        fileName: "app/components/UI/widgets/users/dlg_user.tsx",
         lineNumber: 35,
         columnNumber: 13
       }, this)
@@ -6290,7 +6445,7 @@ function UserDialog({ isNew, user, departments, errors }) {
     void 0,
     !1,
     {
-      fileName: "app/components/UI/widgets/users/user_dialog.tsx",
+      fileName: "app/components/UI/widgets/users/dlg_user.tsx",
       lineNumber: 28,
       columnNumber: 9
     },
@@ -6307,8 +6462,8 @@ function ButtonNewUser() {
   return /* @__PURE__ */ jsxDEV46(
     CustomButton,
     {
-      className: "bg-blue-gray-500 hover:shadow-blue-gray-100",
-      onClick: () => navigate("/dashboard/users?new=True"),
+      className: "bg-primary hover:shadow-blue-gray-100",
+      onClick: () => navigate("/dashboard/users?new_user=True"),
       children: [
         /* @__PURE__ */ jsxDEV46("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV46("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, !1, {
           fileName: "app/components/UI/widgets/users/btn_new_user.tsx",
@@ -6333,9 +6488,9 @@ function ButtonNewUser() {
   );
 }
 
-// app/components/UI/widgets/users/users_table.tsx
+// app/components/UI/widgets/users/tbl_users.tsx
 import moment2 from "moment";
-import { useNavigate as useNavigate5 } from "@remix-run/react";
+import { useNavigate as useNavigate6 } from "@remix-run/react";
 
 // app/components/UI/widgets/users/btn_delete_user.tsx
 import { Form as Form16 } from "@remix-run/react";
@@ -6352,7 +6507,7 @@ function ButtonDeleteUser({ userId }) {
     /* @__PURE__ */ jsxDEV47(
       CustomButton,
       {
-        className: "bg-red-500 hover:shadow-red-100",
+        className: "bg-danger hover:shadow-danger_shadow",
         onClick: async (event) => {
           confirm(
             t("confirm_delete")
@@ -6361,21 +6516,18 @@ function ButtonDeleteUser({ userId }) {
         type: "submit",
         name: "_action",
         value: "deleteUser",
-        children: [
-          /* @__PURE__ */ jsxDEV47("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV47("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, !1, {
-            fileName: "app/components/UI/widgets/users/btn_delete_user.tsx",
-            lineNumber: 32,
-            columnNumber: 21
-          }, this) }, void 0, !1, {
-            fileName: "app/components/UI/widgets/users/btn_delete_user.tsx",
-            lineNumber: 31,
-            columnNumber: 17
-          }, this),
-          t("delete")
-        ]
+        children: /* @__PURE__ */ jsxDEV47("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV47("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_user.tsx",
+          lineNumber: 32,
+          columnNumber: 21
+        }, this) }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_user.tsx",
+          lineNumber: 31,
+          columnNumber: 17
+        }, this)
       },
       void 0,
-      !0,
+      !1,
       {
         fileName: "app/components/UI/widgets/users/btn_delete_user.tsx",
         lineNumber: 24,
@@ -6390,207 +6542,311 @@ function ButtonDeleteUser({ userId }) {
   }, this);
 }
 
-// app/components/UI/widgets/users/users_table.tsx
+// app/components/UI/widgets/users/tbl_users.tsx
+import { useTranslation as useTranslation23 } from "react-i18next";
+
+// app/components/UI/widgets/users/btn_edit_user.tsx
+import { useNavigate as useNavigate5 } from "@remix-run/react";
 import { useTranslation as useTranslation22 } from "react-i18next";
 import { jsxDEV as jsxDEV48 } from "react/jsx-dev-runtime";
-function UsersTable({ users, departments }) {
+function ButtonEditUser({ userId }) {
   let navigate = useNavigate5(), { t } = useTranslation22();
   return /* @__PURE__ */ jsxDEV48(
+    CustomButton,
+    {
+      className: "bg-primary hover:shadow-blue-gray-100",
+      onClick: () => navigate(`/dashboard/users?state=users&userId=${userId}`),
+      children: /* @__PURE__ */ jsxDEV48("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV48("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" }, void 0, !1, {
+        fileName: "app/components/UI/widgets/users/btn_edit_user.tsx",
+        lineNumber: 19,
+        columnNumber: 17
+      }, this) }, void 0, !1, {
+        fileName: "app/components/UI/widgets/users/btn_edit_user.tsx",
+        lineNumber: 18,
+        columnNumber: 13
+      }, this)
+    },
+    void 0,
+    !1,
+    {
+      fileName: "app/components/UI/widgets/users/btn_edit_user.tsx",
+      lineNumber: 14,
+      columnNumber: 9
+    },
+    this
+  );
+}
+
+// app/components/UI/widgets/users/tbl_users.tsx
+import { jsxDEV as jsxDEV49 } from "react/jsx-dev-runtime";
+function UsersTable({ currentUserId, users, departments }) {
+  let navigate = useNavigate6(), { t } = useTranslation23();
+  return /* @__PURE__ */ jsxDEV49(
     "table",
     {
-      className: "border-2 border-blue-gray-700 w-full",
+      className: "w-full",
       children: [
-        /* @__PURE__ */ jsxDEV48(
+        /* @__PURE__ */ jsxDEV49(
           "thead",
           {
-            className: "bg-blue-gray-400 text-white text-center",
-            children: /* @__PURE__ */ jsxDEV48("tr", { children: [
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 24,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("is_active") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 25,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("login") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+            className: "bg-primary text-white text-center",
+            children: /* @__PURE__ */ jsxDEV49("tr", { children: [
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 26,
                 columnNumber: 21
               }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("first_name") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("is_active") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 27,
                 columnNumber: 21
               }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("last_name") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("login") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 28,
                 columnNumber: 21
               }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("middle_name") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("first_name") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 29,
                 columnNumber: 21
               }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("department") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("last_name") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 30,
                 columnNumber: 21
               }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("expired_password") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("middle_name") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 31,
                 columnNumber: 21
               }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("created") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("department") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 32,
                 columnNumber: 21
               }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700", children: t("updated") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("expired_password") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 33,
                 columnNumber: 21
               }, this),
-              /* @__PURE__ */ jsxDEV48("th", { className: "p-1 text-sm border border-blue-gray-700" }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("created") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                 lineNumber: 34,
+                columnNumber: 21
+              }, this),
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("updated") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                lineNumber: 35,
+                columnNumber: 21
+              }, this),
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                lineNumber: 36,
+                columnNumber: 21
+              }, this),
+              /* @__PURE__ */ jsxDEV49("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                lineNumber: 37,
                 columnNumber: 21
               }, this)
             ] }, void 0, !0, {
-              fileName: "app/components/UI/widgets/users/users_table.tsx",
-              lineNumber: 23,
+              fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+              lineNumber: 25,
               columnNumber: 17
             }, this)
           },
           void 0,
           !1,
           {
-            fileName: "app/components/UI/widgets/users/users_table.tsx",
-            lineNumber: 20,
+            fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+            lineNumber: 22,
             columnNumber: 13
           },
           this
         ),
-        /* @__PURE__ */ jsxDEV48("tbody", { children: users.map((user, index) => /* @__PURE__ */ jsxDEV48(
+        /* @__PURE__ */ jsxDEV49("tbody", { children: users.map((user, index) => /* @__PURE__ */ jsxDEV49(
           "tr",
           {
+            className: user?.id === currentUserId ? "bg-selected hover:cursor-pointer" : " hover:cursor-pointer",
             children: [
-              /* @__PURE__ */ jsxDEV48("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 42,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ jsxDEV48(
+              /* @__PURE__ */ jsxDEV49(
                 "td",
                 {
-                  className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline",
-                  onClick: () => navigate(`/dashboard/users?userId=${user.id}`),
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
+                  children: index + 1
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 46,
+                  columnNumber: 25
+                },
+                this
+              ),
+              /* @__PURE__ */ jsxDEV49(
+                "td",
+                {
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
                   children: user.isActive ? t("active") : t("not_active")
                 },
                 void 0,
                 !1,
                 {
-                  fileName: "app/components/UI/widgets/users/users_table.tsx",
-                  lineNumber: 43,
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 49,
                   columnNumber: 25
                 },
                 this
               ),
-              /* @__PURE__ */ jsxDEV48(
+              /* @__PURE__ */ jsxDEV49(
                 "td",
                 {
-                  className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline",
-                  onClick: () => navigate(`/dashboard/users?userId=${user.id}`),
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
                   children: user.login
                 },
                 void 0,
                 !1,
                 {
-                  fileName: "app/components/UI/widgets/users/users_table.tsx",
-                  lineNumber: 48,
-                  columnNumber: 25
-                },
-                this
-              ),
-              /* @__PURE__ */ jsxDEV48(
-                "td",
-                {
-                  className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline",
-                  onClick: () => navigate(`/dashboard/users?userId=${user.id}`),
-                  children: user.firstName
-                },
-                void 0,
-                !1,
-                {
-                  fileName: "app/components/UI/widgets/users/users_table.tsx",
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
                   lineNumber: 54,
                   columnNumber: 25
                 },
                 this
               ),
-              /* @__PURE__ */ jsxDEV48(
+              /* @__PURE__ */ jsxDEV49(
                 "td",
                 {
-                  className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline",
-                  onClick: () => navigate(`/dashboard/users?userId=${user.id}`),
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
+                  children: user.firstName
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 59,
+                  columnNumber: 25
+                },
+                this
+              ),
+              /* @__PURE__ */ jsxDEV49(
+                "td",
+                {
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
                   children: user.lastName
                 },
                 void 0,
                 !1,
                 {
-                  fileName: "app/components/UI/widgets/users/users_table.tsx",
-                  lineNumber: 60,
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 64,
                   columnNumber: 25
                 },
                 this
               ),
-              /* @__PURE__ */ jsxDEV48(
+              /* @__PURE__ */ jsxDEV49(
                 "td",
                 {
-                  className: "p-1 text-sm border border-blue-gray-700 hover:cursor-pointer hover:underline",
-                  onClick: () => navigate(`/dashboard/users?userId=${user.id}`),
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
                   children: user.middleName
                 },
                 void 0,
                 !1,
                 {
-                  fileName: "app/components/UI/widgets/users/users_table.tsx",
-                  lineNumber: 66,
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 69,
                   columnNumber: 25
                 },
                 this
               ),
-              /* @__PURE__ */ jsxDEV48("td", { className: "p-1 text-sm border border-blue-gray-700", children: departments.find((item) => item.id === user.departmentId)?.title }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 72,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ jsxDEV48("td", { className: "p-1 text-sm border border-blue-gray-700", children: moment2(user.expiredPwd).format("DD.MM.YYYY") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 75,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ jsxDEV48("td", { className: "p-1 text-sm border border-blue-gray-700", children: moment2(user.createdAt).format("DD.MM.YYYY H:m:s") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 78,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ jsxDEV48("td", { className: "p-1 text-sm border border-blue-gray-700", children: moment2(user.updatedAt).format("DD.MM.YYYY H:m:s") }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 81,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ jsxDEV48("td", { className: "p-1 text-sm border border-blue-gray-700 flex justify-center", children: /* @__PURE__ */ jsxDEV48(ButtonDeleteUser, { userId: user.id }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 85,
+              /* @__PURE__ */ jsxDEV49(
+                "td",
+                {
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
+                  children: departments.find((item) => item.id === user.departmentId)?.title
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 74,
+                  columnNumber: 25
+                },
+                this
+              ),
+              /* @__PURE__ */ jsxDEV49(
+                "td",
+                {
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
+                  children: moment2(user.expiredPwd).format("DD.MM.YYYY")
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 79,
+                  columnNumber: 25
+                },
+                this
+              ),
+              /* @__PURE__ */ jsxDEV49(
+                "td",
+                {
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
+                  children: moment2(user.createdAt).format("DD.MM.YYYY H:m:s")
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 84,
+                  columnNumber: 25
+                },
+                this
+              ),
+              /* @__PURE__ */ jsxDEV49(
+                "td",
+                {
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  onClick: () => navigate(`/dashboard/users?state=users&current_user=${user.id}`),
+                  children: moment2(user.updatedAt).format("DD.MM.YYYY H:m:s")
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                  lineNumber: 89,
+                  columnNumber: 25
+                },
+                this
+              ),
+              /* @__PURE__ */ jsxDEV49("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ jsxDEV49(ButtonEditUser, { userId: user.id }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                lineNumber: 95,
                 columnNumber: 29
               }, this) }, void 0, !1, {
-                fileName: "app/components/UI/widgets/users/users_table.tsx",
-                lineNumber: 84,
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                lineNumber: 94,
+                columnNumber: 25
+              }, this),
+              /* @__PURE__ */ jsxDEV49("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ jsxDEV49(ButtonDeleteUser, { userId: user.id }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                lineNumber: 98,
+                columnNumber: 29
+              }, this) }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+                lineNumber: 97,
                 columnNumber: 25
               }, this)
             ]
@@ -6598,14 +6854,14 @@ function UsersTable({ users, departments }) {
           user.id,
           !0,
           {
-            fileName: "app/components/UI/widgets/users/users_table.tsx",
-            lineNumber: 39,
+            fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+            lineNumber: 42,
             columnNumber: 21
           },
           this
         )) }, void 0, !1, {
-          fileName: "app/components/UI/widgets/users/users_table.tsx",
-          lineNumber: 37,
+          fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+          lineNumber: 40,
           columnNumber: 13
         }, this)
       ]
@@ -6613,8 +6869,8 @@ function UsersTable({ users, departments }) {
     void 0,
     !0,
     {
-      fileName: "app/components/UI/widgets/users/users_table.tsx",
-      lineNumber: 17,
+      fileName: "app/components/UI/widgets/users/tbl_users.tsx",
+      lineNumber: 19,
       columnNumber: 9
     },
     this
@@ -6622,25 +6878,1298 @@ function UsersTable({ users, departments }) {
 }
 
 // app/components/UI/widgets/users/view.tsx
-import { jsxDEV as jsxDEV49 } from "react/jsx-dev-runtime";
-function UsersView({
-  isNew,
-  user,
-  users,
-  departments,
-  errors
-}) {
-  return /* @__PURE__ */ jsxDEV49("div", { className: "mx-1 flex flex-col gap-3 h-[calc(100vh-5rem)]", children: [
-    /* @__PURE__ */ jsxDEV49(ErrorMessage, { errors }, void 0, !1, {
-      fileName: "app/components/UI/widgets/users/view.tsx",
+import MaterialTailwind6 from "@material-tailwind/react";
+import { useTranslation as useTranslation37 } from "react-i18next";
+
+// app/components/UI/widgets/users/tbl_roles.tsx
+import { Form as Form18, useNavigate as useNavigate7 } from "@remix-run/react";
+import { useTranslation as useTranslation25 } from "react-i18next";
+
+// app/components/UI/widgets/users/btn_delete_role.tsx
+import { Form as Form17 } from "@remix-run/react";
+import { useTranslation as useTranslation24 } from "react-i18next";
+import { jsxDEV as jsxDEV50 } from "react/jsx-dev-runtime";
+function ButtonDeleteRole({ roleId }) {
+  let { t } = useTranslation24();
+  return /* @__PURE__ */ jsxDEV50(Form17, { method: "post", children: [
+    /* @__PURE__ */ jsxDEV50("input", { type: "hidden", name: "id", defaultValue: roleId }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_delete_role.tsx",
+      lineNumber: 23,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV50(
+      CustomButton,
+      {
+        className: "bg-danger hover:shadow-danger_shadow",
+        onClick: async (event) => {
+          confirm(
+            t("confirm_delete")
+          ) || event.preventDefault();
+        },
+        type: "submit",
+        name: "_action",
+        value: "deleteRole",
+        children: /* @__PURE__ */ jsxDEV50("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV50("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_role.tsx",
+          lineNumber: 32,
+          columnNumber: 21
+        }, this) }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_role.tsx",
+          lineNumber: 31,
+          columnNumber: 17
+        }, this)
+      },
+      void 0,
+      !1,
+      {
+        fileName: "app/components/UI/widgets/users/btn_delete_role.tsx",
+        lineNumber: 24,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/btn_delete_role.tsx",
+    lineNumber: 22,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/tbl_roles.tsx
+import { Fragment as Fragment6, jsxDEV as jsxDEV51 } from "react/jsx-dev-runtime";
+function RolesTable({ role, roles }) {
+  let navigate = useNavigate7(), { t } = useTranslation25();
+  return /* @__PURE__ */ jsxDEV51(Fragment6, { children: [
+    roles.map((role2) => /* @__PURE__ */ jsxDEV51(
+      Form18,
+      {
+        method: "post",
+        className: "hidden",
+        id: `updateRoleForm_${role2.id}`,
+        children: [
+          /* @__PURE__ */ jsxDEV51("input", { type: "hidden", name: "id", defaultValue: role2.id }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+            lineNumber: 24,
+            columnNumber: 21
+          }, this),
+          /* @__PURE__ */ jsxDEV51(
+            "input",
+            {
+              id: `updateRoleButton_${role2.id}`,
+              type: "submit",
+              name: "_action",
+              value: "updateRole"
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+              lineNumber: 25,
+              columnNumber: 21
+            },
+            this
+          )
+        ]
+      },
+      role2.id,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+        lineNumber: 18,
+        columnNumber: 17
+      },
+      this
+    )),
+    /* @__PURE__ */ jsxDEV51(
+      "table",
+      {
+        className: "w-full",
+        children: [
+          /* @__PURE__ */ jsxDEV51(
+            "thead",
+            {
+              className: "bg-primary text-white text-center",
+              children: /* @__PURE__ */ jsxDEV51("tr", { children: [
+                /* @__PURE__ */ jsxDEV51("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                  lineNumber: 40,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV51("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                  lineNumber: 41,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV51("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                  lineNumber: 42,
+                  columnNumber: 25
+                }, this)
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                lineNumber: 39,
+                columnNumber: 21
+              }, this)
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+              lineNumber: 36,
+              columnNumber: 17
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV51("tbody", { children: roles.map((rl, index) => /* @__PURE__ */ jsxDEV51(
+            "tr",
+            {
+              className: role?.id === rl.id ? "bg-selected hover:cursor-pointer" : "hover:cursor-pointer",
+              onClick: () => navigate(`/dashboard/users?state=roles&roleId=${rl.id}`),
+              children: [
+                /* @__PURE__ */ jsxDEV51("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                  lineNumber: 52,
+                  columnNumber: 29
+                }, this),
+                /* @__PURE__ */ jsxDEV51(
+                  "td",
+                  {
+                    className: "p-1 text-sm border border-blue-gray-500 hover:cursor-pointer hover:underline",
+                    children: /* @__PURE__ */ jsxDEV51(
+                      "input",
+                      {
+                        className: "text-sm w-full focus:outline-none p-1 text-black",
+                        form: `updateRoleForm_${rl.id}`,
+                        type: "text",
+                        name: "title",
+                        defaultValue: rl.title,
+                        maxLength: 45,
+                        onChange: () => {
+                          document.getElementById(`updateRoleButton_${rl.id}`).click();
+                        }
+                      },
+                      void 0,
+                      !1,
+                      {
+                        fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                        lineNumber: 56,
+                        columnNumber: 33
+                      },
+                      this
+                    )
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                    lineNumber: 53,
+                    columnNumber: 29
+                  },
+                  this
+                ),
+                /* @__PURE__ */ jsxDEV51("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ jsxDEV51(ButtonDeleteRole, { roleId: rl.id }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                  lineNumber: 70,
+                  columnNumber: 33
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+                  lineNumber: 69,
+                  columnNumber: 29
+                }, this)
+              ]
+            },
+            rl.id,
+            !0,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+              lineNumber: 47,
+              columnNumber: 25
+            },
+            this
+          )) }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+            lineNumber: 45,
+            columnNumber: 17
+          }, this)
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+        lineNumber: 33,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/tbl_roles.tsx",
+    lineNumber: 16,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/tbl_ainputforms.tsx
+import { AccessType } from "@prisma/client";
+import { Form as Form20 } from "@remix-run/react";
+import { useTranslation as useTranslation27 } from "react-i18next";
+
+// app/components/UI/widgets/users/btn_delete_ainputform.tsx
+import { Form as Form19 } from "@remix-run/react";
+import { useTranslation as useTranslation26 } from "react-i18next";
+import { jsxDEV as jsxDEV52 } from "react/jsx-dev-runtime";
+function ButtonDeleteAccessInputForm({ aform }) {
+  let { t } = useTranslation26(), handleDelete = async (event) => {
+    confirm(
+      t("confirm_delete")
+    ) || event.preventDefault();
+  };
+  return /* @__PURE__ */ jsxDEV52(Form19, { method: "post", children: [
+    /* @__PURE__ */ jsxDEV52("input", { type: "hidden", name: "id", defaultValue: aform.id }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_delete_ainputform.tsx",
+      lineNumber: 24,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV52("input", { type: "hidden", name: "roleId", defaultValue: aform.roleId }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_delete_ainputform.tsx",
       lineNumber: 25,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ jsxDEV49(
+    /* @__PURE__ */ jsxDEV52(
+      CustomButton,
+      {
+        className: "bg-danger hover:shadow-danger_shadow",
+        onClick: handleDelete,
+        type: "submit",
+        name: "_action",
+        value: "deleteAccessInput",
+        children: /* @__PURE__ */ jsxDEV52("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV52("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_ainputform.tsx",
+          lineNumber: 34,
+          columnNumber: 21
+        }, this) }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_ainputform.tsx",
+          lineNumber: 33,
+          columnNumber: 17
+        }, this)
+      },
+      void 0,
+      !1,
+      {
+        fileName: "app/components/UI/widgets/users/btn_delete_ainputform.tsx",
+        lineNumber: 26,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/btn_delete_ainputform.tsx",
+    lineNumber: 23,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/tbl_ainputforms.tsx
+import { Fragment as Fragment7, jsxDEV as jsxDEV53 } from "react/jsx-dev-runtime";
+function AccessInputFormsTable({ aforms, inputForms }) {
+  let { t } = useTranslation27();
+  return /* @__PURE__ */ jsxDEV53(Fragment7, { children: [
+    aforms && aforms.map((aform) => /* @__PURE__ */ jsxDEV53(
+      Form20,
+      {
+        className: "hidden",
+        id: `updateAccessInputForm_${aform.id}`,
+        method: "post",
+        children: [
+          /* @__PURE__ */ jsxDEV53("input", { type: "hidden", name: "id", defaultValue: aform.id }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+            lineNumber: 25,
+            columnNumber: 21
+          }, this),
+          /* @__PURE__ */ jsxDEV53("input", { type: "hidden", name: "roleId", defaultValue: aform.roleId }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+            lineNumber: 26,
+            columnNumber: 21
+          }, this),
+          /* @__PURE__ */ jsxDEV53(
+            CustomButton,
+            {
+              className: "bg-green-500 hover:shadow-green-100",
+              id: `updateAccessInputFormButton_${aform.id}`,
+              form: `updateAccessInputForm_${aform.id}`,
+              type: "submit",
+              name: "_action",
+              value: "updateAccessInput"
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+              lineNumber: 27,
+              columnNumber: 21
+            },
+            this
+          )
+        ]
+      },
+      `updateAccessInputForm_${aform.id}`,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+        lineNumber: 19,
+        columnNumber: 17
+      },
+      this
+    )),
+    /* @__PURE__ */ jsxDEV53(
+      "table",
+      {
+        className: "w-full",
+        children: [
+          /* @__PURE__ */ jsxDEV53(
+            "thead",
+            {
+              className: "bg-primary text-white text-center",
+              children: /* @__PURE__ */ jsxDEV53("tr", { children: [
+                /* @__PURE__ */ jsxDEV53("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 44,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV53("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("form") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 45,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV53("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("access_type") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 46,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV53("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 47,
+                  columnNumber: 25
+                }, this)
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                lineNumber: 43,
+                columnNumber: 21
+              }, this)
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+              lineNumber: 40,
+              columnNumber: 17
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV53("tbody", { children: aforms.map((aform, index) => /* @__PURE__ */ jsxDEV53(
+            "tr",
+            {
+              children: [
+                /* @__PURE__ */ jsxDEV53("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 55,
+                  columnNumber: 29
+                }, this),
+                /* @__PURE__ */ jsxDEV53("td", { className: "p-1 text-sm border border-blue-gray-500", children: /* @__PURE__ */ jsxDEV53(
+                  "select",
+                  {
+                    className: "text-sm w-full",
+                    form: `updateAccessInputForm_${aform.id}`,
+                    name: "formId",
+                    defaultValue: aform.formId ? aform.formId : "",
+                    onChange: () => {
+                      document.getElementById(`updateAccessInputFormButton_${aform.id}`).click();
+                    },
+                    children: inputForms.map((inputForm) => /* @__PURE__ */ jsxDEV53("option", { value: inputForm.id, children: inputForm.title }, inputForm.id, !1, {
+                      fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                      lineNumber: 68,
+                      columnNumber: 41
+                    }, this))
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                    lineNumber: 57,
+                    columnNumber: 33
+                  },
+                  this
+                ) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 56,
+                  columnNumber: 29
+                }, this),
+                /* @__PURE__ */ jsxDEV53("td", { className: "p-1 text-sm border border-blue-gray-500 w-24", children: /* @__PURE__ */ jsxDEV53(
+                  "select",
+                  {
+                    className: "text-sm w-full",
+                    form: `updateAccessInputForm_${aform.id}`,
+                    name: "accessType",
+                    defaultValue: aform.accessType ? aform.accessType : "",
+                    onChange: () => {
+                      document.getElementById(`updateAccessInputFormButton_${aform.id}`).click();
+                    },
+                    children: Object.keys(AccessType).map((key) => /* @__PURE__ */ jsxDEV53("option", { value: key, children: key }, key, !1, {
+                      fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                      lineNumber: 85,
+                      columnNumber: 75
+                    }, this))
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                    lineNumber: 75,
+                    columnNumber: 33
+                  },
+                  this
+                ) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 74,
+                  columnNumber: 29
+                }, this),
+                /* @__PURE__ */ jsxDEV53("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ jsxDEV53(ButtonDeleteAccessInputForm, { aform }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 89,
+                  columnNumber: 33
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+                  lineNumber: 88,
+                  columnNumber: 29
+                }, this)
+              ]
+            },
+            aform.id,
+            !0,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+              lineNumber: 52,
+              columnNumber: 25
+            },
+            this
+          )) }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+            lineNumber: 50,
+            columnNumber: 17
+          }, this)
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+        lineNumber: 37,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/tbl_ainputforms.tsx",
+    lineNumber: 17,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/btn_add_ainputform.tsx
+import { Form as Form21 } from "@remix-run/react";
+import { useTranslation as useTranslation28 } from "react-i18next";
+import { jsxDEV as jsxDEV54 } from "react/jsx-dev-runtime";
+function ButtonAddAccessInputForm({ roleId }) {
+  let { t } = useTranslation28();
+  return /* @__PURE__ */ jsxDEV54(Form21, { method: "post", children: [
+    /* @__PURE__ */ jsxDEV54("input", { type: "hidden", name: "roleId", value: roleId }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_add_ainputform.tsx",
+      lineNumber: 14,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV54(
+      CustomButton,
+      {
+        className: "bg-primary hover:shadow-blue-gray-100",
+        type: "submit",
+        name: "_action",
+        value: "createEmptyAccessInput",
+        children: [
+          /* @__PURE__ */ jsxDEV54("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV54("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/btn_add_ainputform.tsx",
+            lineNumber: 22,
+            columnNumber: 21
+          }, this) }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/btn_add_ainputform.tsx",
+            lineNumber: 21,
+            columnNumber: 17
+          }, this),
+          t("add")
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/btn_add_ainputform.tsx",
+        lineNumber: 15,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/btn_add_ainputform.tsx",
+    lineNumber: 13,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/btn_add_role.tsx
+import { Form as Form22 } from "@remix-run/react";
+import { useTranslation as useTranslation29 } from "react-i18next";
+import { jsxDEV as jsxDEV55 } from "react/jsx-dev-runtime";
+function ButtonAddRole({ count }) {
+  let { t } = useTranslation29();
+  return /* @__PURE__ */ jsxDEV55(Form22, { method: "post", children: [
+    /* @__PURE__ */ jsxDEV55("input", { type: "hidden", name: "cnt", defaultValue: count + 1 }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_add_role.tsx",
+      lineNumber: 14,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV55(
+      CustomButton,
+      {
+        className: "bg-primary hover:shadow-primary_shadow",
+        type: "submit",
+        name: "_action",
+        value: "createEmptyRole",
+        children: [
+          /* @__PURE__ */ jsxDEV55("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV55("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/btn_add_role.tsx",
+            lineNumber: 22,
+            columnNumber: 21
+          }, this) }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/btn_add_role.tsx",
+            lineNumber: 21,
+            columnNumber: 17
+          }, this),
+          t("add")
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/btn_add_role.tsx",
+        lineNumber: 15,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/btn_add_role.tsx",
+    lineNumber: 13,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/btn_add_asearchform.tsx
+import { Form as Form23 } from "@remix-run/react";
+import { useTranslation as useTranslation30 } from "react-i18next";
+import { jsxDEV as jsxDEV56 } from "react/jsx-dev-runtime";
+function ButtonAddAccessSearchForm({ roleId }) {
+  let { t } = useTranslation30();
+  return /* @__PURE__ */ jsxDEV56(Form23, { method: "post", children: [
+    /* @__PURE__ */ jsxDEV56("input", { type: "hidden", name: "roleId", value: roleId }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_add_asearchform.tsx",
+      lineNumber: 14,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV56(
+      CustomButton,
+      {
+        className: "bg-primary hover:shadow-blue-gray-100",
+        type: "submit",
+        name: "_action",
+        value: "createEmptyAccessSearch",
+        children: [
+          /* @__PURE__ */ jsxDEV56("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV56("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/btn_add_asearchform.tsx",
+            lineNumber: 22,
+            columnNumber: 21
+          }, this) }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/btn_add_asearchform.tsx",
+            lineNumber: 21,
+            columnNumber: 17
+          }, this),
+          t("add")
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/btn_add_asearchform.tsx",
+        lineNumber: 15,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/btn_add_asearchform.tsx",
+    lineNumber: 13,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/tbl_asearchforms.tsx
+import { AccessType as AccessType2 } from "@prisma/client";
+import { Form as Form25 } from "@remix-run/react";
+import { useTranslation as useTranslation32 } from "react-i18next";
+
+// app/components/UI/widgets/users/btn_delete_asearchform.tsx
+import { Form as Form24 } from "@remix-run/react";
+import { useTranslation as useTranslation31 } from "react-i18next";
+import { jsxDEV as jsxDEV57 } from "react/jsx-dev-runtime";
+function ButtonDeleteAccessSearchForm({ aform }) {
+  let { t } = useTranslation31(), handleDelete = async (event) => {
+    confirm(
+      t("confirm_delete")
+    ) || event.preventDefault();
+  };
+  return /* @__PURE__ */ jsxDEV57(Form24, { method: "post", children: [
+    /* @__PURE__ */ jsxDEV57("input", { type: "hidden", name: "id", defaultValue: aform.id }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_delete_asearchform.tsx",
+      lineNumber: 24,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV57("input", { type: "hidden", name: "roleId", defaultValue: aform.roleId }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_delete_asearchform.tsx",
+      lineNumber: 25,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV57(
+      CustomButton,
+      {
+        className: "bg-danger hover:shadow-danger_shadow",
+        onClick: handleDelete,
+        type: "submit",
+        name: "_action",
+        value: "deleteAccessSearch",
+        children: /* @__PURE__ */ jsxDEV57("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV57("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_asearchform.tsx",
+          lineNumber: 34,
+          columnNumber: 21
+        }, this) }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_asearchform.tsx",
+          lineNumber: 33,
+          columnNumber: 17
+        }, this)
+      },
+      void 0,
+      !1,
+      {
+        fileName: "app/components/UI/widgets/users/btn_delete_asearchform.tsx",
+        lineNumber: 26,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/btn_delete_asearchform.tsx",
+    lineNumber: 23,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/tbl_asearchforms.tsx
+import { Fragment as Fragment8, jsxDEV as jsxDEV58 } from "react/jsx-dev-runtime";
+function AccessSearchFormsTable({ aforms, searchForms }) {
+  let { t } = useTranslation32();
+  return /* @__PURE__ */ jsxDEV58(Fragment8, { children: [
+    aforms && aforms.map((aform) => /* @__PURE__ */ jsxDEV58(
+      Form25,
+      {
+        className: "hidden",
+        id: `updateAccessSearchForm_${aform.id}`,
+        method: "post",
+        children: [
+          /* @__PURE__ */ jsxDEV58("input", { type: "hidden", name: "id", defaultValue: aform.id }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+            lineNumber: 25,
+            columnNumber: 21
+          }, this),
+          /* @__PURE__ */ jsxDEV58("input", { type: "hidden", name: "roleId", defaultValue: aform.roleId }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+            lineNumber: 26,
+            columnNumber: 21
+          }, this),
+          /* @__PURE__ */ jsxDEV58("input", { type: "hidden", name: "accessType", defaultValue: AccessType2.READ }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+            lineNumber: 27,
+            columnNumber: 21
+          }, this),
+          /* @__PURE__ */ jsxDEV58(
+            CustomButton,
+            {
+              className: "bg-green-500 hover:shadow-green-100",
+              id: `updateAccessSearchFormButton_${aform.id}`,
+              form: `updateAccessSearchForm_${aform.id}`,
+              type: "submit",
+              name: "_action",
+              value: "updateAccessSearch"
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+              lineNumber: 28,
+              columnNumber: 21
+            },
+            this
+          )
+        ]
+      },
+      `updateAccessSearchForm_${aform.id}`,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+        lineNumber: 19,
+        columnNumber: 17
+      },
+      this
+    )),
+    /* @__PURE__ */ jsxDEV58(
+      "table",
+      {
+        className: "w-full",
+        children: [
+          /* @__PURE__ */ jsxDEV58(
+            "thead",
+            {
+              className: "bg-primary text-white text-center",
+              children: /* @__PURE__ */ jsxDEV58("tr", { children: [
+                /* @__PURE__ */ jsxDEV58("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                  lineNumber: 45,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV58("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("form") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                  lineNumber: 46,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV58("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                  lineNumber: 47,
+                  columnNumber: 25
+                }, this)
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                lineNumber: 44,
+                columnNumber: 21
+              }, this)
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+              lineNumber: 41,
+              columnNumber: 17
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV58("tbody", { children: aforms.map((aform, index) => /* @__PURE__ */ jsxDEV58(
+            "tr",
+            {
+              children: [
+                /* @__PURE__ */ jsxDEV58("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                  lineNumber: 55,
+                  columnNumber: 29
+                }, this),
+                /* @__PURE__ */ jsxDEV58("td", { className: "p-1 text-sm border border-blue-gray-500", children: /* @__PURE__ */ jsxDEV58(
+                  "select",
+                  {
+                    className: "text-sm w-full",
+                    form: `updateAccessSearchForm_${aform.id}`,
+                    name: "formId",
+                    defaultValue: aform.formId ? aform.formId : "",
+                    onChange: () => {
+                      document.getElementById(`updateAccessSearchFormButton_${aform.id}`).click();
+                    },
+                    children: searchForms.map((searchForm) => /* @__PURE__ */ jsxDEV58("option", { value: searchForm.id, children: searchForm.title }, searchForm.id, !1, {
+                      fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                      lineNumber: 68,
+                      columnNumber: 41
+                    }, this))
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                    lineNumber: 57,
+                    columnNumber: 33
+                  },
+                  this
+                ) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                  lineNumber: 56,
+                  columnNumber: 29
+                }, this),
+                /* @__PURE__ */ jsxDEV58("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ jsxDEV58(ButtonDeleteAccessSearchForm, { aform }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                  lineNumber: 75,
+                  columnNumber: 33
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+                  lineNumber: 74,
+                  columnNumber: 29
+                }, this)
+              ]
+            },
+            aform.id,
+            !0,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+              lineNumber: 52,
+              columnNumber: 25
+            },
+            this
+          )) }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+            lineNumber: 50,
+            columnNumber: 17
+          }, this)
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+        lineNumber: 38,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/tbl_asearchforms.tsx",
+    lineNumber: 17,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/tbl_users_only_login.tsx
+import { useNavigate as useNavigate10 } from "@remix-run/react";
+import { useTranslation as useTranslation33 } from "react-i18next";
+import { jsxDEV as jsxDEV59 } from "react/jsx-dev-runtime";
+function UsersOnlyLoginTable({ users, currentUserId }) {
+  let navigate = useNavigate10(), { t } = useTranslation33();
+  return /* @__PURE__ */ jsxDEV59(
+    "table",
+    {
+      className: "w-full",
+      children: [
+        /* @__PURE__ */ jsxDEV59(
+          "thead",
+          {
+            className: "bg-primary text-white text-center",
+            children: /* @__PURE__ */ jsxDEV59("tr", { children: [
+              /* @__PURE__ */ jsxDEV59("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+                lineNumber: 22,
+                columnNumber: 21
+              }, this),
+              /* @__PURE__ */ jsxDEV59("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("login") }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+                lineNumber: 23,
+                columnNumber: 21
+              }, this)
+            ] }, void 0, !0, {
+              fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+              lineNumber: 21,
+              columnNumber: 17
+            }, this)
+          },
+          void 0,
+          !1,
+          {
+            fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+            lineNumber: 18,
+            columnNumber: 13
+          },
+          this
+        ),
+        /* @__PURE__ */ jsxDEV59("tbody", { children: users.map((user, index) => /* @__PURE__ */ jsxDEV59(
+          "tr",
+          {
+            className: user?.id === currentUserId ? "bg-selected hover:cursor-pointer" : " hover:cursor-pointer",
+            onClick: () => navigate(`/dashboard/users?state=users_roles&current_user=${user.id}`),
+            children: [
+              /* @__PURE__ */ jsxDEV59("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+                lineNumber: 33,
+                columnNumber: 25
+              }, this),
+              /* @__PURE__ */ jsxDEV59(
+                "td",
+                {
+                  className: "p-1 text-sm border border-blue-gray-500",
+                  children: user.login
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+                  lineNumber: 34,
+                  columnNumber: 25
+                },
+                this
+              )
+            ]
+          },
+          user.id,
+          !0,
+          {
+            fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+            lineNumber: 28,
+            columnNumber: 21
+          },
+          this
+        )) }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+          lineNumber: 26,
+          columnNumber: 13
+        }, this)
+      ]
+    },
+    void 0,
+    !0,
+    {
+      fileName: "app/components/UI/widgets/users/tbl_users_only_login.tsx",
+      lineNumber: 15,
+      columnNumber: 9
+    },
+    this
+  );
+}
+
+// app/components/UI/widgets/users/tbl_roles_only_title.tsx
+import { useTranslation as useTranslation35 } from "react-i18next";
+
+// app/components/UI/widgets/users/btn_delete_userrole.tsx
+import { Form as Form26 } from "@remix-run/react";
+import { useTranslation as useTranslation34 } from "react-i18next";
+import { jsxDEV as jsxDEV60 } from "react/jsx-dev-runtime";
+function ButtonDeleteUserRole({ userRoleId, userId }) {
+  let { t } = useTranslation34();
+  return /* @__PURE__ */ jsxDEV60(Form26, { method: "post", children: [
+    /* @__PURE__ */ jsxDEV60("input", { type: "hidden", name: "id", defaultValue: userRoleId }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_delete_userrole.tsx",
+      lineNumber: 24,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV60("input", { type: "hidden", name: "userId", defaultValue: userId || "" }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_delete_userrole.tsx",
+      lineNumber: 25,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV60(
+      CustomButton,
+      {
+        className: "bg-danger hover:shadow-danger_shadow",
+        onClick: async (event) => {
+          confirm(
+            t("confirm_delete")
+          ) || event.preventDefault();
+        },
+        type: "submit",
+        name: "_action",
+        value: "deleteUserRole",
+        children: /* @__PURE__ */ jsxDEV60("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV60("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_userrole.tsx",
+          lineNumber: 34,
+          columnNumber: 21
+        }, this) }, void 0, !1, {
+          fileName: "app/components/UI/widgets/users/btn_delete_userrole.tsx",
+          lineNumber: 33,
+          columnNumber: 17
+        }, this)
+      },
+      void 0,
+      !1,
+      {
+        fileName: "app/components/UI/widgets/users/btn_delete_userrole.tsx",
+        lineNumber: 26,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/btn_delete_userrole.tsx",
+    lineNumber: 23,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/tbl_roles_only_title.tsx
+import { Form as Form27 } from "@remix-run/react";
+import { Fragment as Fragment9, jsxDEV as jsxDEV61 } from "react/jsx-dev-runtime";
+function RolesOnlyTitleTable({ userRoles, roles }) {
+  let { t } = useTranslation35();
+  return /* @__PURE__ */ jsxDEV61(Fragment9, { children: [
+    userRoles && userRoles.map((ur) => /* @__PURE__ */ jsxDEV61(
+      Form27,
+      {
+        className: "hidden",
+        id: `updateUserRole_${ur.id}`,
+        method: "post",
+        children: [
+          /* @__PURE__ */ jsxDEV61("input", { type: "hidden", name: "id", defaultValue: ur.id }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+            lineNumber: 23,
+            columnNumber: 21
+          }, this),
+          /* @__PURE__ */ jsxDEV61("input", { type: "hidden", name: "userId", defaultValue: ur.userId ? ur.userId : "" }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+            lineNumber: 24,
+            columnNumber: 21
+          }, this),
+          /* @__PURE__ */ jsxDEV61(
+            "input",
+            {
+              type: "submit",
+              id: `updateUserRoleButton_${ur.id}`,
+              form: `updateUserRole_${ur.id}`,
+              name: "_action",
+              value: "updateUserRole"
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+              lineNumber: 25,
+              columnNumber: 21
+            },
+            this
+          )
+        ]
+      },
+      `updateUserRole_${ur.id}`,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+        lineNumber: 17,
+        columnNumber: 17
+      },
+      this
+    )),
+    /* @__PURE__ */ jsxDEV61(
+      "table",
+      {
+        className: "w-full",
+        children: [
+          /* @__PURE__ */ jsxDEV61(
+            "thead",
+            {
+              className: "bg-primary text-white text-center",
+              children: /* @__PURE__ */ jsxDEV61("tr", { children: [
+                /* @__PURE__ */ jsxDEV61("th", { className: "p-1 text-sm border border-blue-gray-500", children: "#" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                  lineNumber: 41,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV61("th", { className: "p-1 text-sm border border-blue-gray-500", children: t("title") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                  lineNumber: 42,
+                  columnNumber: 25
+                }, this),
+                /* @__PURE__ */ jsxDEV61("th", { className: "p-1 text-sm border border-blue-gray-500" }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                  lineNumber: 43,
+                  columnNumber: 25
+                }, this)
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                lineNumber: 40,
+                columnNumber: 21
+              }, this)
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+              lineNumber: 37,
+              columnNumber: 17
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV61("tbody", { children: userRoles.map((ur, index) => /* @__PURE__ */ jsxDEV61(
+            "tr",
+            {
+              children: [
+                /* @__PURE__ */ jsxDEV61("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: index + 1 }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                  lineNumber: 51,
+                  columnNumber: 29
+                }, this),
+                /* @__PURE__ */ jsxDEV61(
+                  "td",
+                  {
+                    className: "p-1 text-sm border border-blue-gray-500",
+                    children: /* @__PURE__ */ jsxDEV61(
+                      "select",
+                      {
+                        className: "text-sm w-full",
+                        form: `updateUserRole_${ur.id}`,
+                        name: "roleId",
+                        defaultValue: ur.roleId ? ur.roleId : "",
+                        onChange: () => {
+                          document.getElementById(`updateUserRoleButton_${ur.id}`).click();
+                        },
+                        children: roles.map((role) => /* @__PURE__ */ jsxDEV61("option", { value: role.id, children: role.title }, role.id, !1, {
+                          fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                          lineNumber: 66,
+                          columnNumber: 41
+                        }, this))
+                      },
+                      void 0,
+                      !1,
+                      {
+                        fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                        lineNumber: 55,
+                        columnNumber: 33
+                      },
+                      this
+                    )
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                    lineNumber: 52,
+                    columnNumber: 29
+                  },
+                  this
+                ),
+                /* @__PURE__ */ jsxDEV61("td", { className: "p-1 text-sm border border-blue-gray-500 w-10", children: /* @__PURE__ */ jsxDEV61(ButtonDeleteUserRole, { userRoleId: ur.id, userId: ur.userId }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                  lineNumber: 73,
+                  columnNumber: 33
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+                  lineNumber: 72,
+                  columnNumber: 29
+                }, this)
+              ]
+            },
+            ur.id,
+            !0,
+            {
+              fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+              lineNumber: 48,
+              columnNumber: 25
+            },
+            this
+          )) }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+            lineNumber: 46,
+            columnNumber: 17
+          }, this)
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+        lineNumber: 34,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/tbl_roles_only_title.tsx",
+    lineNumber: 15,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/btn_add_userrole.tsx
+import { Form as Form28 } from "@remix-run/react";
+import { useTranslation as useTranslation36 } from "react-i18next";
+import { jsxDEV as jsxDEV62 } from "react/jsx-dev-runtime";
+function ButtonAddUserRole({ userId }) {
+  let { t } = useTranslation36();
+  return /* @__PURE__ */ jsxDEV62(Form28, { method: "post", children: [
+    /* @__PURE__ */ jsxDEV62("input", { type: "hidden", name: "userId", defaultValue: userId }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/btn_add_userrole.tsx",
+      lineNumber: 14,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV62(
+      CustomButton,
+      {
+        className: "bg-primary hover:shadow-primary_shadow",
+        type: "submit",
+        name: "_action",
+        value: "createEmptyUserRole",
+        children: [
+          /* @__PURE__ */ jsxDEV62("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ jsxDEV62("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/btn_add_userrole.tsx",
+            lineNumber: 22,
+            columnNumber: 21
+          }, this) }, void 0, !1, {
+            fileName: "app/components/UI/widgets/users/btn_add_userrole.tsx",
+            lineNumber: 21,
+            columnNumber: 17
+          }, this),
+          t("add")
+        ]
+      },
+      void 0,
+      !0,
+      {
+        fileName: "app/components/UI/widgets/users/btn_add_userrole.tsx",
+        lineNumber: 15,
+        columnNumber: 13
+      },
+      this
+    )
+  ] }, void 0, !0, {
+    fileName: "app/components/UI/widgets/users/btn_add_userrole.tsx",
+    lineNumber: 13,
+    columnNumber: 9
+  }, this);
+}
+
+// app/components/UI/widgets/users/view.tsx
+import { jsxDEV as jsxDEV63 } from "react/jsx-dev-runtime";
+var { Tab, TabPanel, Tabs, TabsBody, TabsHeader } = MaterialTailwind6;
+function UsersView({
+  state,
+  role,
+  roles,
+  isNewUser,
+  user,
+  users,
+  departments,
+  inputForms,
+  searchForms,
+  accessInputForms,
+  accessSearchForms,
+  currentUserId,
+  userRoles,
+  errors
+}) {
+  let { t } = useTranslation37();
+  return /* @__PURE__ */ jsxDEV63("div", { className: "mx-1 flex flex-col gap-3 h-[calc(100vh-5rem)]", children: [
+    /* @__PURE__ */ jsxDEV63(ErrorMessage, { errors }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/view.tsx",
+      lineNumber: 58,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ jsxDEV63(
       UserDialog,
       {
-        isNew,
-        user: user || null,
+        isNew: isNewUser,
+        user,
         departments,
         errors
       },
@@ -6648,69 +8177,358 @@ function UsersView({
       !1,
       {
         fileName: "app/components/UI/widgets/users/view.tsx",
-        lineNumber: 26,
+        lineNumber: 59,
         columnNumber: 13
       },
       this
     ),
-    /* @__PURE__ */ jsxDEV49(Panel, { className: "h-full overflow-auto", children: [
-      /* @__PURE__ */ jsxDEV49("div", { className: "mb-2 flex justify-between py-2 px-2 border border-gray-900", children: /* @__PURE__ */ jsxDEV49(
-        "div",
+    /* @__PURE__ */ jsxDEV63(Panel, { className: "h-full overflow-auto", children: /* @__PURE__ */ jsxDEV63(Tabs, { value: state || "users", children: [
+      /* @__PURE__ */ jsxDEV63(
+        TabsHeader,
         {
-          className: "flex items-center gap-3",
-          children: /* @__PURE__ */ jsxDEV49(ButtonNewUser, {}, void 0, !1, {
-            fileName: "app/components/UI/widgets/users/view.tsx",
-            lineNumber: 37,
-            columnNumber: 25
-          }, this)
+          placeholder: "",
+          children: [
+            /* @__PURE__ */ jsxDEV63(
+              Tab,
+              {
+                className: "capitalize text-primary font-bold",
+                value: "users",
+                placeholder: "",
+                children: t("users")
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 70,
+                columnNumber: 25
+              },
+              this
+            ),
+            /* @__PURE__ */ jsxDEV63(
+              Tab,
+              {
+                className: "capitalize text-primary font-bold",
+                value: "roles",
+                placeholder: "",
+                children: t("roles")
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 77,
+                columnNumber: 25
+              },
+              this
+            ),
+            /* @__PURE__ */ jsxDEV63(
+              Tab,
+              {
+                className: "capitalize text-primary font-bold",
+                value: "users-roles",
+                placeholder: "",
+                children: t("users-roles")
+              },
+              void 0,
+              !1,
+              {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 84,
+                columnNumber: 25
+              },
+              this
+            )
+          ]
         },
         void 0,
-        !1,
+        !0,
         {
           fileName: "app/components/UI/widgets/users/view.tsx",
-          lineNumber: 34,
+          lineNumber: 67,
           columnNumber: 21
         },
         this
-      ) }, void 0, !1, {
-        fileName: "app/components/UI/widgets/users/view.tsx",
-        lineNumber: 33,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ jsxDEV49(
-        UsersTable,
+      ),
+      /* @__PURE__ */ jsxDEV63(
+        TabsBody,
         {
-          users,
-          departments
+          animate: {
+            initial: { x: 250 },
+            mount: { x: 0 },
+            unmount: { x: 250 }
+          },
+          placeholder: "",
+          children: [
+            /* @__PURE__ */ jsxDEV63(TabPanel, { className: "p-1", value: "users", children: [
+              /* @__PURE__ */ jsxDEV63("div", { className: "mb-2 flex justify-between py-2 px-2 border border-blue-gray-100", children: /* @__PURE__ */ jsxDEV63(
+                "div",
+                {
+                  className: "flex items-center gap-3",
+                  children: /* @__PURE__ */ jsxDEV63(ButtonNewUser, {}, void 0, !1, {
+                    fileName: "app/components/UI/widgets/users/view.tsx",
+                    lineNumber: 105,
+                    columnNumber: 37
+                  }, this)
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 102,
+                  columnNumber: 33
+                },
+                this
+              ) }, void 0, !1, {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 101,
+                columnNumber: 29
+              }, this),
+              /* @__PURE__ */ jsxDEV63(
+                UsersTable,
+                {
+                  currentUserId,
+                  users,
+                  departments
+                },
+                void 0,
+                !1,
+                {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 108,
+                  columnNumber: 29
+                },
+                this
+              )
+            ] }, void 0, !0, {
+              fileName: "app/components/UI/widgets/users/view.tsx",
+              lineNumber: 100,
+              columnNumber: 25
+            }, this),
+            /* @__PURE__ */ jsxDEV63(TabPanel, { className: "p-1", value: "users-roles", children: /* @__PURE__ */ jsxDEV63("div", { className: "mt-5 p-1 border flex gap-20", children: [
+              /* @__PURE__ */ jsxDEV63("div", { className: "w-1/2 flex flex-col gap-3", children: [
+                /* @__PURE__ */ jsxDEV63("h1", { className: "text-bold text-primary", children: t("users") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 117,
+                  columnNumber: 37
+                }, this),
+                /* @__PURE__ */ jsxDEV63("div", { className: "w-full", children: /* @__PURE__ */ jsxDEV63(
+                  UsersOnlyLoginTable,
+                  {
+                    users,
+                    currentUserId
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/view.tsx",
+                    lineNumber: 119,
+                    columnNumber: 41
+                  },
+                  this
+                ) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 118,
+                  columnNumber: 37
+                }, this)
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 116,
+                columnNumber: 33
+              }, this),
+              /* @__PURE__ */ jsxDEV63("div", { className: "w-1/2 flex flex-col gap-3", children: [
+                /* @__PURE__ */ jsxDEV63("h1", { className: "text-bold text-primary", children: t("roles") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 126,
+                  columnNumber: 37
+                }, this),
+                currentUserId ? /* @__PURE__ */ jsxDEV63(ButtonAddUserRole, { userId: currentUserId }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 127,
+                  columnNumber: 54
+                }, this) : null,
+                /* @__PURE__ */ jsxDEV63(
+                  RolesOnlyTitleTable,
+                  {
+                    roles,
+                    userRoles
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/view.tsx",
+                    lineNumber: 128,
+                    columnNumber: 37
+                  },
+                  this
+                )
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 125,
+                columnNumber: 33
+              }, this)
+            ] }, void 0, !0, {
+              fileName: "app/components/UI/widgets/users/view.tsx",
+              lineNumber: 115,
+              columnNumber: 29
+            }, this) }, void 0, !1, {
+              fileName: "app/components/UI/widgets/users/view.tsx",
+              lineNumber: 114,
+              columnNumber: 25
+            }, this),
+            /* @__PURE__ */ jsxDEV63(TabPanel, { className: "p-1", value: "roles", children: [
+              /* @__PURE__ */ jsxDEV63("div", { className: "mt-5 p-1 border flex flex-col gap-3", children: [
+                /* @__PURE__ */ jsxDEV63("h1", { className: "text-bold text-primary", children: t("roles") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 137,
+                  columnNumber: 33
+                }, this),
+                /* @__PURE__ */ jsxDEV63("div", { children: /* @__PURE__ */ jsxDEV63(ButtonAddRole, { count: roles.length }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 139,
+                  columnNumber: 37
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 138,
+                  columnNumber: 33
+                }, this),
+                /* @__PURE__ */ jsxDEV63(RolesTable, { role, roles }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 141,
+                  columnNumber: 33
+                }, this)
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 136,
+                columnNumber: 29
+              }, this),
+              /* @__PURE__ */ jsxDEV63("div", { className: "mt-5 p-1 border flex flex-col gap-3", children: [
+                /* @__PURE__ */ jsxDEV63("h1", { className: "text-bold text-primary", children: t("access_inputforms") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 144,
+                  columnNumber: 33
+                }, this),
+                /* @__PURE__ */ jsxDEV63("div", { children: role && /* @__PURE__ */ jsxDEV63(ButtonAddAccessInputForm, { roleId: role.id }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 146,
+                  columnNumber: 46
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 145,
+                  columnNumber: 33
+                }, this),
+                /* @__PURE__ */ jsxDEV63(
+                  AccessInputFormsTable,
+                  {
+                    aforms: accessInputForms,
+                    inputForms
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/view.tsx",
+                    lineNumber: 148,
+                    columnNumber: 33
+                  },
+                  this
+                )
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 143,
+                columnNumber: 29
+              }, this),
+              /* @__PURE__ */ jsxDEV63("div", { className: "mt-5 p-1 border flex flex-col gap-3", children: [
+                /* @__PURE__ */ jsxDEV63("h1", { className: "text-bold text-primary", children: t("access_searchforms") }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 154,
+                  columnNumber: 33
+                }, this),
+                /* @__PURE__ */ jsxDEV63("div", { children: role && /* @__PURE__ */ jsxDEV63(ButtonAddAccessSearchForm, { roleId: role.id }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 156,
+                  columnNumber: 46
+                }, this) }, void 0, !1, {
+                  fileName: "app/components/UI/widgets/users/view.tsx",
+                  lineNumber: 155,
+                  columnNumber: 33
+                }, this),
+                /* @__PURE__ */ jsxDEV63(
+                  AccessSearchFormsTable,
+                  {
+                    aforms: accessSearchForms,
+                    searchForms
+                  },
+                  void 0,
+                  !1,
+                  {
+                    fileName: "app/components/UI/widgets/users/view.tsx",
+                    lineNumber: 158,
+                    columnNumber: 33
+                  },
+                  this
+                )
+              ] }, void 0, !0, {
+                fileName: "app/components/UI/widgets/users/view.tsx",
+                lineNumber: 153,
+                columnNumber: 29
+              }, this)
+            ] }, void 0, !0, {
+              fileName: "app/components/UI/widgets/users/view.tsx",
+              lineNumber: 135,
+              columnNumber: 25
+            }, this)
+          ]
         },
         void 0,
-        !1,
+        !0,
         {
           fileName: "app/components/UI/widgets/users/view.tsx",
-          lineNumber: 40,
-          columnNumber: 17
+          lineNumber: 92,
+          columnNumber: 21
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/components/UI/widgets/users/view.tsx",
-      lineNumber: 32,
+      lineNumber: 66,
+      columnNumber: 17
+    }, this) }, void 0, !1, {
+      fileName: "app/components/UI/widgets/users/view.tsx",
+      lineNumber: 65,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/UI/widgets/users/view.tsx",
-    lineNumber: 24,
+    lineNumber: 57,
     columnNumber: 9
   }, this);
 }
 
 // app/routes/dashboard.users.tsx
-import { jsxDEV as jsxDEV50 } from "react/jsx-dev-runtime";
+import { jsxDEV as jsxDEV64 } from "react/jsx-dev-runtime";
 async function loader5({
   request
 }) {
-  let roles = await api_default.users.getRoles(), departments = await api_default.users.getDepartments(), users = await api_default.users.getUsers(), url = new URL(request.url), userId = url.searchParams.get("userId"), isNew = url.searchParams.get("new"), user;
-  return isNew ? user = {} : userId && (user = await api_default.users.getUser(Number(userId)), user = { ...user, password: void 0 }), json5({ user, users, roles, departments, isNew });
+  let roles = await api_default.users.getRoles(), users = await api_default.users.getUsers(), departments = await api_default.users.getDepartments(), inputForms = await api_default.db.getInputForms(), searchForms = await api_default.db.getSearchForms(), url = new URL(request.url), state = url.searchParams.get("state"), roleId = url.searchParams.get("roleId"), userId = url.searchParams.get("userId"), isNewUser = url.searchParams.get("new_user"), currenUserId = url.searchParams.get("current_user"), user;
+  isNewUser ? user = {} : userId && (user = await api_default.users.getUser(Number(userId)), user = { ...user, password: void 0 });
+  let role, accessInputForms = [], accessSearchForms = [];
+  roleId && (role = await api_default.users.getRole(Number(roleId)), accessInputForms = await api_default.users.getAccessInputForms(Number(roleId)), accessSearchForms = await api_default.users.getAccessSearchForms(Number(roleId)));
+  let userRoles = [];
+  return currenUserId && (userRoles = await api_default.users.getUserRoles(Number(currenUserId))), json5({
+    state,
+    role,
+    roles,
+    isNewUser,
+    user,
+    users,
+    departments,
+    inputForms,
+    searchForms,
+    accessInputForms,
+    accessSearchForms,
+    currenUserId,
+    userRoles
+  });
 }
 async function action4({
   request
@@ -6764,24 +8582,152 @@ async function action4({
       e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
     }
   }
+  if (_action === "createRole")
+    try {
+      return await api_default.users.createEmptyRole(Number(values.cnt)), redirect3("/dashboard/users");
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  if (_action === "updateRole") {
+    let roleId = Number(values.id), updateRole = {
+      id: Number(values.id),
+      title: String(values.title)
+    };
+    try {
+      return await api_default.users.updateRole(roleId, updateRole), redirect3("/dashboard/users");
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  }
+  if (_action === "deleteRole") {
+    let roleId = Number(values.id);
+    try {
+      return await api_default.users.deleteRole(roleId), redirect3("/dashboard/users");
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  }
+  if (_action === "createEmptyAccessInput")
+    try {
+      return await api_default.users.createEmptyAccessInputForm(Number(values.roleId)), redirect3(`/dashboard/users?state=roles&roleId=${values.roleId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  if (_action === "updateAccessInput") {
+    let aformId = Number(values.id), updateAccessInput = {
+      id: Number(values.id),
+      roleId: Number(values.roleId),
+      formId: Number(values.formId),
+      accessType: String(values.accessType)
+    };
+    try {
+      return await api_default.users.updateAccessInputForm(aformId, updateAccessInput), redirect3(`/dashboard/users?state=roles&roleId=${values.roleId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  }
+  if (_action === "deleteAccessInput") {
+    let aformId = Number(values.id);
+    try {
+      return await api_default.users.deleteAccessInputForm(aformId), redirect3(`/dashboard/users?state=roles&roleId=${values.roleId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  }
+  if (_action === "createEmptyAccessSearch")
+    try {
+      return await api_default.users.createEmptyAccessSearchForm(Number(values.roleId)), redirect3(`/dashboard/users?state=roles&roleId=${values.roleId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  if (_action === "updateAccessSearch") {
+    let aformId = Number(values.id), updateAccessSearch = {
+      id: Number(values.id),
+      roleId: Number(values.roleId),
+      formId: Number(values.formId),
+      accessType: String(values.accessType)
+    };
+    try {
+      return await api_default.users.updateAccessSearchForm(aformId, updateAccessSearch), redirect3(`/dashboard/users?state=roles&roleId=${values.roleId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  }
+  if (_action === "deleteAccessSearch") {
+    let aformId = Number(values.id);
+    try {
+      return await api_default.users.deleteAccessSearchForm(aformId), redirect3(`/dashboard/users?state=roles&roleId=${values.roleId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  }
+  if (_action === "createEmptyUserRole")
+    try {
+      return await api_default.users.createEmptyUserRole(Number(values.userId)), redirect3(`/dashboard/users?state=users_roles&current_user=${values.userId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  if (_action === "updateUserRole") {
+    let userRoleId = Number(values.id), updateUserRole = {
+      id: Number(values.id),
+      userId: Number(values.userId),
+      roleId: Number(values.roleId)
+    };
+    try {
+      return await api_default.users.updateUserRole(userRoleId, updateUserRole), redirect3(`/dashboard/users?state=roles&current_user=${values.userId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  }
+  if (_action === "deleteUserRole") {
+    let userRoleId = Number(values.id);
+    try {
+      return await api_default.users.deleteUserRole(userRoleId), redirect3(`/dashboard/users?state=users_roles&current_user=${values.userId}`);
+    } catch (e) {
+      e instanceof Prisma4.PrismaClientKnownRequestError && (errors = e.message);
+    }
+  }
   return json5({ errors });
 }
 function Users() {
-  let { user, users, departments, isNew } = useLoaderData5(), data = useActionData4();
-  return /* @__PURE__ */ jsxDEV50(
+  let {
+    state,
+    role,
+    roles,
+    isNewUser,
+    user,
+    users,
+    departments,
+    inputForms,
+    searchForms,
+    accessInputForms,
+    accessSearchForms,
+    currenUserId,
+    userRoles
+  } = useLoaderData5(), data = useActionData4();
+  return /* @__PURE__ */ jsxDEV64(
     UsersView,
     {
-      isNew: !!isNew,
+      state,
+      roles,
+      role,
+      isNewUser: !!isNewUser,
       user,
       users,
       departments,
+      inputForms,
+      searchForms,
+      accessInputForms,
+      accessSearchForms,
+      currentUserId: Number(currenUserId),
+      userRoles,
       errors: data?.errors ? data.errors : void 0
     },
     void 0,
     !1,
     {
       fileName: "app/routes/dashboard.users.tsx",
-      lineNumber: 98,
+      lineNumber: 292,
       columnNumber: 9
     },
     this
@@ -6801,19 +8747,19 @@ import {
   UsersIcon,
   CircleStackIcon
 } from "@heroicons/react/24/solid";
-import { useTranslation as useTranslation25 } from "react-i18next";
+import { useTranslation as useTranslation40 } from "react-i18next";
 
 // app/components/UI/widgets/dashboard/view.tsx
 import { Outlet as Outlet2 } from "@remix-run/react";
 
 // app/components/UI/widgets/dashboard/menu/main_menu.tsx
-import MaterialTailwind8 from "@material-tailwind/react";
+import MaterialTailwind9 from "@material-tailwind/react";
 
 // app/components/UI/elements/logo.tsx
 import { Link as Link3 } from "@remix-run/react";
-import { jsxDEV as jsxDEV51 } from "react/jsx-dev-runtime";
-var Logo = () => /* @__PURE__ */ jsxDEV51(Link3, { to: "/", className: "flex gap-3", children: [
-  /* @__PURE__ */ jsxDEV51(
+import { jsxDEV as jsxDEV65 } from "react/jsx-dev-runtime";
+var Logo = () => /* @__PURE__ */ jsxDEV65(Link3, { to: "/", className: "flex gap-3", children: [
+  /* @__PURE__ */ jsxDEV65(
     "img",
     {
       className: "h-14 object-cover object-center",
@@ -6829,7 +8775,7 @@ var Logo = () => /* @__PURE__ */ jsxDEV51(Link3, { to: "/", className: "flex gap
     },
     this
   ),
-  /* @__PURE__ */ jsxDEV51("span", { className: "font-bold text-lg self-center pt-1 text-blue-gray-800", children: "Db Creator" }, void 0, !1, {
+  /* @__PURE__ */ jsxDEV65("span", { className: "font-bold text-lg self-center pt-1 text-blue-gray-800", children: "Db Creator" }, void 0, !1, {
     fileName: "app/components/UI/elements/logo.tsx",
     lineNumber: 11,
     columnNumber: 13
@@ -6841,14 +8787,14 @@ var Logo = () => /* @__PURE__ */ jsxDEV51(Link3, { to: "/", className: "flex gap
 }, this), logo_default = Logo;
 
 // app/components/UI/widgets/dashboard/menu/nav_list.tsx
-import MaterialTailwind7 from "@material-tailwind/react";
+import MaterialTailwind8 from "@material-tailwind/react";
 
 // app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx
-import MaterialTailwind6 from "@material-tailwind/react";
-import { Fragment as Fragment6, createElement, useState as useState6 } from "react";
+import MaterialTailwind7 from "@material-tailwind/react";
+import { Fragment as Fragment10, createElement, useState as useState6 } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { Link as Link4 } from "@remix-run/react";
-import { jsxDEV as jsxDEV52 } from "react/jsx-dev-runtime";
+import { jsxDEV as jsxDEV66 } from "react/jsx-dev-runtime";
 var {
   Collapse,
   Typography,
@@ -6857,16 +8803,16 @@ var {
   MenuHandler,
   MenuList,
   MenuItem
-} = MaterialTailwind6;
+} = MaterialTailwind7;
 function NavListMenu({ menuTitle, navListMenuItems }) {
   let [isMenuOpen, setIsMenuOpen] = useState6(!1), [isMobileMenuOpen, setIsMobileMenuOpen] = useState6(!1), renderItems = navListMenuItems.map(
-    ({ icon, title, link }, key) => /* @__PURE__ */ jsxDEV52("a", { href: "#", children: /* @__PURE__ */ jsxDEV52(
+    ({ icon, title, link }, key) => /* @__PURE__ */ jsxDEV66("a", { href: "#", children: /* @__PURE__ */ jsxDEV66(
       MenuItem,
       {
         placeholder: "",
         className: "flex items-center gap-3 rounded-lg",
         children: [
-          /* @__PURE__ */ jsxDEV52("div", { className: "flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ", children: [
+          /* @__PURE__ */ jsxDEV66("div", { className: "flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ", children: [
             " ",
             createElement(icon, {
               strokeWidth: 2,
@@ -6877,16 +8823,15 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
             lineNumber: 34,
             columnNumber: 21
           }, this),
-          /* @__PURE__ */ jsxDEV52("div", { children: /* @__PURE__ */ jsxDEV52(
+          /* @__PURE__ */ jsxDEV66("div", { children: /* @__PURE__ */ jsxDEV66(
             Typography,
             {
-              className: "flex items-center text-sm font-bold",
+              className: "flex items-center text-sm font-bold text-primary",
               variant: "h6",
-              color: "blue-gray",
               placeholder: "",
-              children: /* @__PURE__ */ jsxDEV52(Link4, { to: link, children: title }, void 0, !1, {
+              children: /* @__PURE__ */ jsxDEV66(Link4, { to: link, children: title }, void 0, !1, {
                 fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-                lineNumber: 48,
+                lineNumber: 47,
                 columnNumber: 29
               }, this)
             },
@@ -6919,8 +8864,8 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
       columnNumber: 13
     }, this)
   );
-  return /* @__PURE__ */ jsxDEV52(Fragment6, { children: [
-    /* @__PURE__ */ jsxDEV52(
+  return /* @__PURE__ */ jsxDEV66(Fragment10, { children: [
+    /* @__PURE__ */ jsxDEV66(
       Menu,
       {
         open: isMenuOpen,
@@ -6928,23 +8873,23 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
         offset: { mainAxis: 20 },
         placement: "bottom",
         children: [
-          /* @__PURE__ */ jsxDEV52(MenuHandler, { children: /* @__PURE__ */ jsxDEV52(
+          /* @__PURE__ */ jsxDEV66(MenuHandler, { children: /* @__PURE__ */ jsxDEV66(
             Typography,
             {
               className: "font-medium",
               as: "div",
               variant: "small",
               placeholder: "",
-              children: /* @__PURE__ */ jsxDEV52(
+              children: /* @__PURE__ */ jsxDEV66(
                 ListItem,
                 {
-                  className: "flex items-center gap-2 py-2 pr-4 font-medium text-gray-900",
+                  className: "flex items-center gap-2 py-2 pr-4 font-medium text-primary",
                   selected: isMenuOpen || isMobileMenuOpen,
                   onClick: () => setIsMobileMenuOpen((cur) => !cur),
                   placeholder: "",
                   children: [
                     menuTitle,
-                    /* @__PURE__ */ jsxDEV52(
+                    /* @__PURE__ */ jsxDEV66(
                       ChevronDownIcon,
                       {
                         strokeWidth: 2.5,
@@ -6954,12 +8899,12 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
                       !1,
                       {
                         fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-                        lineNumber: 78,
+                        lineNumber: 77,
                         columnNumber: 29
                       },
                       this
                     ),
-                    /* @__PURE__ */ jsxDEV52(
+                    /* @__PURE__ */ jsxDEV66(
                       ChevronDownIcon,
                       {
                         strokeWidth: 2.5,
@@ -6969,7 +8914,7 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
                       !1,
                       {
                         fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-                        lineNumber: 83,
+                        lineNumber: 82,
                         columnNumber: 29
                       },
                       this
@@ -6980,7 +8925,7 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
                 !0,
                 {
                   fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-                  lineNumber: 71,
+                  lineNumber: 70,
                   columnNumber: 25
                 },
                 this
@@ -6990,23 +8935,23 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
             !1,
             {
               fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-              lineNumber: 65,
+              lineNumber: 64,
               columnNumber: 21
             },
             this
           ) }, void 0, !1, {
             fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-            lineNumber: 64,
+            lineNumber: 63,
             columnNumber: 17
           }, this),
-          /* @__PURE__ */ jsxDEV52(
+          /* @__PURE__ */ jsxDEV66(
             MenuList,
             {
               className: "hidden max-w-screen-xl rounded-xl lg:block",
               placeholder: "",
-              children: /* @__PURE__ */ jsxDEV52("ul", { className: "flex flex-col gap-y-2 outline-none outline-0", children: renderItems }, void 0, !1, {
+              children: /* @__PURE__ */ jsxDEV66("ul", { className: "flex flex-col gap-y-2 outline-none outline-0", children: renderItems }, void 0, !1, {
                 fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-                lineNumber: 95,
+                lineNumber: 94,
                 columnNumber: 21
               }, this)
             },
@@ -7014,7 +8959,7 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
             !1,
             {
               fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-              lineNumber: 91,
+              lineNumber: 90,
               columnNumber: 17
             },
             this
@@ -7025,44 +8970,44 @@ function NavListMenu({ menuTitle, navListMenuItems }) {
       !0,
       {
         fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-        lineNumber: 58,
+        lineNumber: 57,
         columnNumber: 13
       },
       this
     ),
-    /* @__PURE__ */ jsxDEV52("div", { className: "block lg:hidden", children: /* @__PURE__ */ jsxDEV52(Collapse, { open: isMobileMenuOpen, children: renderItems }, void 0, !1, {
+    /* @__PURE__ */ jsxDEV66("div", { className: "block lg:hidden", children: /* @__PURE__ */ jsxDEV66(Collapse, { open: isMobileMenuOpen, children: renderItems }, void 0, !1, {
       fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-      lineNumber: 101,
+      lineNumber: 100,
       columnNumber: 17
     }, this) }, void 0, !1, {
       fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-      lineNumber: 100,
+      lineNumber: 99,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/components/UI/widgets/dashboard/menu/nav_list_menu.tsx",
-    lineNumber: 57,
+    lineNumber: 56,
     columnNumber: 9
   }, this);
 }
 
 // app/components/UI/widgets/dashboard/menu/nav_list.tsx
-import { useTranslation as useTranslation23 } from "react-i18next";
-import { jsxDEV as jsxDEV53 } from "react/jsx-dev-runtime";
-var { List } = MaterialTailwind7;
+import { useTranslation as useTranslation38 } from "react-i18next";
+import { jsxDEV as jsxDEV67 } from "react/jsx-dev-runtime";
+var { List } = MaterialTailwind8;
 function NavList({
   editDataMenuItems,
   searchDataMenuItems,
   serviceMenuItems
 }) {
-  let { t } = useTranslation23();
-  return /* @__PURE__ */ jsxDEV53(
+  let { t } = useTranslation38();
+  return /* @__PURE__ */ jsxDEV67(
     List,
     {
       className: "mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1",
       placeholder: "",
       children: [
-        /* @__PURE__ */ jsxDEV53(
+        /* @__PURE__ */ jsxDEV67(
           NavListMenu,
           {
             menuTitle: t("edit_data"),
@@ -7077,7 +9022,7 @@ function NavList({
           },
           this
         ),
-        /* @__PURE__ */ jsxDEV53(
+        /* @__PURE__ */ jsxDEV67(
           NavListMenu,
           {
             menuTitle: t("search_data"),
@@ -7092,7 +9037,7 @@ function NavList({
           },
           this
         ),
-        /* @__PURE__ */ jsxDEV53(
+        /* @__PURE__ */ jsxDEV67(
           NavListMenu,
           {
             menuTitle: t("service"),
@@ -7121,11 +9066,11 @@ function NavList({
 }
 
 // app/components/UI/elements/language.tsx
-import { useTranslation as useTranslation24 } from "react-i18next";
-import { jsxDEV as jsxDEV54 } from "react/jsx-dev-runtime";
+import { useTranslation as useTranslation39 } from "react-i18next";
+import { jsxDEV as jsxDEV68 } from "react/jsx-dev-runtime";
 function LanguagePanel() {
-  let { i18n } = useTranslation24();
-  return /* @__PURE__ */ jsxDEV54("div", { className: "flex flex-row justify-center items-center gap-4 font-bold", children: [
+  let { i18n } = useTranslation39();
+  return /* @__PURE__ */ jsxDEV68("div", { className: "flex flex-row justify-center items-center gap-4 font-bold", children: [
     {
       title: "KAZ",
       label: "kk"
@@ -7134,7 +9079,7 @@ function LanguagePanel() {
       title: "RUS",
       label: "ru"
     }
-  ].map((item, index) => /* @__PURE__ */ jsxDEV54(
+  ].map((item, index) => /* @__PURE__ */ jsxDEV68(
     "span",
     {
       className: `${i18n.language === item.label ? "border-2 border-blue-gray-500" : ""} p-1 text-sm rounded-md hover:cursor-pointer`,
@@ -7161,11 +9106,11 @@ import {
   Bars3Icon,
   XMarkIcon
 } from "@heroicons/react/24/outline";
-import { jsxDEV as jsxDEV55 } from "react/jsx-dev-runtime";
+import { jsxDEV as jsxDEV69 } from "react/jsx-dev-runtime";
 var {
   IconButton,
   Collapse: Collapse2
-} = MaterialTailwind8;
+} = MaterialTailwind9;
 function MainMenu({
   openNav,
   setOpenNav,
@@ -7173,13 +9118,13 @@ function MainMenu({
   searchDataMenuItems,
   serviceMenuItems
 }) {
-  return /* @__PURE__ */ jsxDEV55("div", { className: "w-full", children: /* @__PURE__ */ jsxDEV55(
+  return /* @__PURE__ */ jsxDEV69("div", { className: "w-full", children: /* @__PURE__ */ jsxDEV69(
     "div",
     {
       className: "w-full px-4 bg-white shadow shadow-blue-gray-300 mb-2",
       children: [
-        /* @__PURE__ */ jsxDEV55("div", { className: "w-full flex items-center justify-between text-blue-gray-900", children: [
-          /* @__PURE__ */ jsxDEV55("div", { className: "shrink-0 h-16", children: /* @__PURE__ */ jsxDEV55(logo_default, {}, void 0, !1, {
+        /* @__PURE__ */ jsxDEV69("div", { className: "w-full flex items-center justify-between text-blue-gray-900", children: [
+          /* @__PURE__ */ jsxDEV69("div", { className: "shrink-0 h-16", children: /* @__PURE__ */ jsxDEV69(logo_default, {}, void 0, !1, {
             fileName: "app/components/UI/widgets/dashboard/menu/main_menu.tsx",
             lineNumber: 38,
             columnNumber: 25
@@ -7188,7 +9133,7 @@ function MainMenu({
             lineNumber: 37,
             columnNumber: 21
           }, this),
-          /* @__PURE__ */ jsxDEV55("div", { className: "hidden lg:block", children: /* @__PURE__ */ jsxDEV55(
+          /* @__PURE__ */ jsxDEV69("div", { className: "hidden lg:block", children: /* @__PURE__ */ jsxDEV69(
             NavList,
             {
               editDataMenuItems,
@@ -7208,7 +9153,7 @@ function MainMenu({
             lineNumber: 40,
             columnNumber: 21
           }, this),
-          /* @__PURE__ */ jsxDEV55(
+          /* @__PURE__ */ jsxDEV69(
             IconButton,
             {
               variant: "text",
@@ -7216,11 +9161,11 @@ function MainMenu({
               className: "lg:hidden",
               onClick: () => setOpenNav(!openNav),
               placeholder: "",
-              children: openNav ? /* @__PURE__ */ jsxDEV55(XMarkIcon, { className: "h-6 w-6", strokeWidth: 2 }, void 0, !1, {
+              children: openNav ? /* @__PURE__ */ jsxDEV69(XMarkIcon, { className: "h-6 w-6", strokeWidth: 2 }, void 0, !1, {
                 fileName: "app/components/UI/widgets/dashboard/menu/main_menu.tsx",
                 lineNumber: 55,
                 columnNumber: 29
-              }, this) : /* @__PURE__ */ jsxDEV55(Bars3Icon, { className: "h-6 w-6", strokeWidth: 2 }, void 0, !1, {
+              }, this) : /* @__PURE__ */ jsxDEV69(Bars3Icon, { className: "h-6 w-6", strokeWidth: 2 }, void 0, !1, {
                 fileName: "app/components/UI/widgets/dashboard/menu/main_menu.tsx",
                 lineNumber: 57,
                 columnNumber: 29
@@ -7235,7 +9180,7 @@ function MainMenu({
             },
             this
           ),
-          /* @__PURE__ */ jsxDEV55(LanguagePanel, {}, void 0, !1, {
+          /* @__PURE__ */ jsxDEV69(LanguagePanel, {}, void 0, !1, {
             fileName: "app/components/UI/widgets/dashboard/menu/main_menu.tsx",
             lineNumber: 60,
             columnNumber: 21
@@ -7245,7 +9190,7 @@ function MainMenu({
           lineNumber: 36,
           columnNumber: 17
         }, this),
-        /* @__PURE__ */ jsxDEV55(Collapse2, { open: openNav, children: /* @__PURE__ */ jsxDEV55(
+        /* @__PURE__ */ jsxDEV69(Collapse2, { open: openNav, children: /* @__PURE__ */ jsxDEV69(
           NavList,
           {
             editDataMenuItems,
@@ -7283,7 +9228,7 @@ function MainMenu({
 }
 
 // app/components/UI/widgets/dashboard/view.tsx
-import { jsxDEV as jsxDEV56 } from "react/jsx-dev-runtime";
+import { jsxDEV as jsxDEV70 } from "react/jsx-dev-runtime";
 function DashboardView({
   openNav,
   setOpenNav,
@@ -7292,8 +9237,8 @@ function DashboardView({
   serviceMenuItems,
   context
 }) {
-  return /* @__PURE__ */ jsxDEV56("div", { className: "w-full h-screen", children: [
-    /* @__PURE__ */ jsxDEV56(
+  return /* @__PURE__ */ jsxDEV70("div", { className: "w-full h-screen", children: [
+    /* @__PURE__ */ jsxDEV70(
       MainMenu,
       {
         openNav,
@@ -7311,7 +9256,7 @@ function DashboardView({
       },
       this
     ),
-    /* @__PURE__ */ jsxDEV56("div", { className: "overflow-y-auto h-[calc(100vh-5rem)]", children: /* @__PURE__ */ jsxDEV56(Outlet2, { context }, void 0, !1, {
+    /* @__PURE__ */ jsxDEV70("div", { className: "overflow-y-auto h-[calc(100vh-5rem)]", children: /* @__PURE__ */ jsxDEV70(Outlet2, { context }, void 0, !1, {
       fileName: "app/components/UI/widgets/dashboard/view.tsx",
       lineNumber: 32,
       columnNumber: 17
@@ -7328,7 +9273,7 @@ function DashboardView({
 }
 
 // app/routes/dashboard.tsx
-import { jsxDEV as jsxDEV57 } from "react/jsx-dev-runtime";
+import { jsxDEV as jsxDEV71 } from "react/jsx-dev-runtime";
 async function loader6() {
   let dictionaries = await api_default.db.getDictionaries(), inputForms = await api_default.db.getInputForms(), searchForms = await api_default.db.getSearchForms();
   return json6({
@@ -7338,7 +9283,7 @@ async function loader6() {
   });
 }
 function dashboard() {
-  let { t } = useTranslation25(), data = useLoaderData6(), [docs, setDocs] = useState7({}), [current, setCurrent] = useState7(0), [conditions, setConditions] = useState7([]), context = {
+  let { t } = useTranslation40(), data = useLoaderData6(), [docs, setDocs] = useState7({}), [current, setCurrent] = useState7(0), [conditions, setConditions] = useState7([]), context = {
     ...data,
     docs,
     setDocs,
@@ -7356,12 +9301,12 @@ function dashboard() {
     icon: NewspaperIcon
   })), serviceMenuItems = [
     {
-      title: t("db_structure"),
+      title: t("menu_db_structure"),
       link: "db_struct",
       icon: CircleStackIcon
     },
     {
-      title: t("users"),
+      title: t("menu_db_users"),
       link: "users",
       icon: UsersIcon
     }
@@ -7371,7 +9316,7 @@ function dashboard() {
       "resize",
       () => window.innerWidth >= 960 && setOpenNav(!1)
     );
-  }, []), /* @__PURE__ */ jsxDEV57(
+  }, []), /* @__PURE__ */ jsxDEV71(
     DashboardView,
     {
       openNav,
@@ -7399,13 +9344,13 @@ __export(index_exports, {
   meta: () => meta
 });
 import { Link as Link5 } from "@remix-run/react";
-import { jsxDEV as jsxDEV58 } from "react/jsx-dev-runtime";
+import { jsxDEV as jsxDEV72 } from "react/jsx-dev-runtime";
 var meta = () => [
   { title: "New Remix App" },
   { name: "description", content: "Welcome to Remix!" }
 ];
 function Index() {
-  return /* @__PURE__ */ jsxDEV58("div", { children: /* @__PURE__ */ jsxDEV58(Link5, { to: "/dashboard", children: "Dashboard" }, void 0, !1, {
+  return /* @__PURE__ */ jsxDEV72("div", { children: /* @__PURE__ */ jsxDEV72(Link5, { to: "/dashboard", children: "Dashboard" }, void 0, !1, {
     fileName: "app/routes/_index.tsx",
     lineNumber: 14,
     columnNumber: 7
@@ -7417,7 +9362,7 @@ function Index() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { entry: { module: "/build/entry.client-TAHU6LB7.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-XJ6BYS35.js", "/build/_shared/chunk-TJ4YKIVD.js", "/build/_shared/chunk-Q6LMBPEP.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-KLSWWMWR.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-O7O22ZK6.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard": { id: "routes/dashboard", parentId: "root", path: "dashboard", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard-WCMTBFBG.js", imports: ["/build/_shared/chunk-DGLILCEK.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.db_struct": { id: "routes/dashboard.db_struct", parentId: "routes/dashboard", path: "db_struct", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.db_struct-EDHQW5RW.js", imports: ["/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.enter_data.$formId": { id: "routes/dashboard.enter_data.$formId", parentId: "routes/dashboard", path: "enter_data/:formId", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.enter_data.$formId-TBBRFJS4.js", imports: ["/build/_shared/chunk-35IR2J3X.js", "/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.search_data.$formId": { id: "routes/dashboard.search_data.$formId", parentId: "routes/dashboard", path: "search_data/:formId", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.search_data.$formId-PSLAM6BY.js", imports: ["/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.users": { id: "routes/dashboard.users", parentId: "routes/dashboard", path: "users", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.users-E6D2IMC7.js", imports: ["/build/_shared/chunk-35IR2J3X.js", "/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "8a7437c8", hmr: { runtime: "/build/_shared/chunk-Q6LMBPEP.js", timestamp: 1709722588938 }, url: "/build/manifest-8A7437C8.js" };
+var assets_manifest_default = { entry: { module: "/build/entry.client-TAHU6LB7.js", imports: ["/build/_shared/chunk-OAPPX4FA.js", "/build/_shared/chunk-XJ6BYS35.js", "/build/_shared/chunk-TJ4YKIVD.js", "/build/_shared/chunk-Q6LMBPEP.js", "/build/_shared/chunk-JR22VO6P.js", "/build/_shared/chunk-WEAPBHQG.js", "/build/_shared/chunk-7PHB3BFD.js", "/build/_shared/chunk-CJ4MY3PQ.js", "/build/_shared/chunk-PZDJHGND.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-FLDRAAC7.js", imports: void 0, hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/_index": { id: "routes/_index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/_index-O7O22ZK6.js", imports: void 0, hasAction: !1, hasLoader: !1, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard": { id: "routes/dashboard", parentId: "root", path: "dashboard", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard-5HHWBALD.js", imports: ["/build/_shared/chunk-DGLILCEK.js"], hasAction: !1, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.db_struct": { id: "routes/dashboard.db_struct", parentId: "routes/dashboard", path: "db_struct", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.db_struct-EDHQW5RW.js", imports: ["/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.enter_data.$formId": { id: "routes/dashboard.enter_data.$formId", parentId: "routes/dashboard", path: "enter_data/:formId", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.enter_data.$formId-TBBRFJS4.js", imports: ["/build/_shared/chunk-35IR2J3X.js", "/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.search_data.$formId": { id: "routes/dashboard.search_data.$formId", parentId: "routes/dashboard", path: "search_data/:formId", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.search_data.$formId-PSLAM6BY.js", imports: ["/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 }, "routes/dashboard.users": { id: "routes/dashboard.users", parentId: "routes/dashboard", path: "users", index: void 0, caseSensitive: void 0, module: "/build/routes/dashboard.users-Z3L5J5BI.js", imports: ["/build/_shared/chunk-35IR2J3X.js", "/build/_shared/chunk-FMBQK5TO.js"], hasAction: !0, hasLoader: !0, hasClientAction: !1, hasClientLoader: !1, hasErrorBoundary: !1 } }, version: "5b6b78e2", hmr: { runtime: "/build/_shared/chunk-Q6LMBPEP.js", timestamp: 1710238730358 }, url: "/build/manifest-5B6B78E2.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var mode = "development", assetsBuildDirectory = "public/build", future = { v3_fetcherPersist: !1, v3_relativeSplatPath: !1, v3_throwAbortReason: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

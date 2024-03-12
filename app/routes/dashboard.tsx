@@ -60,12 +60,12 @@ export default function dashboard() {
 
     const serviceMenuItems = [
         {
-            title: t('db_structure'),
+            title: t('menu_db_structure'),
             link: "db_struct",
             icon: CircleStackIcon
         },
         {
-            title: t('users'),
+            title: t('menu_db_users'),
             link: "users",
             icon: UsersIcon
         },

@@ -120,7 +120,7 @@ export default function UserDialog({ isNew, user, departments, errors }: UserDia
                 </CardBody>
                 <CardFooter className="pt-0 flex flex-row gap-3 justify-center" placeholder="">
                     <CustomButton
-                        className="bg-blue-gray-500 hover:shadow-blue-gray-100"
+                        className="bg-primary hover:shadow-primary_shadow"
                         form="userForm"
                         type="submit"
                         name="_action"
@@ -129,7 +129,7 @@ export default function UserDialog({ isNew, user, departments, errors }: UserDia
                         {t('save')}
                     </CustomButton>
                     <CustomButton
-                        className="bg-blue-gray-500 hover:shadow-blue-gray-100"
+                        className="bg-primary hover:shadow-primary_shadow"
                         onClick={() => setOpen(false)}
                     >
                         {t('close')}
