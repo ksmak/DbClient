@@ -1,6 +1,6 @@
 import { InputField } from "@prisma/client"
 import { Dispatch, SetStateAction } from "react"
-import Field from "./field_single"
+import Field from "./field"
 
 type SingleGroupProps = {
     state: string | null,

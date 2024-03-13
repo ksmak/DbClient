@@ -91,6 +91,7 @@ model InputForm {
   title_ru     String         
   groups       Group[]
   access       AccessInputForm[]
+  docs         Doc[]
 }
 
 model SearchForm {
@@ -220,6 +221,8 @@ model ValList {
 
 model Doc {
   id            Int            @id
+  form          InputForm      @relation(fields: [formId], references: [id], onDelete: Restrict)
+  formId        Int
   isActive      Boolean        @default(true)
   dateStart     DateTime?      @default(now()) 
   dateEnd       DateTime?

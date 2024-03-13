@@ -18,7 +18,7 @@ export default function ButtonSave({ userId, inputFormId, doc }: ButtonSaveProps
             _user: userId ? userId : '',
             _inputFormId: inputFormId ? inputFormId : '',
             _id: doc.id ? doc.id : '',
-            json: JSON.stringify(document)
+            json: JSON.stringify(doc)
         }, {
             method: "post",
         })

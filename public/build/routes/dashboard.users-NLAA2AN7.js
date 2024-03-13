@@ -1,20 +1,25 @@
 import {
   CustomSelect
-} from "/build/_shared/chunk-35IR2J3X.js";
+} from "/build/_shared/chunk-CJ6GU4CH.js";
+import {
+  CustomInput
+} from "/build/_shared/chunk-UGUQ3OMG.js";
 import {
   CustomButton,
-  CustomInput,
   ErrorMessage,
   Panel,
   require_index_browser,
   require_node
-} from "/build/_shared/chunk-N4W3YWYJ.js";
+} from "/build/_shared/chunk-GBHP66B7.js";
 import {
   require_react as require_react2
 } from "/build/_shared/chunk-DGLILCEK.js";
 import {
   useTranslation
 } from "/build/_shared/chunk-XJ6BYS35.js";
+import {
+  require_jsx_dev_runtime
+} from "/build/_shared/chunk-7PHB3BFD.js";
 import {
   Form,
   useActionData,
@@ -26,9 +31,6 @@ import {
 } from "/build/_shared/chunk-Q6LMBPEP.js";
 import "/build/_shared/chunk-JR22VO6P.js";
 import "/build/_shared/chunk-WEAPBHQG.js";
-import {
-  require_jsx_dev_runtime
-} from "/build/_shared/chunk-7PHB3BFD.js";
 import {
   require_react
 } from "/build/_shared/chunk-CJ4MY3PQ.js";
@@ -4053,7 +4055,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/users/dlg_user.tsx"
   );
-  import.meta.hot.lastModified = "1710238729688.626";
+  import.meta.hot.lastModified = "1710331139876.0017";
 }
 var {
   Dialog,
@@ -4069,6 +4071,7 @@ function UserDialog({
 }) {
   _s();
   const {
+    i18n,
     t
   } = useTranslation();
   const [open, setOpen] = (0, import_react3.useState)(false);
@@ -4080,102 +4083,102 @@ function UserDialog({
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Form, { id: "userForm", className: "flex flex-col gap-3", method: "post", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "hidden", name: "id", defaultValue: user?.id ? user.id : "" }, void 0, false, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 54,
+          lineNumber: 55,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_is_active", type: "checkbox", name: "isActive", title: t("is_active"), defaultChecked: user?.isActive }, void 0, false, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 55,
+          lineNumber: 56,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_login", type: "text", name: "login", title: t("login"), defaultValue: user?.login, required: true, readOnly: !isNew, size: 45 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 56,
+          lineNumber: 57,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_password", type: "password", name: "password", title: t("password"), defaultValue: user?.password, required: false, size: 45 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 57,
+          lineNumber: 58,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_firsName", type: "text", name: "firstName", title: t("first_name"), defaultValue: user?.firstName ? user.firstName : "", required: false, size: 45 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 58,
+          lineNumber: 59,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_lastName", type: "text", name: "lastName", title: t("last_name"), defaultValue: user?.lastName ? user.lastName : "", required: false, size: 45 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 59,
+          lineNumber: 60,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_middleName", type: "text", name: "middleName", title: t("middle_name"), defaultValue: user?.middleName ? user.middleName : "", required: false, size: 45 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 60,
+          lineNumber: 61,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomSelect, { id: "user_department", name: "departmentId", title: t("department"), defaultValue: user?.departmentId ? user.departmentId : "", required: false, children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { children: "-" }, void 0, false, {
             fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-            lineNumber: 62,
+            lineNumber: 63,
             columnNumber: 29
           }, this),
-          departments.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: item.id, children: item.title }, void 0, false, {
+          departments.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: item.id, children: item[`title_${i18n.language}`] }, void 0, false, {
             fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-            lineNumber: 63,
+            lineNumber: 64,
             columnNumber: 54
           }, this))
         ] }, void 0, true, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 61,
+          lineNumber: 62,
           columnNumber: 25
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomInput, { id: "user_expiredPwd", type: "date", name: "expiredPwd", title: t("expired_password"), defaultValue: (0, import_moment.default)(user?.expiredPwd).format("YYYY-MM-DD"), required: true, size: 45 }, void 0, false, {
           fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-          lineNumber: 65,
+          lineNumber: 66,
           columnNumber: 25
         }, this)
       ] }, user?.id, true, {
         fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-        lineNumber: 53,
+        lineNumber: 54,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-red-500 text-sm", children: errors }, void 0, false, {
         fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-        lineNumber: 67,
+        lineNumber: 68,
         columnNumber: 21
       }, this)
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-      lineNumber: 52,
+      lineNumber: 53,
       columnNumber: 17
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CardFooter, { className: "pt-0 flex flex-row gap-3 justify-center", placeholder: "", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomButton, { className: "bg-primary hover:shadow-primary_shadow", form: "userForm", type: "submit", name: "_action", value: isNew ? "createUser" : "updateUser", children: t("save") }, void 0, false, {
         fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-        lineNumber: 70,
+        lineNumber: 71,
         columnNumber: 21
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomButton, { className: "bg-primary hover:shadow-primary_shadow", onClick: () => setOpen(false), children: t("close") }, void 0, false, {
         fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-        lineNumber: 73,
+        lineNumber: 74,
         columnNumber: 21
       }, this)
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-      lineNumber: 69,
+      lineNumber: 70,
       columnNumber: 17
     }, this)
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-    lineNumber: 51,
+    lineNumber: 52,
     columnNumber: 13
   }, this) }, void 0, false, {
     fileName: "app/components/UI/widgets/users/dlg_user.tsx",
-    lineNumber: 50,
+    lineNumber: 51,
     columnNumber: 10
   }, this);
 }
-_s(UserDialog, "UPwhw75mJsSW09Mu9lulRqSHgr4=", false, function() {
+_s(UserDialog, "fkoagGwCabd9KhwTM9eG2tS/77g=", false, function() {
   return [useTranslation];
 });
 _c = UserDialog;
@@ -6146,4 +6149,4 @@ moment/moment.js:
   (*! license : MIT *)
   (*! momentjs.com *)
 */
-//# sourceMappingURL=/build/routes/dashboard.users-4Y6JHGEE.js.map
+//# sourceMappingURL=/build/routes/dashboard.users-NLAA2AN7.js.map

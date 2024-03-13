@@ -1,9 +1,22 @@
 import { Dictionary, InputForm, SearchForm, Group, InputField, SearchField } from "@prisma/client"
 import { PrismaClient } from "@prisma/client/extension";
-import { IDict } from "~/types/types";
+import { IDict, IDictVal } from "~/types/types";
 
 export default function DbModule(prisma: PrismaClient) {
     return {
+        async getDictValues(dictId: number) {
+            return prisma.$queryRawUnsafe(`SELECT * FROM dic_${dictId}`)
+        },
+        async updateDictValue(dictId: number, dictVal: IDictVal) {
+            if (!dictVal.id) {
+                return prisma.$queryRawUnsafe(`INSERT INTO dic_${dictId}(title_kk, title_ru, is_enabled) values('${dictVal.title_kk}', '${dictVal.title_ru}', ${dictVal.is_enabled})`)
+            } else {
+                return prisma.$queryRawUnsafe(`UPDATE dic_${dictId} SET title_kk='${dictVal.title_kk}', title_ru='${dictVal.title_ru}', is_enabled=${dictVal.is_enabled} WHERE id=${dictVal.id}`)
+            }
+        },
+        async deleteDictValue(dictId: number, id: number) {
+            return prisma.$queryRawUnsafe(`DELETE FROM dic_${dictId} WHERE id=${id}`)
+        },
         async getDictionaries() {
             let dicts: IDict[] = []
             const dictionaries = await prisma.dictionary.findMany()

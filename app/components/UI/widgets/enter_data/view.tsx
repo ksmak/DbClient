@@ -1,10 +1,12 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import ErrorMessage from "../../elements/error_message";
 import Buttons from "./buttons/buttons";
 import DialogFindResult from "./dlg_find_result";
 import RecNavigator from "./rec_navigator";
 import Panel from "../../elements/panel";
 import EditForm from "./edit_form/edit_form";
+import DialogMultyGroup from "./dlg_multy_group";
+import { Group, InputField } from "@prisma/client";
 
 type EnterDataViewProps = {
     errors?: string,
@@ -20,6 +22,7 @@ type EnterDataViewProps = {
     dictionaries: any,
     doc: any,
     setDoc: Dispatch<SetStateAction<any>>,
+    group: Group & { fields: InputField[] } | null,
 }
 
 export default function EnterDataView({
@@ -35,8 +38,17 @@ export default function EnterDataView({
     state,
     dictionaries,
     doc,
-    setDoc
+    setDoc,
+    group,
 }: EnterDataViewProps) {
+    const [openGroup, setOpenGroup] = useState(false)
+
+    useEffect(() => {
+        if (state === 'edit' && group) {
+            setOpenGroup(true)
+        }
+    }, [group])
+
     return (
         <div className="h-[calc(100vh-5rem)] flex flex-col gap-3 pb-5">
             <ErrorMessage errors={errors} />
@@ -44,6 +56,15 @@ export default function EnterDataView({
                 open={open}
                 setOpen={setOpen}
                 docs={docs}
+            />
+            <DialogMultyGroup
+                state={state}
+                open={openGroup}
+                setOpen={setOpenGroup}
+                group={group}
+                dictionaries={dictionaries}
+                doc={doc}
+                setDoc={setDoc}
             />
             <Panel className="h-full overflow-auto">
                 <div className="py-2 flex justify-between items-center">

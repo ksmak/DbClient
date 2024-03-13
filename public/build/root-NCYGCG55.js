@@ -2,6 +2,9 @@ import {
   useTranslation
 } from "/build/_shared/chunk-XJ6BYS35.js";
 import {
+  require_jsx_dev_runtime
+} from "/build/_shared/chunk-7PHB3BFD.js";
+import {
   Links,
   LiveReload,
   Meta,
@@ -15,9 +18,6 @@ import {
 } from "/build/_shared/chunk-Q6LMBPEP.js";
 import "/build/_shared/chunk-JR22VO6P.js";
 import "/build/_shared/chunk-WEAPBHQG.js";
-import {
-  require_jsx_dev_runtime
-} from "/build/_shared/chunk-7PHB3BFD.js";
 import {
   require_react
 } from "/build/_shared/chunk-CJ4MY3PQ.js";
@@ -46,7 +46,7 @@ function useChangeLanguage(locale) {
 var import_i18next = __toESM(require_i18next(), 1);
 
 // app/tailwind.css
-var tailwind_default = "/build/_assets/tailwind-PTJOSTG6.css";
+var tailwind_default = "/build/_assets/tailwind-NZXBN34F.css";
 
 // app/root.tsx
 var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
@@ -161,4 +161,4 @@ export {
   handle,
   links
 };
-//# sourceMappingURL=/build/root-ROHAVX76.js.map
+//# sourceMappingURL=/build/root-NCYGCG55.js.map

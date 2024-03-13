@@ -1,8 +1,8 @@
 import { InputField } from "@prisma/client"
 import { Dispatch, MouseEvent, SetStateAction } from "react"
-import Field from "./field_single"
 import CustomButton from "~/components/UI/elements/custom_button"
 import { useTranslation } from "react-i18next"
+import { useNavigate } from "@remix-run/react"
 
 type MultyGroupProps = {
     state: string | null,
@@ -12,19 +12,8 @@ type MultyGroupProps = {
     setDoc: Dispatch<SetStateAction<any>>,
 }
 export default function MultyGroup({ state, dictionaries, group, doc, setDoc }: MultyGroupProps) {
-    const { i18n } = useTranslation()
-    const handleAdd = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        let d = { ...doc }
-        const tbl = `tbl_${group.id}`
-        let fields: any = { id: null, sid: null, lst: 0 }
-        for (const field of group.fields) {
-            fields[`f${field.id}`] = ''
-        }
-        d[tbl].push(fields)
-        setDoc(d)
-    }
-
+    const { i18n, t } = useTranslation()
+    const navigate = useNavigate()
     const handleDelete = (e: MouseEvent<HTMLButtonElement>, recordIndex: number) => {
         e.preventDefault()
         const response = confirm(
@@ -39,19 +28,17 @@ export default function MultyGroup({ state, dictionaries, group, doc, setDoc }: 
     }
 
     return (
-        <div className="border p-1">
-            <div
-                className="flex justify-end p-1"
-            >
+        <div className="border p-1 flex flex-col gap-3">
+            <div className="mt-2">
                 {state === 'edit'
                     ? <CustomButton
-                        className="bg-blue-gray-500 hover:shadow-blue-gray-100"
-                        onClick={handleAdd}
+                        className="bg-primary hover:shadow-primary_shadow"
+                        onClick={() => navigate(`/dashboard/enter_data/${doc.formId}?state=edit&groupId=${group.id}`)}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>
-                        Add
+                        {t('add')}
                     </CustomButton>
                     : null}
             </div>
@@ -59,7 +46,7 @@ export default function MultyGroup({ state, dictionaries, group, doc, setDoc }: 
                 className="border border-blue-gray-700"
             >
                 <thead
-                    className="bg-blue-gray-400 text-white text-center"
+                    className="bg-primary text-white text-center"
                 >
                     <tr>
                         <th className="p-1 text-sm border border-blue-gray-700">#</th>
@@ -75,18 +62,15 @@ export default function MultyGroup({ state, dictionaries, group, doc, setDoc }: 
                     {doc[`tbl_${group.id}`].map((record: any, index: number) => (
                         <tr key={index} >
                             <td className="p-1 text-sm border border-blue-gray-700">{index + 1}</td>
-                            {group?.fields && group.fields.map((fld: InputField) => (
-                                <td key={fld.id} className="p-1 text-sm border border-blue-gray-700">
-                                    <Field
-                                        state={state}
-                                        dictionaries={dictionaries}
-                                        recordIndex={index}
-                                        doc={doc}
-                                        setDoc={setDoc}
-                                        fld={fld}
-                                    />
-                                </td>
-                            ))}
+                            {group?.fields && group.fields.map((fld: InputField) => {
+                                let val = doc[`tbl_${group.id}`][index][`fld_${fld.id}`]
+                                return (
+                                    <th key={fld.id} className="p-1 text-sm border border-blue-gray-700">
+                                        {val}
+                                    </th>
+                                )
+                            })}
+                            <td className="p-1 text-sm border border-blue-gray-700">{record.value}</td>
                             {state === "edit" && index !== 0
                                 ? <td className="p-1 text-sm border border-blue-gray-700">
                                     <CustomButton

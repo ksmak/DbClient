@@ -6,6 +6,9 @@ import {
   initReactI18next
 } from "/build/_shared/chunk-XJ6BYS35.js";
 import {
+  require_jsx_dev_runtime
+} from "/build/_shared/chunk-7PHB3BFD.js";
+import {
   RemixBrowser
 } from "/build/_shared/chunk-TJ4YKIVD.js";
 import {
@@ -13,9 +16,6 @@ import {
 } from "/build/_shared/chunk-Q6LMBPEP.js";
 import "/build/_shared/chunk-JR22VO6P.js";
 import "/build/_shared/chunk-WEAPBHQG.js";
-import {
-  require_jsx_dev_runtime
-} from "/build/_shared/chunk-7PHB3BFD.js";
 import {
   require_react
 } from "/build/_shared/chunk-CJ4MY3PQ.js";
@@ -4124,4 +4124,4 @@ if (window.requestIdleCallback) {
 } else {
   window.setTimeout(hydrate, 1);
 }
-//# sourceMappingURL=/build/entry.client-TAHU6LB7.js.map
+//# sourceMappingURL=/build/entry.client-XJQU6TMB.js.map

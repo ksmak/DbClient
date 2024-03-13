@@ -13,7 +13,7 @@ BEGIN
 	SELECT id FROM "Dictionary"
 	LOOP
 		IF (NOT EXISTS(SELECT FROM pg_tables WHERE schemaname = 'public' AND tablename = 'dic_' || r_dics.id)) THEN
-			EXECUTE 'CREATE TABLE ' || 'dic_' || r_dics.id || ' (id SERIAL NOT NULL PRIMARY KEY, title text, is_enabled boolean) ';
+			EXECUTE 'CREATE TABLE ' || 'dic_' || r_dics.id || ' (id SERIAL NOT NULL PRIMARY KEY, title_kk text, title_ru text, is_enabled boolean) ';
 		END IF;
 	END LOOP;
     FOR r_tbls IN

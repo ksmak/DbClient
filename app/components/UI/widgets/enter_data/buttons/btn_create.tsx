@@ -1,30 +1,24 @@
-import { Form } from "@remix-run/react";
+import { useNavigate } from "@remix-run/react";
 import CustomButton from "~/components/UI/elements/custom_button";
 import { useTranslation } from "react-i18next";
 
 type ButtonCreateProps = {
-    userId: number,
     inputFormId: number
 }
 
-export default function ButtonCreate({ userId, inputFormId }: ButtonCreateProps) {
+export default function ButtonCreate({ inputFormId }: ButtonCreateProps) {
     const { t } = useTranslation()
+    const navigate = useNavigate()
 
     return (
-        <Form method="post">
-            <input type="hidden" name="_user" value={userId} />
-            <input type="hidden" name="_inputFormId" value={inputFormId} />
-            <CustomButton
-                className="bg-primary hover:shadow-primary_shadow"
-                type="submit"
-                name="_action"
-                value="openForCreate"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                {t('create')}
-            </CustomButton>
-        </Form>
+        <CustomButton
+            className="bg-primary hover:shadow-primary_shadow"
+            onClick={() => navigate(`/dashboard/enter_data/${inputFormId}?state=edit`)}
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            {t('create')}
+        </CustomButton>
     )
 }

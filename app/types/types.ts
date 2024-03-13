@@ -17,6 +17,13 @@ export interface IDict {
     }[],
 }
 
+export interface IDictVal {
+    id?: number,
+    title_kk: string,
+    title_ru: string,
+    is_enabled: boolean
+}
+
 export interface IField {
     name: string,
     _type: string,

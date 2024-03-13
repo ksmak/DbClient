@@ -11,13 +11,16 @@ export async function loader({
     params,
 }: LoaderFunctionArgs) {
     const url = new URL(request.url)
-    const docId = url.searchParams.get("docId")
     const state = url.searchParams.get("state")
-    let inputForm: any | undefined
-    let doc: any
-    inputForm = await api.db.getInputForm(Number(params.formId))
-    doc = await api.doc.getDoc(docId ? Number(docId) : null, inputForm)
-    return json({ inputForm, doc, state })
+    const docId = url.searchParams.get("docId")
+    const groupId = url.searchParams.get("groupId")
+    let inputForm = await api.db.getInputForm(Number(params.formId))
+    let doc = await api.doc.getDoc(docId ? Number(docId) : null, inputForm)
+    let group = null
+    if (groupId) {
+        group = await api.db.getGroup(Number(groupId))
+    }
+    return json({ inputForm, doc, state, group })
 }
 
 export async function action({
@@ -35,69 +38,73 @@ export async function action({
         _id,
         ...values
     } = Object.fromEntries(formData)
-    try {
-        const inputForm = await api.db.getInputForm(Number(_inputFormId))
-
-        if (_action === 'openForCreate') {
-            return redirect(`/dashboard/enter_data/${_inputFormId}?state=edit`)
-        }
-        else if (_action === 'openForEdit') {
-            return redirect(`/dashboard/enter_data/${_inputFormId}?state=edit&docId=${_id}`)
-        }
-        else if (_action === 'openForSearch') {
-            return redirect(`/dashboard/enter_data/${_inputFormId}?state=search`)
-        }
-        else if (_action === 'saveDocument') {
-            let jsonData = JSON.parse(String(values.json))
-            if (_id) {
-                await api.doc.updateDoc(Number(_user), inputForm, jsonData)
-                return redirect(`/dashboard/enter_data/${_inputFormId}?docId=${_id}`)
-            } else {
-                await api.doc.createDoc(Number(_user), inputForm, jsonData)
-                return redirect(`/dashboard/enter_data/${_inputFormId}?`)
-            }
-        }
-        else if (_action === 'findDocument') {
-            let jsonData = JSON.parse(String(values.json))
-            const results: { id: number }[] | [] = await api.doc.findDoc(inputForm, jsonData)
-            if (results.length > 100) {
-                errors = "Find records more 100"
-            } else {
-                docs = {
-                    formId: inputForm.id,
-                    ids: results.map((item: any) => item.id)
+    switch (_action) {
+        case 'saveDocument': {
+            try {
+                let inputForm = await api.db.getInputForm(Number(_inputFormId))
+                let jsonData = JSON.parse(String(values.json))
+                if (_id) {
+                    await api.doc.updateDoc(Number(_user), inputForm, jsonData)
+                    return redirect(`/dashboard/enter_data/${_inputFormId}?docId=${_id}`)
+                } else {
+                    await api.doc.createDoc(Number(_user), inputForm, jsonData)
+                    return redirect(`/dashboard/enter_data/${_inputFormId}`)
                 }
-                ok = true
+            } catch (e) {
+                if (e instanceof Prisma.PrismaClientKnownRequestError) {
+                    errors = e.message
+                } else {
+                    throw e
+                }
             }
+            break
         }
-        else if (_action === 'cancelUpdate') {
-            if (_id) {
-                return redirect(`/dashboard/enter_data/${_inputFormId}?docId=${_id}`)
-            } else {
-                return redirect(`/dashboard/enter_data/${_inputFormId}?`)
+        case 'findDocument': {
+            try {
+                let inputForm = await api.db.getInputForm(Number(_inputFormId))
+                let jsonData = JSON.parse(String(values.json))
+                const results: { id: number }[] | [] = await api.doc.findDoc(inputForm, jsonData)
+                if (results.length > 100) {
+                    errors = "Find records more 100"
+                } else {
+                    docs = {
+                        formId: inputForm.id,
+                        ids: results.map((item: any) => item.id)
+                    }
+                    ok = true
+                }
+            } catch (e) {
+                if (e instanceof Prisma.PrismaClientKnownRequestError) {
+                    errors = e.message
+                } else {
+                    throw e
+                }
             }
+            break
         }
-        else if (_action === 'deleteDocument') {
-            if (_id) {
-                await api.doc.deleteDoc(Number(_id))
-                deletedDocId = (Number(_id))
-                ok = true
+        case 'deleteDocument': {
+            try {
+                if (_id) {
+                    await api.doc.deleteDoc(Number(_id))
+                    deletedDocId = (Number(_id))
+                    ok = true
+                }
+            } catch (e) {
+                if (e instanceof Prisma.PrismaClientKnownRequestError) {
+                    errors = e.message
+                } else {
+                    throw e
+                }
             }
-        }
-    } catch (e) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
-            errors = e.message
-        } else {
-            throw e
+            break
         }
     }
-
     return json({ errors, docs, deletedDocId, ok })
 }
 
 export default function EnterData() {
     const { dictionaries, docs, setDocs, current, setCurrent } = useOutletContext<ContexType>()
-    const { inputForm, doc, state } = useLoaderData<typeof loader>()
+    const { inputForm, doc, state, group } = useLoaderData<typeof loader>()
     const [document, setDocument] = useState<typeof doc>(doc)
     const navigation = useNavigation()
     const formRef = useRef<HTMLFormElement>(null)
@@ -138,6 +145,7 @@ export default function EnterData() {
             dictionaries={dictionaries}
             doc={document}
             setDoc={setDocument}
+            group={group}
         />
     )
 }

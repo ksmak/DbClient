@@ -6,7 +6,8 @@ import { ContexType, ICondition } from "~/types/types";
 import {
     NewspaperIcon,
     UsersIcon,
-    CircleStackIcon
+    CircleStackIcon,
+    BookOpenIcon,
 } from "@heroicons/react/24/solid";
 
 import { useTranslation } from "react-i18next";
@@ -68,6 +69,11 @@ export default function dashboard() {
             title: t('menu_db_users'),
             link: "users",
             icon: UsersIcon
+        },
+        {
+            title: t('menu_dictionaries'),
+            link: "dictionaries",
+            icon: BookOpenIcon
         },
     ]
 

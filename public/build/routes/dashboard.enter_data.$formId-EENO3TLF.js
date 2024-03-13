@@ -1,19 +1,24 @@
 import {
   CustomSelect
-} from "/build/_shared/chunk-35IR2J3X.js";
+} from "/build/_shared/chunk-CJ6GU4CH.js";
+import {
+  CustomInput
+} from "/build/_shared/chunk-UGUQ3OMG.js";
 import {
   CustomButton,
-  CustomInput,
   ErrorMessage,
   Panel,
   require_node
-} from "/build/_shared/chunk-N4W3YWYJ.js";
+} from "/build/_shared/chunk-GBHP66B7.js";
 import {
   require_react as require_react2
 } from "/build/_shared/chunk-DGLILCEK.js";
 import {
   useTranslation
 } from "/build/_shared/chunk-XJ6BYS35.js";
+import {
+  require_jsx_dev_runtime
+} from "/build/_shared/chunk-7PHB3BFD.js";
 import {
   Form,
   useActionData,
@@ -30,9 +35,6 @@ import {
 import "/build/_shared/chunk-JR22VO6P.js";
 import "/build/_shared/chunk-WEAPBHQG.js";
 import {
-  require_jsx_dev_runtime
-} from "/build/_shared/chunk-7PHB3BFD.js";
-import {
   require_react
 } from "/build/_shared/chunk-CJ4MY3PQ.js";
 import {
@@ -41,7 +43,10 @@ import {
 
 // app/routes/dashboard.enter_data.$formId.tsx
 var import_node = __toESM(require_node(), 1);
-var import_react14 = __toESM(require_react(), 1);
+var import_react17 = __toESM(require_react(), 1);
+
+// app/components/UI/widgets/enter_data/view.tsx
+var import_react15 = __toESM(require_react(), 1);
 
 // app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx
 var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
@@ -63,57 +68,36 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx"
   );
-  import.meta.hot.lastModified = "1709721283146.1047";
+  import.meta.hot.lastModified = "1710333963814.371";
 }
 function ButtonCancel({
-  userId,
   inputFormId,
-  doc
+  docId
 }) {
   _s();
   const {
     t
   } = useTranslation();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Form, { method: "post", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "hidden", name: "_user", value: userId }, void 0, false, {
+  const navigate = useNavigate();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomButton, { outline: true, className: "hover:shadow-primary_shadow text-primary border-primary", onClick: () => navigate(`/dashboard/enter_data/${inputFormId}?docId=${docId}`), children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, false, {
+      fileName: "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx",
+      lineNumber: 36,
+      columnNumber: 17
+    }, this) }, void 0, false, {
       fileName: "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx",
       lineNumber: 35,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "hidden", name: "_inputFormId", value: inputFormId }, void 0, false, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx",
-      lineNumber: 36,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "hidden", name: "_id", value: doc.id ? doc.id : "" }, void 0, false, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx",
-      lineNumber: 37,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", type: "submit", name: "_action", value: "cancelUpdate", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, false, {
-        fileName: "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx",
-        lineNumber: 40,
-        columnNumber: 21
-      }, this) }, void 0, false, {
-        fileName: "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx",
-        lineNumber: 39,
-        columnNumber: 17
-      }, this),
-      t("cancel")
-    ] }, void 0, true, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx",
-      lineNumber: 38,
-      columnNumber: 13
-    }, this)
+    t("cancel")
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/enter_data/buttons/btn_cancel.tsx",
     lineNumber: 34,
     columnNumber: 10
   }, this);
 }
-_s(ButtonCancel, "zlIdU9EjM2llFt74AbE2KsUJXyM=", false, function() {
-  return [useTranslation];
+_s(ButtonCancel, "1n6r5eWNKhP/dvqdbLCphpT4ddM=", false, function() {
+  return [useTranslation, useNavigate];
 });
 _c = ButtonCancel;
 var _c;
@@ -141,51 +125,35 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/enter_data/buttons/btn_create.tsx"
   );
-  import.meta.hot.lastModified = "1710248915954.2651";
+  import.meta.hot.lastModified = "1710333022310.8044";
 }
 function ButtonCreate({
-  userId,
   inputFormId
 }) {
   _s2();
   const {
     t
   } = useTranslation();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Form, { method: "post", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("input", { type: "hidden", name: "_user", value: userId }, void 0, false, {
+  const navigate = useNavigate();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(CustomButton, { className: "bg-primary hover:shadow-primary_shadow", onClick: () => navigate(`/dashboard/enter_data/${inputFormId}?state=edit`), children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
+      fileName: "app/components/UI/widgets/enter_data/buttons/btn_create.tsx",
+      lineNumber: 35,
+      columnNumber: 17
+    }, this) }, void 0, false, {
       fileName: "app/components/UI/widgets/enter_data/buttons/btn_create.tsx",
       lineNumber: 34,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("input", { type: "hidden", name: "_inputFormId", value: inputFormId }, void 0, false, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_create.tsx",
-      lineNumber: 35,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(CustomButton, { className: "bg-primary hover:shadow-primary_shadow", type: "submit", name: "_action", value: "openForCreate", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
-        fileName: "app/components/UI/widgets/enter_data/buttons/btn_create.tsx",
-        lineNumber: 38,
-        columnNumber: 21
-      }, this) }, void 0, false, {
-        fileName: "app/components/UI/widgets/enter_data/buttons/btn_create.tsx",
-        lineNumber: 37,
-        columnNumber: 17
-      }, this),
-      t("create")
-    ] }, void 0, true, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_create.tsx",
-      lineNumber: 36,
-      columnNumber: 13
-    }, this)
+    t("create")
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/enter_data/buttons/btn_create.tsx",
     lineNumber: 33,
     columnNumber: 10
   }, this);
 }
-_s2(ButtonCreate, "zlIdU9EjM2llFt74AbE2KsUJXyM=", false, function() {
-  return [useTranslation];
+_s2(ButtonCreate, "1n6r5eWNKhP/dvqdbLCphpT4ddM=", false, function() {
+  return [useTranslation, useNavigate];
 });
 _c2 = ButtonCreate;
 var _c2;
@@ -297,57 +265,36 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx"
   );
-  import.meta.hot.lastModified = "1709721306522.9307";
+  import.meta.hot.lastModified = "1710333943178.783";
 }
 function ButtonEdit({
-  userId,
   inputFormId,
-  doc
+  docId
 }) {
   _s4();
   const {
     t
   } = useTranslation();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(Form, { method: "post", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("input", { type: "hidden", name: "_user", value: userId }, void 0, false, {
+  const navigate = useNavigate();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", onClick: () => navigate(`/dashboard/enter_data/${inputFormId}?state=edit&docId=${docId}`), children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" }, void 0, false, {
+      fileName: "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx",
+      lineNumber: 36,
+      columnNumber: 17
+    }, this) }, void 0, false, {
       fileName: "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx",
       lineNumber: 35,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("input", { type: "hidden", name: "_inputFormId", value: inputFormId }, void 0, false, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx",
-      lineNumber: 36,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("input", { type: "hidden", name: "_id", value: doc.id ? doc.id : "" }, void 0, false, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx",
-      lineNumber: 37,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", type: "submit", name: "_action", value: "openForEdit", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" }, void 0, false, {
-        fileName: "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx",
-        lineNumber: 40,
-        columnNumber: 21
-      }, this) }, void 0, false, {
-        fileName: "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx",
-        lineNumber: 39,
-        columnNumber: 17
-      }, this),
-      t("edit")
-    ] }, void 0, true, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx",
-      lineNumber: 38,
-      columnNumber: 13
-    }, this)
+    t("edit")
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/enter_data/buttons/btn_edit.tsx",
     lineNumber: 34,
     columnNumber: 10
   }, this);
 }
-_s4(ButtonEdit, "zlIdU9EjM2llFt74AbE2KsUJXyM=", false, function() {
-  return [useTranslation];
+_s4(ButtonEdit, "1n6r5eWNKhP/dvqdbLCphpT4ddM=", false, function() {
+  return [useTranslation, useNavigate];
 });
 _c4 = ButtonEdit;
 var _c4;
@@ -444,7 +391,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/enter_data/buttons/btn_save.tsx"
   );
-  import.meta.hot.lastModified = "1709721323311.5178";
+  import.meta.hot.lastModified = "1710334324875.705";
 }
 function ButtonSave({
   userId,
@@ -462,7 +409,7 @@ function ButtonSave({
       _user: userId ? userId : "",
       _inputFormId: inputFormId ? inputFormId : "",
       _id: doc.id ? doc.id : "",
-      json: JSON.stringify(document)
+      json: JSON.stringify(doc)
     }, {
       method: "post"
     });
@@ -513,51 +460,35 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/enter_data/buttons/btn_search.tsx"
   );
-  import.meta.hot.lastModified = "1709721330031.7515";
+  import.meta.hot.lastModified = "1710333282591.4026";
 }
 function ButtonSearch({
-  userId,
   inputFormId
 }) {
   _s7();
   const {
     t
   } = useTranslation();
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(Form, { method: "post", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { type: "hidden", name: "_user", value: userId }, void 0, false, {
+  const navigate = useNavigate();
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(CustomButton, { className: "bg-primary hover:shadow-primary_shadow", onClick: () => navigate(`/dashboard/enter_data/${inputFormId}?state=search`), children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" }, void 0, false, {
+      fileName: "app/components/UI/widgets/enter_data/buttons/btn_search.tsx",
+      lineNumber: 35,
+      columnNumber: 17
+    }, this) }, void 0, false, {
       fileName: "app/components/UI/widgets/enter_data/buttons/btn_search.tsx",
       lineNumber: 34,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("input", { type: "hidden", name: "_inputFormId", value: inputFormId }, void 0, false, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_search.tsx",
-      lineNumber: 35,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", type: "submit", name: "_action", value: "openForSearch", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime7.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" }, void 0, false, {
-        fileName: "app/components/UI/widgets/enter_data/buttons/btn_search.tsx",
-        lineNumber: 38,
-        columnNumber: 21
-      }, this) }, void 0, false, {
-        fileName: "app/components/UI/widgets/enter_data/buttons/btn_search.tsx",
-        lineNumber: 37,
-        columnNumber: 17
-      }, this),
-      t("search")
-    ] }, void 0, true, {
-      fileName: "app/components/UI/widgets/enter_data/buttons/btn_search.tsx",
-      lineNumber: 36,
-      columnNumber: 13
-    }, this)
+    t("search")
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/enter_data/buttons/btn_search.tsx",
     lineNumber: 33,
     columnNumber: 10
   }, this);
 }
-_s7(ButtonSearch, "zlIdU9EjM2llFt74AbE2KsUJXyM=", false, function() {
-  return [useTranslation];
+_s7(ButtonSearch, "1n6r5eWNKhP/dvqdbLCphpT4ddM=", false, function() {
+  return [useTranslation, useNavigate];
 });
 _c7 = ButtonSearch;
 var _c7;
@@ -862,7 +793,7 @@ $RefreshReg$(_c10, "RecNavigator");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 
-// app/components/UI/widgets/enter_data/edit_form/field_single.tsx
+// app/components/UI/widgets/enter_data/edit_form/field.tsx
 var import_jsx_dev_runtime11 = __toESM(require_jsx_dev_runtime(), 1);
 if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
@@ -870,7 +801,7 @@ if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   prevRefreshReg = window.$RefreshReg$;
   prevRefreshSig = window.$RefreshSig$;
   window.$RefreshReg$ = (type, id) => {
-    window.$RefreshRuntime$.register(type, '"app/components/UI/widgets/enter_data/edit_form/field_single.tsx"' + id);
+    window.$RefreshRuntime$.register(type, '"app/components/UI/widgets/enter_data/edit_form/field.tsx"' + id);
   };
   window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
 }
@@ -880,9 +811,9 @@ var _s10 = $RefreshSig$();
 if (import.meta) {
   import.meta.hot = createHotContext(
     //@ts-expect-error
-    "app/components/UI/widgets/enter_data/edit_form/field_single.tsx"
+    "app/components/UI/widgets/enter_data/edit_form/field.tsx"
   );
-  import.meta.hot.lastModified = "1710249487321.3945";
+  import.meta.hot.lastModified = "1710321139422.6836";
 }
 function Field({
   state,
@@ -911,25 +842,25 @@ function Field({
   switch (fld.fieldType) {
     case "TEXT":
       return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(CustomInput, { className: cls, id: fieldName, title: fieldTitle, type: "text", name: fieldName, value: val, onChange: handleChange, required: fld.isRequire && state === "edit", disabled: !fld.isEnable || !["create", "edit", "search", "find"].includes(String(state)), size: fld.len ? fld.len : 30, maxLength: fld.len ? fld.len : 30 }, fld.id, false, {
-        fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
         lineNumber: 51,
         columnNumber: 14
       }, this);
     case "CYRILLIC":
       return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(CustomInput, { className: cls, id: fieldName, title: fieldTitle, type: "text", name: fieldName, value: val, onChange: handleChange, required: fld.isRequire && state === "edit", disabled: !fld.isEnable || !["create", "edit", "search", "find"].includes(String(state)), size: fld.len ? fld.len : 30, maxLength: fld.len ? fld.len : 30 }, fld.id, false, {
-        fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
         lineNumber: 53,
         columnNumber: 14
       }, this);
     case "INTEGER":
       return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(CustomInput, { className: cls, id: fieldName, title: fieldTitle, type: "number", name: fieldName, value: val, onChange: handleChange, required: fld.isRequire && state === "edit", disabled: !fld.isEnable || !["create", "edit", "search", "find"].includes(String(state)), size: fld.len ? fld.len : 30, maxLength: fld.len ? fld.len : 30 }, fld.id, false, {
-        fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
         lineNumber: 55,
         columnNumber: 14
       }, this);
     case "NUMERIC":
       return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(CustomInput, { className: cls, id: fieldName, title: fieldTitle, type: "number", step: "0.01", name: fieldName, value: val, onChange: handleChange, required: fld.isRequire && state === "edit", disabled: !fld.isEnable || !["create", "edit", "search", "find"].includes(String(state)), size: fld.len ? fld.len : 30, maxLength: fld.len ? fld.len : 30 }, fld.id, false, {
-        fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
         lineNumber: 57,
         columnNumber: 14
       }, this);
@@ -937,33 +868,33 @@ function Field({
       const dic = dictionaries.find((item) => item.id === fld.dicId);
       return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(CustomSelect, { className: cls, id: fieldName, title: fieldTitle, name: fieldName, value: val, onChange: handleChange, required: fld.isRequire && state === "edit", disabled: !fld.isEnable || !["create", "edit", "search", "find"].includes(String(state)), children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("option", { children: "-" }, void 0, false, {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
           lineNumber: 61,
           columnNumber: 21
         }, this),
-        ["create", "edit", "search", "find"].includes(String(state)) ? dic?.data_edit.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("option", { value: item.id, children: item.title }, item.id, false, {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        ["create", "edit", "search", "find"].includes(String(state)) ? dic?.data_edit.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("option", { value: item.id, children: item[`title_${i18n.language}`] }, item.id, false, {
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
           lineNumber: 62,
           columnNumber: 112
-        }, this)) : dic?.data_browse.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("option", { value: item.id, children: item.title }, item.id, false, {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        }, this)) : dic?.data_browse.map((item) => /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)("option", { value: item.id, children: item[`title_${i18n.language}`] }, item.id, false, {
+          fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
           lineNumber: 62,
-          columnNumber: 204
+          columnNumber: 224
         }, this))
       ] }, fld.id, true, {
-        fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
         lineNumber: 60,
         columnNumber: 14
       }, this);
     case "DATE":
       return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(CustomInput, { className: cls, id: fieldName, title: fieldTitle, type: "date", name: fieldName, value: val, onChange: handleChange, required: fld.isRequire && state === "edit", disabled: !fld.isEnable || !["create", "edit", "search", "find"].includes(String(state)), size: fld.len ? fld.len : 30, maxLength: fld.len ? fld.len : 30 }, fld.id, false, {
-        fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
         lineNumber: 65,
         columnNumber: 14
       }, this);
     case "TIME":
       return /* @__PURE__ */ (0, import_jsx_dev_runtime11.jsxDEV)(CustomInput, { className: cls, id: fieldName, title: fieldTitle, type: "time", name: fieldName, value: val, onChange: handleChange, required: fld.isRequire && state === "edit", disabled: !fld.isEnable || !["create", "edit", "search", "find"].includes(String(state)), size: fld.len ? fld.len : 30, maxLength: fld.len ? fld.len : 30 }, fld.id, false, {
-        fileName: "app/components/UI/widgets/enter_data/edit_form/field_single.tsx",
+        fileName: "app/components/UI/widgets/enter_data/edit_form/field.tsx",
         lineNumber: 67,
         columnNumber: 14
       }, this);
@@ -997,7 +928,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/enter_data/edit_form/single_group.tsx"
   );
-  import.meta.hot.lastModified = "1710249650984.6553";
+  import.meta.hot.lastModified = "1710320857095.1306";
 }
 function SingleGroup({
   state,
@@ -1042,7 +973,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx"
   );
-  import.meta.hot.lastModified = "1710249650972.655";
+  import.meta.hot.lastModified = "1710321757945.2395";
 }
 function MultyGroup({
   state,
@@ -1053,25 +984,10 @@ function MultyGroup({
 }) {
   _s11();
   const {
-    i18n
+    i18n,
+    t
   } = useTranslation();
-  const handleAdd = (e) => {
-    e.preventDefault();
-    let d = {
-      ...doc
-    };
-    const tbl = `tbl_${group.id}`;
-    let fields = {
-      id: null,
-      sid: null,
-      lst: 0
-    };
-    for (const field of group.fields) {
-      fields[`f${field.id}`] = "";
-    }
-    d[tbl].push(fields);
-    setDoc(d);
-  };
+  const navigate = useNavigate();
   const handleDelete = (e, recordIndex) => {
     e.preventDefault();
     const response = confirm("Please confirm you want to delete this record.");
@@ -1084,110 +1000,114 @@ function MultyGroup({
       setDoc(d);
     }
   };
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "border p-1", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "flex justify-end p-1", children: state === "edit" ? /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(CustomButton, { className: "bg-blue-gray-500 hover:shadow-blue-gray-100", onClick: handleAdd, children: [
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "border p-1 flex flex-col gap-3", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("div", { className: "mt-2", children: state === "edit" ? /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(CustomButton, { className: "bg-primary hover:shadow-primary_shadow", onClick: () => navigate(`/dashboard/enter_data/${doc.formId}?state=edit&groupId=${group.id}`), children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 4.5v15m7.5-7.5h-15" }, void 0, false, {
         fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-        lineNumber: 69,
+        lineNumber: 54,
         columnNumber: 29
       }, this) }, void 0, false, {
         fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-        lineNumber: 68,
+        lineNumber: 53,
         columnNumber: 25
       }, this),
-      "Add"
+      t("add")
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-      lineNumber: 67,
+      lineNumber: 52,
       columnNumber: 37
     }, this) : null }, void 0, false, {
       fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-      lineNumber: 66,
+      lineNumber: 51,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("table", { className: "border border-blue-gray-700", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("thead", { className: "bg-blue-gray-400 text-white text-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("tr", { children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("thead", { className: "bg-primary text-white text-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, false, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-          lineNumber: 77,
+          lineNumber: 62,
           columnNumber: 25
         }, this),
         group?.fields && group.fields.map((fld) => /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: fld[`title_${i18n.language}`] }, fld.id, false, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-          lineNumber: 78,
+          lineNumber: 63,
           columnNumber: 67
         }, this)),
         /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: "#" }, void 0, false, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-          lineNumber: 81,
+          lineNumber: 66,
           columnNumber: 25
         }, this)
       ] }, void 0, true, {
         fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-        lineNumber: 76,
+        lineNumber: 61,
         columnNumber: 21
       }, this) }, void 0, false, {
         fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-        lineNumber: 75,
+        lineNumber: 60,
         columnNumber: 17
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("tbody", { children: doc[`tbl_${group.id}`].map((record, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("tr", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: index + 1 }, void 0, false, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-          lineNumber: 86,
+          lineNumber: 71,
           columnNumber: 29
         }, this),
-        group?.fields && group.fields.map((fld) => /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(Field, { state, dictionaries, recordIndex: index, doc, setDoc, fld }, void 0, false, {
+        group?.fields && group.fields.map((fld) => {
+          let val = doc[`tbl_${group.id}`][index][`fld_${fld.id}`];
+          return /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("th", { className: "p-1 text-sm border border-blue-gray-700", children: val }, fld.id, false, {
+            fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
+            lineNumber: 74,
+            columnNumber: 20
+          }, this);
+        }),
+        /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: record.value }, void 0, false, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-          lineNumber: 88,
-          columnNumber: 37
-        }, this) }, fld.id, false, {
-          fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-          lineNumber: 87,
-          columnNumber: 71
-        }, this)),
+          lineNumber: 78,
+          columnNumber: 29
+        }, this),
         state === "edit" && index !== 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("td", { className: "p-1 text-sm border border-blue-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)(CustomButton, { className: "bg-red-500 hover:shadow-red-100", onClick: (e) => handleDelete(e, index), children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor", className: "w-4 h-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime13.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18 18 6M6 6l12 12" }, void 0, false, {
             fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-            lineNumber: 93,
+            lineNumber: 82,
             columnNumber: 45
           }, this) }, void 0, false, {
             fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-            lineNumber: 92,
+            lineNumber: 81,
             columnNumber: 41
           }, this),
           "Delete"
         ] }, void 0, true, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-          lineNumber: 91,
+          lineNumber: 80,
           columnNumber: 37
         }, this) }, void 0, false, {
           fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-          lineNumber: 90,
+          lineNumber: 79,
           columnNumber: 64
         }, this) : null
       ] }, index, true, {
         fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-        lineNumber: 85,
+        lineNumber: 70,
         columnNumber: 68
       }, this)) }, void 0, false, {
         fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-        lineNumber: 84,
+        lineNumber: 69,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-      lineNumber: 74,
+      lineNumber: 59,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/enter_data/edit_form/multy_group.tsx",
-    lineNumber: 65,
+    lineNumber: 50,
     columnNumber: 10
   }, this);
 }
-_s11(MultyGroup, "iD7vDB/EPQWin5ATG71yacngHuk=", false, function() {
-  return [useTranslation];
+_s11(MultyGroup, "snclS1U3LXStivP937A7v9MkjWg=", false, function() {
+  return [useTranslation, useNavigate];
 });
 _c13 = MultyGroup;
 var _c13;
@@ -1285,8 +1205,102 @@ $RefreshReg$(_c14, "EditForm");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 
-// app/components/UI/widgets/enter_data/view.tsx
+// app/components/UI/widgets/enter_data/dlg_multy_group.tsx
+var import_react14 = __toESM(require_react2(), 1);
 var import_jsx_dev_runtime15 = __toESM(require_jsx_dev_runtime(), 1);
+if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
+  console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
+} else {
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = (type, id) => {
+    window.$RefreshRuntime$.register(type, '"app/components/UI/widgets/enter_data/dlg_multy_group.tsx"' + id);
+  };
+  window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
+}
+var prevRefreshReg;
+var prevRefreshSig;
+var _s13 = $RefreshSig$();
+if (import.meta) {
+  import.meta.hot = createHotContext(
+    //@ts-expect-error
+    "app/components/UI/widgets/enter_data/dlg_multy_group.tsx"
+  );
+  import.meta.hot.lastModified = "1710333969062.1968";
+}
+var {
+  Dialog: Dialog2,
+  Card: Card2,
+  CardBody: CardBody2,
+  CardFooter: CardFooter2
+} = import_react14.default;
+function DialogMultyGroup({
+  isNew,
+  state,
+  open,
+  setOpen,
+  group,
+  dictionaries,
+  doc,
+  setDoc
+}) {
+  _s13();
+  const {
+    t
+  } = useTranslation();
+  const handleSave = () => {
+  };
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(Dialog2, { placeholder: "", size: "lg", open, handler: () => setOpen(false), className: "bg-transparent shadow-none", children: /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(Card2, { className: "mx-auto w-full", placeholder: "", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(CardBody2, { className: "flex flex-col gap-4 overflow-auto", placeholder: "", children: group?.fields ? group.fields.map((fld) => /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(Field, { state, dictionaries, recordIndex: 0, doc, setDoc, fld }, fld.id, false, {
+      fileName: "app/components/UI/widgets/enter_data/dlg_multy_group.tsx",
+      lineNumber: 50,
+      columnNumber: 62
+    }, this)) : /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(import_jsx_dev_runtime15.Fragment, { children: "-" }, void 0, false, {
+      fileName: "app/components/UI/widgets/enter_data/dlg_multy_group.tsx",
+      lineNumber: 50,
+      columnNumber: 182
+    }, this) }, void 0, false, {
+      fileName: "app/components/UI/widgets/enter_data/dlg_multy_group.tsx",
+      lineNumber: 49,
+      columnNumber: 17
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(CardFooter2, { className: "pt-0 flex flex-row gap-3 justify-center", placeholder: "", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(CustomButton, { className: "bg-primary hover:shadow-primary_shadow", form: "userForm", type: "submit", name: "_action", onClick: () => handleSave(), children: t("save") }, void 0, false, {
+        fileName: "app/components/UI/widgets/enter_data/dlg_multy_group.tsx",
+        lineNumber: 53,
+        columnNumber: 21
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(CustomButton, { className: "bg-primary hover:shadow-primary_shadow", onClick: () => setOpen(false), children: t("close") }, void 0, false, {
+        fileName: "app/components/UI/widgets/enter_data/dlg_multy_group.tsx",
+        lineNumber: 56,
+        columnNumber: 21
+      }, this)
+    ] }, void 0, true, {
+      fileName: "app/components/UI/widgets/enter_data/dlg_multy_group.tsx",
+      lineNumber: 52,
+      columnNumber: 17
+    }, this)
+  ] }, void 0, true, {
+    fileName: "app/components/UI/widgets/enter_data/dlg_multy_group.tsx",
+    lineNumber: 48,
+    columnNumber: 13
+  }, this) }, void 0, false, {
+    fileName: "app/components/UI/widgets/enter_data/dlg_multy_group.tsx",
+    lineNumber: 47,
+    columnNumber: 10
+  }, this);
+}
+_s13(DialogMultyGroup, "zlIdU9EjM2llFt74AbE2KsUJXyM=", false, function() {
+  return [useTranslation];
+});
+_c15 = DialogMultyGroup;
+var _c15;
+$RefreshReg$(_c15, "DialogMultyGroup");
+window.$RefreshReg$ = prevRefreshReg;
+window.$RefreshSig$ = prevRefreshSig;
+
+// app/components/UI/widgets/enter_data/view.tsx
+var import_jsx_dev_runtime16 = __toESM(require_jsx_dev_runtime(), 1);
 if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
 } else {
@@ -1299,12 +1313,13 @@ if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
 }
 var prevRefreshReg;
 var prevRefreshSig;
+var _s14 = $RefreshSig$();
 if (import.meta) {
   import.meta.hot = createHotContext(
     //@ts-expect-error
     "app/components/UI/widgets/enter_data/view.tsx"
   );
-  import.meta.hot.lastModified = "1709721358088.7192";
+  import.meta.hot.lastModified = "1710322296495.0027";
 }
 function EnterDataView({
   errors,
@@ -1319,60 +1334,74 @@ function EnterDataView({
   state,
   dictionaries,
   doc,
-  setDoc
+  setDoc,
+  group
 }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "h-[calc(100vh-5rem)] flex flex-col gap-3 pb-5", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(ErrorMessage, { errors }, void 0, false, {
+  _s14();
+  const [openGroup, setOpenGroup] = (0, import_react15.useState)(false);
+  (0, import_react15.useEffect)(() => {
+    if (state === "edit" && group) {
+      setOpenGroup(true);
+    }
+  }, [group]);
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { className: "h-[calc(100vh-5rem)] flex flex-col gap-3 pb-5", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(ErrorMessage, { errors }, void 0, false, {
       fileName: "app/components/UI/widgets/enter_data/view.tsx",
-      lineNumber: 43,
+      lineNumber: 54,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(DialogFindResult, { open, setOpen, docs }, void 0, false, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(DialogFindResult, { open, setOpen, docs }, void 0, false, {
       fileName: "app/components/UI/widgets/enter_data/view.tsx",
-      lineNumber: 44,
+      lineNumber: 55,
       columnNumber: 13
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(Panel, { className: "h-full overflow-auto", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)("div", { className: "py-2 flex justify-between items-center", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(Buttons, { userId, inputFormId: inputForm.id, doc, state }, void 0, false, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(DialogMultyGroup, { state, open: openGroup, setOpen: setOpenGroup, group, dictionaries, doc, setDoc }, void 0, false, {
+      fileName: "app/components/UI/widgets/enter_data/view.tsx",
+      lineNumber: 56,
+      columnNumber: 13
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(Panel, { className: "h-full overflow-auto", children: [
+      /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)("div", { className: "py-2 flex justify-between items-center", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(Buttons, { userId, inputFormId: inputForm.id, doc, state }, void 0, false, {
           fileName: "app/components/UI/widgets/enter_data/view.tsx",
-          lineNumber: 47,
+          lineNumber: 59,
           columnNumber: 21
         }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(RecNavigator, { docs, current, setCurrent }, void 0, false, {
+        /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(RecNavigator, { docs, current, setCurrent }, void 0, false, {
           fileName: "app/components/UI/widgets/enter_data/view.tsx",
-          lineNumber: 48,
+          lineNumber: 60,
           columnNumber: 21
         }, this)
       ] }, void 0, true, {
         fileName: "app/components/UI/widgets/enter_data/view.tsx",
-        lineNumber: 46,
+        lineNumber: 58,
         columnNumber: 17
       }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime15.jsxDEV)(EditForm, { formRef, userId, inputForm, state, dictionaries, doc, setDoc }, void 0, false, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(EditForm, { formRef, userId, inputForm, state, dictionaries, doc, setDoc }, void 0, false, {
         fileName: "app/components/UI/widgets/enter_data/view.tsx",
-        lineNumber: 50,
+        lineNumber: 62,
         columnNumber: 17
       }, this)
     ] }, void 0, true, {
       fileName: "app/components/UI/widgets/enter_data/view.tsx",
-      lineNumber: 45,
+      lineNumber: 57,
       columnNumber: 13
     }, this)
   ] }, void 0, true, {
     fileName: "app/components/UI/widgets/enter_data/view.tsx",
-    lineNumber: 42,
+    lineNumber: 53,
     columnNumber: 10
   }, this);
 }
-_c15 = EnterDataView;
-var _c15;
-$RefreshReg$(_c15, "EnterDataView");
+_s14(EnterDataView, "xp1DNuc21X6tMBhFpCs0YjqxrnQ=");
+_c16 = EnterDataView;
+var _c16;
+$RefreshReg$(_c16, "EnterDataView");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 
 // app/routes/dashboard.enter_data.$formId.tsx
-var import_jsx_dev_runtime16 = __toESM(require_jsx_dev_runtime(), 1);
+var import_jsx_dev_runtime17 = __toESM(require_jsx_dev_runtime(), 1);
 if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
   console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
 } else {
@@ -1385,16 +1414,16 @@ if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
 }
 var prevRefreshReg;
 var prevRefreshSig;
-var _s13 = $RefreshSig$();
+var _s15 = $RefreshSig$();
 if (import.meta) {
   import.meta.hot = createHotContext(
     //@ts-expect-error
     "app/routes/dashboard.enter_data.$formId.tsx"
   );
-  import.meta.hot.lastModified = "1709721439563.4617";
+  import.meta.hot.lastModified = "1710333988165.5857";
 }
 function EnterData() {
-  _s13();
+  _s15();
   const {
     dictionaries,
     docs,
@@ -1405,18 +1434,19 @@ function EnterData() {
   const {
     inputForm,
     doc,
-    state
+    state,
+    group
   } = useLoaderData();
-  const [document2, setDocument] = (0, import_react14.useState)(doc);
+  const [document2, setDocument] = (0, import_react17.useState)(doc);
   const navigation = useNavigation();
-  const formRef = (0, import_react14.useRef)(null);
+  const formRef = (0, import_react17.useRef)(null);
   const userId = 19;
   const data = useActionData();
-  const [showFind, setShowFind] = (0, import_react14.useState)(false);
-  (0, import_react14.useEffect)(() => {
+  const [showFind, setShowFind] = (0, import_react17.useState)(false);
+  (0, import_react17.useEffect)(() => {
     setDocument(doc);
   }, [doc]);
-  (0, import_react14.useEffect)(() => {
+  (0, import_react17.useEffect)(() => {
     if (data?.docs && data?.ok) {
       setDocs(data.docs);
       setShowFind(true);
@@ -1431,21 +1461,21 @@ function EnterData() {
       }));
     }
   }, [data]);
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime16.jsxDEV)(EnterDataView, { errors: data?.errors, open: showFind, setOpen: setShowFind, docs, userId, current, setCurrent, formRef, inputForm, state, dictionaries, doc: document2, setDoc: setDocument }, void 0, false, {
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime17.jsxDEV)(EnterDataView, { errors: data?.errors, open: showFind, setOpen: setShowFind, docs, userId, current, setCurrent, formRef, inputForm, state, dictionaries, doc: document2, setDoc: setDocument, group }, void 0, false, {
     fileName: "app/routes/dashboard.enter_data.$formId.tsx",
-    lineNumber: 154,
+    lineNumber: 174,
     columnNumber: 10
   }, this);
 }
-_s13(EnterData, "5/1QAMMsuCa9Z9XpGxCZDcBaDPk=", false, function() {
+_s15(EnterData, "9qlXiH2cXD4+p033etoAY2sS3B8=", false, function() {
   return [useOutletContext, useLoaderData, useNavigation, useActionData];
 });
-_c16 = EnterData;
-var _c16;
-$RefreshReg$(_c16, "EnterData");
+_c17 = EnterData;
+var _c17;
+$RefreshReg$(_c17, "EnterData");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 export {
   EnterData as default
 };
-//# sourceMappingURL=/build/routes/dashboard.enter_data.$formId-PBXMXJTV.js.map
+//# sourceMappingURL=/build/routes/dashboard.enter_data.$formId-EENO3TLF.js.map

@@ -14,6 +14,7 @@ export default function DocModule(prisma: PrismaClient) {
             }
             let doc = {
                 id: null,
+                formId: inputForm.id,
                 isActive: true,
                 startDate: null,
                 endDate: null,
@@ -32,6 +33,7 @@ export default function DocModule(prisma: PrismaClient) {
                 })
                 if (result) {
                     doc.id = result.id
+                    doc.formId = result.formId
                     doc.isActive = result.isActive
                     doc.startDate = result.startDate
                     doc.endDate = result.endDate
@@ -73,6 +75,7 @@ export default function DocModule(prisma: PrismaClient) {
                 prisma.doc.create({
                     data: {
                         id: sid,
+                        formId: inputForm.id,
                         isActive: true,
                         dateStart: null,
                         dateEnd: null,
@@ -118,6 +121,7 @@ export default function DocModule(prisma: PrismaClient) {
                         id: doc.id
                     },
                     data: {
+                        formId: inputForm.id,
                         isActive: true,
                         dateStart: undefined,
                         dateEnd: undefined,

@@ -2,11 +2,11 @@ import {
   require_react as require_react2
 } from "/build/_shared/chunk-DGLILCEK.js";
 import {
-  createHotContext
-} from "/build/_shared/chunk-Q6LMBPEP.js";
-import {
   require_jsx_dev_runtime
 } from "/build/_shared/chunk-7PHB3BFD.js";
+import {
+  createHotContext
+} from "/build/_shared/chunk-Q6LMBPEP.js";
 import {
   require_react
 } from "/build/_shared/chunk-CJ4MY3PQ.js";
@@ -1372,6 +1372,7 @@ In case this error is unexpected for you, please report it in https://pris.ly/pr
     };
     exports.Prisma.DocScalarFieldEnum = {
       id: "id",
+      formId: "formId",
       isActive: "isActive",
       dateStart: "dateStart",
       dateEnd: "dateEnd",
@@ -1574,16 +1575,23 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/UI/elements/custom_button.tsx"
   );
-  import.meta.hot.lastModified = "1709015251622.2969";
+  import.meta.hot.lastModified = "1710304184373.6316";
 }
 function CustomButton({
   className,
+  outline,
   children,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { ...props, className: `text-white text-xs py-1.5 px-3.5 flex items-center gap-2 rounded-md hover:cursor-pointer hover:shadow-lg font-semibold uppercase ${className}`, children }, void 0, false, {
+  let cls = "";
+  if (outline) {
+    cls = `border text-xs py-1.5 px-3.5 flex items-center gap-2 rounded-md hover:cursor-pointer hover:shadow-lg font-semibold uppercase ${className}`;
+  } else {
+    cls = `text-white text-xs py-1.5 px-3.5 flex items-center gap-2 rounded-md hover:cursor-pointer hover:shadow-lg font-semibold uppercase ${className}`;
+  }
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime3.jsxDEV)("button", { ...props, className: cls, children }, void 0, false, {
     fileName: "app/components/UI/elements/custom_button.tsx",
-    lineNumber: 26,
+    lineNumber: 33,
     columnNumber: 10
   }, this);
 }
@@ -1593,76 +1601,11 @@ $RefreshReg$(_c3, "CustomButton");
 window.$RefreshReg$ = prevRefreshReg;
 window.$RefreshSig$ = prevRefreshSig;
 
-// app/components/UI/elements/custom_input.tsx
-var import_jsx_dev_runtime4 = __toESM(require_jsx_dev_runtime(), 1);
-if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
-  console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
-} else {
-  prevRefreshReg = window.$RefreshReg$;
-  prevRefreshSig = window.$RefreshSig$;
-  window.$RefreshReg$ = (type, id) => {
-    window.$RefreshRuntime$.register(type, '"app/components/UI/elements/custom_input.tsx"' + id);
-  };
-  window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
-}
-var prevRefreshReg;
-var prevRefreshSig;
-if (import.meta) {
-  import.meta.hot = createHotContext(
-    //@ts-expect-error
-    "app/components/UI/elements/custom_input.tsx"
-  );
-  import.meta.hot.lastModified = "1709709349104.161";
-}
-function CustomInput({
-  className,
-  subClass,
-  id,
-  title,
-  errors,
-  children,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: `${className} p-1 flex items-baseline`, children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("label", { className: "font-bold text-sm mr-1 min-w-40", htmlFor: id, children: title }, void 0, false, {
-      fileName: "app/components/UI/elements/custom_input.tsx",
-      lineNumber: 31,
-      columnNumber: 13
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "flex flex-col justify-between", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("input", { id, className: `${subClass} font-mono font-bold text-sm border-2 p-1 focus:outline-blue-gray-500`, ...props, children }, void 0, false, {
-        fileName: "app/components/UI/elements/custom_input.tsx",
-        lineNumber: 35,
-        columnNumber: 17
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("span", { className: "text-sm text-red-500 h-4", children: errors }, void 0, false, {
-        fileName: "app/components/UI/elements/custom_input.tsx",
-        lineNumber: 38,
-        columnNumber: 17
-      }, this)
-    ] }, void 0, true, {
-      fileName: "app/components/UI/elements/custom_input.tsx",
-      lineNumber: 34,
-      columnNumber: 13
-    }, this)
-  ] }, void 0, true, {
-    fileName: "app/components/UI/elements/custom_input.tsx",
-    lineNumber: 30,
-    columnNumber: 10
-  }, this);
-}
-_c4 = CustomInput;
-var _c4;
-$RefreshReg$(_c4, "CustomInput");
-window.$RefreshReg$ = prevRefreshReg;
-window.$RefreshSig$ = prevRefreshSig;
-
 export {
   require_index_browser3 as require_index_browser,
   require_node,
   ErrorMessage,
   CustomButton,
-  CustomInput,
   Panel
 };
 /*! Bundled license information:
@@ -1680,4 +1623,4 @@ export {
      *)
   *)
 */
-//# sourceMappingURL=/build/_shared/chunk-N4W3YWYJ.js.map
+//# sourceMappingURL=/build/_shared/chunk-GBHP66B7.js.map

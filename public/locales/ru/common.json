@@ -4,6 +4,7 @@
     "service": "Сервис",
     "menu_db_structure": "Структура БД...",
     "menu_db_users": "Пользователи БД...",
+    "menu_dictionaries": "Справочники БД...",
     "add_dictionary": "Добавить справочник",
     "add_inputform": "Добавить форму для ввода",
     "add_searchform": "Добавить форму для поиска",

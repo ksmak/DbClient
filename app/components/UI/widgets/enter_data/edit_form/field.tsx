@@ -113,10 +113,10 @@ export default function Field({ state, dictionaries, doc, setDoc, recordIndex, f
                     <option>-</option>
                     {['create', 'edit', 'search', 'find'].includes(String(state))
                         ? dic?.data_edit.map((item: any) => (
-                            <option key={item.id} value={item.id}>{item.title}</option>
+                            <option key={item.id} value={item.id}>{item[`title_${i18n.language}` as keyof typeof item]}</option>
                         ))
                         : dic?.data_browse.map((item: any) => (
-                            <option key={item.id} value={item.id}>{item.title}</option>
+                            <option key={item.id} value={item.id}>{item[`title_${i18n.language}` as keyof typeof item]}</option>
                         ))}
                 </CustomSelect>
             )

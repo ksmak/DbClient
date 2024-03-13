@@ -17,7 +17,7 @@ type UserDialogProps = {
 }
 
 export default function UserDialog({ isNew, user, departments, errors }: UserDialogProps) {
-    const { t } = useTranslation()
+    const { i18n, t } = useTranslation()
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
@@ -103,7 +103,7 @@ export default function UserDialog({ isNew, user, departments, errors }: UserDia
                         >
                             <option>-</option>
                             {departments.map(item => (
-                                <option value={item.id}>{item.title}</option>
+                                <option value={item.id}>{item[`title_${i18n.language}` as keyof typeof item]}</option>
                             ))}
                         </CustomSelect>
                         <CustomInput
